@@ -1,0 +1,61 @@
+import os, sys
+Import( '*' )
+
+if 'swig' in masterEnv[ 'TOOLS' ] and have_python_capi:
+	env = masterEnv.Clone()
+
+	# Needed for python/java wrappers in combination with builts
+	# in release mode (thus using one of -O2, -O3 or -Os, in case RELEASE_DEBUG=false, strict-aliasing is
+	# therefore disabled anyways)
+	# See also http://www.swig.org/Release/CHANGES, entry for 03/02/2006
+	if 'gcc' in env[ 'TOOLS' ]:
+		env.AppendUnique( CCFLAGS = env['CCFLAGS'] + ['-fno-strict-aliasing'] )
+
+	# generate wrappers with SWIG
+	env[ 'SWIGFLAGS' ] = [ '-c++', '-python', '-threads' ]
+
+	# Add stuff needed to build Python extensions
+	env.AppendUnique( **python_capi_options )
+
+	# Link needed boost libraries
+	env.AppendUnique( **mergeOptions( utfacade_options, boost_options) )
+	env.AppendUnique( LIBS = boost_libs( [ 'program_options', 'serialization' ] ) )
+
+	# totally override (not append) some other options if necessary
+	if 'SHLIBPREFIX' in python_capi_options:
+		env[ 'SHLIBPREFIX' ] = python_capi_options[ 'SHLIBPREFIX' ]
+	if 'SHLIBSUFFIX' in python_capi_options:
+		env[ 'SHLIBSUFFIX' ] = python_capi_options[ 'SHLIBSUFFIX' ]
+
+	# on windows, you should better not use the debug flags as this will cause the python headers to
+	# link agains the debug version of python, which usually is not available
+	if sys.platform == 'win32':
+		if '_DEBUG' in env[ 'CPPDEFINES' ]:
+			env.Replace( CPPDEFINES = list( env[ 'CPPDEFINES' ] ) ) # SCons 1.2 bug: Clone() does not make a copy...
+			env[ 'CPPDEFINES' ].remove( '_DEBUG' )
+		if '/MDd' in env[ 'CCFLAGS' ]:
+			env.Replace( CCFLAGS = list( env[ 'CCFLAGS' ] ) ) # SCons 1.2 bug: Clone() does not make a copy...
+			env[ 'CCFLAGS' ].remove( '/MDd' )
+			# also remove runtime error checking, because causes compiler error with VS2010 compiler
+			env[ 'CCFLAGS' ].remove( '/RTC1' )
+			env.Append( CCFLAGS = '/MD' )
+
+	javaInterface = os.path.join( "..", "Java", "interface.i" )
+
+	for module in globSourceFiles( "*.i" ) + [ javaInterface ]:
+		if module == javaInterface:
+			moduleName = "ubitrack"
+		else:
+			moduleName = module[ : -2 ]
+
+		cppFile = "pyUT_" + moduleName + ".cpp"
+		env.CXXFile( target = cppFile, source = module )
+
+		# link the extension module
+		env.AppendUnique( **utfacade_options )
+		pylib = filter( lambda x: x.path.endswith( env[ 'SHLIBSUFFIX' ] ), env.SharedLibrary( "_" + moduleName, cppFile ) )
+		Alias( [ 'all', 'python-bindings' ], pylib )
+
+		# install to lib/python/site-packages
+		py_install_path = os.path.join( install_prefix, 'lib', 'python', 'site-packages' )
+		Alias( [ 'install-all', 'install-python-bindings' ], Install( py_install_path, [ pylib, moduleName + '.py' ] ) )

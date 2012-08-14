@@ -1,0 +1,12 @@
+import glob
+
+Import( '*' )
+
+
+
+sconsfiles = [ "utFacade/SConscript", "utComponents/SConscript" ]
+
+# recurse into subdirectories and export driver build environment
+SConscript( sconsfiles )
+success = True
+Return('success')

@@ -1,0 +1,26 @@
+import os
+
+# import variables from other scons files
+Import( '*' )
+env = masterEnv.Clone()
+
+# add the main file
+sources = [ 'console.cpp' ]
+
+# setup compiler and linker flags
+config_options = mergeOptions( utfacade_options, boost_options, opencv_options, tinyxml_options, utcore_options, utvision_options, utdataflow_options, log4cpp_options, lapack_options)
+env.AppendUnique( **config_options )
+env.AppendUnique( LIBS = boost_libs( [ 'program_options' ] ) )
+
+# fix library search paths on gnu linker
+if 'gnulink' in env[ 'TOOLS' ]:
+	boost_rpath = map( lambda x: Dir( x ).abspath, boost_options[ 'LIBPATH' ] )
+	env.Append( RPATH = boost_rpath + [ env.Literal( "'$$ORIGIN/../lib'" ) ] )
+
+# build the console
+setupAppBuild(env, sources, 'utConsole', 'utFacade')
+
+
+# also create a visual studio project for the library	
+createVisualStudioProject(env, sources, [], 'utFacade-Console')
+
