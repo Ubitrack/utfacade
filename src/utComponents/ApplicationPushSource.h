@@ -144,7 +144,7 @@ protected:
 };
 
 typedef ApplicationPushSource< Measurement::Rotation > ApplicationPushSourceRotation;
-typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
+//typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
 //typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
 typedef ApplicationPushSource< Measurement::PositionList2 > ApplicationPushSourcePosition2DList;
 typedef ApplicationPushSource< Measurement::PoseList > ApplicationPushSourcePoseList;
@@ -211,6 +211,36 @@ public:
 			Math::Vector< 2 >(position2d.x, position2d.y)
 			) );
 		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePosition2D receivePosition2D: x=" << position2d.x << " y=" << position2d.y );
+	}
+
+	/** reference to logger */
+	log4cpp::Category& m_logger;
+};
+
+class ApplicationPushSourcePosition
+	: public ApplicationPushSource< Measurement::Position >
+    , public Facade::SimplePosition3DReceiver
+{
+public:
+	/**
+	 * UTQL component constructor.
+	 *
+	 * @param nm Unique name of the component.
+	 * @param cfg \c UTQL subgraph
+	 */
+	ApplicationPushSourcePosition( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph )
+		: ApplicationPushSource< Measurement::Position >( nm, subgraph )
+		, m_logger( log4cpp::Category::getInstance( "Ubitrack.Components.ApplicationPushSourcePosition3D" ) )
+	{}
+
+	/** implements the \c Facade::SimplePosition2DReceiver interface */
+	void receivePosition3D( const Facade::SimplePosition3D& position3d ) throw()
+	{
+		// convert SimplePosition2D to Measurement::Position2D
+		m_outPort.send( Measurement::Position( position3d.timestamp,
+			Math::Vector< 3 >(position3d.x, position3d.y, position3d.z)
+			) );
+		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePosition3D receivePosition3D: x=" << position3d.x << " y=" << position3d.y<< " z=" << position3d.z  );
 	}
 
 	/** reference to logger */

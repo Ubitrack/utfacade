@@ -209,6 +209,7 @@ public:
 	 * @return NULL if component not found
 	 */
 	SimplePosition2DReceiver* getPushSourcePosition2D( const char* sComponentName ) throw();
+	SimplePosition3DReceiver* getPushSourcePosition3D( const char* sComponentName ) throw();
 	
 	/**
 	 * Gets a pointer to a SimplePoseReceiver interface on a ApplicationPushSourcePose.

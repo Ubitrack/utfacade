@@ -144,6 +144,7 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 
 
 
+
 #ifdef SWIGCSHARP
 %extend Ubitrack::Facade::SimpleImage {
 	%apply unsigned char OUTPUT[] {unsigned char * where};

@@ -20,7 +20,8 @@ else:
 
 	# link the extension module
 	config_options = mergeOptions( log4cpp_options, utfacade_options, utdataflow_options, utcore_options, utvision_options, opencv_options)
+	#uterrorvis_options
 	env.AppendUnique( **config_options )
 
 	
-	lib = setupLibraryBuild(env, cpp_wrapper_sources, lib_name, 'utFacade')	
+	lib = setupLibraryBuild(env, cpp_wrapper_sources, lib_name, 'dotnet')	

@@ -70,7 +70,7 @@ else:
 	# define aliases for build targets (integrates our targets in the standard command-line targets)
 	Alias( [ 'all' ], [ wrapper_lib, wrapper_jar ] )
 	Alias( [ 'java-bindings' ], [ wrapper_lib, wrapper_jar ] )
- 	Alias( [ 'install-all', 'install-java-bindings' ], [ install_lib, install_jar ] )
+ 	Alias( [ 'install-all', 'install-java' ], [ install_lib, install_jar ] )
 	
 	# cleanup target: cleanup build directory on invocation of scons with the '-c' option on one of the targets specified in the
 	# first parameter

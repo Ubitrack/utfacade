@@ -765,6 +765,23 @@ SimplePosition2DReceiver* SimpleFacade::getPushSourcePosition2D( const char* sCo
 	}
 }
 
+SimplePosition3DReceiver* SimpleFacade::getPushSourcePosition3D( const char* sComponentName ) throw()
+{
+	try
+	{
+		LOG4CPP_INFO( logger, "Trying to get SimpleFacade::getPushSourcePosition3D for "<<sComponentName);
+		SimplePosition3DReceiver* result = m_pPrivate->componentByName< Components::ApplicationPushSourcePosition >( sComponentName ).get();
+		LOG4CPP_INFO( logger, "Getting SimpleFacade::getPushSourcePosition3D  "<<result);
+		return result;
+	}
+	catch ( const Ubitrack::Util::Exception& e )
+	{
+		LOG4CPP_ERROR( logger, "Caught exception in SimpleFacade::getPushSourcePosition3D( " << sComponentName <<" ): " << e );
+		setError( e.what() );
+		return 0;
+	}
+}
+
 SimplePoseReceiver* SimpleFacade::getPushSourcePose( const char* sComponentName ) throw()
 {
 	try
