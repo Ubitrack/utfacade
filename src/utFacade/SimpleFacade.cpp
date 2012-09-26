@@ -1047,4 +1047,8 @@ void SimpleFacade::setError( const char* sMsg ) throw()
 	m_sError = strdup( sMsg );
 }
 
+void SimpleFacade::killEverything(){
+	m_pPrivate->killEverything();
+}
+
 } } // namespace Ubitrack::Facade

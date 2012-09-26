@@ -114,7 +114,7 @@ AdvancedFacade::~AdvancedFacade()
 	LOG4CPP_DEBUG( logger, "Removing data flow network" );
 	
 	m_pDataflowNetwork.reset();
-	Dataflow::EventQueue::singleton().clear();
+	//Dataflow::EventQueue::singleton().clear();
 
 	//Dataflow::EventQueue::removeRefToEventQueue();
 	
@@ -350,6 +350,10 @@ void AdvancedFacade::receiveUtqlResponse( boost::shared_ptr< Ubitrack::ClientSer
 	
 	if ( bPrevStarted )
 		startDataflow();
+}
+
+void AdvancedFacade::killEverything(){
+	Dataflow::EventQueue::destroyEventQueue();
 }
 
 

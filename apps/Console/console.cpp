@@ -50,13 +50,6 @@ void ctrlC ( int i )
 
 int main( int ac, char** av )
 {
-	
-#ifdef _WIN32
-	// set to quite high priority, see: http://msdn.microsoft.com/en-us/library/windows/desktop/ms686219%28v=vs.85%29.aspx
-	// carefully use this function under windows to steer ubitrack's cpu time:
-	// SetPriorityClass( GetCurrentProcess(), HIGH_PRIORITY_CLASS );
-#endif
-
 	signal ( SIGINT, &ctrlC );
 	
 	try

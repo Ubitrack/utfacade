@@ -281,6 +281,8 @@ public:
 	/** returns the description of the last error or 0 if there was no error so far. */	
 	const char* getLastError() throw();
 	
+	void killEverything();
+
 protected:
 	/** 
 	 * Pointer to private data.

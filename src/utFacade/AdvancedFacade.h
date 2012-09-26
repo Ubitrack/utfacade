@@ -178,7 +178,7 @@ public:
 	void removeDataflowObserver( DataflowObserver* pObserver )
 	{ m_observers.remove( pObserver ); }
 	
-	
+	void killEverything();
 protected:
 	/** a component factory */
 	boost::scoped_ptr< Dataflow::ComponentFactory > m_pComponentFactory;
