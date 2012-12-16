@@ -92,7 +92,6 @@ AdvancedFacade::AdvancedFacade( const std::string& sComponentPath )
 			m_pComponentFactory.reset( new Dataflow::ComponentFactory( UBITRACK_COMPONENTS_PATH ) );
 	}
 
-	//Dataflow::EventQueue::addRefToEventQueue();
 }
 
 
@@ -116,7 +115,6 @@ AdvancedFacade::~AdvancedFacade()
 	m_pDataflowNetwork.reset();
 	//Dataflow::EventQueue::singleton().clear();
 
-	//Dataflow::EventQueue::removeRefToEventQueue();
 	
 	LOG4CPP_DEBUG( logger, "AdvancedFacade destroyed" );
 }

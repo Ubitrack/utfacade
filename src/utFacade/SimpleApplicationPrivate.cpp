@@ -23,10 +23,11 @@ bool SimpleApplicationPullSinkMatrix3x3Private::getMatrix3x3( SimpleMatrix3x3 & 
 		matrix.values[3] = (*p)(1,0);
 		matrix.values[4] = (*p)(1,1);
 		matrix.values[5] = (*p)(1,2);
-		matrix.values[6] = (*p)(2,1);
-		matrix.values[7] = (*p)(2,2);
-		matrix.values[8] = (*p)(2,0);				
+		matrix.values[6] = (*p)(2,0);
+		matrix.values[7] = (*p)(2,1);
+		matrix.values[8] = (*p)(2,2);				
 		matrix.timestamp = p.time();
+
 	}
 	catch ( const Ubitrack::Util::Exception& e )
 	{
