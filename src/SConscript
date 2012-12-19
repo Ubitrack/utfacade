@@ -2,9 +2,6 @@ import glob
 
 Import( '*' )
 
-
-
-#sconsfiles = [ "utFacade/SConscript", "utComponents/SConscript", "utErrorVisUtil/SConscript" ]
 sconsfiles = [ "utFacade/SConscript", "utComponents/SConscript" ]
 
 # recurse into subdirectories and export driver build environment

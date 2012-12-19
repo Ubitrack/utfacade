@@ -53,7 +53,7 @@ config_h_content = """#ifndef __UBITRACK_CONFIG_H_INCLUDED__
 %s HAVE_DIRECTSHOW
 #endif
 #endif
-""" % ( install_component_prefix.encode( 'string_escape' ), 'ubitrack', haveMap[ have_glew ], haveMap[ have_freeglut ], haveMap[ have_lapack ], haveMap[ have_opencv ], haveMap[ have_coin ], haveMap[ have_directshow ] )
+""" % ( install_component_prefix.encode( 'string_escape' ), 'ubitrack', haveMap[False], haveMap[ have_freeglut ], haveMap[ have_lapack ], haveMap[ have_opencv ], haveMap[False], haveMap[ have_directshow ] )
 env.CreateFile( os.path.join( Dir( '.' ).srcnode().abspath, 'config.h' ), Value( config_h_content ) )
 
 
@@ -66,7 +66,7 @@ sources = globSourceFiles( '*.cpp' )
 
 # Merge all options in one "ubitrack" option. Note that some options might be empty if its module is not available	
 # Set ubitrack root source path explicitly that allows sources to access header files relative with #include <..> statements
-utfacade_options = mergeOptions( boost_options, opencv_options, tinyxml_options, utcore_options, utvision_options,  utdataflow_options, log4cpp_options, lapack_options )
+utfacade_options = mergeOptions( utvision_all_options,  utdataflow_all_options)
 utfacade_options ['CPPPATH'] += [ os.path.join( getCurrentPath(), '..\\') ]
 
 
@@ -90,18 +90,20 @@ setupIncludeInstall(env, simpleHeaders, 'utFacade', 'includes')
 
 # e)
 # clear all 3rd-party dependencies in the case of linking against ubitrack.dll
+utfacade_all_options = utfacade_options.copy()
 utfacade_options[ 'LIBS' ] = []
 utfacade_options[ 'LIBPATH' ] = []
 # add the ubitrack library to the link options.
 utfacade_options[ 'LIBS' ] += libs
 utfacade_options[ 'LIBPATH' ] += [ install_library_prefix ]
 
-
+utfacade_all_options[ 'LIBS' ] += libs
+utfacade_all_options[ 'LIBPATH' ] += [ install_library_prefix ]
 
 
 # f)
 have_utfacade = True
-Export( 'utfacade_options', 'have_utfacade' )
+Export( 'utfacade_options', 'have_utfacade', 'utfacade_all_options' )
 
 
 # also create a visual studio project for the library	
