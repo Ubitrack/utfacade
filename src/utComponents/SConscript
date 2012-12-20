@@ -39,7 +39,7 @@ sources = globSourceFiles( '*.cpp' )
 #utapplication_options = mergeOptions( utfacade_options )
 # Set ubitrack root source path explicitly that allows sources to access header files relative with #include <..> statements
 utapplication_options = mergeOptions( utfacade_all_options )
-utapplication_options ['CPPPATH'] += [  os.path.join( getCurrentPath(), '..\\') ]
+utapplication_options ['CPPPATH'] += [  os.path.join( getCurrentPath(), '../') ]
 env.AppendUnique( **utapplication_options )
 env.Replace( no_import_lib = 1 )
 # c)

@@ -54,7 +54,7 @@ config_h_content = """#ifndef __UBITRACK_CONFIG_H_INCLUDED__
 #endif
 #endif
 """ % ( install_component_prefix.encode( 'string_escape' ), 'ubitrack', haveMap[False], haveMap[ have_freeglut ], haveMap[ have_lapack ], haveMap[ have_opencv ], haveMap[False], haveMap[ have_directshow ] )
-env.CreateFile( os.path.join( Dir( '.' ).srcnode().abspath, 'config.h' ), Value( config_h_content ) )
+env.CreateFile( os.path.join( Dir( '.' ).srcnode().abspath, 'Config.h' ), Value( config_h_content ) )
 
 
 headers = globSourceFiles( '*.h' )
@@ -67,7 +67,7 @@ sources = globSourceFiles( '*.cpp' )
 # Merge all options in one "ubitrack" option. Note that some options might be empty if its module is not available	
 # Set ubitrack root source path explicitly that allows sources to access header files relative with #include <..> statements
 utfacade_options = mergeOptions( utvision_all_options,  utdataflow_all_options)
-utfacade_options ['CPPPATH'] += [ os.path.join( getCurrentPath(), '..\\') ]
+utfacade_options ['CPPPATH'] += [ os.path.join( getCurrentPath(), '../') ]
 
 
 env.AppendUnique( **utfacade_options )

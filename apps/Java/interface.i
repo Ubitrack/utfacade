@@ -10,7 +10,7 @@ SWIG */
 %{
 #include <string>
 #include <sstream>
-#include <utFacade/config.h>
+#include <utFacade/Config.h>
 #include <utFacade/SimpleFacade.h>
 #include <utUtil/Logging.h>
 #include <utUtil/Exception.h>
@@ -131,7 +131,7 @@ Declarations must come before their usage, otherwise, SWIG will
 generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 
 %include ../../src/utFacade/utFacade.h
-%include ../../src/utFacade/config.h
+%include ../../src/utFacade/Config.h
 //%include ../../Ubitrack/Ubitrack.h
 %include ../../../utcore/src/utCore.h
 
