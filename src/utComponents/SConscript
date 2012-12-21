@@ -32,7 +32,7 @@ headers = globSourceFiles( '*.h' )
 sources = globSourceFiles( '*.cpp' )
 
 if not have_utvision:
-	print sources
+	print "Not compiling ApplicationEndpointsVision components due to missing utVision."
 	sources.remove( 'ApplicationEndpointsVision.cpp' );
 
 # b)	
