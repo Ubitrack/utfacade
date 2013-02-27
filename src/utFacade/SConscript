@@ -28,6 +28,8 @@ Import( '*' )
 # a)
 env = masterEnv.Clone()
 
+have_directshow = sys.platform == "win32"
+
 # create a config.h file
 haveMap = { True : '#define', False : '#undef' }
 config_h_content = """#ifndef __UBITRACK_CONFIG_H_INCLUDED__
