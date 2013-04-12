@@ -3,10 +3,13 @@ Import( '*' )
 
 #if 'swig' in masterEnv[ 'TOOLS' ] and not sys.platform == 'darwin':
 env = masterEnv.Clone()
+
 if not have_swig :
 	print "Not building DotNet Wrapper: SWIG not available."
 elif sys.platform == 'darwin' :
 	print "Not building DotNet Wrapper: DotNet not available on Mac OS."
+elif sys.platform.startswith("linux") :
+	print "Not building DotNet Wrapper: DotNet not available on linux."	
 else:
 	lib_name = 'ubitrack_dotnet_swig'
 	
