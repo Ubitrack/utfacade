@@ -1,0 +1,6 @@
+set(the_description "The UbiTrack Facade")
+configure_file(Config_cmake.h Config.h)
+ut_add_module(utfacade INTERNAL utcore utdataflow utvision)
+ut_module_include_directories("${UBITRACK_MODULES_PATH}/utfacade/src" "${CMAKE_CURRENT_BINARY_DIR}/.." ${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR}  ${Boost_INCLUDE_DIR})
+ut_glob_local_sources()
+ut_create_module()
