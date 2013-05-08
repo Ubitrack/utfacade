@@ -1,5 +1,0 @@
-set(the_description "The UbiTrack Facade Components")
-ut_add_module(utfacadecomponents INTERNAL utcore utdataflow utvision utfacade)
-ut_module_include_directories("${UBITRACK_MODULES_PATH}/utfacade/src" ${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR}  ${Boost_INCLUDE_DIR})
-ut_glob_local_sources()
-ut_create_module_components()

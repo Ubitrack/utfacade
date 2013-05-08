@@ -1,3 +1,11 @@
-add_subdirectory(src/utFacade)
-add_subdirectory(src/utComponents)
+set(the_description "The UbiTrack Facade")
+configure_file(src/utFacade/Config_cmake.h src/utFacade/Config.h)
+ut_add_module(utfacade INTERNAL utcore utdataflow utvision)
+ut_module_include_directories(${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR}  ${Boost_INCLUDE_DIR})
+ut_glob_module_sources(HEADERS "src/utFacade/*.h" SOURCES "src/utFacade/*.cpp")
+ut_glob_component_sources(HEADERS "src/utComponents/*.h" SOURCES "src/utComponents/*.cpp")
+ut_create_module()
 
+add_subdirectory(apps/Console)
+add_subdirectory(apps/DotNet)
+add_subdirectory(apps/Java)
