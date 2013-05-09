@@ -27,7 +27,7 @@ if(BUILD_UTCONSOLE)
     if (MSVC AND NOT BUILD_SHARED_LIBS)
       set_target_properties(${the_target} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:atlthunk.lib /NODEFAULTLIB:atlsd.lib /DEBUG")
     endif()
-    install(TARGETS ${the_target}
-            RUNTIME DESTINATION "${EXECUTABLE_OUTPUT_PATH}" COMPONENT main)
   endif()
+  install(TARGETS ${the_target}
+          RUNTIME DESTINATION "bin" COMPONENT main)
 endif(BUILD_UTCONSOLE)
