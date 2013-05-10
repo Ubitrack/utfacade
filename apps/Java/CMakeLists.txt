@@ -1,4 +1,13 @@
-IF(HAVE_SWIG)
-  MESSAGE(STATUS "Building Java wrappers TBD")
-  ##SWIG_ADD_MODULE(ubitrack_java java interface.i)
-ENDIF(HAVE_SWIG)
+SET(UTJAVA_REQUIRED_DEPS utcore utdataflow utvision utfacade)
+if(BUILD_UTJAVA)
+    ut_include_modules(${UTJAVA_REQUIRED_DEPS} ${JNI_INCLUDE_DIRS})
+
+        SET(CMAKE_SWIG_FLAGS "-v")
+        
+		SET(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_BINARY_DIR}/gensrc/ubitrack)
+        SET_SOURCE_FILES_PROPERTIES(interface.i PROPERTIES CPLUSPLUS ON)
+        #SET_SOURCE_FILES_PROPERTIES(interface.i PROPERTIES SWIG_FLAGS "-package")
+
+        SWIG_ADD_MODULE(ubitrack java interface.i)
+        SWIG_LINK_LIBRARIES(ubitrack ${JNI_LIBRARIES} ${UBITRACK_LINKER_LIBS} ${UTJAVA_REQUIRED_DEPS})
+endif(BUILD_UTJAVA)
