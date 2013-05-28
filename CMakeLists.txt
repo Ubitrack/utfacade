@@ -6,7 +6,7 @@ ut_glob_component_sources(HEADERS "src/utComponents/*.h" SOURCES "src/utComponen
 
 # writes config file into binary_dir, so sourcetree will not be cluttered
 configure_file(src/utFacade/Config_cmake.hh src/utFacade/Config.h)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/utFacade/Config.h" DESTINATION "${UBITRACK_INCLUDE_INSTALL_PATH}/utFacade/Config.h" COMPONENT main)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/src/utFacade/Config.h" DESTINATION "${UBITRACK_INCLUDE_INSTALL_PATH}/utFacade" COMPONENT main)
 
 ut_create_module()
 

@@ -21,7 +21,8 @@ if(BUILD_UTJAVA)
 		           COMMAND cmake -E echo "Creating jar file..."
 		           COMMAND ${Java_JAR_EXECUTABLE} cvf ubitrack.jar -C ${CMAKE_CURRENT_BINARY_DIR}/classes ubitrack 
 	)
-
+        #install(FILES ${SWIG_MODULE_ubitrack_java_REAL_NAME} DESTINATION "${UBITRACK_LIB_INSTALL_PATH}/${SWIG_MODULE_ubitrack_java_REAL_NAME}" COMPONENT main)
+        #install(FILES ubitrack.jar DESTINATION "${UBITRACK_LIB_INSTALL_PATH}/ubitrack.jar" COMPONENT main)
 
 # Need to install the wrapper files somewhere ..
 endif(BUILD_UTJAVA)
