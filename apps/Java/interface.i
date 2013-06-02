@@ -130,17 +130,16 @@ SConscript file resides.  Attention: The order of includes matters!
 Declarations must come before their usage, otherwise, SWIG will
 generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 
-%include ../../src/utFacade/utFacade.h
-%include ../../src/utFacade/Config.h
-//%include ../../Ubitrack/Ubitrack.h
-%include ../../../utcore/src/utCore.h
+%include utFacade/utFacade.h
+%include Config.h
+%include utCore.h
 
-%include ../../src/utFacade/SimpleVectorTypes.h
+%include utFacade/SimpleVectorTypes.h
 
-%include ../../src/utFacade/SimpleDatatypes.h
-%include ../../src/utFacade/SimpleFacade.h
+%include utFacade/SimpleDatatypes.h
+%include utFacade/SimpleFacade.h
 
-%include ../../../utcore/src/utUtil/Logging.h
+%include utUtil/Logging.h
 
 
 

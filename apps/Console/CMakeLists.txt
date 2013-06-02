@@ -1,33 +1,8 @@
-SET(UTCONSOLE_REQUIRED_DEPS utcore utdataflow utvision utfacade)
+set(the_description "The UbiTrack utConsole app")
+ut_add_app(utConsole DEPS utcore utdataflow utfacade utvision)
+ut_app_include_directories(${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR}  ${Boost_INCLUDE_DIR})
+ut_glob_app_sources(SOURCES "console.cpp")
+ut_create_executable()
 
-#ut_check_dependencies(${UTCONSOLE_REQUIRED_DEPS})
-
-#MESSAGE(STATUS "UT_DEPENDENCIES FOUND ${UT_DEPENDENCIES_FOUND} ${HAVE_utcore}")
-if(BUILD_UTCONSOLE)
-  project(utConsole)
-
-  #ut_include_directories("${utConsole_SOURCE_DIR}/include")#for opencv.hpp
-  ut_include_modules(${UTCONSOLE_REQUIRED_DEPS})
-
-  #if(CMAKE_COMPILER_IS_GNUCXX AND NOT ENABLE_NOISY_WARNINGS)
-  #  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-function")
-  #endif()
-
-  set(the_target "utConsole")
-  set(srcs "console.cpp")
-  
-  add_executable(${the_target} ${srcs})
-  target_link_libraries(${the_target} ${UBITRACK_LINKER_LIBS} ${UTCONSOLE_REQUIRED_DEPS})
-
-  set_target_properties(${the_target} PROPERTIES
-    OUTPUT_NAME "utConsole"
-    PROJECT_LABEL "utConsole")
-
-  if(WIN32)
-    if (MSVC AND NOT BUILD_SHARED_LIBS)
-      set_target_properties(${the_target} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:atlthunk.lib /NODEFAULTLIB:atlsd.lib /DEBUG")
-    endif()
-  endif()
-  install(TARGETS ${the_target}
-          RUNTIME DESTINATION "bin" COMPONENT main)
-endif(BUILD_UTCONSOLE)
+#set_target_properties(${the_target} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:atlthunk.lib /NODEFAULTLIB:atlsd.lib /DEBUG")
+# ut_module_include_directories(../../src ${CMAKE_CURRENT_BINARY_DIR}/../../src)
