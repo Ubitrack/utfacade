@@ -131,7 +131,7 @@ Declarations must come before their usage, otherwise, SWIG will
 generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 
 %include utFacade/utFacade.h
-%include Config.h
+%include utFacade/Config.h
 %include utCore.h
 
 %include utFacade/SimpleVectorTypes.h
