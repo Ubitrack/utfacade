@@ -6,7 +6,7 @@ macro(ut_get_customized_app_creator)
        
 	SET(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_BINARY_DIR}/gensrc/ubitrack)
     SET_SOURCE_FILES_PROPERTIES(interface.i PROPERTIES CPLUSPLUS ON)
-    #SET_SOURCE_FILES_PROPERTIES(interface.i PROPERTIES SWIG_FLAGS "-package")
+    SET_SOURCE_FILES_PROPERTIES(interface.i PROPERTIES SWIG_FLAGS "-package;ubitrack")
 
     SWIG_ADD_MODULE(ubitrack_java java ${UBITRACK_APP_${the_app}_SOURCES})
     SWIG_LINK_LIBRARIES(ubitrack_java ${JNI_LIBRARIES} ${UBITRACK_APP_${the_app}_DEPS} ${UBITRACK_LINKER_LIBS})
