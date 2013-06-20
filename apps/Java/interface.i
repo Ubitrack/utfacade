@@ -146,6 +146,7 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 
 
 #ifdef SWIGCSHARP
+
 %extend Ubitrack::Facade::SimpleImage {
 	%apply unsigned char OUTPUT[] {unsigned char * where};
 	
@@ -155,11 +156,12 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 	%cs_marshal_intptr(void*)
 	void * getDataPointer( )
 	{ return $self->imageData; }
-	
-	void copyImageDataToARGB32Pointer( void * where, int texWidth, int texHeight, const unsigned char alpha )
+	// removed all const from alpha, a, r,g,b , android problem
+	void copyImageDataToARGB32Pointer( void * where, int texWidth, int texHeight, unsigned char alpha )
 	{ 
 		unsigned int* where2 = (unsigned int*) where;
-		const unsigned int a = unsigned int(alpha) << 24;
+		unsigned int a = alpha;
+		a = a << 24;
 		
 		for (int i = 0; i < $self->height; i++)
         {
@@ -167,11 +169,11 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 			unsigned char* bytePointer = $self->imageData + i * $self->widthStep;
 			for (int j = 0; j < $self->width; j++)
 			{
-				const unsigned int r = *bytePointer;
+				unsigned int r = *bytePointer;
 				bytePointer++;
-				const unsigned int g = *bytePointer;
+				unsigned int g = *bytePointer;
 				bytePointer++;
-				const unsigned int b = *bytePointer;
+				unsigned int b = *bytePointer;
 				bytePointer++;
 				*where3 = a |  r << 16 | g << 8 | b;
 				++where3;

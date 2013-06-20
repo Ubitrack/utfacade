@@ -8,7 +8,7 @@ if not have_swig :
 	print "Not building DotNet Wrapper: SWIG not available."
 elif sys.platform == 'darwin' :
 	print "Not building DotNet Wrapper: DotNet not available on Mac OS."
-elif sys.platform.startswith("linux") :
+elif sys.platform.startswith("linux") and not platform=='android':
 	print "Not building DotNet Wrapper: DotNet not available on linux."	
 else:
 	lib_name = 'ubitrack_dotnet_swig'
@@ -22,7 +22,7 @@ else:
 
 
 	# link the extension module
-	config_options = mergeOptions( log4cpp_options, utfacade_options, utdataflow_options, utcore_options, utvision_options, opencv_options)
+	config_options = mergeOptions( utfacade_all_options, utdataflow_all_options, utvision_all_options)
 	#uterrorvis_options
 	env.AppendUnique( **config_options )
 
