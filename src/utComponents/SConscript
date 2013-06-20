@@ -1,6 +1,8 @@
 import sys
 import os.path
 
+have_utvision = False
+
 Import( '*' )
 
 
@@ -51,7 +53,7 @@ env.Replace( no_import_lib = 1 )
 #	env.Append( CPPDEFINES = 'UBITRACK_DLL' )
 
 # d)	
-libs = setupComponentBuild(env, sources, 'utFacade')
+libs = setupComponentBuild(env, sources, 'facade')
 
 # e)
 # clear all 3rd-party dependencies in the case of linking against ubitrack.dll

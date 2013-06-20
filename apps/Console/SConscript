@@ -8,7 +8,7 @@ env = masterEnv.Clone()
 sources = [ 'console.cpp' ]
 
 # setup compiler and linker flags
-config_options = mergeOptions( utfacade_options, boost_options, opencv_options, tinyxml_options, utcore_options, utvision_options, utdataflow_options, log4cpp_options, lapack_options)
+config_options = mergeOptions( utfacade_all_options)
 env.AppendUnique( **config_options )
 env.AppendUnique( LIBS = boost_libs( [ 'program_options' ] ) )
 
@@ -18,7 +18,7 @@ if 'gnulink' in env[ 'TOOLS' ]:
 	env.Append( RPATH = boost_rpath + [ env.Literal( "'$$ORIGIN/../lib'" ) ] )
 
 # build the console
-setupAppBuild(env, sources, 'utConsole', 'utFacade')
+setupAppBuild(env, sources, 'utConsole', 'facade')
 
 
 # also create a visual studio project for the library	
