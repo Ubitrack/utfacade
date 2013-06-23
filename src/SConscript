@@ -4,6 +4,8 @@ Import( '*' )
 
 if not have_utdataflow:
 	success = False
+	have_utfacade = False
+	Export('have_utfacade')
 	Return('success')
 
 sconsfiles = [ "utFacade/SConscript", "utComponents/SConscript" ]

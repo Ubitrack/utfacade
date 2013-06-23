@@ -11,12 +11,10 @@ elif sys.platform == 'darwin' :
 elif sys.platform.startswith("linux") and not platform=='android':
 	print "Not building DotNet Wrapper: DotNet not available on linux."	
 else:
-	lib_name = 'ubitrack_dotnet_swig'
-	
-	lib_name = lib_name + configuration_suffix
+	lib_name = 'ubitrack_dotnet_swig'	
 		
 	# generate wrappers with SWIG
-	env[ 'SWIGFLAGS' ] = [ '-c++', '-csharp', '-dllimport', lib_name, '-namespace', 'Ubitrack' ]
+	env[ 'SWIGFLAGS' ] = [ '-c++', '-csharp', '-dllimport', lib_name + configuration_suffix, '-namespace', 'Ubitrack' ]
 	all_wrapper_sources = env.CXXFile( target = 'ubitrack_dotnet_swig.cc', source = os.path.join( "..", "Java", "interface.i" ) )
 	cpp_wrapper_sources = filter( lambda x: str( x ).endswith( ".cc" ), all_wrapper_sources )		
 
