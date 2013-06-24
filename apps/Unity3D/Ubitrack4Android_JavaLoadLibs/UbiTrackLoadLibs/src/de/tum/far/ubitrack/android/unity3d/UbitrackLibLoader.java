@@ -1,0 +1,63 @@
+package de.tum.far.ubitrack.android.unity3d;
+import org.opencv.android.OpenCVLoader;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import com.unity3d.player.UnityPlayerNativeActivity;
+
+
+public class UbitrackLibLoader extends UnityPlayerNativeActivity {
+
+	static String TAG = "ubitrack";
+	static{
+		
+		Log.i(TAG,"gnustl_shared");
+		loadLibrary("gnustl_shared");
+		
+		Log.i(TAG,"loading opencv");
+		 if (!OpenCVLoader.initDebug()) {
+			 Log.e(TAG,"OpenCVLoader.initDebug");
+		        // Handle initialization error
+		    }
+		 Log.i(TAG,"opencv loaded");
+		 
+		 
+		Log.i(TAG,"log4cpp_x86");
+		loadLibrary("log4cpp_x86");		
+		Log.i(TAG,"utCore_x86");
+		loadLibrary("utCore_x86");
+		Log.i(TAG,"utVision_x86");
+		loadLibrary("utVision_x86");
+		Log.i(TAG,"utDataflow_x86");
+		loadLibrary("utDataflow_x86");
+		Log.i(TAG,"Ubitrack_x86");
+		loadLibrary("Ubitrack_x86");
+		Log.i(TAG,"ubitrack_dotnet_swig_x86");
+		loadLibrary("ubitrack_dotnet_swig_x86");		
+		
+		
+	}
+	
+	public static boolean loadLibrary(String paramString)
+	{
+		try
+		{
+			System.loadLibrary(paramString);			
+			return true;
+		}
+		catch (UnsatisfiedLinkError localUnsatisfiedLinkError)
+		{			
+			Log.e(TAG,"loadLibrary", localUnsatisfiedLinkError);
+		} 
+		return false;
+	}
+	
+	  protected void onCreate(Bundle savedInstanceState) {
+
+	    // call UnityPlayerActivity.onCreate()
+	    super.onCreate(savedInstanceState);
+   
+	    
+	  }
+} 
