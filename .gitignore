@@ -1,3 +1,6 @@
 /apps/DotNet/bin
 /apps/DotNet/obj
 /apps/Unity3D/Ubitrack4Android_JavaLoadLibs/.metadata
+/apps/DotNet/UbitrackDotNet.suo
+/apps/Unity3D/UnityTextureUpdate/UnityTextureUpdate/obj
+/apps/Unity3D/UnityTextureUpdate/UnityTextureUpdate/bin

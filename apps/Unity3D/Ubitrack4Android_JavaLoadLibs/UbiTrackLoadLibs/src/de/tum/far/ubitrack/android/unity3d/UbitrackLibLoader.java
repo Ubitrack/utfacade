@@ -23,18 +23,18 @@ public class UbitrackLibLoader extends UnityPlayerNativeActivity {
 		 Log.i(TAG,"opencv loaded");
 		 
 		 
-		Log.i(TAG,"log4cpp_x86");
-		loadLibrary("log4cpp_x86");		
-		Log.i(TAG,"utCore_x86");
-		loadLibrary("utCore_x86");
-		Log.i(TAG,"utVision_x86");
-		loadLibrary("utVision_x86");
-		Log.i(TAG,"utDataflow_x86");
-		loadLibrary("utDataflow_x86");
-		Log.i(TAG,"Ubitrack_x86");
-		loadLibrary("Ubitrack_x86");
-		Log.i(TAG,"ubitrack_dotnet_swig_x86");
-		loadLibrary("ubitrack_dotnet_swig_x86");		
+		Log.i(TAG,"log4cpp");
+		loadLibrary("log4cpp");		
+		Log.i(TAG,"utCore");
+		loadLibrary("utCore");
+		Log.i(TAG,"utVision");
+		loadLibrary("utVision");
+		Log.i(TAG,"utDataflow");
+		loadLibrary("utDataflow");
+		Log.i(TAG,"Ubitrack");
+		loadLibrary("Ubitrack");
+		Log.i(TAG,"ubitrack_dotnet_swig");
+		loadLibrary("ubitrack_dotnet_swig");		
 		
 		
 	}

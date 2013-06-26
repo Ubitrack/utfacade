@@ -192,11 +192,11 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 		unsigned int* where2 = (unsigned int*) where;
 		unsigned int a = alpha;
 		a = a << 24;
-		
+		int height_1 = $self->height - 1;
 		for (int i = 0; i < $self->height; i++)
         	{
 			unsigned int* where3 = where2 + i * texWidth;
-			unsigned char* bytePointer = $self->imageData + ($self->height - i ) * $self->widthStep;
+			unsigned char* bytePointer = $self->imageData + (height_1 - i ) * $self->widthStep;
 			for (int j = 0; j < $self->width; j++)
 			{
 				unsigned int r = *bytePointer;
