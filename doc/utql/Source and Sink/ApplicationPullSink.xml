@@ -68,7 +68,7 @@
         </Input>
                 
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkPose"/>
+            <UbitrackLib class="ApplicationPullSinkPosition"/>
         </DataflowConfiguration>
     </Pattern>
     
