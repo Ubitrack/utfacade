@@ -73,7 +73,8 @@ public:
 	/** destroys the data flow */
 	~SimpleFacade();
 
-	unsigned long long int now();
+	static unsigned long long int now();
+	
 	/** 
 	 * Loads and instantiates a dataflow network from an XML file
 	 *

@@ -1,8 +1,13 @@
 import sys
 import os.path
 
-Import( '*' )
+have_freeglut = False
+have_lapack = False
+have_opencv = False
+have_directshow = False
+have_utvision = False
 
+Import( '*' )
 
 # HOW TO BUILD (A) LIBRAR-Y/IES FROM A MODULE
 # Building libraries from modules should be consistent for each module.
@@ -27,6 +32,8 @@ Import( '*' )
 
 # a)
 env = masterEnv.Clone()
+
+have_directshow = sys.platform == "win32"
 
 # create a config.h file
 haveMap = { True : '#define', False : '#undef' }
@@ -66,11 +73,13 @@ sources = globSourceFiles( '*.cpp' )
 
 # Merge all options in one "ubitrack" option. Note that some options might be empty if its module is not available	
 # Set ubitrack root source path explicitly that allows sources to access header files relative with #include <..> statements
-utfacade_options = mergeOptions( utvision_all_options,  utdataflow_all_options)
+if have_utvision:
+	utfacade_options = mergeOptions( utvision_all_options,  utdataflow_all_options)
+else:
+	utfacade_options = utdataflow_all_options.copy()
 utfacade_options ['CPPPATH'] += [ os.path.join( getCurrentPath(), '../') ]
-
-
 env.AppendUnique( **utfacade_options )
+
 
 # c)
 if sys.platform == 'win32':
@@ -80,7 +89,7 @@ if sys.platform == 'win32':
 # d)	
 libName = 'utFacade'
 
-libs = setupLibraryBuild(env, sources, libName, 'utFacade')
+libs = setupLibraryBuild(env, sources, libName, 'facade')
 
 simpleHeaders = headers[:]
 for src in [ "AdvancedFacade.h", "DataflowObserver.h", "SimpleApplicationPrivate.h" ]:
