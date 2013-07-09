@@ -14,6 +14,7 @@ SWIG */
 #include <utFacade/SimpleFacade.h>
 #include <utUtil/Logging.h>
 #include <utUtil/Exception.h>
+
 %}
 
 %include "typemaps.i";
@@ -145,7 +146,11 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 
 
 #ifdef SWIGCSHARP
+
 %extend Ubitrack::Facade::SimpleImage {
+
+	
+
 	%apply unsigned char OUTPUT[] {unsigned char * where};
 	
 		void copyImageData( unsigned char* where )
@@ -154,23 +159,24 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 	%cs_marshal_intptr(void*)
 	void * getDataPointer( )
 	{ return $self->imageData; }
-	
-	void copyImageDataToARGB32Pointer( void * where, int texWidth, int texHeight, const unsigned char alpha )
+	// removed all const from alpha, a, r,g,b , android problem
+	void copyImageDataToARGB32Pointer( void * where, int texWidth, int texHeight, unsigned char alpha )
 	{ 
 		unsigned int* where2 = (unsigned int*) where;
-		const unsigned int a = unsigned int(alpha) << 24;
+		unsigned int a = alpha;
+		a = a << 24;
 		
 		for (int i = 0; i < $self->height; i++)
-        {
+        	{
 			unsigned int* where3 = where2 + i * texWidth;
 			unsigned char* bytePointer = $self->imageData + i * $self->widthStep;
 			for (int j = 0; j < $self->width; j++)
 			{
-				const unsigned int r = *bytePointer;
+				unsigned int r = *bytePointer;
 				bytePointer++;
-				const unsigned int g = *bytePointer;
+				unsigned int g = *bytePointer;
 				bytePointer++;
-				const unsigned int b = *bytePointer;
+				unsigned int b = *bytePointer;
 				bytePointer++;
 				*where3 = a |  r << 16 | g << 8 | b;
 				++where3;
@@ -179,29 +185,34 @@ generate generic type wrapper classes of style SWITTYPE_p_<xxx>. */
 		}
 		
 	}
-	/*
-	void copyImageDataToBGRA32Pointer( void * where, int texWidth, int texHeight )
+
+	void copyImageDataToARGB32PointerFlipVertical( void * where, int texWidth, int texHeight, unsigned char alpha )
 	{ 
-		unsigned char* where2 = (unsigned char*) where;
-		unsigned char* bytePointer = $self->imageData;
+		unsigned int* where2 = (unsigned int*) where;
+		unsigned int a = alpha;
+		a = a << 24;
+		int height_1 = $self->height - 1;
 		for (int i = 0; i < $self->height; i++)
-        {
-			int baseStartindex = i * $self->width;
-            int baseOtherindex = i * texWidth;
+        	{
+			unsigned int* where3 = where2 + i * texWidth;
+			unsigned char* bytePointer = $self->imageData + (height_1 - i ) * $self->widthStep;
 			for (int j = 0; j < $self->width; j++)
 			{
-				int startindex = (baseStartindex + j) * 3;
-				int otherindex = (baseOtherindex + j) * 4;
-
-				where2[otherindex+0] = bytePointer[startindex + 2];
-				where2[otherindex+1] = bytePointer[startindex + 1];
-				where2[otherindex+2] = bytePointer[startindex + 0];
-				where2[otherindex+3] = 255;
+				unsigned int r = *bytePointer;
+				bytePointer++;
+				unsigned int g = *bytePointer;
+				bytePointer++;
+				unsigned int b = *bytePointer;
+				bytePointer++;
+				*where3 = a |  r << 16 | g << 8 | b;
+				++where3;
 				
 			}
 		}
 		
-	}*/
+	}
+
+	
 	
 	
 	

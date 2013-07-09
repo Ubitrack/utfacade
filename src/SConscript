@@ -2,6 +2,12 @@ import glob
 
 Import( '*' )
 
+if not have_utdataflow:
+	success = False
+	have_utfacade = False
+	Export('have_utfacade')
+	Return('success')
+
 sconsfiles = [ "utFacade/SConscript", "utComponents/SConscript" ]
 
 # recurse into subdirectories and export driver build environment

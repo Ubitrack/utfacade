@@ -28,7 +28,7 @@ else:
 	env[ 'SWIGFLAGS' ] = [ '-v', '-c++', '-java', '-package', 'ubitrack', '-outdir', os.path.join( buildDir.abspath, "gensrc", "ubitrack") ]
 	env[ 'JARCHDIR' ]  = os.path.join( buildDir.path, 'classes' )
 	env[ 'JAVACLASSPATH' ] = os.path.join( buildDir.path, 'gensrc' )
-	config_options = mergeOptions( log4cpp_options, utfacade_options, utdataflow_options, utcore_options, opencv_options, utvision_options)
+	config_options = mergeOptions( utfacade_all_options, utdataflow_all_options, utvision_all_options)
 	env.AppendUnique( **config_options )
 	env.AppendUnique( LIBS = boost_libs( [ 'thread' ] ) )
 

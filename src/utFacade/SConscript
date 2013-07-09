@@ -87,7 +87,7 @@ if sys.platform == 'win32':
 	env.Append( CPPDEFINES = 'UTFACADE_DLL' )
 
 # d)	
-libName = 'Ubitrack'
+libName = 'utFacade'
 
 libs = setupLibraryBuild(env, sources, libName, 'facade')
 
