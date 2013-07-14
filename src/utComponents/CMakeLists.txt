@@ -3,3 +3,18 @@ ut_add_component(utfacadecomponents DEPS utcore utdataflow utfacade utvision)
 ut_component_include_directories(../ ${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${OPENCV_INCLUDE_DIR})
 ut_glob_component_sources(HEADERS "*.h" SOURCES "*.cpp")
 ut_create_multi_component()
+
+# need some headers from the components directory 
+if(UBITRACK_COMPONENT_${the_component}_HEADERS)
+  foreach(hdr ${UBITRACK_COMPONENT_${the_component}_HEADERS})
+    string(REGEX REPLACE "^.*modules/.*/src/" "" hdr2 "${hdr}")
+           GET_FILENAME_COMPONENT(fpath ${hdr2} PATH)
+           #MESSAGE(STATUS "${UBITRACK_INCLUDE_INSTALL_PATH}/${fpath}")
+           IF(fpath)
+             install(FILES ${hdr} DESTINATION "${UBITRACK_INCLUDE_INSTALL_PATH}/${fpath}" COMPONENT main)
+           ELSE(fpath)
+             install(FILES ${hdr} DESTINATION "${UBITRACK_INCLUDE_INSTALL_PATH}" COMPONENT main)
+           ENDIF(fpath)
+  endforeach()
+endif()
+

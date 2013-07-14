@@ -33,6 +33,9 @@
  * @author Benjamin Becker <benjamin.becker@eads.net>
  */
 
+#ifndef __UBITRACK_COMPONENTS_APPLICATIONENDPOINTSVISION_H_INCLUDED__
+#define __UBITRACK_COMPONENTS_APPLICATIONENDPOINTSVISION_H_INCLUDED__
+
 #include <utComponents/ApplicationPushSink.h>
 #include <utComponents/ApplicationPullSink.h>
 #include <utComponents/ApplicationPushSource.h>
@@ -68,3 +71,4 @@ struct EventTypeTraits< Measurement::ImageMeasurement >
 
 } }
 
+#endif // __UBITRACK_COMPONENTS_APPLICATIONENDPOINTSVISION_H_INCLUDED__
