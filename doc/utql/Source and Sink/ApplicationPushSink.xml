@@ -165,8 +165,33 @@
             <UbitrackLib class="ApplicationPushSinkMatrix3x4"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    <Pattern name="ApplicationPushSinkMatrix4x4" displayName="Application Push Sink (4x4 Matrix)">
+
+  <Pattern name="ApplicationPushSinkMatrix3x3" displayName="Application Push Sink (3x3 Matrix)">
+    <Description>
+      <h:p>
+        This is a sink component which may be used to interface the dataflow network
+        to an user application. This sink uses a push input port and calls a callback function supplied
+        by the application upon reception of a new event. See the Doxygen documentation for details.
+      </h:p>
+    </Description>
+
+    <Input>
+      <Node name="A" displayName="A"/>
+      <Node name="B" displayName="B"/>
+      <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
+        <Description>
+          <h:p>The input matrix</h:p>
+        </Description>
+        <Predicate>type=='3x3Matrix'&amp;&amp;mode=='push'</Predicate>
+      </Edge>
+    </Input>
+
+    <DataflowConfiguration>
+      <UbitrackLib class="ApplicationPushSinkMatrix3x3"/>
+    </DataflowConfiguration>
+  </Pattern>
+
+  <Pattern name="ApplicationPushSinkMatrix4x4" displayName="Application Push Sink (4x4 Matrix)">
     	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a push input port and calls a callback function supplied 
     	by the application upon reception of a new event. See the Doxygen documentation for details.

@@ -49,6 +49,7 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSinkErrorPositionList > ( "ApplicationPushSinkErrorPositionList" );
 	cf->registerComponent< ApplicationPushSinkErrorPositionList2 > ( "ApplicationPushSinkErrorPosition2DList" );
 	cf->registerComponent< ApplicationPushSink< Measurement::Matrix3x4 > > ( "ApplicationPushSinkMatrix3x4" );
+	cf->registerComponent< ApplicationPushSink< Measurement::Matrix3x3 > > ( "ApplicationPushSinkMatrix3x3" );
 	cf->registerComponent< ApplicationPushSink< Measurement::Matrix4x4 > > ( "ApplicationPushSinkMatrix4x4" );
 	cf->registerComponent< ApplicationPushSink< Measurement::Distance > > ( "ApplicationPushSinkDistance" );
 	
