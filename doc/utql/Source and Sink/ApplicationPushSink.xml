@@ -240,7 +240,7 @@
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Distance">
+            <Edge name="Input" source="A" destination="B" displayName="Button">
             	<Description><h:p>The key value.</h:p></Description>
                 <Predicate>type=='Button'&amp;&amp;mode=='push'</Predicate>
             </Edge>
