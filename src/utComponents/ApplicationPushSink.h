@@ -189,6 +189,7 @@ protected:
 };
 
 
+typedef ApplicationPushSink< Measurement::Button > ApplicationPushSinkButton;
 typedef ApplicationPushSink< Measurement::Pose > ApplicationPushSinkPose;
 typedef ApplicationPushSink< Measurement::ErrorPose > ApplicationPushSinkErrorPose;
 typedef ApplicationPushSink< Measurement::Position > ApplicationPushSinkPosition;
