@@ -38,8 +38,10 @@
 namespace Ubitrack { namespace Components {
 
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
+	cf->registerComponent< ApplicationPullSinkButton > ( "ApplicationPullSinkButton" );
 	cf->registerComponent< ApplicationPullSinkPose > ( "ApplicationPullSinkPose" );
 	cf->registerComponent< ApplicationPullSinkErrorPose > ( "ApplicationPullSinkErrorPose" );
+	cf->registerComponent< ApplicationPullSinkPosition2D > ( "ApplicationPullSinkPosition2D" );
 	cf->registerComponent< ApplicationPullSinkPosition > ( "ApplicationPullSinkPosition" );
 	cf->registerComponent< ApplicationPullSinkErrorPosition > ( "ApplicationPullSinkErrorPosition" );
 	cf->registerComponent< ApplicationPullSinkRotation > ( "ApplicationPullSinkRotation" );
@@ -48,6 +50,7 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPullSinkPositionList2 > ( "ApplicationPullSinkPosition2DList" );
 	cf->registerComponent< ApplicationPullSinkSkalar > ( "ApplicationPullSinkSkalar" );
 	cf->registerComponent< ApplicationPullSinkMatrix3x3 > ( "ApplicationPullSinkMatrix3x3" );
+	cf->registerComponent< ApplicationPullSinkVector4D > ( "ApplicationPullSinkVector4D" );
 	
 }
 

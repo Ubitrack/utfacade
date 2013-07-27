@@ -116,8 +116,10 @@ protected:
 	PullConsumer< EventType > m_InPort;
 };
 
+typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkButton;
 typedef ApplicationPullSink< Measurement::Pose > ApplicationPullSinkPose;
 typedef ApplicationPullSink< Measurement::ErrorPose > ApplicationPullSinkErrorPose;
+typedef ApplicationPullSink< Measurement::Position2D > ApplicationPullSinkPosition2D;
 typedef ApplicationPullSink< Measurement::Position > ApplicationPullSinkPosition;
 typedef ApplicationPullSink< Measurement::ErrorPosition > ApplicationPullSinkErrorPosition;
 typedef ApplicationPullSink< Measurement::Rotation > ApplicationPullSinkRotation;
@@ -127,6 +129,7 @@ typedef ApplicationPullSink< Measurement::PositionList2 > ApplicationPullSinkPos
 typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkSkalar;
 typedef ApplicationPullSink< Measurement::Matrix3x3 > ApplicationPullSinkMatrix3x3;
 typedef ApplicationPullSink< Measurement::Matrix4x4 > ApplicationPullSinkMatrix4x4;
+typedef ApplicationPullSink< Measurement::Vector4D > ApplicationPullSinkVector4D;
 
 
 } } // namespace Ubitrack::Components
