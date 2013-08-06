@@ -1,10 +1,33 @@
-if(UBITRACK_INITIAL_PASS)
-    set(the_target "ubitrack_dotnet")
-    set(UBITRACK_APPS_BUILD ${UBITRACK_APPS_BUILD} "${the_target}" CACHE INTERNAL "List of UbiTrack apps included into the build")
-    set(UBITRACK_APPS_${the_target}_LOCATION  "${CMAKE_CURRENT_SOURCE_DIR}" CACHE INTERNAL "Location of ${the_target} app sources")
-else(UBITRACK_INITIAL_PASS)
-	IF(HAVE_SWIG)
-	  MESSAGE(STATUS "Building DotNet wrappers TBD")
-	  ##SWIG_ADD_MODULE(ubitrack_java csharp interface.i)
-	ENDIF(HAVE_SWIG)
-endif(UBITRACK_INITIAL_PASS)
+macro(ut_get_customized_app_creator)
+    ut_include_modules(${UBITRACK_APP_${the_app}_DEPS} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/../utfacade)
+    SET(CMAKE_SWIG_FLAGS "-v")
+
+	if(CMAKE_COMPILER_IS_GNUCXX)
+      SET(CMAKE_CXX_FLAGS "-fno-strict-aliasing")
+    endif(CMAKE_COMPILER_IS_GNUCXX)
+	SET(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_BINARY_DIR}/gensrc/ubitrack)
+    SET_SOURCE_FILES_PROPERTIES(${UBITRACK_APP_${the_app}_SOURCES} PROPERTIES CPLUSPLUS ON)
+    SET_SOURCE_FILES_PROPERTIES(${UBITRACK_APP_${the_app}_SOURCES}PROPERTIES SWIG_FLAGS "-namespace;Ubitrack")
+
+    SWIG_ADD_MODULE(ubitrack_dotnet_swig csharp ${UBITRACK_APP_${the_app}_SOURCES})
+    SWIG_LINK_LIBRARIES(ubitrack_dotnet_swig ${UBITRACK_APP_${the_app}_DEPS} ${UBITRACK_LINKER_LIBS})
+
+	install(TARGETS ${SWIG_MODULE_ubitrack_dotnet_swig_REAL_NAME}
+	  RUNTIME DESTINATION bin COMPONENT main
+	  LIBRARY DESTINATION ${UBITRACK_LIB_INSTALL_PATH} COMPONENT main
+	  ARCHIVE DESTINATION ${UBITRACK_LIB_INSTALL_PATH} COMPONENT main
+	)	
+
+	file(GLOB cs_srcs "${CMAKE_CURRENT_BINARY_DIR}/gensrc/ubitrack/*.cs")
+	csharp_add_library(ubitrack_dotnet ${cs_srcs})
+	install_assembly(ubitrack_dotnet DESTINATION "${UBITRACK_LIB_INSTALL_PATH}")
+	
+endmacro(ut_get_customized_app_creator)
+
+if (WIN32)
+	set(the_description "The UbiTrack DotNet Wrapper")
+	ut_add_app(ubitrack_dotnet_swig DEPS utcore utdataflow utfacade utvision)
+	ut_app_include_directories(${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
+	ut_glob_app_sources(SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../Java/interface.i")
+	ut_create_customized_app()
+endif(WIN32)
