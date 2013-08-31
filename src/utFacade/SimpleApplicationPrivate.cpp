@@ -130,9 +130,9 @@ bool SimpleApplicationPullSinkPositionList3DPrivate::getPositionList3D(  SimpleP
 		Ubitrack::Measurement::PositionList p = pSink->get(timestamp);
 		//LOG4CPP_INFO( logger, "Sucessfully pulled pose in SimpleApplicationPullSinkPositionList3DPrivate::getPositionList3D: " << p );
 		// Convert measurement
-		int count = p->size();
+		const std::size_t count ( p->size() );
 		
-		for(int i=0;i<count;i++)
+		for( std::size_t i( 0 ); i<count; i++ )
 		{
 			SimplePosition3DValue value;
 			Math::Vector< 3 >  v3 = (*p)[i];
@@ -165,8 +165,9 @@ bool SimpleApplicationPullSinkErrorPositionList3DPrivate::getErrorPositionList3D
 		Ubitrack::Measurement::ErrorPositionList p = pSink->get(timestamp);
 		//LOG4CPP_INFO( logger, "Sucessfully pulled pose in SimpleApplicationPullSinkErrorPositionList3DPrivate::getErrorPositionList3D: " << p );
 		// Convert measurement
-		int count = p->size();
-		for(int i=0;i<count;i++)
+		const std::size_t count ( p->size() );
+		
+		for( std::size_t i( 0 ); i<count; i++ )
 		{
 			SimpleErrorPosition3DValue value;
 			Math::Vector< 3 >  v3 = (*p)[i].value;

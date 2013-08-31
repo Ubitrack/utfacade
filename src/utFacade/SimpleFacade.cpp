@@ -161,8 +161,8 @@ void convert2DPositionListCallback( Ubitrack::Facade::SimplePosition2DListReceiv
 {
 	using namespace Ubitrack;
 	Facade::SimplePosition2DList p;
-	int count = measurement->size();
-	for(int i=0;i<count;i++)
+	const std::size_t count( measurement->size() );
+	for( std::size_t i( 0 ); i<count; i++ )
 	{
 		SimplePosition2DValue value;
 		Math::Vector< 2 >  v2 = (*measurement)[i];
@@ -230,8 +230,8 @@ void convert3DPositionListCallback( Ubitrack::Facade::SimplePositionList3DReceiv
 {
 	using namespace Ubitrack;
 	Facade::SimplePositionList3D p;
-	int count = measurement->size();
-	for(int i=0;i<count;i++)
+	const std::size_t count( measurement->size() );
+	for( std::size_t i( 0 ); i<count; i++ )
 	{
 		SimplePosition3DValue value;
 		Math::Vector< 3 >  v3 = (*measurement)[i];
@@ -249,8 +249,8 @@ void convert3DErrorPositionListCallback( Ubitrack::Facade::SimpleErrorPositionLi
 {
 	using namespace Ubitrack;
 	Facade::SimpleErrorPositionList3D p;
-	int count = measurement->size();
-	for(int i=0;i<count;i++)
+	const std::size_t count( measurement->size() );
+	for( std::size_t i( 0 ); i<count; i++ )
 	{
 		SimpleErrorPosition3DValue value;
 		Math::Vector< 3 >  v3 = (*measurement)[i].value;
