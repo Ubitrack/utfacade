@@ -1,6 +1,6 @@
 set(the_description "The UbiTrack Facade")
 ut_add_module(utfacade utcore utdataflow utvision)
-ut_module_include_directories(utfacade ${TINYXML_INCLUDE_DIR} ${LOG4CPP_INCLUDE_DIR} ${BOOSTBINDINGS_INCLUDE_DIR} ${LAPACK_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${OPENCV_INCLUDE_DIR})
+ut_module_include_directories(utfacade ${UBITRACK_CORE_DEPS_INCLUDE_DIR} ${OPENCV_INCLUDE_DIR})
 ut_glob_module_sources(HEADERS "*.h" SOURCES "*.cpp")
 
 # writes config file into binary_dir, so sourcetree will not be cluttered
