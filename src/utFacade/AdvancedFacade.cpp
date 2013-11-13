@@ -47,7 +47,6 @@
 #include <utClientServer/TcpConnection.h>
 #include <utDataflow/DataflowNetwork.h>
 #include <utFacade/Config.h>
-// #include <utFacade/Config.h>
 #ifdef _WIN32
 	#include <utUtil/CleanWindows.h>
 #endif
