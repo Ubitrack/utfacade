@@ -87,7 +87,8 @@ if sys.platform == 'win32':
 	env.Append( CPPDEFINES = 'UTFACADE_DLL' )
 
 # d)	
-libName = 'utFacade'
+# facade library must be called "Ubitrack", otherwise old programs can't be used anymore and the advanced facade can't find the components directory on windows
+libName = 'Ubitrack'
 
 libs = setupLibraryBuild(env, sources, libName, 'facade')
 
