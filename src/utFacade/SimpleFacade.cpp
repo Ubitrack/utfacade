@@ -165,7 +165,7 @@ void convert2DPositionListCallback( Ubitrack::Facade::SimplePosition2DListReceiv
 	for( std::size_t i( 0 ); i<count; i++ )
 	{
 		SimplePosition2DValue value;
-		Math::Vector< 2 >  v2 = (*measurement)[i];
+		Math::Vector< double, 2 >  v2 = (*measurement)[i];
 		value.x = v2[0];
 		value.y = v2[1];
 		p.values.push_back(value);
@@ -217,7 +217,7 @@ void convert3DErrorPositionCallback( Ubitrack::Facade::SimpleErrorPosition3DRece
 	
 	Facade::SimpleErrorPosition3D value;	
 	
-	Math::Vector< 3 >  v3 = measurement->value;
+	Math::Vector< double, 3 >  v3 = measurement->value;
 	value.x = v3[0];
 	value.y = v3[1];
 	value.z = v3[2];
@@ -234,7 +234,7 @@ void convert3DPositionListCallback( Ubitrack::Facade::SimplePositionList3DReceiv
 	for( std::size_t i( 0 ); i<count; i++ )
 	{
 		SimplePosition3DValue value;
-		Math::Vector< 3 >  v3 = (*measurement)[i];
+		Math::Vector< double, 3 >  v3 = (*measurement)[i];
 		value.x = v3[0];
 		value.y = v3[1];
 		value.z = v3[2];
@@ -253,7 +253,7 @@ void convert3DErrorPositionListCallback( Ubitrack::Facade::SimpleErrorPositionLi
 	for( std::size_t i( 0 ); i<count; i++ )
 	{
 		SimpleErrorPosition3DValue value;
-		Math::Vector< 3 >  v3 = (*measurement)[i].value;
+		Math::Vector< double, 3 >  v3 = (*measurement)[i].value;
 		value.x = v3[0];
 		value.y = v3[1];
 		value.z = v3[2];

@@ -176,7 +176,7 @@ public:
 		m_outPort.send( Measurement::Pose( pose.timestamp,
 			Math::Pose(
 				Math::Quaternion( pose.rx, pose.ry, pose.rz, pose.rw ),
-				Math::Vector< 3 >( pose.tx, pose.ty, pose.tz )
+				Math::Vector< double, 3 >( pose.tx, pose.ty, pose.tz )
 				)
 			) );
 	}
@@ -208,7 +208,7 @@ public:
 	{
 		// convert SimplePosition2D to Measurement::Position2D
 		m_outPort.send( Measurement::Position2D( position2d.timestamp,
-			Math::Vector< 2 >(position2d.x, position2d.y)
+			Math::Vector< double, 2 >(position2d.x, position2d.y)
 			) );
 		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePosition2D receivePosition2D: x=" << position2d.x << " y=" << position2d.y );
 	}
@@ -238,7 +238,7 @@ public:
 	{
 		// convert SimplePosition2D to Measurement::Position2D
 		m_outPort.send( Measurement::Position( position3d.timestamp,
-			Math::Vector< 3 >(position3d.x, position3d.y, position3d.z)
+			Math::Vector< double, 3 >(position3d.x, position3d.y, position3d.z)
 			) );
 		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePosition3D receivePosition3D: x=" << position3d.x << " y=" << position3d.y<< " z=" << position3d.z  );
 	}
@@ -297,10 +297,10 @@ public:
 	void receivePositionList3D( const Facade::SimplePositionList3D& positionlist3d ) throw()
 	{
 		const std::vector<SimplePosition3DValue>& values = positionlist3d.values;
-		std::vector< Math::Vector<3> > newValues;
+		std::vector< Math::Vector< double, 3 > > newValues;
 		
 		for(unsigned int i=0;i<values.size();i++){
-			newValues.push_back(Math::Vector<3>(values[i].x,values[i].y,values[i].z));
+			newValues.push_back(Math::Vector< double, 3 >(values[i].x,values[i].y,values[i].z));
 		}
 		
 		m_outPort.send( Measurement::PositionList( positionlist3d.timestamp,
