@@ -1,16 +1,7 @@
-import glob
+# order of which the SConscript are called is of importance this time
+sconsfiles = ['utFacade/SConscript', 'utComponents/SConscript' ]
 
-Import( '*' )
-
-if not have_utdataflow:
-	success = False
-	have_utfacade = False
-	Export('have_utfacade')
-	Return('success')
-
-sconsfiles = [ "utFacade/SConscript", "utComponents/SConscript" ]
-
-# recurse into subdirectories and export driver build environment
+# call all SConscript files
 SConscript( sconsfiles )
 success = True
 Return('success')

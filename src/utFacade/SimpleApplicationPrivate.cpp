@@ -101,7 +101,7 @@ bool SimpleApplicationPullSinkErrorPosition3DPrivate::getErrorPosition3D( Simple
 		LOG4CPP_INFO( logger, "Sucessfully pulled pose in SimpleApplicationPullSinkErrorPosition3DPrivate::getErrorPosition3D: " << p );
 		// Convert measurement		
 	
-		Math::Vector< 3 >  v3 = p->value;
+		Math::Vector< double, 3 >  v3 = p->value;
 		pos.x = v3[0];
 		pos.y = v3[1];
 		pos.z = v3[2];
@@ -135,7 +135,7 @@ bool SimpleApplicationPullSinkPositionList3DPrivate::getPositionList3D(  SimpleP
 		for( std::size_t i( 0 ); i<count; i++ )
 		{
 			SimplePosition3DValue value;
-			Math::Vector< 3 >  v3 = (*p)[i];
+			Math::Vector< double, 3 >  v3 = (*p)[i];
 			value.x = v3[0];
 			value.y = v3[1];
 			value.z = v3[2];
@@ -170,7 +170,7 @@ bool SimpleApplicationPullSinkErrorPositionList3DPrivate::getErrorPositionList3D
 		for( std::size_t i( 0 ); i<count; i++ )
 		{
 			SimpleErrorPosition3DValue value;
-			Math::Vector< 3 >  v3 = (*p)[i].value;
+			Math::Vector< double, 3 >  v3 = (*p)[i].value;
 			value.x = v3[0];
 			value.y = v3[1];
 			value.z = v3[2];

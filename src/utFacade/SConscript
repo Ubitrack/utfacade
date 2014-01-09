@@ -1,3 +1,25 @@
+# HOW TO BUILD (A) LIBRAR-Y/IES FROM A MODULE
+# Building libraries from modules should be consistent for each module.
+# Use the following scheme for each new library created:
+#
+# a) Check for required libraries. If they are not available return False and export flags if needed
+# b) Define the src-subdirectories for which the library should be compiled
+#    and glob all files in there
+# c) Define a [LIBRARY]_options variable for the library containing all dependencies
+#    from other libraries. Create a clone from the master environment and add those options.
+# d) WINDOWS ONLY: Create a header file which implements dll interface functionality
+#    dependent from a [LIBRARY]_DLL define. If the define is set, the dll should be exported,
+#    if not, the dll should be imported. Set the define in the preprocessor options for the environment.
+# e) Build the library!
+# f) Remove all entries for (at least) the LIBS and LIBPATH keys in the options and
+#    add only the newly-compiled library as a dependcy. This will avoid multiple includes
+#    of libraries. Also verify that the import/export-switch define is not set.
+# g) Export the options so that other libraries can base on this library. 
+# h) Optionally setup help and ide projects
+#
+# The use of options and possibility to export them makes hierarchical build environments
+# obsolete. Avoid exporting new environments to the build system.
+
 import sys
 import os.path
 
@@ -6,36 +28,21 @@ have_lapack = False
 have_opencv = False
 have_directshow = False
 have_utvision = False
+have_utdataflow = False
 
 Import( '*' )
 
-# HOW TO BUILD (A) LIBRAR-Y/IES FROM A MODULE
-# Building libraries from modules should be consistent for each module.
-# Use the following scheme for each new library created:
-#
-# a) Define the src-subdirectories for which the library should be compiled
-#    and glob all files in there
-# b) Define a [LIBRARY]_options variable for the library containing all dependencies
-#    from other libraries. Create a clone from the master environment and add those options.
-# c) WINDOWS ONLY: Create a header file which implements dll interface functionality
-#    dependent from a [LIBRARY]_DLL define. If the define is set, the dll should be exported,
-#    if not, the dll should be imported. Set the define in the preprocessor options for the environment.
-# d) Build the library!
-# e) Remove all entries for (at least) the LIBS and LIBPATH keys in the options and
-#    add only the newly-compiled library as a dependcy. This will avoid multiple includes
-#    of libraries. Also verify that the import/export-switch define is not set.
-# f) Export the options so that other libraries can base on this library.
-#
-# The use of options and possibility to export them makes hierarchical build environments
-# obsolete. Avoid exporting new environments to the build system.
-
-
-# a)
-env = masterEnv.Clone()
-
 have_directshow = sys.platform == "win32"
 
-# create a config.h file
+# a)
+if not have_utdataflow:
+	print "utdataflow missing -- not building facade libraries"
+	result = False;
+	Return('result')
+
+# create a config.h file, need environment for this
+env = masterEnv.Clone()
+
 haveMap = { True : '#define', False : '#undef' }
 config_h_content = """#ifndef __UBITRACK_CONFIG_H_INCLUDED__
 #define __UBITRACK_CONFIG_H_INCLUDED__
@@ -63,34 +70,32 @@ config_h_content = """#ifndef __UBITRACK_CONFIG_H_INCLUDED__
 """ % ( install_component_prefix.encode( 'string_escape' ), 'ubitrack', haveMap[False], haveMap[ have_freeglut ], haveMap[ have_lapack ], haveMap[ have_opencv ], haveMap[False], haveMap[ have_directshow ] )
 env.CreateFile( os.path.join( Dir( '.' ).srcnode().abspath, 'Config.h' ), Value( config_h_content ) )
 
-
+# b)
 headers = globSourceFiles( '*.h' )
 sources = globSourceFiles( '*.cpp' )
 
-# b)	
-# setup compiler and linker flags
-
-
-# Merge all options in one "ubitrack" option. Note that some options might be empty if its module is not available	
-# Set ubitrack root source path explicitly that allows sources to access header files relative with #include <..> statements
+# c)
 if have_utvision:
 	utfacade_options = mergeOptions( utvision_all_options,  utdataflow_all_options)
 else:
 	utfacade_options = utdataflow_all_options.copy()
 utfacade_options ['CPPPATH'] += [ os.path.join( getCurrentPath(), '../') ]
+
 env.AppendUnique( **utfacade_options )
 
 
-# c)
+# d)
 if sys.platform == 'win32':
 	# On windows this statement will help the compiler to realize that it has to _export_ the library instead of importing it
 	env.Append( CPPDEFINES = 'UTFACADE_DLL' )
 
-# d)	
+# e)	
 # facade library must be called "Ubitrack", otherwise old programs can't be used anymore and the advanced facade can't find the components directory on windows
 libName = 'Ubitrack'
-
+# compile all source files into single library
+# {buildenvironment, source files, name of the library, build target}
 libs = setupLibraryBuild(env, sources, libName, 'facade')
+
 
 simpleHeaders = headers[:]
 for src in [ "AdvancedFacade.h", "DataflowObserver.h", "SimpleApplicationPrivate.h" ]:
@@ -98,32 +103,20 @@ for src in [ "AdvancedFacade.h", "DataflowObserver.h", "SimpleApplicationPrivate
 		
 setupIncludeInstall(env, simpleHeaders, 'utFacade', 'includes')
 
-# e)
-# clear all 3rd-party dependencies in the case of linking against ubitrack.dll
+# f)
 utfacade_all_options = utfacade_options.copy()
 utfacade_options[ 'LIBS' ] = []
 utfacade_options[ 'LIBPATH' ] = []
-# add the ubitrack library to the link options.
 utfacade_options[ 'LIBS' ] += libs
 utfacade_options[ 'LIBPATH' ] += [ install_library_prefix ]
-
 utfacade_all_options[ 'LIBS' ] += libs
 utfacade_all_options[ 'LIBPATH' ] += [ install_library_prefix ]
 
 
-# f)
-have_utfacade = True
+# g)
+have_utfacade = libs != 0
 Export( 'utfacade_options', 'have_utfacade', 'utfacade_all_options' )
 
-
-# also create a visual studio project for the library	
-createVisualStudioProject(env, sources, headers, 'utFacade')
-
-# generate short help message on how to build against the library
+# h)
 generateHelp(utfacade_options)
-
-
-# return compile status
-success = libs
-Return ('success')
-
+createVisualStudioProject(env, sources, headers, 'utFacade')
