@@ -194,6 +194,8 @@ typedef ApplicationPushSink< Measurement::Pose > ApplicationPushSinkPose;
 typedef ApplicationPushSink< Measurement::ErrorPose > ApplicationPushSinkErrorPose;
 typedef ApplicationPushSink< Measurement::Position > ApplicationPushSinkPosition;
 typedef ApplicationPushSink< Measurement::Position2D > ApplicationPushSinkPosition2D;
+typedef ApplicationPushSink< Measurement::Position > ApplicationPushSinkErrorPosition;
+typedef ApplicationPushSink< Measurement::Position2D > ApplicationPushSinkErrorPosition2D;
 typedef ApplicationPushSink< Measurement::Rotation > ApplicationPushSinkRotation;
 typedef ApplicationPushSink< Measurement::PositionList > ApplicationPushSinkPositionList;
 typedef ApplicationPushSink< Measurement::PositionList2 > ApplicationPushSinkPositionList2;

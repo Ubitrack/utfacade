@@ -66,6 +66,26 @@
         </DataflowConfiguration>
     </Pattern>
     
+    <Pattern name="ApplicationPushSinkErrorPosition" displayName="Application Push Sink (3D ErrorPosition)">
+    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
+    	to an user application. This sink uses a push input port and calls a callback function supplied 
+    	by the application upon reception of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition">
+            	<Description><h:p>The input position</h:p></Description>
+                <Predicate>type=='3DPositionError'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkErrorPosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
     <Pattern name="ApplicationPushSinkRotation" displayName="Application Push Sink (3D Rotation)">
     	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a push input port and calls a callback function supplied 
@@ -135,7 +155,7 @@
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input 2D Position List">
+            <Edge name="Input" source="A" destination="B" displayName="Input 2D Position">
             	<Description><h:p>The input positions</h:p></Description>
                 <Predicate>type=='2DPosition'&amp;&amp;mode=='push'</Predicate>
             </Edge>
