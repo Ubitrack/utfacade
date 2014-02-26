@@ -48,8 +48,10 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSourcePosition2DList > ( "ApplicationPushSourcePositionList2" );
 	cf->registerComponent< ApplicationPushSourcePose > ( "ApplicationPushSourcePose" );
 	cf->registerComponent< ApplicationPushSourcePoseList > ( "ApplicationPushSourcePoseList" );
-	cf->registerComponent< ApplicationPushSourcePoseList > ( "ApplicationPushSourceMatrix3x3" );
-	cf->registerComponent< ApplicationPushSourcePoseList > ( "ApplicationPushSourceVector4" );
+	cf->registerComponent< ApplicationPushSourceMatrix4x4 > ( "ApplicationPushSourceMatrix4x4" );
+	cf->registerComponent< ApplicationPushSourceMatrix3x4 > ( "ApplicationPushSourceMatrix3x4" );
+	cf->registerComponent< ApplicationPushSourceMatrix3x3 > ( "ApplicationPushSourceMatrix3x3" );
+	cf->registerComponent< ApplicationPushSourceVector4 > ( "ApplicationPushSourceVector4" );
 }
 
 } } // namespace Ubitrack::Components
