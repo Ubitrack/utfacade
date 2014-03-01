@@ -152,6 +152,7 @@ typedef ApplicationPushSource< Measurement::Matrix4x4 > ApplicationPushSourceMat
 typedef ApplicationPushSource< Measurement::Matrix3x4 > ApplicationPushSourceMatrix3x4;
 typedef ApplicationPushSource< Measurement::Matrix3x3 > ApplicationPushSourceMatrix3x3;
 typedef ApplicationPushSource< Measurement::Vector4D > ApplicationPushSourceVector4;
+typedef ApplicationPushSource< Measurement::ErrorPose > ApplicationPushSourceErrorPose;
 
 
 

@@ -47,6 +47,7 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSourcePosition2D > ( "ApplicationPushSourcePosition2" );	
 	cf->registerComponent< ApplicationPushSourcePosition2DList > ( "ApplicationPushSourcePositionList2" );
 	cf->registerComponent< ApplicationPushSourcePose > ( "ApplicationPushSourcePose" );
+	cf->registerComponent< ApplicationPushSourceErrorPose > ( "ApplicationPushSourceErrorPose" );
 	cf->registerComponent< ApplicationPushSourcePoseList > ( "ApplicationPushSourcePoseList" );
 	cf->registerComponent< ApplicationPushSourceMatrix4x4 > ( "ApplicationPushSourceMatrix4x4" );
 	cf->registerComponent< ApplicationPushSourceMatrix3x4 > ( "ApplicationPushSourceMatrix3x4" );
