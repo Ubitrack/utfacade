@@ -1,0 +1,32 @@
+import os, sys
+
+have_swig = False
+
+Import( '*' )
+
+#if 'swig' in masterEnv[ 'TOOLS' ] and not sys.platform == 'darwin':
+env = masterEnv.Clone()
+
+if not have_swig :
+	print "Not building python Wrapper: SWIG not available."
+if not have_python_capi:
+	print "Not building python Wrapper: SWIG not available."
+else:
+	lib_name = 'ubitrack_python_swig'	
+		
+	# generate wrappers with SWIG
+	env[ 'SWIGFLAGS' ] = [ '-c++', '-python', '-threads' ]
+	all_wrapper_sources = env.CXXFile( target = 'ubitrack_python_swig.cc', source =  "interface.i"  )
+	cpp_wrapper_sources = filter( lambda x: str( x ).endswith( ".cc" ), all_wrapper_sources )		
+
+
+	# link the extension module
+	config_options = mergeOptions( utfacade_all_options, utdataflow_all_options, utvision_all_options, python_capi_options)
+	#uterrorvis_options
+	env.AppendUnique( **config_options )
+
+	
+	lib = setupLibraryBuild(env, cpp_wrapper_sources, lib_name, 'python')	
+	
+	py_install_path = os.path.join( install_prefix, 'lib', 'python', 'site-packages' )
+	Alias( [ 'install-all', 'install-python' ], Install( py_install_path, [ 'ubitrack.py' ] ) )	

@@ -1,5 +1,10 @@
+Import( 'globSourceFiles' , 'masterEnv','setupIncludeInstallAll' )
+
 # order of which the SConscript are called is of importance this time
 sconsfiles = ['utFacade/SConscript', 'utComponents/SConscript' ]
+
+env = masterEnv.Clone()
+setupIncludeInstallAll(env, '.')
 
 # call all SConscript files
 SConscript( sconsfiles )

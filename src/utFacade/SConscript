@@ -98,11 +98,9 @@ libs = setupLibraryBuild(env, sources, libName, 'facade')
 
 
 simpleHeaders = headers[:]
-for src in [ "AdvancedFacade.h", "DataflowObserver.h", "SimpleApplicationPrivate.h" ]:
+for src in [ "SimpleApplicationPrivate.h" ]:
 		simpleHeaders.remove( src );
 		
-setupIncludeInstall(env, simpleHeaders, 'utFacade', 'includes')
-
 # f)
 utfacade_all_options = utfacade_options.copy()
 utfacade_options[ 'LIBS' ] = []
