@@ -148,6 +148,12 @@ typedef ApplicationPushSource< Measurement::Rotation > ApplicationPushSourceRota
 //typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
 typedef ApplicationPushSource< Measurement::PositionList2 > ApplicationPushSourcePosition2DList;
 typedef ApplicationPushSource< Measurement::PoseList > ApplicationPushSourcePoseList;
+typedef ApplicationPushSource< Measurement::Matrix4x4 > ApplicationPushSourceMatrix4x4;
+typedef ApplicationPushSource< Measurement::Matrix3x4 > ApplicationPushSourceMatrix3x4;
+typedef ApplicationPushSource< Measurement::Matrix3x3 > ApplicationPushSourceMatrix3x3;
+typedef ApplicationPushSource< Measurement::Vector4D > ApplicationPushSourceVector4;
+typedef ApplicationPushSource< Measurement::ErrorPose > ApplicationPushSourceErrorPose;
+
 
 
 /**

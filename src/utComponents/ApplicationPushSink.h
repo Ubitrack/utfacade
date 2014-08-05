@@ -201,6 +201,7 @@ typedef ApplicationPushSink< Measurement::PositionList > ApplicationPushSinkPosi
 typedef ApplicationPushSink< Measurement::PositionList2 > ApplicationPushSinkPositionList2;
 typedef ApplicationPushSink< Measurement::Matrix4x4 > ApplicationPushSinkMatrix4x4;
 typedef ApplicationPushSink< Measurement::Matrix3x3 > ApplicationPushSinkMatrix3x3;
+typedef ApplicationPushSink< Measurement::Matrix3x4 > ApplicationPushSinkMatrix3x4;
 typedef ApplicationPushSink< Measurement::ErrorPositionList > ApplicationPushSinkErrorPositionList;
 typedef ApplicationPushSink< Measurement::ErrorPositionList2 > ApplicationPushSinkErrorPositionList2;
 } } // namespace Ubitrack::Components

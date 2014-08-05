@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<UTQLPatternTemplates xmlns='http://ar.in.tum.de/ubitrack/utql'
+                      xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                      xmlns:xi='http://www.w3.org/2001/XInclude'
+                      xmlns:h="http://www.w3.org/1999/xhtml"
+                      xsi:schemaLocation='http://ar.in.tum.de/ubitrack/utql ../../../schema/utql_templates.xsd'>
+    
+    <Pattern name="ApplicationPullSourcePose" displayName="Application Pull Source (Pose)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output Pose">
+            	<Description><h:p>The output pose</h:p></Description>
+                <Attribute name="type" value="6D" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourcePose"/>
+        </DataflowConfiguration>
+    </Pattern>
+	
+    <Pattern name="ApplicationPullSourceErrorPose" displayName="Application Pull Source (ErrorPose)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output ErrorPose">
+            	<Description><h:p>The output error pose</h:p></Description>
+                <Attribute name="type" value="6DError" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceErrorPose"/>
+        </DataflowConfiguration>
+    </Pattern>
+	
+    <Pattern name="ApplicationPullSourcePosition" displayName="Application Pull Source (3D Position)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output Position">
+            	<Description><h:p>The output position</h:p></Description>
+                <Attribute name="type" value="3DPosition" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourcePosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <Pattern name="ApplicationPullSourceErrorPosition" displayName="Application Pull Source (3D ErrorPosition)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output ErrorPosition">
+            	<Description><h:p>The output position</h:p></Description>
+                <Attribute name="type" value="3DPositionError" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceErrorPosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <Pattern name="ApplicationPullSourceRotation" displayName="Application Pull Source (3D Rotation)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output Rotation">
+            	<Description><h:p>The output rotation</h:p></Description>
+                <Attribute name="type" value="3DRotation" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceRotation"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <Pattern name="ApplicationPullSourcePositionList" displayName="Application Pull Source (3D Position List)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output Position List">
+            	<Description><h:p>The output pose</h:p></Description>
+                <Attribute name="type" value="3DPositionList" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourcePositionList"/>
+        </DataflowConfiguration>
+    </Pattern>
+	
+	<Pattern name="ApplicationPullSourcePositionList2" displayName="Application Pull Source (2D Position List)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output 2D Position List">
+            	<Description><h:p>The output positions</h:p></Description>
+                <Attribute name="type" value="2DPositionList" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourcePosition2DList"/>
+        </DataflowConfiguration>
+    </Pattern>
+	
+	<Pattern name="ApplicationPullSourcePosition2" displayName="Application Pull Source (2D Position)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output 2D Position">
+            	<Description><h:p>The output positions</h:p></Description>
+                <Attribute name="type" value="2DPosition" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourcePosition2D"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <Pattern name="ApplicationPullSourceMatrix3x4" displayName="Application Pull Source (3x4 Matrix)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output Matrix">
+            	<Description><h:p>The output matrix</h:p></Description>
+                <Attribute name="type" value="3x4Matrix" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceMatrix3x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+  <Pattern name="ApplicationPullSourceMatrix3x3" displayName="Application Pull Source (3x3 Matrix)">
+    <Description>
+      <h:p>
+        This is a sink component which may be used to interface the dataflow network
+        to an user application. This sink uses a push input port and calls a callback function supplied
+        by the application upon reception of a new event. See the Doxygen documentation for details.
+      </h:p>
+    </Description>
+
+    <Output>
+      <Node name="A" displayName="A"/>
+      <Node name="B" displayName="B"/>
+      <Edge name="Output" source="A" destination="B" displayName="Output Matrix">
+        <Description>
+          <h:p>The output matrix</h:p>
+        </Description>
+        <Attribute name="type" value="3x3Matrix" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+      </Edge>
+    </Output>
+
+    <DataflowConfiguration>
+      <UbitrackLib class="ApplicationPullSourceMatrix3x3"/>
+    </DataflowConfiguration>
+  </Pattern>
+
+  <Pattern name="ApplicationPullSourceMatrix4x4" displayName="Application Pull Source (4x4 Matrix)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Output Matrix">
+            	<Description><h:p>The output matrix</h:p></Description>
+                <Attribute name="type" value="4x4Matrix" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceMatrix4x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <Pattern name="ApplicationPullSourceDistance" displayName="Application Pull Source (Distance)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Distance">
+            	<Description><h:p>The output distance scalar double value.</h:p></Description>
+                <Attribute name="type" value="Distance" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceDistance"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <Pattern name="ApplicationPullSourceButton" displayName="Application Pull Source (Button)">
+    	<Description><h:p>This is a source component which may be used to interface the dataflow network 
+    	to an user application. This source provides a pull output port and calls a callback function supplied 
+    	by the application upon the request of a new event. See the Doxygen documentation for details.
+    	</h:p></Description>
+    	
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Button">
+            	<Description><h:p>The key value.</h:p></Description>
+                <Attribute name="type" value="Button" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="pull" xsi:type="EnumAttributeReferenceType"/>
+
+            </Edge>
+        </Output>
+                
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSourceButton"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
+    <!-- Attribute declarations -->
+    
+    <GlobalNodeAttributeDeclarations>
+        <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/1/1)"/>
+    </GlobalNodeAttributeDeclarations>
+    
+    <GlobalEdgeAttributeDeclarations>
+        <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/2/1)"/>
+        <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/2/2)"/>
+        <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/2/3)"/>
+    </GlobalEdgeAttributeDeclarations>
+    
+    <GlobalDataflowAttributeDeclarations>
+        <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/3/1)"/>
+    </GlobalDataflowAttributeDeclarations>
+ 
+    
+</UTQLPatternTemplates>
