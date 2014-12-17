@@ -181,14 +181,14 @@ void convertImageCallback( Ubitrack::Facade::SimpleImageReceiver* receiver, cons
 {
 	using namespace Ubitrack;
 	Facade::SimpleImage i;
-
+	
 	i.width = measurement->width();
 	i.height = measurement->height();
-	i.imageData = (unsigned char *) measurement->imageData;
-	i.widthStep = measurement->widthStep;
+	i.imageData = (unsigned char *) measurement->iplImage()->imageData;
+	i.widthStep = measurement->iplImage()->widthStep;
 	i.depth = measurement->depth();
 	i.nChannels = measurement->channels();
-	i.imageSize = measurement->widthStep * measurement->height();
+	i.imageSize = measurement->iplImage()->widthStep * measurement->height();
 
 	i.timestamp = measurement.time();
 
