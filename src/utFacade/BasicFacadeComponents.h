@@ -53,10 +53,14 @@ namespace Ubitrack { namespace Facade {
 
         template< typename BMT >
         class BasicPullSink {
+
         public:
+            typedef BMT MeasurementType;
+
             BasicPullSink(basic_facade_string_type& name, BasicFacadePrivate* _private);
             ~BasicPullSink();
             BMT* get(unsigned long long int const ts);
+
         private:
             BasicPullSinkPrivate<BMT>* m_pPrivate;
         };
@@ -65,12 +69,14 @@ namespace Ubitrack { namespace Facade {
         class BasicPushSink {
 
         public:
-            typedef std::function<void(const BMT&)> CallbackType;
+            typedef BMT MeasurementType;
+            typedef std::function<void(const MeasurementType&)> CallbackType;
 
             BasicPushSink(basic_facade_string_type& name, BasicFacadePrivate* _private);
             ~BasicPushSink();
             void registerCallback(CallbackType cb);
             void unregisterCallback();
+
         private:
             BasicPushSinkPrivate<BMT>* m_pPrivate;
         };
@@ -79,22 +85,28 @@ namespace Ubitrack { namespace Facade {
         class BasicPullSource {
 
         public:
-            typedef std::function< BMT* (unsigned long long int const)> CallbackType;
+            typedef BMT MeasurementType;
+            typedef std::function< MeasurementType* (unsigned long long int const)> CallbackType;
 
             BasicPullSource(basic_facade_string_type& name, BasicFacadePrivate* _private);
             ~BasicPullSource();
             void registerCallback(CallbackType cb);
             void unregisterCallback();
+
         private:
             BasicPullSourcePrivate<BMT>* m_pPrivate;
         };
 
         template< typename BMT >
         class BasicPushSource {
+
         public:
+            typedef BMT MeasurementType;
+
             BasicPushSource(basic_facade_string_type& name, BasicFacadePrivate* _private);
             ~BasicPushSource();
             void send(const BMT &measurement);
+
         private:
             BasicPushSourcePrivate<BMT>* m_pPrivate;
         };

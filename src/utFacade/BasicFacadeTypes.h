@@ -77,10 +77,11 @@ namespace Ubitrack {
             unsigned long long int const time();
             bool is_valid() const { return m_valid; };
 
-            virtual DataType getDataType() = 0;
-            virtual int getDimX() = 0;
-            virtual int getDimY() = 0;
-            virtual int getDimZ() = 0;
+            int size() const { return getDimX() * getDimY() * getDimZ(); }
+            virtual DataType getDataType() const = 0;
+            virtual int getDimX() const = 0;
+            virtual int getDimY() const = 0;
+            virtual int getDimZ() const = 0;
 
         protected:
             unsigned long long int m_timestamp;
@@ -95,10 +96,10 @@ namespace Ubitrack {
             BasicScalarIntMeasurement(unsigned long long int const ts, BasicScalarIntMeasurementPrivate* _pPrivate);
             ~BasicScalarIntMeasurement();
 
-            virtual DataType getDataType() { return SCALARI; }
-            virtual int getDimX() { return 1; }
-            virtual int getDimY() { return 1; }
-            virtual int getDimZ() { return 1; }
+            virtual DataType getDataType() const { return SCALARI; }
+            virtual int getDimX() const { return 1; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
 
             /* get int v */
             bool get(int& v);
@@ -114,10 +115,10 @@ namespace Ubitrack {
             BasicScalarDoubleMeasurement(unsigned long long int const ts, BasicScalarDoubleMeasurementPrivate* _pPrivate);
             ~BasicScalarDoubleMeasurement();
 
-            virtual DataType getDataType() { return SCALARI; }
-            virtual int getDimX() { return 1; }
-            virtual int getDimY() { return 1; }
-            virtual int getDimZ() { return 1; }
+            virtual DataType getDataType() const { return SCALARI; }
+            virtual int getDimX() const { return 1; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
 
             /* get int v */
             bool get(double& v);
@@ -135,10 +136,10 @@ namespace Ubitrack {
             BasicVector2Measurement(unsigned long long int const ts, BasicVector2MeasurementPrivate* _pPrivate);
             ~BasicVector2Measurement();
 
-            virtual DataType getDataType() { return VECTOR2D; }
-            virtual int getDimX() { return 2; }
-            virtual int getDimY() { return 1; }
-            virtual int getDimZ() { return 1; }
+            virtual DataType getDataType() const { return VECTOR2D; }
+            virtual int getDimX() const { return 2; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
 
             /* get vec2 v */
             bool get( std::vector<double>& v );
@@ -158,10 +159,10 @@ namespace Ubitrack {
             BasicMatrix33Measurement(unsigned long long int const ts, BasicMatrix33MeasurementPrivate* _pPrivate);
             ~BasicMatrix33Measurement();
 
-            virtual DataType getDataType() { return MATRIX33D; }
-            virtual int getDimX() { return 3; }
-            virtual int getDimY() { return 3; }
-            virtual int getDimZ() { return 1; }
+            virtual DataType getDataType() const { return MATRIX33D; }
+            virtual int getDimX() const { return 3; }
+            virtual int getDimY() const { return 3; }
+            virtual int getDimZ() const { return 1; }
 
             /* get mat33 rows as vector M*N row-major */
             bool get( std::vector<double>& v );
@@ -181,10 +182,10 @@ namespace Ubitrack {
             BasicPoseMeasurement(unsigned long long int const ts, BasicPoseMeasurementPrivate* _pPrivate);
             ~BasicPoseMeasurement();
 
-            virtual DataType getDataType() { return POSE; }
-            virtual int getDimX() { return 7; }
-            virtual int getDimY() { return 1; }
-            virtual int getDimZ() { return 1; }
+            virtual DataType getDataType() const { return POSE; }
+            virtual int getDimX() const { return 7; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
 
             /* get pose as vector [x, y, z, rx, ry, rz, rw] */
             bool get( std::vector<double>& v );

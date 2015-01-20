@@ -55,6 +55,9 @@ namespace Ubitrack {
 *
 */
 
+        void initUbitrackLogging(basic_facade_string_type& filename);
+
+
         class UTFACADE_EXPORT BasicFacade
         {
         public:
@@ -69,6 +72,7 @@ namespace Ubitrack {
             ~BasicFacade();
 
             static unsigned long long int now();
+
 
             /**
             * Loads and instantiates a dataflow network from an XML file

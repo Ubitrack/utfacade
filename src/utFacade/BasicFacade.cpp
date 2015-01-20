@@ -55,6 +55,12 @@ static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Faca
 namespace Ubitrack {
     namespace Facade {
 
+        void initUbitrackLogging(basic_facade_string_type& filename)
+        {
+            Util::initLogging(filename.c_str());
+        }
+
+
         BasicFacadePrivate::BasicFacadePrivate( basic_facade_string_type& sComponentPath )
                 : AdvancedFacade( sComponentPath )
                 , m_pBasicObserver( 0 )
@@ -262,7 +268,7 @@ namespace Ubitrack {
         }
 
         /** returns a wrapper for an ApplicationPullSink with a type defined via BMT **/
-        template< class BMT >
+        template< typename BMT >
         BasicPullSink< BMT >* BasicFacade::getPullSink( basic_facade_string_type& sName ) throw() {
             BasicPullSink< BMT >* sink = NULL;
             try {
@@ -276,7 +282,7 @@ namespace Ubitrack {
         }
 
         /** returns a wrapper for an ApplicationPushSink with a type defined via BMT **/
-        template< class BMT >
+        template< typename BMT >
         BasicPushSink< BMT >* BasicFacade::getPushSink( basic_facade_string_type& sName ) throw() {
             BasicPushSink< BMT >* sink = NULL;
             try {
@@ -290,7 +296,7 @@ namespace Ubitrack {
         }
 
         /** returns a wrapper for an ApplicationPullsource with a type defined via BMT **/
-        template< class BMT >
+        template< typename BMT >
         BasicPullSource< BMT >* BasicFacade::getPullSource( basic_facade_string_type& sName ) throw() {
             BasicPullSource< BMT >* source = NULL;
             try {
@@ -304,7 +310,7 @@ namespace Ubitrack {
         }
 
         /** returns a wrapper for an ApplicationPushSource with a type defined via BMT **/
-        template< class BMT >
+        template< typename BMT >
         BasicPushSource< BMT >* BasicFacade::getPushSource( basic_facade_string_type& sName ) throw() {
             BasicPushSource< BMT >* source = NULL;
             try {
@@ -321,5 +327,36 @@ namespace Ubitrack {
         
     }
 }
+
+
+
+
+
+
+template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  <Ubitrack::Facade::BasicScalarIntMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  <Ubitrack::Facade::BasicScalarIntMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource<Ubitrack::Facade::BasicScalarIntMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource<Ubitrack::Facade::BasicScalarIntMeasurement>(basic_facade_string_type&);
+
+template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  <Ubitrack::Facade::BasicScalarDoubleMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  <Ubitrack::Facade::BasicScalarDoubleMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource<Ubitrack::Facade::BasicScalarDoubleMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource<Ubitrack::Facade::BasicScalarDoubleMeasurement>(basic_facade_string_type&);
+
+template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVector2Measurement >* Ubitrack::Facade::BasicFacade::getPullSink  <Ubitrack::Facade::BasicVector2Measurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVector2Measurement >* Ubitrack::Facade::BasicFacade::getPushSink  <Ubitrack::Facade::BasicVector2Measurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVector2Measurement >* Ubitrack::Facade::BasicFacade::getPullSource<Ubitrack::Facade::BasicVector2Measurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVector2Measurement >* Ubitrack::Facade::BasicFacade::getPushSource<Ubitrack::Facade::BasicVector2Measurement>(basic_facade_string_type&);
+
+template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrix33Measurement >* Ubitrack::Facade::BasicFacade::getPullSink  <Ubitrack::Facade::BasicMatrix33Measurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrix33Measurement >* Ubitrack::Facade::BasicFacade::getPushSink  <Ubitrack::Facade::BasicMatrix33Measurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrix33Measurement >* Ubitrack::Facade::BasicFacade::getPullSource<Ubitrack::Facade::BasicMatrix33Measurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrix33Measurement >* Ubitrack::Facade::BasicFacade::getPushSource<Ubitrack::Facade::BasicMatrix33Measurement>(basic_facade_string_type&);
+
+template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  <Ubitrack::Facade::BasicPoseMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  <Ubitrack::Facade::BasicPoseMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource<Ubitrack::Facade::BasicPoseMeasurement>(basic_facade_string_type&);
+template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource<Ubitrack::Facade::BasicPoseMeasurement>(basic_facade_string_type&);
+
 
 #endif // ENABLE_BASICFACADE
