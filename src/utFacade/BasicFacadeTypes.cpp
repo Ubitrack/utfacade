@@ -57,63 +57,75 @@ namespace Ubitrack {
         }
 
 
-        // Vec2
-        BasicVector2Measurement::BasicVector2Measurement(unsigned long long int const ts, BasicVector2MeasurementPrivate* _pPrivate)
+        // Vec
+        template< int LEN >
+        BasicVectorMeasurement< LEN >::BasicVectorMeasurement(unsigned long long int const ts, BasicVectorMeasurementPrivate< LEN >* _pPrivate)
                 : BasicMeasurement(ts)
                 , m_pPrivate(_pPrivate) {}
 
-        BasicVector2Measurement::BasicVector2Measurement(unsigned long long int const ts, const std::vector<double>& value)
-                : BasicVector2Measurement(ts, new BasicVector2MeasurementPrivate(ts, value)) {}
+        template< int LEN >
+        BasicVectorMeasurement< LEN >::BasicVectorMeasurement(unsigned long long int const ts, const std::vector<double>& value)
+                : BasicVectorMeasurement(ts, new BasicVectorMeasurementPrivate< LEN >(ts, value)) {}
 
-        BasicVector2Measurement::~BasicVector2Measurement() {
+        template< int LEN >
+        BasicVectorMeasurement< LEN >::~BasicVectorMeasurement() {
             if (m_pPrivate) {
                 free(m_pPrivate);
             }
         }
 
-        bool BasicVector2Measurement::get(std::vector<double>& v) {
+        template< int LEN >
+        bool BasicVectorMeasurement< LEN >::get(std::vector<double>& v) {
+            typedef TensorIndex< LEN > TI;
+
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
                     auto *m = m_pPrivate->m_measurement.get();
-                    v.reserve(m->size());
-                    std::copy(m->begin(), m->end(), std::back_inserter(v));
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::SIZE; i++) {
+                        v.at(i) = (*m)(i);
+                    }
                     return true;
                 }
             }
             return false;
         }
 
-        // Vec3
-        // Vec4
 
-        // Mat33
-        BasicMatrix33Measurement::BasicMatrix33Measurement(unsigned long long int const ts, BasicMatrix33MeasurementPrivate* _pPrivate)
+        // Mat
+        template< int ROWS, int COLS >
+        BasicMatrixMeasurement< ROWS, COLS >::BasicMatrixMeasurement(unsigned long long int const ts, BasicMatrixMeasurementPrivate< ROWS, COLS >* _pPrivate)
                 : BasicMeasurement(ts)
                 , m_pPrivate(_pPrivate) {}
 
-        BasicMatrix33Measurement::BasicMatrix33Measurement(unsigned long long int const ts, const std::vector<double>& value)
-                : BasicMatrix33Measurement(ts, new BasicMatrix33MeasurementPrivate(ts, value)) {}
+        template< int ROWS, int COLS >
+        BasicMatrixMeasurement< ROWS, COLS >::BasicMatrixMeasurement(unsigned long long int const ts, const std::vector<double>& value)
+                : BasicMatrixMeasurement< ROWS, COLS >(ts, new BasicMatrixMeasurementPrivate< ROWS, COLS >(ts, value)) {}
 
-        BasicMatrix33Measurement::~BasicMatrix33Measurement() {
+        template< int ROWS, int COLS >
+        BasicMatrixMeasurement< ROWS, COLS >::~BasicMatrixMeasurement() {
             if (m_pPrivate) {
                 free(m_pPrivate);
             }
         }
 
-        bool BasicMatrix33Measurement::get(std::vector<double>& v) {
+        template< int ROWS, int COLS >
+        bool BasicMatrixMeasurement< ROWS, COLS >::get(std::vector<double>& v) {
+            typedef TensorIndex< ROWS, COLS > TI;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
                     auto *m = m_pPrivate->m_measurement.get();
-                    v.reserve(m->size());
-                    std::copy(m->data().begin(), m->data().end(), std::back_inserter(v));
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::LEN1; i++) {
+                        for (unsigned int j = 0; j < TI::LEN2; j++) {
+                            v.at(TI::indexOf(i, j)) = (*m)(i, j);
+                        }
+                    }
                     return true;
                 }
             }
             return false;
         }
-
-        // Mat34
-        // Mat44
 
         // Pose
         BasicPoseMeasurement::BasicPoseMeasurement(unsigned long long int const ts, BasicPoseMeasurementPrivate* _pPrivate)
@@ -130,14 +142,16 @@ namespace Ubitrack {
         }
 
         bool BasicPoseMeasurement::get(std::vector<double>& v) {
+            typedef TensorIndex< 7 > TI;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
                     // copied twice .. needs better implementation .. e.g. TensorIndex ...
                     Math::Vector< double, 7 > vec;
                     m_pPrivate->m_measurement.get()->toVector(vec);
-
-                    v.reserve(vec.size());
-                    std::copy(vec.data().begin(),vec.data().end(), std::back_inserter(v));
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::SIZE; i++) {
+                        v.at(i) = vec(i);
+                    }
                     return true;
                 }
             }
@@ -157,5 +171,15 @@ namespace Ubitrack {
     }
 }
 
+
+
+template class Ubitrack::Facade::BasicVectorMeasurement< 2 >;
+template class Ubitrack::Facade::BasicVectorMeasurement< 3 >;
+template class Ubitrack::Facade::BasicVectorMeasurement< 4 >;
+template class Ubitrack::Facade::BasicVectorMeasurement< 8 >;
+
+template class Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 >;
+template class Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 >;
+template class Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 >;
 
 #endif // ENABLE_BASICFACADE

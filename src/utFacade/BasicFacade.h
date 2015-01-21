@@ -57,7 +57,6 @@ namespace Ubitrack {
 
         void initUbitrackLogging(basic_facade_string_type& filename);
 
-
         class UTFACADE_EXPORT BasicFacade
         {
         public:

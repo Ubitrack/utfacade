@@ -142,7 +142,7 @@ namespace Ubitrack { namespace Facade {
                 }
             }
 
-            measurement_type pullHandler(unsigned long long int const ts) {
+            const measurement_type pullHandler(unsigned long long int const ts) {
                 if (m_slot) {
                     BMT* bm = m_slot(ts);
                     if (bm->is_valid()) {

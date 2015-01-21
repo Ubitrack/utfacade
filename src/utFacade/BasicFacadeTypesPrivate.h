@@ -59,6 +59,70 @@ namespace Ubitrack {
             }
         };
 
+        // some metadata about ubitrack types
+
+
+//        template<>
+//        struct UbitrackMeasurementTypeTrait< Measurement::Button > {
+//            static const bool supported = true;
+//            int dim_x = 1;
+//            int dim_y = 1;
+//            int dim_z = 1;
+//            int datatype = BasicMeasurement::SCALARI;
+//            bool is_array = false;
+//            bool is_list = false;
+//            typedef Measurement::Button ubitrack_measurement_type;
+//        };
+//
+//
+//
+//
+//        template< typename T >
+//        struct UbitrackMeasurementTypeTrait {
+//            static const bool supported = false;
+//        };
+//
+//        template<>
+//        struct UbitrackMeasurementTypeTrait< Measurement::Button > {
+//            static const bool supported = true;
+//            int dim_x = 1;
+//            int dim_y = 1;
+//            int dim_z = 1;
+//            int datatype = BasicMeasurement::SCALARI;
+//            bool is_array = false;
+//            bool is_list = false;
+//            typedef Measurement::Button ubitrack_measurement_type;
+//        };
+//
+//        template<>
+//        struct UbitrackMeasurementTypeTrait< Measurement::Distance > {
+//            static const bool supported = true;
+//            int dim_x = 1;
+//            int dim_y = 1;
+//            int dim_z = 1;
+//            int datatype = BasicMeasurement::SCALARD;
+//            bool is_array = false;
+//            bool is_list = false;
+//            typedef Measurement::Distance ubitrack_measurement_type;
+//        };
+//
+//        template<>
+//        struct UbitrackMeasurementTypeTrait< Measurement::Position2D > {
+//            static const bool supported = true;
+//            int dim_x = 2;
+//            int dim_y = 1;
+//            int dim_z = 1;
+//            int datatype = BasicMeasurement::SCALARD;
+//            bool is_array = false;
+//            bool is_list = false;
+//            typedef Measurement::Distance ubitrack_measurement_type;
+//        };
+//
+//
+//
+
+
+        // implementation of private measurement types
         template< typename BMT >
         struct BasicMeasurementTypeTrait {
             static const bool supported = false;
@@ -87,6 +151,8 @@ namespace Ubitrack {
             typedef Measurement::Button ubitrack_measurement_type;
         };
 
+
+
         // ScalarDouble
         struct BasicScalarDoubleMeasurementPrivate {
 
@@ -110,53 +176,95 @@ namespace Ubitrack {
             typedef Measurement::Distance ubitrack_measurement_type;
         };
 
-        struct BasicVector2MeasurementPrivate {
 
-            BasicVector2MeasurementPrivate(unsigned long long int const ts, const std::vector<double>& v)
-            : m_measurement(Measurement::Position2D(ts, Math::Vector< double, 2>(&v.front()))) {}
 
-            BasicVector2MeasurementPrivate(const Measurement::Position2D& m) : m_measurement(m) {}
+        // Vectors
+        template< int LEN >
+        struct BasicVectorMeasurementPrivate {
+            typedef Math::Vector< double, LEN > ValueType;
+            typedef Measurement::Measurement< ValueType > MeasurementType;
+            BasicVectorMeasurementPrivate(unsigned long long int const ts, const std::vector<double>& v)
+            : m_measurement(MeasurementType(ts, ValueType(&v.front()))) {}
+
+            BasicVectorMeasurementPrivate(const MeasurementType& m) : m_measurement(m) {}
 
             void clear() {
                 m_measurement.reset();
             }
 
-            Measurement::Position2D m_measurement;
+            MeasurementType m_measurement;
 
         };
 
         template<>
-        struct BasicMeasurementTypeTrait< BasicVector2Measurement > {
+        struct BasicMeasurementTypeTrait< BasicVectorMeasurement< 2 > > {
             static const bool supported = true;
-            typedef BasicVector2MeasurementPrivate private_measurement_type;
+            typedef BasicVectorMeasurementPrivate< 2 > private_measurement_type;
             typedef Measurement::Position2D ubitrack_measurement_type;
         };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicVectorMeasurement< 3 > > {
+            static const bool supported = true;
+            typedef BasicVectorMeasurementPrivate< 3 > private_measurement_type;
+            typedef Measurement::Position ubitrack_measurement_type;
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicVectorMeasurement< 4 > > {
+            static const bool supported = true;
+            typedef BasicVectorMeasurementPrivate< 4 > private_measurement_type;
+            typedef Measurement::Vector4D ubitrack_measurement_type;
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicVectorMeasurement< 8 > > {
+            static const bool supported = true;
+            typedef BasicVectorMeasurementPrivate< 8 > private_measurement_type;
+            typedef Measurement::Vector8D ubitrack_measurement_type;
+        };
+
 
         /**
         * M*N elements (row-major)
         */
-        struct BasicMatrix33MeasurementPrivate {
+        template< int ROWS, int COLS >
+        struct BasicMatrixMeasurementPrivate {
+            typedef Math::Matrix< double, ROWS, COLS > ValueType;
+            typedef Measurement::Measurement< ValueType > MeasurementType;
+            BasicMatrixMeasurementPrivate(unsigned long long int const ts, const std::vector<double>& v)
+            : m_measurement(MeasurementType(ts, ValueType(&v.front()))) {}
 
-            BasicMatrix33MeasurementPrivate(unsigned long long int const ts, const std::vector<double>& v)
-            : m_measurement(Measurement::Matrix3x3(ts, Math::Matrix< double, 3, 3 >(&v.front()))) {}
-
-            BasicMatrix33MeasurementPrivate(const Measurement::Matrix3x3& m) : m_measurement(m) {}
+            BasicMatrixMeasurementPrivate(const MeasurementType& m) : m_measurement(m) {}
 
             void clear() {
                 m_measurement.reset();
             }
 
-            Measurement::Matrix3x3 m_measurement;
+            MeasurementType m_measurement;
 
         };
 
         template<>
-        struct BasicMeasurementTypeTrait< BasicMatrix33Measurement > {
+        struct BasicMeasurementTypeTrait< BasicMatrixMeasurement< 3, 3 > > {
             static const bool supported = true;
-            typedef BasicMatrix33MeasurementPrivate private_measurement_type;
+            typedef BasicMatrixMeasurementPrivate< 3, 3 > private_measurement_type;
             typedef Measurement::Matrix3x3 ubitrack_measurement_type;
         };
 
+        template<>
+        struct BasicMeasurementTypeTrait< BasicMatrixMeasurement< 3, 4 > > {
+            static const bool supported = true;
+            typedef BasicMatrixMeasurementPrivate< 3, 4 > private_measurement_type;
+            typedef Measurement::Matrix3x4 ubitrack_measurement_type;
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicMatrixMeasurement< 4, 4 > > {
+            static const bool supported = true;
+            typedef BasicMatrixMeasurementPrivate< 4, 4 > private_measurement_type;
+            typedef Measurement::Matrix4x4 ubitrack_measurement_type;
+        };
 
         /**
         * Pose measurement as vector [x, y, z, rx, ry, rz, rw]

@@ -154,26 +154,46 @@ namespace Ubitrack {
 
 template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicScalarIntMeasurement>;
 template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicScalarDoubleMeasurement>;
-template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicVector2Measurement>;
-template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicMatrix33Measurement>;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicVectorMeasurement< 2 > >;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicVectorMeasurement< 3 > >;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicVectorMeasurement< 4 > >;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicVectorMeasurement< 8 > >;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >;
+template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >;
 template class Ubitrack::Facade::BasicPullSink<Ubitrack::Facade::BasicPoseMeasurement>;
 
 template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicScalarIntMeasurement>;
 template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicScalarDoubleMeasurement>;
-template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicVector2Measurement>;
-template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicMatrix33Measurement>;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicVectorMeasurement< 2 > >;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicVectorMeasurement< 3 > >;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicVectorMeasurement< 4 > >;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicVectorMeasurement< 8 > >;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >;
+template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >;
 template class Ubitrack::Facade::BasicPushSink<Ubitrack::Facade::BasicPoseMeasurement>;
 
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicScalarIntMeasurement>;
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicScalarDoubleMeasurement>;
-template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicVector2Measurement>;
-template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicMatrix33Measurement>;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicVectorMeasurement< 2 > >;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicVectorMeasurement< 3 > >;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicVectorMeasurement< 4 > >;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicVectorMeasurement< 8 > >;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >;
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicPoseMeasurement>;
 
 template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicScalarIntMeasurement>;
 template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicScalarDoubleMeasurement>;
-template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicVector2Measurement>;
-template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicMatrix33Measurement>;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicVectorMeasurement< 2 > >;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicVectorMeasurement< 3 > >;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicVectorMeasurement< 4 > >;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicVectorMeasurement< 8 > >;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >;
 template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicPoseMeasurement>;
 
 #endif // ENABLE_BASICFACADE

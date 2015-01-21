@@ -46,9 +46,15 @@ namespace Ubitrack {
 
         // forward declarations
         struct BasicScalarIntMeasurementPrivate;
+
         struct BasicScalarDoubleMeasurementPrivate;
-        struct BasicVector2MeasurementPrivate;
-        struct BasicMatrix33MeasurementPrivate;
+
+        template< int LEN >
+        struct BasicVectorMeasurementPrivate;
+
+        template< int ROWS, int COLS >
+        struct BasicMatrixMeasurementPrivate;
+
         struct BasicPoseMeasurementPrivate;
 
 
@@ -58,12 +64,8 @@ namespace Ubitrack {
             enum DataType {
                 SCALARI = 0,
                 SCALARD,
-                VECTOR2D,
-                VECTOR3D,
-                VECTOR4D,
-                MATRIX33D,
-                MATRIX34D,
-                MATRIX44D,
+                VECTORD,
+                MATRIXD,
                 POSE,
                 QUATERNION,
                 ERROR_VECTOR,
@@ -74,7 +76,7 @@ namespace Ubitrack {
             BasicMeasurement(unsigned long long int ts) : m_timestamp(ts), m_valid(true) {};
             virtual ~BasicMeasurement() {};
 
-            unsigned long long int const time();
+            unsigned long long int const time() { return m_timestamp; };
             bool is_valid() const { return m_valid; };
 
             int size() const { return getDimX() * getDimY() * getDimZ(); }
@@ -129,15 +131,16 @@ namespace Ubitrack {
 
 
         /** wrapper for vector2 measurement **/
-        class BasicVector2Measurement : public BasicMeasurement {
+        template< int LEN = 2 >
+        class BasicVectorMeasurement : public BasicMeasurement {
         public:
-            BasicVector2Measurement() : BasicMeasurement(), m_pPrivate(NULL) {};
-            BasicVector2Measurement(unsigned long long int const ts, const std::vector<double>& v);
-            BasicVector2Measurement(unsigned long long int const ts, BasicVector2MeasurementPrivate* _pPrivate);
-            ~BasicVector2Measurement();
+            BasicVectorMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicVectorMeasurement(unsigned long long int const ts, const std::vector<double>& v);
+            BasicVectorMeasurement(unsigned long long int const ts, BasicVectorMeasurementPrivate< LEN >* _pPrivate);
+            ~BasicVectorMeasurement();
 
-            virtual DataType getDataType() const { return VECTOR2D; }
-            virtual int getDimX() const { return 2; }
+            virtual DataType getDataType() const { return VECTORD; }
+            virtual int getDimX() const { return LEN; }
             virtual int getDimY() const { return 1; }
             virtual int getDimZ() const { return 1; }
 
@@ -145,30 +148,31 @@ namespace Ubitrack {
             bool get( std::vector<double>& v );
 
 //        private:
-            BasicVector2MeasurementPrivate* m_pPrivate;
+            BasicVectorMeasurementPrivate< LEN >* m_pPrivate;
         };
         // Vector3
         // Vector4
 
         /** wrapper for matrix33 measurement **/
-        class BasicMatrix33Measurement : public BasicMeasurement {
+        template< int ROWS = 3, int COLS = 3 >
+        class BasicMatrixMeasurement : public BasicMeasurement {
         public:
-            BasicMatrix33Measurement() : BasicMeasurement(), m_pPrivate(NULL) {};
-            /* set mat33 rows from vector M*N row-major */
-            BasicMatrix33Measurement(unsigned long long int const ts, const std::vector<double>& v);
-            BasicMatrix33Measurement(unsigned long long int const ts, BasicMatrix33MeasurementPrivate* _pPrivate);
-            ~BasicMatrix33Measurement();
+            BasicMatrixMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            /* set mat rows from vector M*N row-major */
+            BasicMatrixMeasurement(unsigned long long int const ts, const std::vector<double>& v);
+            BasicMatrixMeasurement(unsigned long long int const ts, BasicMatrixMeasurementPrivate< ROWS, COLS >* _pPrivate);
+            ~BasicMatrixMeasurement();
 
-            virtual DataType getDataType() const { return MATRIX33D; }
-            virtual int getDimX() const { return 3; }
-            virtual int getDimY() const { return 3; }
+            virtual DataType getDataType() const { return MATRIXD; }
+            virtual int getDimX() const { return ROWS; }
+            virtual int getDimY() const { return COLS; }
             virtual int getDimZ() const { return 1; }
 
             /* get mat33 rows as vector M*N row-major */
             bool get( std::vector<double>& v );
 
 //        private:
-            BasicMatrix33MeasurementPrivate* m_pPrivate;
+            BasicMatrixMeasurementPrivate< ROWS, COLS >* m_pPrivate;
         };
         // Matrix34
         // Matrix44

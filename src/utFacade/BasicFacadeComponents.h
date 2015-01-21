@@ -70,7 +70,7 @@ namespace Ubitrack { namespace Facade {
 
         public:
             typedef BMT MeasurementType;
-            typedef std::function<void(const MeasurementType&)> CallbackType;
+            typedef std::function<void(MeasurementType&)> CallbackType;
 
             BasicPushSink(basic_facade_string_type& name, BasicFacadePrivate* _private);
             ~BasicPushSink();
