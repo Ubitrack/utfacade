@@ -56,7 +56,12 @@ namespace Ubitrack {
         struct BasicMatrixMeasurementPrivate;
 
         struct BasicPoseMeasurementPrivate;
+        struct BasicRotationMeasurementPrivate;
 
+        template< int LEN >
+        struct BasicErrorVectorMeasurementPrivate;
+
+        struct BasicImageMeasurementPrivate;
 
         class BasicMeasurement {
         public:
@@ -77,9 +82,9 @@ namespace Ubitrack {
             virtual ~BasicMeasurement() {};
 
             unsigned long long int const time() { return m_timestamp; };
-            bool is_valid() const { return m_valid; };
+            bool isValid() const { return m_valid; };
 
-            int size() const { return getDimX() * getDimY() * getDimZ(); }
+            virtual int size() const { return getDimX() * getDimY() * getDimZ(); }
             virtual DataType getDataType() const = 0;
             virtual int getDimX() const = 0;
             virtual int getDimY() const = 0;
@@ -150,8 +155,6 @@ namespace Ubitrack {
 //        private:
             BasicVectorMeasurementPrivate< LEN >* m_pPrivate;
         };
-        // Vector3
-        // Vector4
 
         /** wrapper for matrix33 measurement **/
         template< int ROWS = 3, int COLS = 3 >
@@ -174,8 +177,6 @@ namespace Ubitrack {
 //        private:
             BasicMatrixMeasurementPrivate< ROWS, COLS >* m_pPrivate;
         };
-        // Matrix34
-        // Matrix44
 
         /** wrapper for pose measurement **/
         class BasicPoseMeasurement : public BasicMeasurement {
@@ -197,14 +198,90 @@ namespace Ubitrack {
 //        private:
             BasicPoseMeasurementPrivate* m_pPrivate;
         };
-        // Rotation
 
-        // ErrorVector2
-        // ErrorVector3
-        // ErrorVector4
+        /** wrapper for rotation measurement **/
+        class BasicRotationMeasurement : public BasicMeasurement {
+        public:
+            BasicRotationMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            /* set pose from vector [x, y, z, rx, ry, rz, rw] */
+            BasicRotationMeasurement(unsigned long long int const ts, const std::vector<double>& v);
+            BasicRotationMeasurement(unsigned long long int const ts, BasicRotationMeasurementPrivate* _pPrivate);
+            ~BasicRotationMeasurement();
+
+            virtual DataType getDataType() const { return QUATERNION; }
+            virtual int getDimX() const { return 7; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
+
+            /* get pose as vector [rx, ry, rz, rw] */
+            bool get( std::vector<double>& v );
+
+//        private:
+            BasicRotationMeasurementPrivate* m_pPrivate;
+        };
+
+        // ErrorVector
+        /** wrapper for errorvector measurement **/
+        template< int LEN = 2 >
+        class BasicErrorVectorMeasurement : public BasicMeasurement {
+        public:
+            BasicErrorVectorMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicErrorVectorMeasurement(unsigned long long int const ts, const std::vector<double>& v, const std::vector<double>& c);
+            BasicErrorVectorMeasurement(unsigned long long int const ts, BasicErrorVectorMeasurementPrivate< LEN >* _pPrivate);
+            ~BasicErrorVectorMeasurement();
+
+            virtual DataType getDataType() const { return ERROR_VECTOR; }
+            virtual int getDimX() const { return LEN; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
+
+            /* get vec2 v */
+            bool get( std::vector<double>& v );
+            bool getCovariance( std::vector<double>& v);
+
+//        private:
+            BasicErrorVectorMeasurementPrivate< LEN >* m_pPrivate;
+        };
         // ErrorPose
 
-        // Image
+        /** wrapper for image measurement **/
+        class BasicImageMeasurement : public BasicMeasurement {
+        public:
+
+            enum PixelFormat {
+                UNKNOWN_PIXELFORMAT = 0,
+                RGB,
+                BGR,
+                LUMINANCE,
+                YUV422,
+                YUV411
+            };
+
+
+            BasicImageMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            /* set (copy) image from buffer */
+            BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels, unsigned char* data, PixelFormat pixel_format = RGB, bool copy_data = true);
+            BasicImageMeasurement(unsigned long long int const ts, BasicImageMeasurementPrivate* _pPrivate);
+            ~BasicImageMeasurement();
+
+            virtual DataType getDataType() const { return IMAGE; }
+            virtual int getDimX() const;
+            virtual int getDimY() const;
+            virtual int getDimZ() const;
+
+            unsigned int getPixelSize() const;
+            PixelFormat getPixelFormat() const;
+            unsigned int getByteCount() const;
+
+            unsigned char* getDataPtr() const;
+
+            /* get copy into buffer */
+            bool get( unsigned int size, unsigned char* data );
+
+            BasicImageMeasurementPrivate* m_pPrivate;
+        private:
+        };
+
 
 
         /**

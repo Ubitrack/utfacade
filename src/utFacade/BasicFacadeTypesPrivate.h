@@ -34,6 +34,7 @@
 #include "BasicFacadeTypes.h"
 
 #include "utMeasurement/Measurement.h"
+#include <utVision/Image.h>
 
 namespace Ubitrack {
     namespace Facade {
@@ -297,6 +298,152 @@ namespace Ubitrack {
             typedef Measurement::Pose ubitrack_measurement_type;
         };
 
+        /**
+        * Rotation measurement as vector [rx, ry, rz, rw]
+        */
+        struct BasicRotationMeasurementPrivate {
+
+            BasicRotationMeasurementPrivate(unsigned long long int const ts, const std::vector<double>& v)
+                    : m_measurement(Measurement::Rotation(ts, Math::Quaternion(v[0], v[1], v[2], v[3]))) {}
+
+            BasicRotationMeasurementPrivate(const Measurement::Rotation& m) {
+                m_measurement = m;
+            }
+
+            void clear() {
+                m_measurement.reset();
+            }
+
+            Measurement::Rotation m_measurement;
+
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicRotationMeasurement > {
+            static const bool supported = true;
+            typedef BasicRotationMeasurementPrivate private_measurement_type;
+            typedef Measurement::Rotation ubitrack_measurement_type;
+        };
+
+
+        // ErrorVectors
+        template< int LEN >
+        struct BasicErrorVectorMeasurementPrivate {
+            typedef Math::ErrorVector< double, LEN > ValueType;
+            typedef Measurement::Measurement< ValueType > MeasurementType;
+            BasicErrorVectorMeasurementPrivate(unsigned long long int const ts,
+                    const std::vector<double>& v, const std::vector<double>& c) {
+                Math::Vector< double, LEN > vec(&v.front());
+                Math::Matrix< double, LEN, LEN > mat(&c.front());
+                m_measurement = MeasurementType(ts, ValueType(vec, mat));
+            }
+
+            BasicErrorVectorMeasurementPrivate(const MeasurementType& m) : m_measurement(m) {}
+
+            void clear() {
+                m_measurement.reset();
+            }
+
+            MeasurementType m_measurement;
+
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicErrorVectorMeasurement< 2 > > {
+            static const bool supported = true;
+            typedef BasicErrorVectorMeasurementPrivate< 2 > private_measurement_type;
+            typedef Measurement::ErrorPosition2 ubitrack_measurement_type;
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicErrorVectorMeasurement< 3 > > {
+            static const bool supported = true;
+            typedef BasicErrorVectorMeasurementPrivate< 3 > private_measurement_type;
+            typedef Measurement::ErrorPosition ubitrack_measurement_type;
+        };
+
+
+
+        /**
+        * image measurement buffer
+        */
+        struct BasicImageMeasurementPrivate {
+
+            BasicImageMeasurementPrivate(unsigned long long int const ts,
+                    int width, int height, int depth, int channels, unsigned char* data,
+                    BasicImageMeasurement::PixelFormat pixel_format = BasicImageMeasurement::RGB,
+                    bool copy_data = true) {
+
+                unsigned int pixel_size = sizeof(unsigned char);
+                switch (depth) {
+                    case CV_16U:
+                        pixel_size = sizeof(unsigned short);
+                        break;
+                    case CV_32F:
+                        pixel_size = sizeof(float);
+                        break;
+                    default:
+                        // assume CV8U is the default
+                        break;
+                }
+                unsigned int frame_bytes = width * height * channels * pixel_size;
+
+                boost::shared_ptr< Vision::Image > pImage;
+                if (copy_data) {
+                    pImage.reset(new Vision::Image(width, height, channels, depth));
+
+                    // what about images other than CV8U
+                    // copy data
+                    unsigned char* srcData = (unsigned char*) data;
+                    unsigned char* dstData = (unsigned char*) pImage->imageData;
+                    memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
+
+                } else {
+                    pImage.reset(new Vision::Image(width, height, channels, (void*)(data), depth));
+                }
+
+                switch(channels) {
+                    case 1:
+                        // nothing to do ?
+                        break;
+                    case 3:
+                        if ( pixel_format == BasicImageMeasurement::BGR ) {
+                            pImage->channelSeq[0] = 'B';
+                            pImage->channelSeq[1] = 'G';
+                            pImage->channelSeq[2] = 'R';
+                        } else if ( pixel_format == BasicImageMeasurement::RGB ) {
+                            pImage->channelSeq[0] = 'R';
+                            pImage->channelSeq[1] = 'G';
+                            pImage->channelSeq[2] = 'B';
+                        } else {
+                            // three pixels but not RGB/BGR .. what's it ??
+                        }
+                        break;
+                    default:
+                        // what to do here .. do we have some logging ??
+                        break;
+                }
+                m_measurement = Measurement::ImageMeasurement(pImage);
+            }
+
+            BasicImageMeasurementPrivate(const Measurement::ImageMeasurement& m) {
+                m_measurement = m;
+            }
+
+            void clear() {
+                m_measurement.reset();
+            }
+
+            Measurement::ImageMeasurement m_measurement;
+
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicImageMeasurement > {
+            static const bool supported = true;
+            typedef BasicImageMeasurementPrivate private_measurement_type;
+            typedef Measurement::ImageMeasurement ubitrack_measurement_type;
+        };
     }
 } // namespace Ubitrack::Facade
 

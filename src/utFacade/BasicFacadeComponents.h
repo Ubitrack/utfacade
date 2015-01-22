@@ -33,6 +33,7 @@
 
 #include "BasicFacadeTypes.h"
 #include <functional>
+#include <memory>
 
 namespace Ubitrack { namespace Facade {
 
@@ -59,7 +60,7 @@ namespace Ubitrack { namespace Facade {
 
             BasicPullSink(basic_facade_string_type& name, BasicFacadePrivate* _private);
             ~BasicPullSink();
-            BMT* get(unsigned long long int const ts);
+            std::shared_ptr<BMT> get(unsigned long long int const ts);
 
         private:
             BasicPullSinkPrivate<BMT>* m_pPrivate;

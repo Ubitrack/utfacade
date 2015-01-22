@@ -35,6 +35,7 @@
 #include <utFacade/Config.h>
 
 #include <string>
+#include <memory>
 
 #include "BasicFacadeTypes.h"
 #include "BasicFacadeComponents.h"
@@ -135,19 +136,19 @@ namespace Ubitrack {
 
             /** returns a wrapper for an ApplicationPullSink with a type defined via BMT **/
             template< class BMT >
-            BasicPullSink< BMT >* getPullSink( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPullSink< BMT > > getPullSink( basic_facade_string_type& sName ) throw();
 
             /** returns a wrapper for an ApplicationPushSink with a type defined via BMT **/
             template< class BMT >
-            BasicPushSink< BMT >* getPushSink( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPushSink< BMT > > getPushSink( basic_facade_string_type& sName ) throw();
 
             /** returns a wrapper for an ApplicationPullsource with a type defined via BMT **/
             template< class BMT >
-            BasicPullSource< BMT >* getPullSource( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPullSource< BMT > > getPullSource( basic_facade_string_type& sName ) throw();
 
             /** returns a wrapper for an ApplicationPushSource with a type defined via BMT **/
             template< class BMT >
-            BasicPushSource< BMT >* getPushSource( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPushSource< BMT > > getPushSource( basic_facade_string_type& sName ) throw();
 
             void killEverything();
 
