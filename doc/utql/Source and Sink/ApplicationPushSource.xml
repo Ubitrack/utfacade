@@ -145,7 +145,7 @@
         </Output>
                 
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourcePosition2DList"/>
+            <UbitrackLib class="ApplicationPushSourcePositionList2"/>
         </DataflowConfiguration>
     </Pattern>
     
