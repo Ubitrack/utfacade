@@ -39,6 +39,7 @@ namespace Ubitrack { namespace Components {
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSink< int > > ( "ApplicationPushSinkInt" );
 	cf->registerComponent< ApplicationPushSinkButton > ( "ApplicationPushSinkButton" );
+	cf->registerComponent< ApplicationPushSinkDistance > ( "ApplicationPushSinkDistance" );
 	cf->registerComponent< ApplicationPushSinkPose > ( "ApplicationPushSinkPose" );
 	cf->registerComponent< ApplicationPushSinkErrorPose > ( "ApplicationPushSinkErrorPose" );
 
