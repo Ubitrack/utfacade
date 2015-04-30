@@ -268,6 +268,29 @@
         </DataflowConfiguration>
     </Pattern>
     
+    <Pattern name="ApplicationPushSourceDistance" displayName="Application Push Source (Distance)">
+        <Description><h:p>This is an source component which may be used to interface
+         the dataflow network to a user application.
+         
+         This source uses a push output port and provides a callback
+         function to the application that can be used to send
+         events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Distance">
+                <Attribute name="type" value="Distance" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+        
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceDistance"/>
+        </DataflowConfiguration>
+    </Pattern>
+    
     
     
     <!-- Attribute declarations -->
