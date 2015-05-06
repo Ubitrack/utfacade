@@ -57,7 +57,7 @@ namespace Ubitrack {
 
         void initUbitrackLogging(basic_facade_string_type& filename)
         {
-            Util::initLogging(filename.c_str());
+            Util::initLogging(filename);
         }
 
 
@@ -67,13 +67,13 @@ namespace Ubitrack {
         {}
 
         // translate from DataflowObserver to BasicDataflowObserver
-        void BasicFacadePrivate::notifyAddComponent( basic_facade_string_type& sPatternName, basic_facade_string_type& sComponentName, const Graph::UTQLSubgraph& )
+        void BasicFacadePrivate::notifyAddComponent( const std::string & sPatternName, const std::string & sComponentName, const Graph::UTQLSubgraph& )
         {
             if ( m_pBasicObserver )
                 m_pBasicObserver->notifyAddComponent( sPatternName.c_str(), sComponentName.c_str() );
         }
 
-        void BasicFacadePrivate::notifyDeleteComponent( basic_facade_string_type& sPatternName, basic_facade_string_type& sComponentName )
+        void BasicFacadePrivate::notifyDeleteComponent( const std::string & sPatternName, const std::string & sComponentName )
         {
             if ( m_pBasicObserver )
                 m_pBasicObserver->notifyDeleteComponent( sPatternName.c_str(), sComponentName.c_str() );

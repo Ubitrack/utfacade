@@ -36,12 +36,7 @@
 namespace Ubitrack {
     namespace Facade {
 
-//#define BASICFACADE_USE_STRING_ARGUMENTS
-#ifdef BASICFACADE_USE_STRING_ARGUMENTS
-        typedef const std::string basic_facade_string_type;
-#else
-        typedef const char* basic_facade_string_type;
-#endif
+	typedef const char* basic_facade_string_type;
 
 
         // forward declarations
