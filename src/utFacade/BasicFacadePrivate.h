@@ -46,7 +46,7 @@ namespace Ubitrack {
                 : public AdvancedFacade, public DataflowObserver
         {
         public:
-            BasicFacadePrivate( basic_facade_string_type sComponentPath );
+            BasicFacadePrivate( const char* sComponentPath );
 
             // translate from DataflowObserver to SimpleDataflowObserver
             void notifyAddComponent( const std::string & sPatternName, const std::string & sComponentName, const Graph::UTQLSubgraph& );

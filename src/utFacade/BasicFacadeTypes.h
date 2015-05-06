@@ -30,14 +30,24 @@
 */
 #ifndef __UBITRACK_FACADE_BASICDATATYPES_H_INCLUDED__
 #define __UBITRACK_FACADE_BASICDATATYPES_H_INCLUDED__
+#include <utFacade/utFacade.h>
+#include <utFacade/Config.h>
+
+#ifdef _WIN32
+#	ifdef UTFACADE_DLL
+#		define UTFACADE_DLL_TCM template UTFACADE_EXPORT
+#	else
+#		define UTFACADE_DLL_TCM extern template UTFACADE_EXPORT
+#	endif
+#else // _WIN32
+#	define UTFACADE_DLL_TCM
+#endif
+
 
 #include <vector>
 
 namespace Ubitrack {
     namespace Facade {
-
-	typedef const char* basic_facade_string_type;
-
 
         // forward declarations
         struct BasicScalarIntMeasurementPrivate;
@@ -58,7 +68,7 @@ namespace Ubitrack {
 
         struct BasicImageMeasurementPrivate;
 
-        class BasicMeasurement {
+        class UTFACADE_EXPORT BasicMeasurement {
         public:
 
             enum DataType {
@@ -91,7 +101,7 @@ namespace Ubitrack {
         };
 
         /** wrapper for scalar measurement **/
-        class BasicScalarIntMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicScalarIntMeasurement : public BasicMeasurement {
         public:
             BasicScalarIntMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             BasicScalarIntMeasurement(unsigned long long int const ts, const int value);
@@ -110,7 +120,7 @@ namespace Ubitrack {
             BasicScalarIntMeasurementPrivate* m_pPrivate;
         };
 
-        class BasicScalarDoubleMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicScalarDoubleMeasurement : public BasicMeasurement {
         public:
             BasicScalarDoubleMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             BasicScalarDoubleMeasurement(unsigned long long int const ts, const double value);
@@ -132,7 +142,7 @@ namespace Ubitrack {
 
         /** wrapper for vector2 measurement **/
         template< int LEN = 2 >
-        class BasicVectorMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicVectorMeasurement : public BasicMeasurement {
         public:
             BasicVectorMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             BasicVectorMeasurement(unsigned long long int const ts, const std::vector<double>& v);
@@ -153,7 +163,7 @@ namespace Ubitrack {
 
         /** wrapper for matrix33 measurement **/
         template< int ROWS = 3, int COLS = 3 >
-        class BasicMatrixMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicMatrixMeasurement : public BasicMeasurement {
         public:
             BasicMatrixMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             /* set mat rows from vector M*N row-major */
@@ -174,7 +184,7 @@ namespace Ubitrack {
         };
 
         /** wrapper for pose measurement **/
-        class BasicPoseMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicPoseMeasurement : public BasicMeasurement {
         public:
             BasicPoseMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             /* set pose from vector [x, y, z, rx, ry, rz, rw] */
@@ -195,7 +205,7 @@ namespace Ubitrack {
         };
 
         /** wrapper for rotation measurement **/
-        class BasicRotationMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicRotationMeasurement : public BasicMeasurement {
         public:
             BasicRotationMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             /* set pose from vector [x, y, z, rx, ry, rz, rw] */
@@ -218,7 +228,7 @@ namespace Ubitrack {
         // ErrorVector
         /** wrapper for errorvector measurement **/
         template< int LEN = 2 >
-        class BasicErrorVectorMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicErrorVectorMeasurement : public BasicMeasurement {
         public:
             BasicErrorVectorMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
             BasicErrorVectorMeasurement(unsigned long long int const ts, const std::vector<double>& v, const std::vector<double>& c);
@@ -240,7 +250,7 @@ namespace Ubitrack {
         // ErrorPose
 
         /** wrapper for image measurement **/
-        class BasicImageMeasurement : public BasicMeasurement {
+        class UTFACADE_EXPORT BasicImageMeasurement : public BasicMeasurement {
         public:
 
             enum PixelFormat {
@@ -282,7 +292,7 @@ namespace Ubitrack {
         /**
         * A Basic data flow observer
         */
-        class BasicDataflowObserver
+        class UTFACADE_EXPORT BasicDataflowObserver
         {
         public:
             /** called when a component is added */

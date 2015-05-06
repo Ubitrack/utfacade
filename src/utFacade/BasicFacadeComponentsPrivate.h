@@ -58,7 +58,7 @@ namespace Ubitrack { namespace Facade {
             typedef typename BasicMeasurementTypeTrait< BMT >::ubitrack_measurement_type measurement_type;
             typedef typename Components::ApplicationPullSink< measurement_type > component_type;
 
-            BasicPullSinkPrivate(basic_facade_string_type name, BasicFacadePrivate* facade)
+            BasicPullSinkPrivate(const char* name, BasicFacadePrivate* facade)
             : m_component(facade->componentByName< component_type >(name)) {}
 
             ~BasicPullSinkPrivate() {
@@ -86,7 +86,7 @@ namespace Ubitrack { namespace Facade {
             typedef typename BasicMeasurementTypeTrait< BMT >::ubitrack_measurement_type measurement_type;
             typedef typename Components::ApplicationPushSink< measurement_type > component_type;
 
-            BasicPushSinkPrivate(basic_facade_string_type name, BasicFacadePrivate* facade)
+            BasicPushSinkPrivate(const char* name, BasicFacadePrivate* facade)
                     : m_component(facade->componentByName< component_type >(name)) {}
 
             ~BasicPushSinkPrivate() {
@@ -125,7 +125,7 @@ namespace Ubitrack { namespace Facade {
             typedef typename BasicMeasurementTypeTrait< BMT >::ubitrack_measurement_type measurement_type;
             typedef typename Components::ApplicationPullSource< measurement_type > component_type;
 
-            BasicPullSourcePrivate(basic_facade_string_type name, BasicFacadePrivate* facade)
+            BasicPullSourcePrivate(const char* name, BasicFacadePrivate* facade)
                     : m_component(facade->componentByName< component_type >(name)) {}
 
             ~BasicPullSourcePrivate() {
@@ -169,7 +169,7 @@ namespace Ubitrack { namespace Facade {
             typedef typename BasicMeasurementTypeTrait< BMT >::ubitrack_measurement_type measurement_type;
             typedef typename Components::ApplicationPushSource< measurement_type > component_type;
 
-            BasicPushSourcePrivate(basic_facade_string_type name, BasicFacadePrivate* facade)
+            BasicPushSourcePrivate(const char* name, BasicFacadePrivate* facade)
                     : m_component(facade->componentByName< component_type >(name)) {}
 
             ~BasicPushSourcePrivate() {

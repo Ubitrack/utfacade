@@ -56,7 +56,7 @@ namespace Ubitrack {
 *
 */
 
-        void initUbitrackLogging(basic_facade_string_type filename);
+        void UTFACADE_EXPORT initUbitrackLogging(const char* filename);
 
         class UTFACADE_EXPORT BasicFacade
         {
@@ -66,7 +66,7 @@ namespace Ubitrack {
             *
             * @param sComponentPath Path to component directory. Uses default directory if none is specified
             */
-            BasicFacade( basic_facade_string_type sComponentPath ) throw();
+            BasicFacade( const char* sComponentPath ) throw();
 
             /** destroys the data flow */
             ~BasicFacade();
@@ -80,7 +80,7 @@ namespace Ubitrack {
             * @param sDfSrg filename of dataflow description
             * @return true if successful
             */
-            bool loadDataflow( basic_facade_string_type sDfSrg ) throw();
+            bool loadDataflow( const char* sDfSrg ) throw();
 
             /**
             * Loads and instantiates a dataflow network from a string
@@ -88,7 +88,7 @@ namespace Ubitrack {
             * @param sDataflow string containing the actual XML dataflow
             * @return true if successful
             */
-            bool loadDataflowString( basic_facade_string_type sDataflow ) throw();
+            bool loadDataflowString( const char* sDataflow ) throw();
 
             /** removes all dataflow component instances */
             void clearDataflow() throw();
@@ -105,17 +105,17 @@ namespace Ubitrack {
             * connect to a ubitrack server.
             * @param sAddress format: <hostname> [":" <port>]
             */
-            void connectToServer( basic_facade_string_type sAddress ) throw();
+            void connectToServer( const char* sAddress ) throw();
 
             /**
             * sends the contents of a file to a connected ubitrack server.
             */
-            void sendUtqlToServer( basic_facade_string_type sUtqlFile ) throw();
+            void sendUtqlToServer( const char* sUtqlFile ) throw();
 
             /**
             * sends a string to a connected ubitrack server.
             */
-            void sendUtqlToServerString( basic_facade_string_type buffer ) throw();
+            void sendUtqlToServerString( const char* buffer ) throw();
 
 
             /**
@@ -136,19 +136,19 @@ namespace Ubitrack {
 
             /** returns a wrapper for an ApplicationPullSink with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPullSink< BMT > > getPullSink( basic_facade_string_type sName ) throw();
+            BasicPullSink< BMT >* getPullSink( const char* sName ) throw();
 
             /** returns a wrapper for an ApplicationPushSink with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPushSink< BMT > > getPushSink( basic_facade_string_type sName ) throw();
+            BasicPushSink< BMT >* getPushSink( const char* sName ) throw();
 
             /** returns a wrapper for an ApplicationPullsource with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPullSource< BMT > > getPullSource( basic_facade_string_type sName ) throw();
+            BasicPullSource< BMT >* getPullSource( const char* sName ) throw();
 
             /** returns a wrapper for an ApplicationPushSource with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPushSource< BMT > > getPushSource( basic_facade_string_type sName ) throw();
+            BasicPushSource< BMT >* getPushSource( const char* sName ) throw();
 
             void killEverything();
 
@@ -171,5 +171,76 @@ namespace Ubitrack {
 
 
     } } // namespace Ubitrack::Facade
+
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarDoubleMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 4 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 4 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 4 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 4 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 8 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 8 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 8 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 8 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicPoseMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicRotationMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicRotationMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicRotationMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicRotationMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
 
 #endif

@@ -30,6 +30,8 @@
 */
 #ifndef __UBITRACK_FACADE_BASICFACADECOMPONENTS_H_INCLUDED__
 #define __UBITRACK_FACADE_BASICFACADECOMPONENTS_H_INCLUDED__
+#include <utFacade/utFacade.h>
+#include <utFacade/Config.h>
 
 #include "BasicFacadeTypes.h"
 #include <functional>
@@ -53,12 +55,12 @@ namespace Ubitrack { namespace Facade {
         class BasicPushSourcePrivate;
 
         template< typename BMT >
-        class BasicPullSink {
+        class UTFACADE_EXPORT BasicPullSink {
 
         public:
             typedef BMT MeasurementType;
 
-            BasicPullSink(basic_facade_string_type name, BasicFacadePrivate* _private);
+            BasicPullSink(const char* name, BasicFacadePrivate* _private);
             ~BasicPullSink();
             std::shared_ptr<BMT> get(unsigned long long int const ts);
 
@@ -67,13 +69,13 @@ namespace Ubitrack { namespace Facade {
         };
 
         template< typename BMT >
-        class BasicPushSink {
+        class UTFACADE_EXPORT BasicPushSink {
 
         public:
             typedef BMT MeasurementType;
             typedef std::function<void(MeasurementType&)> CallbackType;
 
-            BasicPushSink(basic_facade_string_type name, BasicFacadePrivate* _private);
+            BasicPushSink(const char* name, BasicFacadePrivate* _private);
             ~BasicPushSink();
             void registerCallback(CallbackType cb);
             void unregisterCallback();
@@ -83,13 +85,13 @@ namespace Ubitrack { namespace Facade {
         };
 
         template< typename BMT >
-        class BasicPullSource {
+        class UTFACADE_EXPORT BasicPullSource {
 
         public:
             typedef BMT MeasurementType;
             typedef std::function< MeasurementType* (unsigned long long int const)> CallbackType;
 
-            BasicPullSource(basic_facade_string_type name, BasicFacadePrivate* _private);
+            BasicPullSource(const char* name, BasicFacadePrivate* _private);
             ~BasicPullSource();
             void registerCallback(CallbackType cb);
             void unregisterCallback();
@@ -99,12 +101,12 @@ namespace Ubitrack { namespace Facade {
         };
 
         template< typename BMT >
-        class BasicPushSource {
+        class UTFACADE_EXPORT BasicPushSource {
 
         public:
             typedef BMT MeasurementType;
 
-            BasicPushSource(basic_facade_string_type name, BasicFacadePrivate* _private);
+            BasicPushSource(const char* name, BasicFacadePrivate* _private);
             ~BasicPushSource();
             void send(const BMT &measurement);
 

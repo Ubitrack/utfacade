@@ -40,7 +40,7 @@ namespace Ubitrack {
         // BasicPullSink
 
         template< typename BMT >
-        BasicPullSink< BMT >::BasicPullSink(basic_facade_string_type name, BasicFacadePrivate* _private)
+        BasicPullSink< BMT >::BasicPullSink(const char* name, BasicFacadePrivate* _private)
                 : m_pPrivate(new BasicPullSinkPrivate< BMT >(name, _private))
         {
 
@@ -69,7 +69,7 @@ namespace Ubitrack {
         // BasicPushSink
 
         template< typename BMT >
-        BasicPushSink< BMT >::BasicPushSink(basic_facade_string_type name, BasicFacadePrivate* _private)
+        BasicPushSink< BMT >::BasicPushSink(const char* name, BasicFacadePrivate* _private)
                 : m_pPrivate(new BasicPushSinkPrivate< BMT >(name, _private)) {
 
         }
@@ -98,7 +98,7 @@ namespace Ubitrack {
         // BasicPullSource
 
         template< typename BMT >
-        BasicPullSource< BMT >::BasicPullSource(basic_facade_string_type name, BasicFacadePrivate* _private)
+        BasicPullSource< BMT >::BasicPullSource(const char* name, BasicFacadePrivate* _private)
                 : m_pPrivate(new BasicPullSourcePrivate< BMT >(name, _private)) {
 
         }
@@ -127,7 +127,7 @@ namespace Ubitrack {
         // BasicPushSource
 
         template< typename BMT >
-        BasicPushSource< BMT >::BasicPushSource(basic_facade_string_type name, BasicFacadePrivate* _private)
+        BasicPushSource< BMT >::BasicPushSource(const char* name, BasicFacadePrivate* _private)
                 : m_pPrivate(new BasicPushSourcePrivate< BMT >(name, _private)) {
 
         }
