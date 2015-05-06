@@ -55,13 +55,13 @@ static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Faca
 namespace Ubitrack {
     namespace Facade {
 
-        void initUbitrackLogging(basic_facade_string_type& filename)
+        void initUbitrackLogging(basic_facade_string_type filename)
         {
             Util::initLogging(filename);
         }
 
 
-        BasicFacadePrivate::BasicFacadePrivate( basic_facade_string_type& sComponentPath )
+        BasicFacadePrivate::BasicFacadePrivate( basic_facade_string_type sComponentPath )
                 : AdvancedFacade( sComponentPath )
                 , m_pBasicObserver( 0 )
         {}
@@ -80,7 +80,7 @@ namespace Ubitrack {
         }
 
 
-        BasicFacade::BasicFacade( basic_facade_string_type& sComponentPath ) throw()
+        BasicFacade::BasicFacade( basic_facade_string_type sComponentPath ) throw()
                 : m_pPrivate( 0 )
                 , m_sError( 0 )
         {
@@ -110,7 +110,7 @@ namespace Ubitrack {
         }
 
 
-        bool BasicFacade::loadDataflow( basic_facade_string_type& sDfSrg ) throw()
+        bool BasicFacade::loadDataflow( basic_facade_string_type sDfSrg ) throw()
         {
             try
             {
@@ -127,7 +127,7 @@ namespace Ubitrack {
         }
 
 
-        bool BasicFacade::loadDataflowString( basic_facade_string_type& sDataflow ) throw()
+        bool BasicFacade::loadDataflowString( basic_facade_string_type sDataflow ) throw()
         {
             try
             {
@@ -190,7 +190,7 @@ namespace Ubitrack {
         }
 
 
-        void BasicFacade::connectToServer( basic_facade_string_type& sAddress ) throw()
+        void BasicFacade::connectToServer( basic_facade_string_type sAddress ) throw()
         {
             try
             {
@@ -204,7 +204,7 @@ namespace Ubitrack {
         }
 
 
-        void BasicFacade::sendUtqlToServer( basic_facade_string_type& sUtqlFile ) throw()
+        void BasicFacade::sendUtqlToServer( basic_facade_string_type sUtqlFile ) throw()
         {
             try
             {
@@ -218,7 +218,7 @@ namespace Ubitrack {
         }
 
 
-        void BasicFacade::sendUtqlToServerString( basic_facade_string_type& buffer ) throw()
+        void BasicFacade::sendUtqlToServerString( basic_facade_string_type buffer ) throw()
         {
             try
             {
@@ -269,7 +269,7 @@ namespace Ubitrack {
 
         /** returns a wrapper for an ApplicationPullSink with a type defined via BMT **/
         template< typename BMT >
-        std::shared_ptr<BasicPullSink< BMT > > BasicFacade::getPullSink( basic_facade_string_type& sName ) throw() {
+        std::shared_ptr<BasicPullSink< BMT > > BasicFacade::getPullSink( basic_facade_string_type sName ) throw() {
             std::shared_ptr<BasicPullSink< BMT > > sink;
             try {
                 sink = std::make_shared<BasicPullSink< BMT > >(sName, m_pPrivate);
@@ -283,7 +283,7 @@ namespace Ubitrack {
 
         /** returns a wrapper for an ApplicationPushSink with a type defined via BMT **/
         template< typename BMT >
-        std::shared_ptr<BasicPushSink< BMT > > BasicFacade::getPushSink( basic_facade_string_type& sName ) throw() {
+        std::shared_ptr<BasicPushSink< BMT > > BasicFacade::getPushSink( basic_facade_string_type sName ) throw() {
             std::shared_ptr<BasicPushSink< BMT > > sink;
             try {
                 sink = std::make_shared<BasicPushSink< BMT > >(sName, m_pPrivate);
@@ -297,7 +297,7 @@ namespace Ubitrack {
 
         /** returns a wrapper for an ApplicationPullsource with a type defined via BMT **/
         template< typename BMT >
-        std::shared_ptr<BasicPullSource< BMT > > BasicFacade::getPullSource( basic_facade_string_type& sName ) throw() {
+        std::shared_ptr<BasicPullSource< BMT > > BasicFacade::getPullSource( basic_facade_string_type sName ) throw() {
             std::shared_ptr<BasicPullSource< BMT > > source = NULL;
             try {
                 source = std::make_shared<BasicPullSource< BMT > >(sName, m_pPrivate);
@@ -311,7 +311,7 @@ namespace Ubitrack {
 
         /** returns a wrapper for an ApplicationPushSource with a type defined via BMT **/
         template< typename BMT >
-        std::shared_ptr<BasicPushSource< BMT > > BasicFacade::getPushSource( basic_facade_string_type& sName ) throw() {
+        std::shared_ptr<BasicPushSource< BMT > > BasicFacade::getPushSource( basic_facade_string_type sName ) throw() {
             std::shared_ptr<BasicPushSource< BMT > > source = NULL;
             try {
                 source = std::make_shared<BasicPushSource< BMT > >(sName, m_pPrivate);
@@ -328,10 +328,10 @@ namespace Ubitrack {
 //        class MeasurementExposer : public BasicFacade {
 //        public:
 //            /* does not work, since MeasurementExposer<BMT> is not a friend of BasicFacade */
-//            template BasicPullSink  < BMT >* BasicFacade::getPullSink  <BasicScalarIntMeasurement>(basic_facade_string_type&);
-//            template BasicPushSink  < BMT >* BasicFacade::getPushSink  <BasicScalarIntMeasurement>(basic_facade_string_type&);
-//            template BasicPullSource< BMT >* BasicFacade::getPullSource<BasicScalarIntMeasurement>(basic_facade_string_type&);
-//            template BasicPushSource< BMT >* BasicFacade::getPushSource<BasicScalarIntMeasurement>(basic_facade_string_type&);
+//            template BasicPullSink  < BMT >* BasicFacade::getPullSink  <BasicScalarIntMeasurement>(basic_facade_string_type);
+//            template BasicPushSink  < BMT >* BasicFacade::getPushSink  <BasicScalarIntMeasurement>(basic_facade_string_type);
+//            template BasicPullSource< BMT >* BasicFacade::getPullSource<BasicScalarIntMeasurement>(basic_facade_string_type);
+//            template BasicPushSource< BMT >* BasicFacade::getPushSource<BasicScalarIntMeasurement>(basic_facade_string_type);
 //
 //            /* this variant only exposes MeasurementExposer::getPu... but not BasicFacade::getPu... */
 //            void implement_sinks(){
@@ -365,74 +365,74 @@ namespace Ubitrack {
 * can this be automated somehow ??????
 * templates of templates ?? .. tried some options and failed, see above ..
 */
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarIntMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicScalarDoubleMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 4 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicVectorMeasurement< 8 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 3 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 3, 4 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicMatrixMeasurement< 4, 4 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicPoseMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicRotationMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 2 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
-template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type&);
-template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type&);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPullSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPushSink  (basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPullSource(basic_facade_string_type);
+template std::shared_ptr<Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicImageMeasurement > > Ubitrack::Facade::BasicFacade::getPushSource(basic_facade_string_type);
 
 #endif // ENABLE_BASICFACADE

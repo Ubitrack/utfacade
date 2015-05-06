@@ -56,7 +56,7 @@ namespace Ubitrack {
 *
 */
 
-        void initUbitrackLogging(basic_facade_string_type& filename);
+        void initUbitrackLogging(basic_facade_string_type filename);
 
         class UTFACADE_EXPORT BasicFacade
         {
@@ -66,7 +66,7 @@ namespace Ubitrack {
             *
             * @param sComponentPath Path to component directory. Uses default directory if none is specified
             */
-            BasicFacade( basic_facade_string_type& sComponentPath ) throw();
+            BasicFacade( basic_facade_string_type sComponentPath ) throw();
 
             /** destroys the data flow */
             ~BasicFacade();
@@ -80,7 +80,7 @@ namespace Ubitrack {
             * @param sDfSrg filename of dataflow description
             * @return true if successful
             */
-            bool loadDataflow( basic_facade_string_type& sDfSrg ) throw();
+            bool loadDataflow( basic_facade_string_type sDfSrg ) throw();
 
             /**
             * Loads and instantiates a dataflow network from a string
@@ -88,7 +88,7 @@ namespace Ubitrack {
             * @param sDataflow string containing the actual XML dataflow
             * @return true if successful
             */
-            bool loadDataflowString( basic_facade_string_type& sDataflow ) throw();
+            bool loadDataflowString( basic_facade_string_type sDataflow ) throw();
 
             /** removes all dataflow component instances */
             void clearDataflow() throw();
@@ -105,17 +105,17 @@ namespace Ubitrack {
             * connect to a ubitrack server.
             * @param sAddress format: <hostname> [":" <port>]
             */
-            void connectToServer( basic_facade_string_type& sAddress ) throw();
+            void connectToServer( basic_facade_string_type sAddress ) throw();
 
             /**
             * sends the contents of a file to a connected ubitrack server.
             */
-            void sendUtqlToServer( basic_facade_string_type& sUtqlFile ) throw();
+            void sendUtqlToServer( basic_facade_string_type sUtqlFile ) throw();
 
             /**
             * sends a string to a connected ubitrack server.
             */
-            void sendUtqlToServerString( basic_facade_string_type& buffer ) throw();
+            void sendUtqlToServerString( basic_facade_string_type buffer ) throw();
 
 
             /**
@@ -136,19 +136,19 @@ namespace Ubitrack {
 
             /** returns a wrapper for an ApplicationPullSink with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPullSink< BMT > > getPullSink( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPullSink< BMT > > getPullSink( basic_facade_string_type sName ) throw();
 
             /** returns a wrapper for an ApplicationPushSink with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPushSink< BMT > > getPushSink( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPushSink< BMT > > getPushSink( basic_facade_string_type sName ) throw();
 
             /** returns a wrapper for an ApplicationPullsource with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPullSource< BMT > > getPullSource( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPullSource< BMT > > getPullSource( basic_facade_string_type sName ) throw();
 
             /** returns a wrapper for an ApplicationPushSource with a type defined via BMT **/
             template< class BMT >
-            std::shared_ptr<BasicPushSource< BMT > > getPushSource( basic_facade_string_type& sName ) throw();
+            std::shared_ptr<BasicPushSource< BMT > > getPushSource( basic_facade_string_type sName ) throw();
 
             void killEverything();
 
