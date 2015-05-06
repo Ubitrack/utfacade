@@ -83,7 +83,7 @@ namespace Ubitrack {
 
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto *m = m_pPrivate->m_measurement.get();
+                    Math::Vector< double, LEN>* m = m_pPrivate->m_measurement.get();
                     v.reserve(TI::SIZE);
                     for (unsigned int i = 0; i < TI::SIZE; i++) {
                         v.at(i) = (*m)(i);
@@ -118,7 +118,7 @@ namespace Ubitrack {
             typedef TensorIndex< ROWS, COLS > TI;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto *m = m_pPrivate->m_measurement.get();
+                    Math::Matrix< double, ROWS, COLS >* m = m_pPrivate->m_measurement.get();
                     v.reserve(TI::SIZE);
                     for (unsigned int i = 0; i < TI::LEN1; i++) {
                         for (unsigned int j = 0; j < TI::LEN2; j++) {
@@ -150,15 +150,15 @@ namespace Ubitrack {
             typedef TensorIndex< 7 > TI;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto m = m_pPrivate->m_measurement.get();
+                    Math::Pose* m = m_pPrivate->m_measurement.get();
                     v.reserve(TI::SIZE);
 
-                    auto t = m->translation();
+                    const Math::Vector< double, 3 >& t = m->translation();
                     v.at(0) = t(0);
                     v.at(1) = t(1);
                     v.at(2) = t(2);
 
-                    auto r = m->rotation();
+                    const Math::Quaternion& r = m->rotation();
                     v.at(3) = r.x();
                     v.at(4) = r.y();
                     v.at(5) = r.z();
@@ -188,7 +188,7 @@ namespace Ubitrack {
             typedef TensorIndex< 4 > TI;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto m = m_pPrivate->m_measurement.get();
+                    Math::Quaternion* m = m_pPrivate->m_measurement.get();
                     v.reserve(TI::SIZE);
 
                     v.at(3) = m->x();
@@ -226,7 +226,7 @@ namespace Ubitrack {
 
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto *m = m_pPrivate->m_measurement.get();
+                    Math::ErrorVector< double, LEN>* m = m_pPrivate->m_measurement.get();
                     v.reserve(TI::SIZE);
                     for (unsigned int i = 0; i < TI::SIZE; i++) {
                         v.at(i) = m->value(i);
@@ -242,7 +242,7 @@ namespace Ubitrack {
             typedef TensorIndex< LEN, LEN > TI;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto *m = m_pPrivate->m_measurement.get();
+                    Math::ErrorVector< double, LEN>* m = m_pPrivate->m_measurement.get();
                     v.reserve(TI::SIZE);
                     for (unsigned int i = 0; i < TI::LEN1; i++) {
                         for (unsigned int j = 0; j < TI::LEN2; j++) {
@@ -325,17 +325,16 @@ namespace Ubitrack {
             PixelFormat pf = UNKNOWN_PIXELFORMAT;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto m = m_pPrivate->m_measurement;
-                    auto cs = m->channelSeq;
+                    Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
 
                     switch(m->nChannels) {
                     case 1:
                         pf = LUMINANCE;
                         break;
                     case 3:
-                        if ( cs[ 0 ] == 'B' && cs[ 1 ] == 'G' && cs[ 2 ] == 'R' ) {
+                        if ( m->channelSeq[ 0 ] == 'B' && m->channelSeq[ 1 ] == 'G' && m->channelSeq[ 2 ] == 'R' ) {
                             pf = BGR;
-                        } else if ( cs[ 0 ] == 'R' && cs[ 1 ] == 'G' && cs[ 2 ] == 'B' ) {
+                        } else if ( m->channelSeq[ 0 ] == 'R' && m->channelSeq[ 1 ] == 'G' && m->channelSeq[ 2 ] == 'B' ) {
                             pf = RGB;
                         } else {
                             // three pixels but not RGB/BGR .. what's it ??
@@ -366,7 +365,7 @@ namespace Ubitrack {
         bool BasicImageMeasurement::get(unsigned int size, unsigned char* data) {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    auto m = m_pPrivate->m_measurement.get();
+                    Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
                     unsigned int frame_bytes = getByteCount();
 
                     if (size < frame_bytes) {

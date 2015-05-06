@@ -61,7 +61,7 @@ namespace Ubitrack {
         class UTFACADE_EXPORT BasicFacade
         {
         public:
-            /**
+            /*
             * Initializes the Ubitrack library.
             *
             * @param sComponentPath Path to component directory. Uses default directory if none is specified
