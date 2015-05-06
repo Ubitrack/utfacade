@@ -60,7 +60,7 @@ namespace Ubitrack {
                 if (m_pPrivate) {
                     m = m_pPrivate->get(ts);
                 }
-            } catch (Util::Exception &e) {
+            } catch (Util::Exception& /* e */) {
                 // log ??
             }
             return m;
@@ -145,7 +145,7 @@ namespace Ubitrack {
                 if (m_pPrivate) {
                     m_pPrivate->send(bm);
                 }
-            } catch (Util::Exception &e) {
+            } catch (Util::Exception& /*e*/) {
                 // log ??
             }
         }

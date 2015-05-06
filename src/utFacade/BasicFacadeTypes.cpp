@@ -13,7 +13,8 @@ namespace Ubitrack {
                 , m_pPrivate(_pPrivate) {}
 
         BasicScalarIntMeasurement::BasicScalarIntMeasurement(unsigned long long int const ts, const int value)
-                : BasicScalarIntMeasurement(ts, new BasicScalarIntMeasurementPrivate(ts, value)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicScalarIntMeasurementPrivate(ts, value)) {}
 
 
         BasicScalarIntMeasurement::~BasicScalarIntMeasurement() {
@@ -38,7 +39,8 @@ namespace Ubitrack {
                 , m_pPrivate(_pPrivate) {}
 
         BasicScalarDoubleMeasurement::BasicScalarDoubleMeasurement(unsigned long long int const ts, const double value)
-                : BasicScalarDoubleMeasurement(ts, new BasicScalarDoubleMeasurementPrivate(ts, value)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicScalarDoubleMeasurementPrivate(ts, value)) {}
 
         BasicScalarDoubleMeasurement::~BasicScalarDoubleMeasurement() {
             if (m_pPrivate) {
@@ -65,7 +67,8 @@ namespace Ubitrack {
 
         template< int LEN >
         BasicVectorMeasurement< LEN >::BasicVectorMeasurement(unsigned long long int const ts, const std::vector<double>& value)
-                : BasicVectorMeasurement(ts, new BasicVectorMeasurementPrivate< LEN >(ts, value)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicVectorMeasurementPrivate< LEN >(ts, value)) {}
 
         template< int LEN >
         BasicVectorMeasurement< LEN >::~BasicVectorMeasurement() {
@@ -100,7 +103,8 @@ namespace Ubitrack {
 
         template< int ROWS, int COLS >
         BasicMatrixMeasurement< ROWS, COLS >::BasicMatrixMeasurement(unsigned long long int const ts, const std::vector<double>& value)
-                : BasicMatrixMeasurement< ROWS, COLS >(ts, new BasicMatrixMeasurementPrivate< ROWS, COLS >(ts, value)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicMatrixMeasurementPrivate< ROWS, COLS >(ts, value)) {}
 
         template< int ROWS, int COLS >
         BasicMatrixMeasurement< ROWS, COLS >::~BasicMatrixMeasurement() {
@@ -133,7 +137,8 @@ namespace Ubitrack {
                 , m_pPrivate(_pPrivate) {}
 
         BasicPoseMeasurement::BasicPoseMeasurement(unsigned long long int const ts, const std::vector<double>& value)
-                : BasicPoseMeasurement(ts, new BasicPoseMeasurementPrivate(ts, value)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicPoseMeasurementPrivate(ts, value)) {}
 
         BasicPoseMeasurement::~BasicPoseMeasurement() {
             if (m_pPrivate) {
@@ -170,7 +175,8 @@ namespace Ubitrack {
                 , m_pPrivate(_pPrivate) {}
 
         BasicRotationMeasurement::BasicRotationMeasurement(unsigned long long int const ts, const std::vector<double>& value)
-                : BasicRotationMeasurement(ts, new BasicRotationMeasurementPrivate(ts, value)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicRotationMeasurementPrivate(ts, value)) {}
 
         BasicRotationMeasurement::~BasicRotationMeasurement() {
             if (m_pPrivate) {
@@ -204,7 +210,8 @@ namespace Ubitrack {
 
         template< int LEN >
         BasicErrorVectorMeasurement< LEN >::BasicErrorVectorMeasurement(unsigned long long int const ts, const std::vector<double>& value, const std::vector<double>& cov)
-                : BasicErrorVectorMeasurement(ts, new BasicErrorVectorMeasurementPrivate< LEN >(ts, value, cov)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicErrorVectorMeasurementPrivate< LEN >(ts, value, cov)) {}
 
         template< int LEN >
         BasicErrorVectorMeasurement< LEN >::~BasicErrorVectorMeasurement() {
@@ -256,7 +263,8 @@ namespace Ubitrack {
                 , m_pPrivate(_pPrivate) {}
 
         BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels, unsigned char* data, PixelFormat pixel_format, bool copy_data)
-                : BasicImageMeasurement(ts, new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data, pixel_format, copy_data)) {}
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data, pixel_format, copy_data)) {}
 
         BasicImageMeasurement::~BasicImageMeasurement() {
             if (m_pPrivate) {

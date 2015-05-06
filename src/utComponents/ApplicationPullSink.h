@@ -127,6 +127,7 @@ typedef ApplicationPullSink< Measurement::PositionList > ApplicationPullSinkPosi
 typedef ApplicationPullSink< Measurement::ErrorPositionList > ApplicationPullSinkErrorPositionList;
 typedef ApplicationPullSink< Measurement::PositionList2 > ApplicationPullSinkPositionList2;
 typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkSkalar;
+typedef ApplicationPullSink< Measurement::Distance > ApplicationPullSinkDistance;
 typedef ApplicationPullSink< Measurement::Matrix3x3 > ApplicationPullSinkMatrix3x3;
 typedef ApplicationPullSink< Measurement::Matrix4x4 > ApplicationPullSinkMatrix4x4;
 typedef ApplicationPullSink< Measurement::Vector4D > ApplicationPullSinkVector4D;
