@@ -33,17 +33,6 @@
 #include <utFacade/utFacade.h>
 #include <utFacade/Config.h>
 
-#ifdef _WIN32
-#	ifdef UTFACADE_DLL
-#		define UTFACADE_DLL_TCM template UTFACADE_EXPORT
-#	else
-#		define UTFACADE_DLL_TCM extern template UTFACADE_EXPORT
-#	endif
-#else // _WIN32
-#	define UTFACADE_DLL_TCM
-#endif
-
-
 #include <vector>
 
 namespace Ubitrack {

@@ -173,6 +173,13 @@ namespace Ubitrack {
     } } // namespace Ubitrack::Facade
 
 #ifdef _WIN32
+
+#ifdef UTFACADE_DLL
+  #define UTFACADE_DLL_TCM template UTFACADE_EXPORT
+#else
+  #define UTFACADE_DLL_TCM extern template UTFACADE_EXPORT
+#endif
+
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicScalarIntMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
