@@ -34,6 +34,7 @@
 #include "BasicFacadeTypes.h"
 
 #include "utMeasurement/Measurement.h"
+#include "utMath/CameraIntrinsics.h"
 #include <utVision/Image.h>
 
 namespace Ubitrack {
@@ -362,7 +363,37 @@ namespace Ubitrack {
             typedef Measurement::ErrorPosition ubitrack_measurement_type;
         };
 
+        // ErrorPose (TBD)
 
+
+        // CameraIntrinsics
+        struct BasicCameraIntrinsicsMeasurementPrivate {
+            typedef Math::CameraIntrinsics< double > ValueType;
+            typedef Measurement::Measurement< ValueType > MeasurementType;
+            BasicCameraIntrinsicsMeasurementPrivate(unsigned long long int const ts,
+                    const std::vector<double>& intrinsics, const std::vector<double>& radial, const std::vector<double>& tangential) {
+				Math::Matrix< double, 3, 3 > _intrinsics(&intrinsics.front());
+				Math::Vector< double, 6 > _radial(&radial.front());
+				Math::Vector< double, 2 > _tangential(&tangential.front());
+                m_measurement = MeasurementType(ts, ValueType(_intrinsics, _radial, _tangential));
+            }
+
+            BasicCameraIntrinsicsMeasurementPrivate(const MeasurementType& m) : m_measurement(m) {}
+
+            void clear() {
+                m_measurement.reset();
+            }
+
+            MeasurementType m_measurement;
+
+        };
+
+        template<>
+        struct BasicMeasurementTypeTrait< BasicCameraIntrinsicsMeasurement > {
+            static const bool supported = true;
+            typedef BasicCameraIntrinsicsMeasurementPrivate private_measurement_type;
+            typedef Measurement::CameraIntrinsics ubitrack_measurement_type;
+        };
 
         /**
         * image measurement buffer

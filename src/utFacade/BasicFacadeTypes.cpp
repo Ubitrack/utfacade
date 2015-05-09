@@ -255,9 +255,78 @@ namespace Ubitrack {
             return false;
         }
 
-        // ErrorPose
+        // ErrorPose (TBD)
 
-        // Image
+        // CameraIntrinsics
+        BasicCameraIntrinsicsMeasurement::BasicCameraIntrinsicsMeasurement(unsigned long long int const ts, BasicCameraIntrinsicsMeasurementPrivate* _pPrivate)
+                : BasicMeasurement(ts)
+                , m_pPrivate(_pPrivate) {}
+
+        BasicCameraIntrinsicsMeasurement::BasicCameraIntrinsicsMeasurement(unsigned long long int const ts, const std::vector<double>& intrinsics, const std::vector<double>& radial, const std::vector<double>& tangential)
+                : BasicMeasurement(ts)
+                , m_pPrivate(new BasicCameraIntrinsicsMeasurementPrivate(ts, intrinsics, radial, tangential)) {}
+
+        BasicCameraIntrinsicsMeasurement::~BasicCameraIntrinsicsMeasurement() {
+            if (m_pPrivate) {
+                delete(m_pPrivate);
+            }
+        }
+
+		bool BasicCameraIntrinsicsMeasurement::get(std::vector<double>& v) {
+            typedef TensorIndex< 3, 3 > TI;
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+					Math::CameraIntrinsics<double>* m = m_pPrivate->m_measurement.get();
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::LEN1; i++) {
+                        for (unsigned int j = 0; j < TI::LEN2; j++) {
+							v.at(TI::indexOf(i, j)) = (*m).matrix(i, j);
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool BasicCameraIntrinsicsMeasurement::getResolution(std::vector<double>& v) {
+            typedef TensorIndex< 2 > TI;
+
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    Math::CameraIntrinsics<double>* m = m_pPrivate->m_measurement.get();
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::SIZE; i++) {
+                        v.at(i) = m->dimension(i);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool BasicCameraIntrinsicsMeasurement::getDistortion(std::vector<double>& radial, std::vector<double>& tangential) {
+            typedef TensorIndex< 6 > TI1;
+            typedef TensorIndex< 2 > TI2;
+
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    Math::CameraIntrinsics<double>* m = m_pPrivate->m_measurement.get();
+                    radial.reserve(TI1::SIZE);
+                    for (unsigned int i = 0; i < TI1::SIZE; i++) {
+						radial.at(i) = m->radial_params(i);
+                    }
+                    tangential.reserve(TI2::SIZE);
+                    for (unsigned int i = 0; i < TI2::SIZE; i++) {
+						tangential.at(i) = m->tangential_params(i);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+		
+		// Image
         BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, BasicImageMeasurementPrivate* _pPrivate)
                 : BasicMeasurement(ts)
                 , m_pPrivate(_pPrivate) {}

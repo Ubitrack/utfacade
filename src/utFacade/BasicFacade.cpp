@@ -397,6 +397,11 @@ template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicErrorVectorMe
 template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
 template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
 
+template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicCameraIntrinsicsMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
+template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicCameraIntrinsicsMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
+template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicCameraIntrinsicsMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
+template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicCameraIntrinsicsMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+
 template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
 template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
 template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);

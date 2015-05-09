@@ -57,7 +57,9 @@ namespace Ubitrack {
 
         struct BasicImageMeasurementPrivate;
 
-        class UTFACADE_EXPORT BasicMeasurement {
+        struct BasicCameraIntrinsicsMeasurementPrivate;
+
+		class UTFACADE_EXPORT BasicMeasurement {
         public:
 
             enum DataType {
@@ -69,6 +71,7 @@ namespace Ubitrack {
                 QUATERNION,
                 ERROR_VECTOR,
                 ERROR_POSE,
+				CAMERA_INTRINSICS,
                 IMAGE
             };
             BasicMeasurement() : m_timestamp(0), m_valid(false) {};
@@ -237,6 +240,32 @@ namespace Ubitrack {
             BasicErrorVectorMeasurementPrivate< LEN >* m_pPrivate;
         };
         // ErrorPose
+
+
+
+        /** wrapper for cameraintrinsics measurement **/
+        class UTFACADE_EXPORT BasicCameraIntrinsicsMeasurement : public BasicMeasurement {
+        public:
+            BasicCameraIntrinsicsMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+			// set from intrinsics matrix33 (as vector) / distortion / resolution
+            BasicCameraIntrinsicsMeasurement(unsigned long long int const ts, const std::vector<double>& intrinsics, const std::vector<double>& radial, const std::vector<double>& tangential);
+            BasicCameraIntrinsicsMeasurement(unsigned long long int const ts, BasicCameraIntrinsicsMeasurementPrivate* _pPrivate);
+            ~BasicCameraIntrinsicsMeasurement();
+
+            virtual DataType getDataType() const { return CAMERA_INTRINSICS; }
+            virtual int getDimX() const { return 1; }
+            virtual int getDimY() const { return 1; }
+            virtual int getDimZ() const { return 1; }
+
+            /* get camera intrinsics matrix 3x3 */
+            bool get( std::vector<double>& v );
+            bool getResolution( std::vector<double>& v);
+            bool getDistortion( std::vector<double>& radial, std::vector<double>& tangential);
+
+//        private:
+            BasicCameraIntrinsicsMeasurementPrivate* m_pPrivate;
+        };
+
 
         /** wrapper for image measurement **/
         class UTFACADE_EXPORT BasicImageMeasurement : public BasicMeasurement {
