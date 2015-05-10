@@ -107,7 +107,7 @@ namespace Ubitrack { namespace Facade {
 
             void pushHandler(const measurement_type& m) {
                 if (m_slot) {
-                    BMT bm = BMT(m.time(), new typename BasicMeasurementTypeTrait< BMT >::private_measurement_type(m));
+                    std::shared_ptr<BMT> bm = std::make_shared<BMT>(m.time(), new typename BasicMeasurementTypeTrait< BMT >::private_measurement_type(m));
                     m_slot( bm );
                 }
             }
@@ -146,7 +146,7 @@ namespace Ubitrack { namespace Facade {
 
             const measurement_type pullHandler(unsigned long long int const ts) {
                 if (m_slot) {
-                    BMT* bm = m_slot(ts);
+                    std::shared_ptr<BMT> bm = m_slot(ts);
                     if (bm->isValid()) {
                         // demeters law ...
                         measurement_type m = bm->m_pPrivate->m_measurement;
@@ -176,11 +176,11 @@ namespace Ubitrack { namespace Facade {
                 m_component.clear();
             }
 
-            void send(const BMT& bm) {
+            void send(const std::shared_ptr<BMT>& bm) {
                 if (m_component) {
-                    if (bm.isValid()) {
+                    if (bm->isValid()) {
                         // demeters law ...
-                        measurement_type m = bm.m_pPrivate->m_measurement;
+                        measurement_type m = bm->m_pPrivate->m_measurement;
                         m_component->send( m );
                     }
                 }

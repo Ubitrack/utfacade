@@ -140,7 +140,7 @@ namespace Ubitrack {
         }
 
         template< typename BMT >
-        void BasicPushSource< BMT >::send(const BMT &bm) {
+        void BasicPushSource< BMT >::send(const std::shared_ptr<BMT>& bm) {
             try{
                 if (m_pPrivate) {
                     m_pPrivate->send(bm);

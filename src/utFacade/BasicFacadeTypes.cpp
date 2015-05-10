@@ -58,6 +58,15 @@ namespace Ubitrack {
             return false;
         }
 
+        bool BasicScalarDoubleMeasurement::get(float& v) {
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    v = (float)(*(m_pPrivate->m_measurement.get()));
+                    return true;
+                }
+            }
+            return false;
+        }
 
         // Vec
         template< int LEN >
@@ -94,6 +103,22 @@ namespace Ubitrack {
             return false;
         }
 
+        template< int LEN >
+        bool BasicVectorMeasurement< LEN >::get(std::vector<float>& v) {
+            typedef TensorIndex< LEN > TI;
+
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    Math::Vector< double, LEN>* m = m_pPrivate->m_measurement.get();
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::SIZE; i++) {
+                        v.at(i) = (float)((*m)(i));
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
 
         // Mat
         template< int ROWS, int COLS >
@@ -123,6 +148,24 @@ namespace Ubitrack {
                     for (unsigned int i = 0; i < TI::LEN1; i++) {
                         for (unsigned int j = 0; j < TI::LEN2; j++) {
                             v.at(TI::indexOf(i, j)) = (*m)(i, j);
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        template< int ROWS, int COLS >
+        bool BasicMatrixMeasurement< ROWS, COLS >::get(std::vector<float>& v) {
+            typedef TensorIndex< ROWS, COLS > TI;
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    Math::Matrix< double, ROWS, COLS >* m = m_pPrivate->m_measurement.get();
+                    v.reserve(TI::SIZE);
+                    for (unsigned int i = 0; i < TI::LEN1; i++) {
+                        for (unsigned int j = 0; j < TI::LEN2; j++) {
+                            v.at(TI::indexOf(i, j)) = (float)((*m)(i, j));
                         }
                     }
                     return true;
@@ -169,6 +212,29 @@ namespace Ubitrack {
             return false;
         }
 
+        bool BasicPoseMeasurement::get(std::vector<float>& v) {
+            typedef TensorIndex< 7 > TI;
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    Math::Pose* m = m_pPrivate->m_measurement.get();
+                    v.reserve(TI::SIZE);
+
+                    const Math::Vector< double, 3 >& t = m->translation();
+                    v.at(0) = (float)(t(0));
+                    v.at(1) = (float)(t(1));
+                    v.at(2) = (float)(t(2));
+
+                    const Math::Quaternion& r = m->rotation();
+                    v.at(3) = (float)(r.x());
+                    v.at(4) = (float)(r.y());
+                    v.at(5) = (float)(r.z());
+                    v.at(6) = (float)(r.w());
+                    return true;
+                }
+            }
+            return false;
+        }
+
         // Rotation
         BasicRotationMeasurement::BasicRotationMeasurement(unsigned long long int const ts, BasicRotationMeasurementPrivate* _pPrivate)
                 : BasicMeasurement(ts)
@@ -195,6 +261,24 @@ namespace Ubitrack {
                     v.at(4) = m->y();
                     v.at(5) = m->z();
                     v.at(6) = m->w();
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool BasicRotationMeasurement::get(std::vector<float>& v) {
+            typedef TensorIndex< 4 > TI;
+            if (m_pPrivate) {
+                if (m_pPrivate->m_measurement) {
+                    Math::Quaternion* m = m_pPrivate->m_measurement.get();
+                    v.reserve(TI::SIZE);
+
+                    v.at(3) = (float)(m->x());
+                    v.at(4) = (float)(m->y());
+                    v.at(5) = (float)(m->z());
+                    v.at(6) = (float)(m->w());
 
                     return true;
                 }

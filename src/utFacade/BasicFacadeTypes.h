@@ -126,6 +126,7 @@ namespace Ubitrack {
 
             /* get int v */
             bool get(double& v);
+            bool get(float& v);
 
 //        private:
             BasicScalarDoubleMeasurementPrivate* m_pPrivate;
@@ -148,6 +149,7 @@ namespace Ubitrack {
 
             /* get vec2 v */
             bool get( std::vector<double>& v );
+            bool get( std::vector<float>& v );
 
 //        private:
             BasicVectorMeasurementPrivate< LEN >* m_pPrivate;
@@ -170,6 +172,7 @@ namespace Ubitrack {
 
             /* get mat33 rows as vector M*N row-major */
             bool get( std::vector<double>& v );
+            bool get( std::vector<float>& v );
 
 //        private:
             BasicMatrixMeasurementPrivate< ROWS, COLS >* m_pPrivate;
@@ -191,6 +194,7 @@ namespace Ubitrack {
 
             /* get pose as vector [x, y, z, rx, ry, rz, rw] */
             bool get( std::vector<double>& v );
+            bool get( std::vector<float>& v );
 
 //        private:
             BasicPoseMeasurementPrivate* m_pPrivate;
@@ -212,6 +216,7 @@ namespace Ubitrack {
 
             /* get pose as vector [rx, ry, rz, rw] */
             bool get( std::vector<double>& v );
+            bool get( std::vector<float>& v );
 
 //        private:
             BasicRotationMeasurementPrivate* m_pPrivate;

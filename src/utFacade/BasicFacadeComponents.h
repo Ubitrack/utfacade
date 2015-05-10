@@ -73,7 +73,7 @@ namespace Ubitrack { namespace Facade {
 
         public:
             typedef BMT MeasurementType;
-            typedef std::function<void(MeasurementType&)> CallbackType;
+            typedef std::function<void(std::shared_ptr<MeasurementType>&)> CallbackType;
 
             BasicPushSink(const char* name, BasicFacadePrivate* _private);
             ~BasicPushSink();
@@ -89,7 +89,7 @@ namespace Ubitrack { namespace Facade {
 
         public:
             typedef BMT MeasurementType;
-            typedef std::function< MeasurementType* (unsigned long long int const)> CallbackType;
+            typedef std::function< std::shared_ptr<MeasurementType> (unsigned long long int const)> CallbackType;
 
             BasicPullSource(const char* name, BasicFacadePrivate* _private);
             ~BasicPullSource();
@@ -108,7 +108,7 @@ namespace Ubitrack { namespace Facade {
 
             BasicPushSource(const char* name, BasicFacadePrivate* _private);
             ~BasicPushSource();
-            void send(const BMT &measurement);
+            void send(const std::shared_ptr<BMT>& measurement);
 
         private:
             BasicPushSourcePrivate<BMT>* m_pPrivate;
