@@ -68,8 +68,7 @@ namespace Ubitrack { namespace Facade {
             std::shared_ptr<BMT> get(unsigned long long int const ts) {
                 std::shared_ptr<BMT> bm;
                 if (m_component) {
-                    auto m = new typename BasicMeasurementTypeTrait< BMT >::private_measurement_type(m_component->get(ts));
-                    bm = std::make_shared<BMT>(ts, m);
+                    bm = std::make_shared<BMT>(ts, new typename BasicMeasurementTypeTrait< BMT >::private_measurement_type(m_component->get(ts)));
                 }
                 return bm;
             }

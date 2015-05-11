@@ -31,7 +31,11 @@
 #include <utFacade/Config.h>
 #ifdef ENABLE_BASICFACADE
 
+#include <utUtil/Logging.h>
+
 #include "BasicFacadeComponentsPrivate.h"
+
+static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Facade.BasicFacadeComponents" ) );
 
 namespace Ubitrack {
     namespace Facade {
@@ -60,9 +64,11 @@ namespace Ubitrack {
                 if (m_pPrivate) {
                     m = m_pPrivate->get(ts);
                 }
-            } catch (Util::Exception& /* e */) {
-                // log ??
-            }
+            } catch (Util::Exception& e) {
+                LOG4CPP_ERROR( logger, "Error while pulling measurement from sink: " << e.what() );
+            } catch(...) {
+				LOG4CPP_ERROR( logger, "Error while pulling measurement from sink: UNKNOWN");
+			}
             return m;
         }
 
@@ -145,9 +151,11 @@ namespace Ubitrack {
                 if (m_pPrivate) {
                     m_pPrivate->send(bm);
                 }
-            } catch (Util::Exception& /*e*/) {
-                // log ??
-            }
+            } catch (Util::Exception& e) {
+				LOG4CPP_ERROR( logger, "Error while pulling measurement from source: " << e.what() );
+			} catch(...) {
+				LOG4CPP_ERROR( logger, "Error while pulling measurement from source: UNKNOWN");
+			}
         }
 
     }
