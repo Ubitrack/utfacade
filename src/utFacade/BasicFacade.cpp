@@ -61,8 +61,8 @@ namespace Ubitrack {
         }
 
 
-        BasicFacadePrivate::BasicFacadePrivate( const char* sComponentPath )
-                : AdvancedFacade( sComponentPath )
+        BasicFacadePrivate::BasicFacadePrivate( const char* sComponentPath, bool drop_events )
+                : AdvancedFacade( drop_events, sComponentPath )
                 , m_pBasicObserver( 0 )
         {}
 
@@ -80,13 +80,13 @@ namespace Ubitrack {
         }
 
 
-        BasicFacade::BasicFacade( const char* sComponentPath ) throw()
+        BasicFacade::BasicFacade( const char* sComponentPath, bool drop_events ) throw()
                 : m_pPrivate( 0 )
                 , m_sError( 0 )
         {
             try
             {
-                m_pPrivate = new BasicFacadePrivate( sComponentPath );
+                m_pPrivate = new BasicFacadePrivate( sComponentPath, drop_events );
                 LOG4CPP_TRACE( logger, "BasicFacadePrivate created successfully" );
             }
             catch ( const Ubitrack::Util::Exception& e )

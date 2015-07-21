@@ -60,9 +60,46 @@ static const char* g_defaultPort = "3000";
 
 namespace Ubitrack { namespace Facade {
 
-AdvancedFacade::AdvancedFacade( const std::string& sComponentPath )
+// XXX duplicated constructor for now until i've found a better solution (Ulrich Eck)
+AdvancedFacade::AdvancedFacade( bool drop_events, const std::string& sComponentPath )
 	: m_bStarted( false )
+	, m_bDropEvents( drop_events )
 	, m_pIoService( new boost::asio::io_service )
+{
+	if ( !sComponentPath.empty() )
+		m_pComponentFactory.reset( new Dataflow::ComponentFactory( sComponentPath ) );
+	else
+	{
+#ifdef _WIN32
+		try
+		{
+			// try "ubitrack"-directory relative to ubitrack.dll
+			HMODULE hModule = GetModuleHandle( "Ubitrack.dll" );
+			if ( !hModule )
+				UBITRACK_THROW( "No ubitrack.dll loaded" );
+			char modulePath[ 256 ];
+			DWORD pathLen = GetModuleFileName( hModule, modulePath, 256 );
+			// just strip the ".dll" from the name
+			std::string compPath( modulePath, pathLen - 4 );
+			m_pComponentFactory.reset( new Dataflow::ComponentFactory( compPath ) );
+		}
+		catch( Util::Exception& e )
+		{
+			LOG4CPP_INFO( logger, e )
+		}
+#endif
+
+		// try compile-time prefix
+		if ( !m_pComponentFactory )
+			m_pComponentFactory.reset( new Dataflow::ComponentFactory( UBITRACK_COMPONENTS_PATH ) );
+	}
+
+}
+
+AdvancedFacade::AdvancedFacade( const std::string& sComponentPath )
+		: m_bStarted( false )
+		, m_bDropEvents( true )
+		, m_pIoService( new boost::asio::io_service )
 {
 	if ( !sComponentPath.empty() )
 		m_pComponentFactory.reset( new Dataflow::ComponentFactory( sComponentPath ) );
@@ -214,9 +251,9 @@ void AdvancedFacade::startDataflow()
 	// start the event queue
 	if ( m_pDataflowNetwork )
 	{
-		Dataflow::EventQueue::singleton().clear(); // FIXME
+		Dataflow::EventQueue::singleton(m_bDropEvents).clear(); // FIXME
 		m_pDataflowNetwork->startNetwork();
-		Dataflow::EventQueue::singleton().start();
+		Dataflow::EventQueue::singleton(m_bDropEvents).start();
 	}
 	m_bStarted = true;
 }
@@ -229,9 +266,9 @@ void AdvancedFacade::stopDataflow()
 	// stop the event queue
 	if ( m_pDataflowNetwork )
 	{
-		Dataflow::EventQueue::singleton().stop();
+		Dataflow::EventQueue::singleton(m_bDropEvents).stop();
 		m_pDataflowNetwork->stopNetwork();
-		Dataflow::EventQueue::singleton().clear(); // FIXME
+		Dataflow::EventQueue::singleton(m_bDropEvents).clear(); // FIXME
 	}
 	m_bStarted = false;
 }

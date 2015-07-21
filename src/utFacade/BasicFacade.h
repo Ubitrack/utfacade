@@ -66,7 +66,7 @@ namespace Ubitrack {
             *
             * @param sComponentPath Path to component directory. Uses default directory if none is specified
             */
-            BasicFacade( const char* sComponentPath ) throw();
+            BasicFacade( const char* sComponentPath, bool dropEvents=true ) throw();
 
             /** destroys the data flow */
             ~BasicFacade();
