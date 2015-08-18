@@ -56,7 +56,7 @@
 static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Facade.AdvancedFacade" ) );
 
 static const char* g_defaultPort = "3000";
-
+unsigned int Ubitrack::Facade::AdvancedFacade::m_instanceCount = 0;
 
 namespace Ubitrack { namespace Facade {
 
@@ -66,6 +66,10 @@ AdvancedFacade::AdvancedFacade( bool drop_events, const std::string& sComponentP
 	, m_bDropEvents( drop_events )
 	, m_pIoService( new boost::asio::io_service )
 {
+	// automatically select eventDomain
+	m_eventDomain = m_instanceCount;
+	m_instanceCount++;
+
 	if ( !sComponentPath.empty() )
 		m_pComponentFactory.reset( new Dataflow::ComponentFactory( sComponentPath ) );
 	else
@@ -101,6 +105,10 @@ AdvancedFacade::AdvancedFacade( const std::string& sComponentPath )
 		, m_bDropEvents( true )
 		, m_pIoService( new boost::asio::io_service )
 {
+	// automatically select eventDomain
+	m_eventDomain = m_instanceCount;
+	m_instanceCount++;
+
 	if ( !sComponentPath.empty() )
 		m_pComponentFactory.reset( new Dataflow::ComponentFactory( sComponentPath ) );
 	else
@@ -251,9 +259,10 @@ void AdvancedFacade::startDataflow()
 	// start the event queue
 	if ( m_pDataflowNetwork )
 	{
-		Dataflow::EventQueue::singleton(m_bDropEvents).clear(); // FIXME
+		Dataflow::EventQueue::singleton(m_eventDomain, m_bDropEvents).clear(); // FIXME
+		m_pDataflowNetwork->assignEventDomain(m_eventDomain);
 		m_pDataflowNetwork->startNetwork();
-		Dataflow::EventQueue::singleton(m_bDropEvents).start();
+		Dataflow::EventQueue::singleton(m_eventDomain, m_bDropEvents).start();
 	}
 	m_bStarted = true;
 }
@@ -266,9 +275,9 @@ void AdvancedFacade::stopDataflow()
 	// stop the event queue
 	if ( m_pDataflowNetwork )
 	{
-		Dataflow::EventQueue::singleton(m_bDropEvents).stop();
+		Dataflow::EventQueue::singleton(m_eventDomain, m_bDropEvents).stop();
 		m_pDataflowNetwork->stopNetwork();
-		Dataflow::EventQueue::singleton(m_bDropEvents).clear(); // FIXME
+		Dataflow::EventQueue::singleton(m_eventDomain, m_bDropEvents).clear(); // FIXME
 	}
 	m_bStarted = false;
 }

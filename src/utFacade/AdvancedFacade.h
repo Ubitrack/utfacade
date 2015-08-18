@@ -210,6 +210,18 @@ protected:
 	
 	/** list of data flow observers */
 	ObserverList m_observers;
+
+private:
+	/*
+	 * EventQueue Domain
+	 */
+	unsigned int m_eventDomain;
+
+	/*
+	 * global counter for automatic assignment of eventDomains
+	 */
+	static unsigned int m_instanceCount;
+
 };
 
 
