@@ -95,7 +95,7 @@ namespace Ubitrack {
         /** wrapper for scalar measurement **/
         class UTFACADE_EXPORT BasicScalarIntMeasurement : public BasicMeasurement {
         public:
-            BasicScalarIntMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicScalarIntMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             BasicScalarIntMeasurement(unsigned long long int const ts, const int value);
             BasicScalarIntMeasurement(unsigned long long int const ts, BasicScalarIntMeasurementPrivate* _pPrivate);
             ~BasicScalarIntMeasurement();
@@ -114,7 +114,7 @@ namespace Ubitrack {
 
         class UTFACADE_EXPORT BasicScalarDoubleMeasurement : public BasicMeasurement {
         public:
-            BasicScalarDoubleMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicScalarDoubleMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             BasicScalarDoubleMeasurement(unsigned long long int const ts, const double value);
             BasicScalarDoubleMeasurement(unsigned long long int const ts, BasicScalarDoubleMeasurementPrivate* _pPrivate);
             ~BasicScalarDoubleMeasurement();
@@ -137,7 +137,7 @@ namespace Ubitrack {
         template< int LEN = 2 >
         class UTFACADE_EXPORT BasicVectorMeasurement : public BasicMeasurement {
         public:
-            BasicVectorMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicVectorMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             BasicVectorMeasurement(unsigned long long int const ts, const std::vector<double>& v);
             BasicVectorMeasurement(unsigned long long int const ts, BasicVectorMeasurementPrivate< LEN >* _pPrivate);
             ~BasicVectorMeasurement();
@@ -159,7 +159,7 @@ namespace Ubitrack {
         template< int ROWS = 3, int COLS = 3 >
         class UTFACADE_EXPORT BasicMatrixMeasurement : public BasicMeasurement {
         public:
-            BasicMatrixMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicMatrixMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             /* set mat rows from vector M*N row-major */
             BasicMatrixMeasurement(unsigned long long int const ts, const std::vector<double>& v);
             BasicMatrixMeasurement(unsigned long long int const ts, BasicMatrixMeasurementPrivate< ROWS, COLS >* _pPrivate);
@@ -181,7 +181,7 @@ namespace Ubitrack {
         /** wrapper for pose measurement **/
         class UTFACADE_EXPORT BasicPoseMeasurement : public BasicMeasurement {
         public:
-            BasicPoseMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicPoseMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             /* set pose from vector [x, y, z, rx, ry, rz, rw] */
             BasicPoseMeasurement(unsigned long long int const ts, const std::vector<double>& v);
             BasicPoseMeasurement(unsigned long long int const ts, BasicPoseMeasurementPrivate* _pPrivate);
@@ -203,7 +203,7 @@ namespace Ubitrack {
         /** wrapper for rotation measurement **/
         class UTFACADE_EXPORT BasicRotationMeasurement : public BasicMeasurement {
         public:
-            BasicRotationMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicRotationMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             /* set pose from vector [x, y, z, rx, ry, rz, rw] */
             BasicRotationMeasurement(unsigned long long int const ts, const std::vector<double>& v);
             BasicRotationMeasurement(unsigned long long int const ts, BasicRotationMeasurementPrivate* _pPrivate);
@@ -227,7 +227,7 @@ namespace Ubitrack {
         template< int LEN = 2 >
         class UTFACADE_EXPORT BasicErrorVectorMeasurement : public BasicMeasurement {
         public:
-            BasicErrorVectorMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicErrorVectorMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             BasicErrorVectorMeasurement(unsigned long long int const ts, const std::vector<double>& v, const std::vector<double>& c);
             BasicErrorVectorMeasurement(unsigned long long int const ts, BasicErrorVectorMeasurementPrivate< LEN >* _pPrivate);
             ~BasicErrorVectorMeasurement();
@@ -251,7 +251,7 @@ namespace Ubitrack {
         /** wrapper for cameraintrinsics measurement **/
         class UTFACADE_EXPORT BasicCameraIntrinsicsMeasurement : public BasicMeasurement {
         public:
-            BasicCameraIntrinsicsMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicCameraIntrinsicsMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
 			// set from intrinsics matrix33 (as vector) / distortion / resolution
             BasicCameraIntrinsicsMeasurement(unsigned long long int const ts, const std::vector<double>& intrinsics, const std::vector<double>& radial, const std::vector<double>& tangential);
             BasicCameraIntrinsicsMeasurement(unsigned long long int const ts, BasicCameraIntrinsicsMeasurementPrivate* _pPrivate);
@@ -286,7 +286,7 @@ namespace Ubitrack {
             };
 
 
-            BasicImageMeasurement() : BasicMeasurement(), m_pPrivate(NULL) {};
+            BasicImageMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
             /* set (copy) image from buffer */
             BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels, unsigned char* data, PixelFormat pixel_format = RGB, bool copy_data = true);
             BasicImageMeasurement(unsigned long long int const ts, BasicImageMeasurementPrivate* _pPrivate);
