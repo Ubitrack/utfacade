@@ -426,7 +426,7 @@ namespace Ubitrack {
                     // what about images other than CV8U
                     // copy data
                     unsigned char* srcData = (unsigned char*) data;
-                    unsigned char* dstData = (unsigned char*) pImage->imageData;
+                    unsigned char* dstData = (unsigned char*) pImage->iplImage()->imageData;
                     memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 
                 } else {
@@ -439,13 +439,13 @@ namespace Ubitrack {
                         break;
                     case 3:
                         if ( pixel_format == BasicImageMeasurement::BGR ) {
-                            pImage->channelSeq[0] = 'B';
-                            pImage->channelSeq[1] = 'G';
-                            pImage->channelSeq[2] = 'R';
+                            pImage->iplImage()->channelSeq[0] = 'B';
+                            pImage->iplImage()->channelSeq[1] = 'G';
+                            pImage->iplImage()->channelSeq[2] = 'R';
                         } else if ( pixel_format == BasicImageMeasurement::RGB ) {
-                            pImage->channelSeq[0] = 'R';
-                            pImage->channelSeq[1] = 'G';
-                            pImage->channelSeq[2] = 'B';
+                            pImage->iplImage()->channelSeq[0] = 'R';
+                            pImage->iplImage()->channelSeq[1] = 'G';
+                            pImage->iplImage()->channelSeq[2] = 'B';
                         } else {
                             // three pixels but not RGB/BGR .. what's it ??
                         }

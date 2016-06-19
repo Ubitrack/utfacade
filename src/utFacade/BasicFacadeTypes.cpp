@@ -428,7 +428,7 @@ namespace Ubitrack {
         int BasicImageMeasurement::getDimX() const {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    return m_pPrivate->m_measurement->width;
+                    return m_pPrivate->m_measurement->width();
                 }
             }
             return 0;
@@ -437,7 +437,7 @@ namespace Ubitrack {
         int BasicImageMeasurement::getDimY() const {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    return m_pPrivate->m_measurement->height;
+                    return m_pPrivate->m_measurement->height();
                 }
             }
             return 0;
@@ -446,7 +446,7 @@ namespace Ubitrack {
         int BasicImageMeasurement::getDimZ() const {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    return m_pPrivate->m_measurement->nChannels;
+                    return m_pPrivate->m_measurement->channels();
                 }
             }
             return 0;
@@ -456,7 +456,7 @@ namespace Ubitrack {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
                     unsigned int pixel_size = sizeof(unsigned char);
-                    switch (m_pPrivate->m_measurement->depth) {
+                    switch (m_pPrivate->m_measurement->depth()) {
                         case CV_16U:
                             pixel_size = sizeof(unsigned short);
                             break;
@@ -480,14 +480,14 @@ namespace Ubitrack {
                 if (m_pPrivate->m_measurement) {
                     Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
 
-                    switch(m->nChannels) {
+                    switch(m->channels()) {
                     case 1:
                         pf = LUMINANCE;
                         break;
                     case 3:
-                        if ( m->channelSeq[ 0 ] == 'B' && m->channelSeq[ 1 ] == 'G' && m->channelSeq[ 2 ] == 'R' ) {
+                        if ( m->iplImage()->channelSeq[ 0 ] == 'B' && m->iplImage()->channelSeq[ 1 ] == 'G' && m->iplImage()->channelSeq[ 2 ] == 'R' ) {
                             pf = BGR;
-                        } else if ( m->channelSeq[ 0 ] == 'R' && m->channelSeq[ 1 ] == 'G' && m->channelSeq[ 2 ] == 'B' ) {
+                        } else if ( m->iplImage()->channelSeq[ 0 ] == 'R' && m->iplImage()->channelSeq[ 1 ] == 'G' && m->iplImage()->channelSeq[ 2 ] == 'B' ) {
                             pf = RGB;
                         } else {
                             // three pixels but not RGB/BGR .. what's it ??
@@ -509,7 +509,7 @@ namespace Ubitrack {
         unsigned char* BasicImageMeasurement::getDataPtr() const {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    return (unsigned char *) m_pPrivate->m_measurement->imageData;
+                    return (unsigned char *) m_pPrivate->m_measurement->iplImage()->imageData;
                 }
             }
             return NULL;
@@ -525,7 +525,7 @@ namespace Ubitrack {
                         frame_bytes = size;
                     }
 
-                    unsigned char* srcData = (unsigned char*) m->imageData;
+                    unsigned char* srcData = (unsigned char*) m->iplImage()->imageData;
                     unsigned char* dstData = (unsigned char*) data;
                     memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 
