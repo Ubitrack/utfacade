@@ -78,9 +78,10 @@ public:
 	 *
 	 * @param sComponentPath Path to component directory. Uses default directory if none is specified
 	 */
-	AdvancedFacade( const std::string& sComponentPath = std::string() );
+	AdvancedFacade( bool dropEvents, const std::string& sComponentPath = std::string() );
+	AdvancedFacade( const std::string& sComponentPath = std::string());
 
-	/**
+ 	/**
 	 * Destroys the dataflow network and removes all ubitrack resources
 	 */
 	virtual ~AdvancedFacade();
@@ -188,6 +189,9 @@ protected:
 	
 	/** has the data flow network been started? */
 	bool m_bStarted;
+
+	/** should the EventQueue drop events ? **/
+	bool m_bDropEvents;
 	
 	/** Boost ASIO IO service for client-server communication */
 	boost::scoped_ptr< boost::asio::io_service > m_pIoService;
@@ -206,6 +210,18 @@ protected:
 	
 	/** list of data flow observers */
 	ObserverList m_observers;
+
+private:
+	/*
+	 * EventQueue Domain
+	 */
+	unsigned int m_eventDomain;
+
+	/*
+	 * global counter for automatic assignment of eventDomains
+	 */
+	static unsigned int m_instanceCount;
+
 };
 
 
