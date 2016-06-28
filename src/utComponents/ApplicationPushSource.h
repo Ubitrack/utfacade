@@ -45,6 +45,10 @@
 #include <utFacade/SimpleDatatypes.h>
 #include <utUtil/SimpleStringIArchive.h>
 
+#ifdef ENABLE_EVENT_TRACING
+#include <utUtil/TracingProvider.h>
+#endif
+
 #include <log4cpp/Category.hh>
 
 // forward decls
@@ -102,7 +106,25 @@ public:
 	 * @param evt the event to send
 	 */
 	void send( const EventType& evt )
-	{ m_outPort.send( evt ); }
+	{
+#ifdef ENABLE_EVENT_TRACING
+		#ifdef HAVE_DTRACE
+			if (UBITRACK_MEASUREMENT_CREATE_ENABLED() && pReceiverInfo ) {
+				UBITRACK_MEASUREMENT_CREATE(getEventDomain(),
+											evt.time(),
+											getName().c_str(),
+											"Output");
+			}
+#endif
+
+#ifdef HAVE_ETW
+			ETWUbitrackMeasurementCreate(getEventDomain(), evt.time(),
+										 getName().c_str(),
+										 "Output");
+#endif
+#endif
+        m_outPort.send( evt );
+	}
 	
 	/**
 	 * Get the callback.
@@ -143,6 +165,7 @@ protected:
 	PushSupplier< EventType > m_outPort;
 };
 
+// @ todo complete ApplicationPushSource definitions
 typedef ApplicationPushSource< Measurement::Rotation > ApplicationPushSourceRotation;
 //typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
 //typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
@@ -156,6 +179,8 @@ typedef ApplicationPushSource< Measurement::ErrorPose > ApplicationPushSourceErr
 typedef ApplicationPushSource< Measurement::Distance > ApplicationPushSourceDistance;
 
 
+
+// @todo remove SimpleFacade in favour to BasicFacade ?
 
 /**
  * Specialization of \c ApplicationPushSource for \c Measurement::Pose, which also supports the

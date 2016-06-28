@@ -48,6 +48,12 @@
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
 #include <utFacade/SimpleDatatypes.h>
+
+
+#ifdef ENABLE_EVENT_TRACING
+#include <utUtil/TracingProvider.h>
+#endif
+
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
 #include <log4cpp/Category.hh>
 #endif
@@ -159,8 +165,28 @@ protected:
 		LOG4CPP_DEBUG( m_logger, getName() << " received event" );
 #endif
 
-		if( m_callback )
+		if( m_callback ) {
+
+#ifdef ENABLE_EVENT_TRACING
+			#ifdef HAVE_DTRACE
+			if (UBITRACK_MEASUREMENT_RECEIVE_ENABLED() && pReceiverInfo ) {
+				UBITRACK_MEASUREMENT_RECEIVE(getEventDomain(),
+											 m.time(),
+											 getName().c_str(),
+											 "Input");
+			}
+#endif
+
+#ifdef HAVE_ETW
+			ETWUbitrackMeasurementReceive(getEventDomain(), evt.time(),
+										  getName().c_str(),
+										  "Input");
+#endif
+#endif
+
 			m_callback( m );
+		}
+
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
 		else
 			LOG4CPP_INFO( m_logger, "ApplicationPushSink " << getName() << " has no consumer connected" );
@@ -188,6 +214,7 @@ protected:
 #endif
 };
 
+// @ todo complete ApplicationPushSink definitions
 
 typedef ApplicationPushSink< Measurement::Button > ApplicationPushSinkButton;
 typedef ApplicationPushSink< Measurement::Distance > ApplicationPushSinkDistance;

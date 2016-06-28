@@ -45,6 +45,11 @@
 #include <utDataflow/ComponentFactory.h>
 #include <utMeasurement/Measurement.h>
 
+#ifdef ENABLE_EVENT_TRACING
+#include <utUtil/TracingProvider.h>
+#endif
+
+
 namespace Ubitrack { namespace Components {
 
 using namespace Dataflow;
@@ -106,6 +111,25 @@ public:
 	 */
     EventType get( Ubitrack::Measurement::Timestamp t )
     {
+
+
+#ifdef ENABLE_EVENT_TRACING
+        #ifdef HAVE_DTRACE
+			if (UBITRACK_MEASUREMENT_RECEIVE_ENABLED() && pReceiverInfo ) {
+				UBITRACK_MEASUREMENT_RECEIVE(getEventDomain(),
+											 t,
+											 getName().c_str(),
+											 "Input");
+			}
+#endif
+
+#ifdef HAVE_ETW
+			ETWUbitrackMeasurementReceive(getEventDomain(), t,
+										  getName().c_str(),
+										  "Input");
+#endif
+#endif
+
       return m_InPort.get ( t );
     }
 
@@ -116,6 +140,7 @@ protected:
 	PullConsumer< EventType > m_InPort;
 };
 
+// @ todo complete ApplicationPullSink definitions
 typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkButton;
 typedef ApplicationPullSink< Measurement::Pose > ApplicationPullSinkPose;
 typedef ApplicationPullSink< Measurement::ErrorPose > ApplicationPullSinkErrorPose;

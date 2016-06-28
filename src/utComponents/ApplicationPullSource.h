@@ -47,6 +47,12 @@
 #include <utDataflow/Component.h>
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
+
+
+#ifdef ENABLE_EVENT_TRACING
+#include <utUtil/TracingProvider.h>
+#endif
+
 // no counterpart in SimpleFacade yet
 //#include <utFacade/SimpleDatatypes.h>
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
@@ -161,8 +167,28 @@ protected:
 #ifndef APPLICATIONPULLSOURCE_NOLOGGING
 		LOG4CPP_DEBUG( m_logger, getName() << " requested event" );
 #endif
-		if( m_callback )
+		if( m_callback ) {
+
+#ifdef ENABLE_EVENT_TRACING
+			#ifdef HAVE_DTRACE
+			if (UBITRACK_MEASUREMENT_CREATE_ENABLED() && pReceiverInfo ) {
+				UBITRACK_MEASUREMENT_CREATE(getEventDomain(),
+											t,
+											getName().c_str(),
+											"Output");
+			}
+#endif
+
+#ifdef HAVE_ETW
+			ETWUbitrackMeasurementCreate(getEventDomain(), t,
+										 getName().c_str(),
+										 "Output");
+#endif
+#endif
+
 			return m_callback( t );
+		}
+
 #ifndef APPLICATIONPULLSOURCE_NOLOGGING
 		else
 			LOG4CPP_INFO( m_logger, "ApplicationPullSource " << getName() << " has no consumer connected" );
@@ -193,6 +219,7 @@ protected:
 };
 
 
+// @ todo complete ApplicationPullSource definitions
 typedef ApplicationPullSource< Measurement::Button > ApplicationPullSourceButton;
 typedef ApplicationPullSource< Measurement::Pose > ApplicationPullSourcePose;
 typedef ApplicationPullSource< Measurement::ErrorPose > ApplicationPullSourceErrorPose;
