@@ -171,7 +171,7 @@ protected:
 
 #ifdef ENABLE_EVENT_TRACING
 			#ifdef HAVE_DTRACE
-			if (UBITRACK_MEASUREMENT_CREATE_ENABLED() && pReceiverInfo ) {
+			if (UBITRACK_MEASUREMENT_CREATE_ENABLED()) {
 				UBITRACK_MEASUREMENT_CREATE(getEventDomain(),
 											t,
 											getName().c_str(),

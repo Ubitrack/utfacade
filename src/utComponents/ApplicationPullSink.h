@@ -115,7 +115,7 @@ public:
 
 #ifdef ENABLE_EVENT_TRACING
         #ifdef HAVE_DTRACE
-			if (UBITRACK_MEASUREMENT_RECEIVE_ENABLED() && pReceiverInfo ) {
+			if (UBITRACK_MEASUREMENT_RECEIVE_ENABLED()) {
 				UBITRACK_MEASUREMENT_RECEIVE(getEventDomain(),
 											 t,
 											 getName().c_str(),
