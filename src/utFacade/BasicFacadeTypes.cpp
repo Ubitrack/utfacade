@@ -417,7 +417,7 @@ namespace Ubitrack {
 
         BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels, unsigned char* data, PixelFormat pixel_format, bool copy_data)
                 : BasicMeasurement(ts)
-                , m_pPrivate(new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data, pixel_format, copy_data)) {}
+                , m_pPrivate(new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data, (Vision::Image::PixelFormat)pixel_format, copy_data)) {}
 
         BasicImageMeasurement::~BasicImageMeasurement() {
             if (m_pPrivate) {
@@ -475,28 +475,11 @@ namespace Ubitrack {
         }
 
         BasicImageMeasurement::PixelFormat BasicImageMeasurement::getPixelFormat() const {
-            PixelFormat pf = UNKNOWN_PIXELFORMAT;
+            PixelFormat pf = BasicImageMeasurement::UNKNOWN_PIXELFORMAT;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
                     Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-
-                    switch(m->channels()) {
-                    case 1:
-                        pf = LUMINANCE;
-                        break;
-                    case 3:
-                        if ( m->iplImage()->channelSeq[ 0 ] == 'B' && m->iplImage()->channelSeq[ 1 ] == 'G' && m->iplImage()->channelSeq[ 2 ] == 'R' ) {
-                            pf = BGR;
-                        } else if ( m->iplImage()->channelSeq[ 0 ] == 'R' && m->iplImage()->channelSeq[ 1 ] == 'G' && m->iplImage()->channelSeq[ 2 ] == 'B' ) {
-                            pf = RGB;
-                        } else {
-                            // three pixels but not RGB/BGR .. what's it ??
-                        }
-                        break;
-                    default:
-                        // what to do here .. do we have some logging ??
-                        break;
-                    }
+                    pf = (PixelFormat)m->pixelFormat();
                 }
             }
             return pf;
@@ -509,7 +492,7 @@ namespace Ubitrack {
         unsigned char* BasicImageMeasurement::getDataPtr() const {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    return (unsigned char *) m_pPrivate->m_measurement->iplImage()->imageData;
+                    return (unsigned char *) m_pPrivate->m_measurement->Mat().data;
                 }
             }
             return NULL;
@@ -525,7 +508,7 @@ namespace Ubitrack {
                         frame_bytes = size;
                     }
 
-                    unsigned char* srcData = (unsigned char*) m->iplImage()->imageData;
+                    unsigned char* srcData = (unsigned char*) m->Mat().data;
                     unsigned char* dstData = (unsigned char*) data;
                     memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 

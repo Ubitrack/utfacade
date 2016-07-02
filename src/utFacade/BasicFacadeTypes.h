@@ -277,12 +277,16 @@ namespace Ubitrack {
         public:
 
             enum PixelFormat {
-                UNKNOWN_PIXELFORMAT = 0,
-                RGB,
-                BGR,
-                LUMINANCE,
-                YUV422,
-                YUV411
+              UNKNOWN_PIXELFORMAT = 0,
+              LUMINANCE,
+              RGB,
+              BGR,
+              RGBA,
+              BGRA,
+              YUV422,
+              YUV411,
+              RAW,
+              DEPTH
             };
 
 
