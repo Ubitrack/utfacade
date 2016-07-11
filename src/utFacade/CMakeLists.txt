@@ -1,7 +1,9 @@
-UT_OPTION(ENABLE_BASICFACADE "Enable Basic Facade" OFF)
+UT_OPTION(ENABLE_BASICFACADE "Enable Basic Facade" ON)
 IF(ENABLE_BASICFACADE)
   add_definitions("-DENABLE_BASICFACADE")
 ENDIF(ENABLE_BASICFACADE)
+
+
 set(the_description "The UbiTrack Facade")
 ut_add_module(utfacade utcore utdataflow utvision)
 ut_module_include_directories(utfacade ${UBITRACK_CORE_DEPS_INCLUDE_DIR} ${OPENCV_INCLUDE_DIR})
