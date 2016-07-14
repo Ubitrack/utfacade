@@ -48,7 +48,6 @@
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
 #include <utFacade/SimpleDatatypes.h>
-#include <utUtil/TracingProvider.h>
 
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
 #include <log4cpp/Category.hh>
@@ -162,10 +161,6 @@ protected:
 #endif
 
 		if( m_callback ) {
-
-#ifdef ENABLE_EVENT_TRACING
-			TRACEPOINT_MEASUREMENT_RECEIVE(getEventDomain(), m.time(), getName().c_str(), "PushSink")
-#endif
 			m_callback( m );
 		}
 

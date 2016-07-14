@@ -44,7 +44,6 @@
 #include <utMeasurement/Measurement.h>
 #include <utFacade/SimpleDatatypes.h>
 #include <utUtil/SimpleStringIArchive.h>
-#include <utUtil/TracingProvider.h>
 
 #include <log4cpp/Category.hh>
 
@@ -104,12 +103,9 @@ public:
 	 */
 	void send( const EventType& evt )
 	{
-#ifdef ENABLE_EVENT_TRACING
-		TRACEPOINT_MEASUREMENT_CREATE(getEventDomain(), evt.time(), getName().c_str(), "PushSource")
-#endif
         m_outPort.send( evt );
 	}
-	
+
 	/**
 	 * Get the callback.
 	 * Get the callback for the user application to supply events

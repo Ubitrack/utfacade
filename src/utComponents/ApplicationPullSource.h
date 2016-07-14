@@ -47,7 +47,6 @@
 #include <utDataflow/Component.h>
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
-#include <utUtil/TracingProvider.h>
 
 // no counterpart in SimpleFacade yet
 //#include <utFacade/SimpleDatatypes.h>
@@ -164,10 +163,6 @@ protected:
 		LOG4CPP_DEBUG( m_logger, getName() << " requested event" );
 #endif
 		if( m_callback ) {
-#ifdef ENABLE_EVENT_TRACING
-			TRACEPOINT_MEASUREMENT_CREATE(getEventDomain(), t, getName().c_str(), "PullSource")
-#endif
-
 			return m_callback( t );
 		}
 

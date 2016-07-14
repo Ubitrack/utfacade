@@ -44,7 +44,6 @@
 #include <utDataflow/Component.h>
 #include <utDataflow/ComponentFactory.h>
 #include <utMeasurement/Measurement.h>
-#include <utUtil/TracingProvider.h>
 
 
 namespace Ubitrack { namespace Components {
@@ -108,11 +107,6 @@ public:
 	 */
     EventType get( Ubitrack::Measurement::Timestamp t )
     {
-
-#ifdef ENABLE_EVENT_TRACING
-		TRACEPOINT_MEASUREMENT_RECEIVE(getEventDomain(), t, getName().c_str(), "PullSink")
-#endif
-
       return m_InPort.get ( t );
     }
 
