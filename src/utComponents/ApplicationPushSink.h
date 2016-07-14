@@ -48,11 +48,7 @@
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
 #include <utFacade/SimpleDatatypes.h>
-
-
-#ifdef ENABLE_EVENT_TRACING
 #include <utUtil/TracingProvider.h>
-#endif
 
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
 #include <log4cpp/Category.hh>
@@ -168,22 +164,8 @@ protected:
 		if( m_callback ) {
 
 #ifdef ENABLE_EVENT_TRACING
-			#ifdef HAVE_DTRACE
-			if (UBITRACK_MEASUREMENT_RECEIVE_ENABLED()) {
-				UBITRACK_MEASUREMENT_RECEIVE(getEventDomain(),
-											 m.time(),
-											 getName().c_str(),
-											 "Input");
-			}
+			TRACEPOINT_MEASUREMENT_RECEIVE(getEventDomain(), m.time(), getName().c_str(), "PushSink")
 #endif
-
-#ifdef HAVE_ETW
-			ETWUbitrackMeasurementReceive(getEventDomain(), evt.time(),
-										  getName().c_str(),
-										  "Input");
-#endif
-#endif
-
 			m_callback( m );
 		}
 

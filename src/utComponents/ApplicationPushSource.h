@@ -44,10 +44,7 @@
 #include <utMeasurement/Measurement.h>
 #include <utFacade/SimpleDatatypes.h>
 #include <utUtil/SimpleStringIArchive.h>
-
-#ifdef ENABLE_EVENT_TRACING
 #include <utUtil/TracingProvider.h>
-#endif
 
 #include <log4cpp/Category.hh>
 
@@ -108,20 +105,7 @@ public:
 	void send( const EventType& evt )
 	{
 #ifdef ENABLE_EVENT_TRACING
-		#ifdef HAVE_DTRACE
-			if (UBITRACK_MEASUREMENT_CREATE_ENABLED()) {
-				UBITRACK_MEASUREMENT_CREATE(getEventDomain(),
-											evt.time(),
-											getName().c_str(),
-											"Output");
-			}
-#endif
-
-#ifdef HAVE_ETW
-			ETWUbitrackMeasurementCreate(getEventDomain(), evt.time(),
-										 getName().c_str(),
-										 "Output");
-#endif
+		TRACEPOINT_MEASUREMENT_CREATE(getEventDomain(), evt.time(), getName().c_str(), "PushSource")
 #endif
         m_outPort.send( evt );
 	}

@@ -37,7 +37,10 @@
 namespace Ubitrack { namespace Components {
 
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
-	cf->registerComponent< ApplicationPushSink< int > > ( "ApplicationPushSinkInt" );
+
+	// this declaration violates the assumption that only measurements are pushed in the dataflow ...
+//	cf->registerComponent< ApplicationPushSink< int > > ( "ApplicationPushSinkInt" );
+
 	cf->registerComponent< ApplicationPushSinkButton > ( "ApplicationPushSinkButton" );
 	cf->registerComponent< ApplicationPushSinkPose > ( "ApplicationPushSinkPose" );
 	cf->registerComponent< ApplicationPushSinkErrorPose > ( "ApplicationPushSinkErrorPose" );
