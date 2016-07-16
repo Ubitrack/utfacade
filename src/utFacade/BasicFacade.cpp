@@ -40,6 +40,7 @@
 
 #ifdef HAVE_OPENCV
 #include <utVision/Image.h>
+#include <utVision/OpenCLManager.h>
 #endif
 
 #include "BasicFacadeTypesPrivate.h"
@@ -58,6 +59,19 @@ namespace Ubitrack {
         void initUbitrackLogging(const char* filename)
         {
             Util::initLogging(filename);
+        }
+
+        void initGPU() {
+#ifdef HAVE_OPENCV
+            // access OCL Manager and initialize if needed
+            Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
+            if (!oclManager.isInitialized()) {
+                if (oclManager.isEnabled()) {
+                    oclManager.initializeOpenGL();
+                }
+            }
+#endif
+            return;
         }
 
 

@@ -1,3 +1,33 @@
+/*
+ * Ubitrack - Library for Ubiquitous Tracking
+ * Copyright 2006, Technische Universitaet Muenchen, and individual
+ * contributors as indicated by the @authors tag. See the
+ * copyright.txt in the distribution for a full listing of individual
+ * contributors.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ */
+
+/**
+* @ingroup api
+* @file
+* Simple datatypes for the \c SimpleFacade
+*
+* @author Ulrich Eck <ueck@net-labs.de>
+*/
 #include <utFacade/Config.h>
 #ifdef ENABLE_BASICFACADE
 
@@ -455,34 +485,21 @@ namespace Ubitrack {
         unsigned int BasicImageMeasurement::getPixelSize() const {
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
-                    unsigned int pixel_size = sizeof(unsigned char);
-                    switch (m_pPrivate->m_measurement->depth()) {
-                        case CV_16U:
-                            pixel_size = sizeof(unsigned short);
-                            break;
-                        case CV_32F:
-                            pixel_size = sizeof(float);
-                            break;
-                        // others ??
-                        default:
-                            // assume CV8U is the default
-                            break;
-                    }
-                    return pixel_size;
+                    Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
+                    return m->depth();
                 }
             }
             return 0;
         }
 
         BasicImageMeasurement::PixelFormat BasicImageMeasurement::getPixelFormat() const {
-            PixelFormat pf = BasicImageMeasurement::UNKNOWN_PIXELFORMAT;
             if (m_pPrivate) {
                 if (m_pPrivate->m_measurement) {
                     Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-                    pf = (PixelFormat)m->pixelFormat();
+                    return (PixelFormat)m->pixelFormat();
                 }
             }
-            return pf;
+            return BasicImageMeasurement::UNKNOWN_PIXELFORMAT;
         }
 
         unsigned int BasicImageMeasurement::getByteCount() const {

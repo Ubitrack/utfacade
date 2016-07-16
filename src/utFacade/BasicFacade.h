@@ -58,6 +58,8 @@ namespace Ubitrack {
 
         void UTFACADE_EXPORT initUbitrackLogging(const char* filename);
 
+        void UTFACADE_EXPORT initGPU();
+
         class UTFACADE_EXPORT BasicFacade
         {
         public:

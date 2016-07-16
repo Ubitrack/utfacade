@@ -32,7 +32,7 @@
 #define __UBITRACK_FACADE_BASICDATATYPES_H_INCLUDED__
 #include <utFacade/utFacade.h>
 #include <utFacade/Config.h>
-
+#include <memory>
 #include <vector>
 
 namespace Ubitrack {
@@ -276,6 +276,7 @@ namespace Ubitrack {
         class UTFACADE_EXPORT BasicImageMeasurement : public BasicMeasurement {
         public:
 
+            // must be in sync with utVision::Image::PixelFormat
             enum PixelFormat {
               UNKNOWN_PIXELFORMAT = 0,
               LUMINANCE,
@@ -313,8 +314,6 @@ namespace Ubitrack {
             BasicImageMeasurementPrivate* m_pPrivate;
         private:
         };
-
-
 
         /**
         * A Basic data flow observer
