@@ -241,7 +241,12 @@ void BasicTextureUpdate::initializeTexture(std::shared_ptr<BasicImageMeasurement
 #ifdef HAVE_OPENCL
                 //Get an image Object from the OpenGL texture
                 cl_int err;
+// windows specific or opencl version specific ??
+#ifdef WIN32
+                m_pPrivate->m_clImage = clCreateFromGLTexture2D( oclManager.getContext(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, m_pPrivate->m_texture, &err);
+#else
                 m_pPrivate->m_clImage = clCreateFromGLTexture( oclManager.getContext(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, m_pPrivate->m_texture, &err);
+#endif
                 if (err != CL_SUCCESS)
                 {
                     LOG4CPP_ERROR( logger, "error at  clCreateFromGLTexture2D:" << err );
