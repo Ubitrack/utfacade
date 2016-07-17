@@ -66,8 +66,7 @@ namespace Ubitrack {
 namespace Facade {
 
 /** private things */
-class BasicTextureUpdatePrivate {
-public:
+struct BasicTextureUpdatePrivate {
     BasicTextureUpdatePrivate()
     : m_bTextureInitialized(false)
     , m_texture(0)
@@ -86,7 +85,6 @@ public:
 
     unsigned m_pow2Width;
     unsigned m_pow2Height;
-
 };
 
 bool getImageFormat(std::shared_ptr<BasicImageMeasurement>& image, bool use_gpu, int& umatConvertCode, GLenum& imgFormat, int& numOfChannels) {
@@ -107,21 +105,26 @@ bool getImageFormat(std::shared_ptr<BasicImageMeasurement>& image, bool use_gpu,
 			numOfChannels = use_gpu ? 4 : 3;
 			umatConvertCode = cv::COLOR_BGR2RGBA;
 			break;
+		case BasicImageMeasurement::BGRA:
+			numOfChannels = 4;
+			imgFormat = use_gpu ? GL_RGBA : GL_BGRA;
+			umatConvertCode = cv::COLOR_BGRA2RGBA;
+			break;
 #else
     case BasicImageMeasurement::BGR:
         numOfChannels = use_gpu ? 4 : 3;
         imgFormat = use_gpu ? GL_RGBA : GL_BGR_EXT;
         umatConvertCode = cv::COLOR_BGR2RGBA;
         break;
+	case BasicImageMeasurement::BGRA:
+		numOfChannels = 4;
+		imgFormat = use_gpu ? GL_RGBA : GL_BGRA_EXT;
+		umatConvertCode = cv::COLOR_BGRA2RGBA;
+		break;
 #endif
     case BasicImageMeasurement::RGBA:
         numOfChannels = 4;
         imgFormat = GL_RGBA;
-        break;
-    case BasicImageMeasurement::BGRA:
-        numOfChannels = 4;
-        imgFormat = use_gpu ? GL_RGBA : GL_BGRA;
-        umatConvertCode = cv::COLOR_BGRA2RGBA;
         break;
     default:
         // Log Error ?
