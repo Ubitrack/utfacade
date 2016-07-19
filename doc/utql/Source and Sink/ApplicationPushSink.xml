@@ -5,7 +5,111 @@
                       xmlns:xi='http://www.w3.org/2001/XInclude'
                       xmlns:h="http://www.w3.org/1999/xhtml"
                       xsi:schemaLocation='http://ar.in.tum.de/ubitrack/utql ../../../schema/utql_templates.xsd'>
-    
+
+
+    <Pattern name="ApplicationPushSinkButton" displayName="Application Push Sink (Button)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Button">
+                <Description><h:p>The key value.</h:p></Description>
+                <Predicate>type=='Button'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkButton"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkSkalar" displayName="Application Push Sink (Skalar)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Skalar">
+                <Description><h:p>The input distance scalar double value.</h:p></Description>
+                <Predicate>type=='Scalar'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkSkalar"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkDistance" displayName="Application Push Sink (Distance)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Distance">
+                <Description><h:p>The input distance scalar double value.</h:p></Description>
+                <Predicate>type=='Distance'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkDistance"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
+
+    <Pattern name="ApplicationPushSinkPosition2" displayName="Application Push Sink (2D Position)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input 2D Position">
+                <Description><h:p>The input positions</h:p></Description>
+                <Predicate>type=='2DPosition'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkPosition2D"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkPosition" displayName="Application Push Sink (3D Position)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Position">
+                <Description><h:p>The input position</h:p></Description>
+                <Predicate>type=='3DPosition'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkPosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+
     <Pattern name="ApplicationPushSinkPose" displayName="Application Push Sink (Pose)">
     	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a push input port and calls a callback function supplied 
@@ -25,7 +129,49 @@
             <UbitrackLib class="ApplicationPushSinkPose"/>
         </DataflowConfiguration>
     </Pattern>
-	
+
+
+
+    <Pattern name="ApplicationPushSinkErrorPosition2" displayName="Application Push Sink (2D ErrorPosition)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition2">
+                <Description><h:p>The input position</h:p></Description>
+                <Predicate>type=='2DPositionError'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkErrorPosition2"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkErrorPosition" displayName="Application Push Sink (3D ErrorPosition)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition">
+                <Description><h:p>The input position</h:p></Description>
+                <Predicate>type=='3DPositionError'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkErrorPosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+
     <Pattern name="ApplicationPushSinkErrorPose" displayName="Application Push Sink (ErrorPose)">
     	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a push input port and calls a callback function supplied 
@@ -45,67 +191,157 @@
             <UbitrackLib class="ApplicationPushSinkErrorPose"/>
         </DataflowConfiguration>
     </Pattern>
-	
-    <Pattern name="ApplicationPushSinkPosition" displayName="Application Push Sink (3D Position)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Position">
-            	<Description><h:p>The input position</h:p></Description>
-                <Predicate>type=='3DPosition'&amp;&amp;mode=='push'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkPosition"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-    <Pattern name="ApplicationPushSinkErrorPosition" displayName="Application Push Sink (3D ErrorPosition)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition">
-            	<Description><h:p>The input position</h:p></Description>
-                <Predicate>type=='3DPositionError'&amp;&amp;mode=='push'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkErrorPosition"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
+
+
     <Pattern name="ApplicationPushSinkRotation" displayName="Application Push Sink (3D Rotation)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
             <Edge name="Input" source="A" destination="B" displayName="Input Rotation">
-            	<Description><h:p>The input rotation</h:p></Description>
+                <Description><h:p>The input rotation</h:p></Description>
                 <Predicate>type=='3DRotation'&amp;&amp;mode=='push'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPushSinkRotation"/>
         </DataflowConfiguration>
     </Pattern>
-    
+
+
+    <Pattern name="ApplicationPushSinkMatrix3x3" displayName="Application Push Sink (3x3 Matrix)">
+        <Description>
+            <h:p>
+                This is a sink component which may be used to interface the dataflow network
+                to an user application. This sink uses a push input port and calls a callback function supplied
+                by the application upon reception of a new event. See the Doxygen documentation for details.
+            </h:p>
+        </Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
+                <Description>
+                    <h:p>The input matrix</h:p>
+                </Description>
+                <Predicate>type=='3x3Matrix'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkMatrix3x3"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkMatrix3x4" displayName="Application Push Sink (3x4 Matrix)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
+                <Description><h:p>The input matrix</h:p></Description>
+                <Predicate>type=='3x4Matrix'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkMatrix3x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkMatrix4x4" displayName="Application Push Sink (4x4 Matrix)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
+                <Description><h:p>The input matrix</h:p></Description>
+                <Predicate>type=='4x4Matrix'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkMatrix4x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
+    <Pattern name="ApplicationPushSinkButtonList" displayName="Application Push Sink (Button List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Button List">
+                <Description><h:p>The input buttons</h:p></Description>
+                <Predicate>type=='ButtonList'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkButtonList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSinkDistanceList" displayName="Application Push Sink (Distance List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Distance List">
+                <Description><h:p>The input distances</h:p></Description>
+                <Predicate>type=='DistanceList'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkDistanceList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPushSinkPositionList2" displayName="Application Push Sink (2D Position List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input 2D Position List">
+                <Description><h:p>The input positions</h:p></Description>
+                <Predicate>type=='2DPositionList'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkPosition2DList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
     <Pattern name="ApplicationPushSinkPositionList" displayName="Application Push Sink (3D Position List)">
     	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a push input port and calls a callback function supplied 
@@ -125,152 +361,111 @@
             <UbitrackLib class="ApplicationPushSinkPositionList"/>
         </DataflowConfiguration>
     </Pattern>
-	
-	<Pattern name="ApplicationPushSinkPositionList2" displayName="Application Push Sink (2D Position List)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
+
+    <Pattern name="ApplicationPushSinkPoseList" displayName="Application Push Sink (3D Pose List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input 2D Position List">
-            	<Description><h:p>The input positions</h:p></Description>
-                <Predicate>type=='2DPositionList'&amp;&amp;mode=='push'</Predicate>
+            <Edge name="Input" source="A" destination="B" displayName="Input Pose List">
+                <Description><h:p>The input pose</h:p></Description>
+                <Predicate>type=='PoseList'&amp;&amp;mode=='push'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkPosition2DList"/>
-        </DataflowConfiguration>
-    </Pattern>
-	
-	<Pattern name="ApplicationPushSinkPosition2" displayName="Application Push Sink (2D Position)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input 2D Position">
-            	<Description><h:p>The input positions</h:p></Description>
-                <Predicate>type=='2DPosition'&amp;&amp;mode=='push'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkPosition2D"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-    <Pattern name="ApplicationPushSinkMatrix3x4" displayName="Application Push Sink (3x4 Matrix)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
-            	<Description><h:p>The input matrix</h:p></Description>
-                <Predicate>type=='3x4Matrix'&amp;&amp;mode=='push'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkMatrix3x4"/>
+            <UbitrackLib class="ApplicationPushSinkPoseList"/>
         </DataflowConfiguration>
     </Pattern>
 
-  <Pattern name="ApplicationPushSinkMatrix3x3" displayName="Application Push Sink (3x3 Matrix)">
-    <Description>
-      <h:p>
-        This is a sink component which may be used to interface the dataflow network
-        to an user application. This sink uses a push input port and calls a callback function supplied
-        by the application upon reception of a new event. See the Doxygen documentation for details.
-      </h:p>
-    </Description>
 
-    <Input>
-      <Node name="A" displayName="A"/>
-      <Node name="B" displayName="B"/>
-      <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
-        <Description>
-          <h:p>The input matrix</h:p>
-        </Description>
-        <Predicate>type=='3x3Matrix'&amp;&amp;mode=='push'</Predicate>
-      </Edge>
-    </Input>
+    <Pattern name="ApplicationPushSinkErrorPositionList2" displayName="Application Push Sink (2D ErrorPosition List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
 
-    <DataflowConfiguration>
-      <UbitrackLib class="ApplicationPushSinkMatrix3x3"/>
-    </DataflowConfiguration>
-  </Pattern>
-
-  <Pattern name="ApplicationPushSinkMatrix4x4" displayName="Application Push Sink (4x4 Matrix)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Matrix">
-            	<Description><h:p>The input matrix</h:p></Description>
-                <Predicate>type=='4x4Matrix'&amp;&amp;mode=='push'</Predicate>
+            <Edge name="Input" source="A" destination="B" displayName="Input 2D ErrorPosition List">
+                <Description><h:p>The input error positions</h:p></Description>
+                <Predicate>type=='2DErrorPositionList'&amp;&amp;mode=='push'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkMatrix4x4"/>
+            <UbitrackLib class="ApplicationPushSinkErrorPosition2DList"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    <Pattern name="ApplicationPushSinkDistance" displayName="Application Push Sink (Distance)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
+
+    <Pattern name="ApplicationPushSinkErrorPositionList" displayName="Application Push Sink (3D ErrorPosition List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Distance">
-            	<Description><h:p>The input distance scalar double value.</h:p></Description>
-                <Predicate>type=='Distance'&amp;&amp;mode=='push'</Predicate>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition List">
+                <Description><h:p>The input error pose</h:p></Description>
+                <Predicate>type=='3DErrorPositionList'&amp;&amp;mode=='push'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkDistance"/>
+            <UbitrackLib class="ApplicationPushSinkErrorPositionList"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    <Pattern name="ApplicationPushSinkButton" displayName="Application Push Sink (Button)">
-    	<Description><h:p>This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a push input port and calls a callback function supplied 
-    	by the application upon reception of a new event. See the Doxygen documentation for details.
-    	</h:p></Description>
-    	
+
+    <Pattern name="ApplicationPushSinkErrorPoseList" displayName="Application Push Sink (3D ErrorPose List)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Button">
-            	<Description><h:p>The key value.</h:p></Description>
-                <Predicate>type=='Button'&amp;&amp;mode=='push'</Predicate>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPose List">
+                <Description><h:p>The input error pose</h:p></Description>
+                <Predicate>type=='ErrorPoseList'&amp;&amp;mode=='push'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSinkButton"/>
+            <UbitrackLib class="ApplicationPushSinkErrorPoseList"/>
         </DataflowConfiguration>
     </Pattern>
-    
+
+
+    <Pattern name="ApplicationPushSinkCameraIntrinsics" displayName="Application Push Sink (CameraIntrinsics)">
+        <Description><h:p>This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a push input port and calls a callback function supplied
+            by the application upon reception of a new event. See the Doxygen documentation for details.
+        </h:p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input CameraIntrinsics">
+                <Description><h:p>The input camera intrinsicis</h:p></Description>
+                <Predicate>type=='Intrinsics'&amp;&amp;mode=='push'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSinkCameraIntrinsics"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
     <!-- Attribute declarations -->
     
     <GlobalNodeAttributeDeclarations>

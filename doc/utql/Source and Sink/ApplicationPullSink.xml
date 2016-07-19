@@ -28,6 +28,56 @@
         </DataflowConfiguration>
     </Pattern>
 
+    <Pattern name="ApplicationPullSinkSkalar" displayName="Application Pull Sink (Scalar)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Scalar">
+                <Description><h:p>The input scalar</h:p></Description>
+                <Predicate>type=='Scalar'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkSkalar"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkDistance" displayName="Application Pull Sink (Distance)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Distance">
+                <Description><h:p>The input distance</h:p></Description>
+                <Predicate>type=='Distance'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkDistance"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
+
+
+
+
     <Pattern name="ApplicationPullSinkPosition2D" displayName="Application Pull Sink (Position2D)">
     	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
@@ -47,6 +97,28 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPosition2D"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkPosition" displayName="Application Pull Sink (3D Position)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Position">
+                <Description><h:p>The input position</h:p></Description>
+                <Predicate>type=='3DPosition'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkPosition"/>
         </DataflowConfiguration>
     </Pattern>
 
@@ -71,8 +143,55 @@
             <UbitrackLib class="ApplicationPullSinkPose"/>
         </DataflowConfiguration>
     </Pattern>
-	
-	<Pattern name="ApplicationPullSinkErrorPose" displayName="Application Pull Sink (ErrorPose)">
+
+
+
+
+    <Pattern name="ApplicationPullSinkErrorPosition2D" displayName="Application Pull Sink (ErrorPosition2D)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition2D">
+                <Description><h:p>The input error position2d</h:p></Description>
+                <Predicate>type=='2DErrorPosition'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkErrorPosition2D"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkErrorPosition" displayName="Application Pull Sink (3D ErrorPosition)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition">
+                <Description><h:p>The input error position</h:p></Description>
+                <Predicate>type=='3DErrorPosition'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkErrorPosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkErrorPose" displayName="Application Pull Sink (ErrorPose)">
     	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
     	the application.<br/>
@@ -93,29 +212,10 @@
             <UbitrackLib class="ApplicationPullSinkErrorPose"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    <Pattern name="ApplicationPullSinkPosition" displayName="Application Pull Sink (3D Position)">
-    	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
-    	the application.<br/>
-    	An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
-    	network. For more details, see the Doxygen documentation.
-    	</p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Position">
-            	<Description><h:p>The input position</h:p></Description>
-                <Predicate>type=='3DPosition'&amp;&amp;mode=='pull'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkPosition"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
+
+
+
+
     <Pattern name="ApplicationPullSinkRotation" displayName="Application Pull Sink (3D Rotation)">
     	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
@@ -137,7 +237,165 @@
             <UbitrackLib class="ApplicationPullSinkRotation"/>
         </DataflowConfiguration>
     </Pattern>
-    
+
+
+    <Pattern name="ApplicationPullSinkMatrix3x3" displayName="Application Pull Sink (Matrix3x3)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Matrix3x3">
+                <Description><h:p>The input matrix33</h:p></Description>
+                <Predicate>type=='3x3Matrix'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkMatrix3x3"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkMatrix3x4" displayName="Application Pull Sink (Matrix3x4)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Matrix3x4">
+                <Description><h:p>The input matrix34</h:p></Description>
+                <Predicate>type=='3x4Matrix'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkMatrix3x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkMatrix4x4" displayName="Application Pull Sink (Matrix4x4)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input Matrix4x4">
+                <Description><h:p>The input matrix44</h:p></Description>
+                <Predicate>type=='4x4Matrix'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkMatrix4x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPullSinkVector4D" displayName="Application Pull Sink (Vector4D)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input 4D Vector">
+                <Description><h:p>The input 4D Vector</h:p></Description>
+                <Predicate>type=='4DVector'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkVector4D"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPullSinkButtonList" displayName="Application Pull Sink (Button List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='ButtonList'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkButtonList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkDistanceList" displayName="Application Pull Sink (Distance List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='DistanceList'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkDistanceList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPullSinkPositionList2" displayName="Application Pull Sink (2D Position List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='2DPositionList'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkPositionList2"/>
+        </DataflowConfiguration>
+    </Pattern>
+
     <Pattern name="ApplicationPullSinkPositionList" displayName="Application Pull Sink (3D Position List)">
     	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
     	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
@@ -159,114 +417,116 @@
             <UbitrackLib class="ApplicationPullSinkPositionList"/>
         </DataflowConfiguration>
     </Pattern>
-	
-	<Pattern name="ApplicationPullSinkPositionList2" displayName="Application Pull Sink (2D Position List)">
-    	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
-    	the application.<br/>
-    	An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
-    	network. For more details, see the Doxygen documentation.
-    	</p></Description>
-    	
+
+    <Pattern name="ApplicationPullSinkPoseList" displayName="Application Pull Sink (3D Pose List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
             <Edge name="Input" source="A" destination="B" displayName="Input List">
-            	<Description><h:p>The input list</h:p></Description>
-                <Predicate>type=='2DPositionList'&amp;&amp;mode=='pull'</Predicate>
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='PoseList'&amp;&amp;mode=='pull'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkPosition2DList"/>
+            <UbitrackLib class="ApplicationPullSinkPoseList"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    <Pattern name="ApplicationPullSinkSkalar" displayName="Application Pull Sink (Scalar)">
-    	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
-    	the application.<br/>
-    	An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
-    	network. For more details, see the Doxygen documentation.
-    	</p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Scalar">
-            	<Description><h:p>The input scalar</h:p></Description>
-                <Predicate>type=='Scalar'&amp;&amp;mode=='pull'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkSkalar"/>
-        </DataflowConfiguration>
-    </Pattern>
-	
-	<Pattern name="ApplicationPullSinkMatrix3x3" displayName="Application Pull Sink (Matrix3x3)">
-    	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
-    	the application.<br/>
-    	An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
-    	network. For more details, see the Doxygen documentation.
-    	</p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Scalar">
-            	<Description><h:p>The input scalar</h:p></Description>
-                <Predicate>type=='3x3Matrix'&amp;&amp;mode=='pull'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkMatrix3x3"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-	<Pattern name="ApplicationPullSinkVector4D" displayName="Application Pull Sink (Vector4D)">
-    	<Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
-    	to an user application. This sink uses a pull input port and also exhibits a pull interface to 
-    	the application.<br/>
-    	An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
-    	network. For more details, see the Doxygen documentation.
-    	</p></Description>
-    	
-        <Input>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input 4D Vector">
-            	<Description><h:p>The input 4D Vector</h:p></Description>
-                <Predicate>type=='4DVector'&amp;&amp;mode=='pull'</Predicate>
-            </Edge>
-        </Input>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkVector4D"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-    <Pattern name="ApplicationPullSinkDistance" displayName="Application Pull Sink (Distance)">
-        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network 
-        to an user application. This sink uses a pull input port and also exhibits a pull interface to 
-        the application.<br/>
-        An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
-        network. For more details, see the Doxygen documentation.
+
+
+    <Pattern name="ApplicationPullSinkErrorPositionList2" displayName="Application Pull Sink (2D ErrorPosition List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
         </p></Description>
-        
+
         <Input>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Input" source="A" destination="B" displayName="Input Distance">
-                <Description><h:p>The input button</h:p></Description>
-                <Predicate>type=='Distance'&amp;&amp;mode=='pull'</Predicate>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='2DErrorPositionList'&amp;&amp;mode=='pull'</Predicate>
             </Edge>
         </Input>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPullSinkDistance"/>
+            <UbitrackLib class="ApplicationPullSinkErrorPositionList2"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkErrorPositionList" displayName="Application Pull Sink (3D ErrorPosition List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='3DErrorPositionList'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkErrorPositionList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPullSinkErrorPoseList" displayName="Application Pull Sink (3D ErrorPose List)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='ErrorPoseList'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkErrorPoseList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPullSinkCameraIntrinsics" displayName="Application Pull Sink (Camera Intrinsics)">
+        <Description><p xmlns="http://www.w3.org/1999/xhtml">This is a sink component which may be used to interface the dataflow network
+            to an user application. This sink uses a pull input port and also exhibits a pull interface to
+            the application.<br/>
+            An application can call the <h:code>get( t )</h:code> method to pull events from the data flow
+            network. For more details, see the Doxygen documentation.
+        </p></Description>
+
+        <Input>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Input" source="A" destination="B" displayName="Input List">
+                <Description><h:p>The input list</h:p></Description>
+                <Predicate>type=='Intrinsics'&amp;&amp;mode=='pull'</Predicate>
+            </Edge>
+        </Input>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPullSinkCameraIntrinsics"/>
         </DataflowConfiguration>
     </Pattern>
 

@@ -45,7 +45,6 @@
 #include <utDataflow/ComponentFactory.h>
 #include <utMeasurement/Measurement.h>
 
-
 namespace Ubitrack { namespace Components {
 
 using namespace Dataflow;
@@ -117,22 +116,38 @@ protected:
 	PullConsumer< EventType > m_InPort;
 };
 
-// @ todo complete ApplicationPullSink definitions
 typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkButton;
-typedef ApplicationPullSink< Measurement::Pose > ApplicationPullSinkPose;
-typedef ApplicationPullSink< Measurement::ErrorPose > ApplicationPullSinkErrorPose;
+typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkSkalar;
+typedef ApplicationPullSink< Measurement::Distance > ApplicationPullSinkDistance; // new
+
 typedef ApplicationPullSink< Measurement::Position2D > ApplicationPullSinkPosition2D;
 typedef ApplicationPullSink< Measurement::Position > ApplicationPullSinkPosition;
+typedef ApplicationPullSink< Measurement::Pose > ApplicationPullSinkPose;
+
+typedef ApplicationPullSink< Measurement::ErrorPosition2 > ApplicationPullSinkErrorPosition2;
 typedef ApplicationPullSink< Measurement::ErrorPosition > ApplicationPullSinkErrorPosition;
+typedef ApplicationPullSink< Measurement::ErrorPose > ApplicationPullSinkErrorPose;
+
 typedef ApplicationPullSink< Measurement::Rotation > ApplicationPullSinkRotation;
-typedef ApplicationPullSink< Measurement::PositionList > ApplicationPullSinkPositionList;
-typedef ApplicationPullSink< Measurement::ErrorPositionList > ApplicationPullSinkErrorPositionList;
-typedef ApplicationPullSink< Measurement::PositionList2 > ApplicationPullSinkPositionList2;
-typedef ApplicationPullSink< Measurement::Button > ApplicationPullSinkSkalar;
-typedef ApplicationPullSink< Measurement::Distance > ApplicationPullSinkDistance;
+
 typedef ApplicationPullSink< Measurement::Matrix3x3 > ApplicationPullSinkMatrix3x3;
+typedef ApplicationPullSink< Measurement::Matrix3x4 > ApplicationPullSinkMatrix3x4;
 typedef ApplicationPullSink< Measurement::Matrix4x4 > ApplicationPullSinkMatrix4x4;
+
 typedef ApplicationPullSink< Measurement::Vector4D > ApplicationPullSinkVector4D;
+
+typedef ApplicationPullSink< Measurement::ButtonList > ApplicationPullSinkButtonList; //new
+typedef ApplicationPullSink< Measurement::DistanceList > ApplicationPullSinkDistanceList; //new
+
+typedef ApplicationPullSink< Measurement::PositionList2 > ApplicationPullSinkPositionList2;
+typedef ApplicationPullSink< Measurement::PositionList > ApplicationPullSinkPositionList;
+typedef ApplicationPullSink< Measurement::PoseList > ApplicationPullSinkPoseList; //new
+
+typedef ApplicationPullSink< Measurement::ErrorPositionList2 > ApplicationPullSinkErrorPositionList2; //new
+typedef ApplicationPullSink< Measurement::ErrorPositionList > ApplicationPullSinkErrorPositionList;
+typedef ApplicationPullSink< Measurement::ErrorPoseList > ApplicationPullSinkErrorPoseList; //new
+
+typedef ApplicationPullSink< Measurement::CameraIntrinsics > ApplicationPullSinkCameraIntrinsics; //new
 
 
 } } // namespace Ubitrack::Components

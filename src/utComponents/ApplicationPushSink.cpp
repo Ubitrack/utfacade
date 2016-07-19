@@ -38,27 +38,30 @@ namespace Ubitrack { namespace Components {
 
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 
-	// this declaration violates the assumption that only measurements are pushed in the dataflow ...
-//	cf->registerComponent< ApplicationPushSink< int > > ( "ApplicationPushSinkInt" );
+	cf->registerComponent< ApplicationPushSinkButton > ("ApplicationPushSinkButton");
+	cf->registerComponent< ApplicationPushSinkSkalar > ("ApplicationPushSinkSkalar");
+	cf->registerComponent< ApplicationPushSinkDistance > ("ApplicationPushSinkDistance"); // new
+	cf->registerComponent< ApplicationPushSinkPosition2D > ("ApplicationPushSinkPosition2D");
+	cf->registerComponent< ApplicationPushSinkPosition > ("ApplicationPushSinkPosition");
+	cf->registerComponent< ApplicationPushSinkPose > ("ApplicationPushSinkPose");
+	cf->registerComponent< ApplicationPushSinkErrorPosition2 > ("ApplicationPushSinkErrorPosition2");
+	cf->registerComponent< ApplicationPushSinkErrorPosition > ("ApplicationPushSinkErrorPosition");
+	cf->registerComponent< ApplicationPushSinkErrorPose > ("ApplicationPushSinkErrorPose");
+	cf->registerComponent< ApplicationPushSinkRotation > ("ApplicationPushSinkRotation");
+	cf->registerComponent< ApplicationPushSinkMatrix3x3 > ("ApplicationPushSinkMatrix3x3");
+	cf->registerComponent< ApplicationPushSinkMatrix3x4 > ("ApplicationPushSinkMatrix3x4");
+	cf->registerComponent< ApplicationPushSinkMatrix4x4 > ("ApplicationPushSinkMatrix4x4");
+	cf->registerComponent< ApplicationPushSinkVector4D > ("ApplicationPushSinkVector4D");
+	cf->registerComponent< ApplicationPushSinkButtonList > ("ApplicationPushSinkButtonList"); //new
+	cf->registerComponent< ApplicationPushSinkDistanceList > ("ApplicationPushSinkDistanceList"); //new
+	cf->registerComponent< ApplicationPushSinkPositionList2 > ("ApplicationPushSinkPositionList2");
+	cf->registerComponent< ApplicationPushSinkPositionList > ("ApplicationPushSinkPositionList");
+	cf->registerComponent< ApplicationPushSinkPoseList > ("ApplicationPushSinkPoseList"); //new
+	cf->registerComponent< ApplicationPushSinkErrorPositionList2 > ("ApplicationPushSinkErrorPositionList2"); //new
+	cf->registerComponent< ApplicationPushSinkErrorPositionList > ("ApplicationPushSinkErrorPositionList");
+	cf->registerComponent< ApplicationPushSinkErrorPoseList > ("ApplicationPushSinkErrorPoseList"); //new
 
-	cf->registerComponent< ApplicationPushSinkButton > ( "ApplicationPushSinkButton" );
-	cf->registerComponent< ApplicationPushSinkPose > ( "ApplicationPushSinkPose" );
-	cf->registerComponent< ApplicationPushSinkErrorPose > ( "ApplicationPushSinkErrorPose" );
-
-	cf->registerComponent< ApplicationPushSinkPosition > ( "ApplicationPushSinkPosition" );
-	cf->registerComponent< ApplicationPushSinkPosition2D > ( "ApplicationPushSinkPosition2D" );
-	cf->registerComponent< ApplicationPushSinkErrorPosition > ( "ApplicationPushSinkErrorPosition" );
-	cf->registerComponent< ApplicationPushSinkErrorPosition2D > ( "ApplicationPushSinkErrorPosition2D" );
-	cf->registerComponent< ApplicationPushSinkRotation > ( "ApplicationPushSinkRotation" );
-	cf->registerComponent< ApplicationPushSinkPositionList > ( "ApplicationPushSinkPositionList" );
-	cf->registerComponent< ApplicationPushSinkPositionList2 > ( "ApplicationPushSinkPosition2DList" );
-	cf->registerComponent< ApplicationPushSinkErrorPositionList > ( "ApplicationPushSinkErrorPositionList" );
-	cf->registerComponent< ApplicationPushSinkErrorPositionList2 > ( "ApplicationPushSinkErrorPosition2DList" );
-	cf->registerComponent< ApplicationPushSink< Measurement::Matrix3x4 > > ( "ApplicationPushSinkMatrix3x4" );
-	cf->registerComponent< ApplicationPushSink< Measurement::Matrix3x3 > > ( "ApplicationPushSinkMatrix3x3" );
-	cf->registerComponent< ApplicationPushSink< Measurement::Matrix4x4 > > ( "ApplicationPushSinkMatrix4x4" );
-	cf->registerComponent< ApplicationPushSink< Measurement::Distance > > ( "ApplicationPushSinkDistance" );
-	
+	cf->registerComponent< ApplicationPushSinkCameraIntrinsics > ("ApplicationPushSinkCameraIntrinsics");
 }
 
 } } // namespace Ubitrack::Components

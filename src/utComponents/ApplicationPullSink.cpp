@@ -38,20 +38,32 @@
 namespace Ubitrack { namespace Components {
 
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
-	cf->registerComponent< ApplicationPullSinkButton > ( "ApplicationPullSinkButton" );
-	cf->registerComponent< ApplicationPullSinkPose > ( "ApplicationPullSinkPose" );
-	cf->registerComponent< ApplicationPullSinkErrorPose > ( "ApplicationPullSinkErrorPose" );
-	cf->registerComponent< ApplicationPullSinkPosition2D > ( "ApplicationPullSinkPosition2D" );
-	cf->registerComponent< ApplicationPullSinkPosition > ( "ApplicationPullSinkPosition" );
-	cf->registerComponent< ApplicationPullSinkErrorPosition > ( "ApplicationPullSinkErrorPosition" );
-	cf->registerComponent< ApplicationPullSinkRotation > ( "ApplicationPullSinkRotation" );
-	cf->registerComponent< ApplicationPullSinkPositionList > ( "ApplicationPullSinkPositionList" );
-	cf->registerComponent< ApplicationPullSinkErrorPositionList > ( "ApplicationPullSinkErrorPositionList" );
-	cf->registerComponent< ApplicationPullSinkPositionList2 > ( "ApplicationPullSinkPosition2DList" );
-	cf->registerComponent< ApplicationPullSinkSkalar > ( "ApplicationPullSinkSkalar" );
-	cf->registerComponent< ApplicationPullSinkMatrix3x3 > ( "ApplicationPullSinkMatrix3x3" );
-	cf->registerComponent< ApplicationPullSinkVector4D > ( "ApplicationPullSinkVector4D" );
-	
+
+	cf->registerComponent< ApplicationPullSinkButton > ("ApplicationPullSinkButton");
+	cf->registerComponent< ApplicationPullSinkSkalar > ("ApplicationPullSinkSkalar");
+	cf->registerComponent< ApplicationPullSinkDistance > ("ApplicationPullSinkDistance");
+	cf->registerComponent< ApplicationPullSinkPosition2D > ("ApplicationPullSinkPosition2D");
+	cf->registerComponent< ApplicationPullSinkPosition > ("ApplicationPullSinkPosition");
+	cf->registerComponent< ApplicationPullSinkPose > ("ApplicationPullSinkPose");
+	cf->registerComponent< ApplicationPullSinkErrorPosition2 > ( "ApplicationPullSinkErrorPosition2" );
+	cf->registerComponent< ApplicationPullSinkErrorPosition > ("ApplicationPullSinkErrorPosition");
+	cf->registerComponent< ApplicationPullSinkErrorPose > ("ApplicationPullSinkErrorPose");
+	cf->registerComponent< ApplicationPullSinkRotation > ("ApplicationPullSinkRotation");
+	cf->registerComponent< ApplicationPullSinkMatrix3x3 > ("ApplicationPullSinkMatrix3x3");
+	cf->registerComponent< ApplicationPullSinkMatrix3x4 > ("ApplicationPullSinkMatrix3x4");
+	cf->registerComponent< ApplicationPullSinkMatrix4x4 > ("ApplicationPullSinkMatrix4x4");
+	cf->registerComponent< ApplicationPullSinkVector4D > ("ApplicationPullSinkVector4D");
+	cf->registerComponent< ApplicationPullSinkButtonList > ("ApplicationPullSinkButtonList");
+	cf->registerComponent< ApplicationPullSinkDistanceList > ("ApplicationPullSinkDistanceList");
+	cf->registerComponent< ApplicationPullSinkPositionList2 > ("ApplicationPullSinkPositionList2");
+	cf->registerComponent< ApplicationPullSinkPositionList > ("ApplicationPullSinkPositionList");
+	cf->registerComponent< ApplicationPullSinkPoseList > ("ApplicationPullSinkPoseList");
+	cf->registerComponent< ApplicationPullSinkErrorPositionList2 > ("ApplicationPullSinkErrorPositionList2");
+	cf->registerComponent< ApplicationPullSinkErrorPositionList > ("ApplicationPullSinkErrorPositionList");
+	cf->registerComponent< ApplicationPullSinkErrorPoseList > ("ApplicationPullSinkErrorPoseList");
+
+	cf->registerComponent< ApplicationPullSinkCameraIntrinsics > ("ApplicationPullSinkCameraIntrinsics");
+
 }
 
 } } // namespace Ubitrack::Components

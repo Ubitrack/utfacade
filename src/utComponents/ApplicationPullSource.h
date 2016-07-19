@@ -47,7 +47,6 @@
 #include <utDataflow/Component.h>
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
-
 // no counterpart in SimpleFacade yet
 //#include <utFacade/SimpleDatatypes.h>
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
@@ -162,10 +161,8 @@ protected:
 #ifndef APPLICATIONPULLSOURCE_NOLOGGING
 		LOG4CPP_DEBUG( m_logger, getName() << " requested event" );
 #endif
-		if( m_callback ) {
+		if( m_callback )
 			return m_callback( t );
-		}
-
 #ifndef APPLICATIONPULLSOURCE_NOLOGGING
 		else
 			LOG4CPP_INFO( m_logger, "ApplicationPullSource " << getName() << " has no consumer connected" );
@@ -196,22 +193,42 @@ protected:
 };
 
 
-// @ todo complete ApplicationPullSource definitions
+
+
+
 typedef ApplicationPullSource< Measurement::Button > ApplicationPullSourceButton;
-typedef ApplicationPullSource< Measurement::Pose > ApplicationPullSourcePose;
-typedef ApplicationPullSource< Measurement::ErrorPose > ApplicationPullSourceErrorPose;
-typedef ApplicationPullSource< Measurement::Position > ApplicationPullSourcePosition;
+typedef ApplicationPullSource< Measurement::Button > ApplicationPullSourceSkalar;
+typedef ApplicationPullSource< Measurement::Distance > ApplicationPullSourceDistance; // new
+
 typedef ApplicationPullSource< Measurement::Position2D > ApplicationPullSourcePosition2D;
-typedef ApplicationPullSource< Measurement::Position > ApplicationPullSourceErrorPosition;
-typedef ApplicationPullSource< Measurement::Position2D > ApplicationPullSourceErrorPosition2D;
+typedef ApplicationPullSource< Measurement::Position > ApplicationPullSourcePosition;
+typedef ApplicationPullSource< Measurement::Pose > ApplicationPullSourcePose;
+
+typedef ApplicationPullSource< Measurement::ErrorPosition2 > ApplicationPullSourceErrorPosition2;
+typedef ApplicationPullSource< Measurement::ErrorPosition > ApplicationPullSourceErrorPosition;
+typedef ApplicationPullSource< Measurement::ErrorPose > ApplicationPullSourceErrorPose;
+
 typedef ApplicationPullSource< Measurement::Rotation > ApplicationPullSourceRotation;
-typedef ApplicationPullSource< Measurement::PositionList > ApplicationPullSourcePositionList;
-typedef ApplicationPullSource< Measurement::PositionList2 > ApplicationPullSourcePositionList2;
-typedef ApplicationPullSource< Measurement::Matrix4x4 > ApplicationPullSourceMatrix4x4;
+
 typedef ApplicationPullSource< Measurement::Matrix3x3 > ApplicationPullSourceMatrix3x3;
 typedef ApplicationPullSource< Measurement::Matrix3x4 > ApplicationPullSourceMatrix3x4;
+typedef ApplicationPullSource< Measurement::Matrix4x4 > ApplicationPullSourceMatrix4x4;
+
+typedef ApplicationPullSource< Measurement::Vector4D > ApplicationPullSourceVector4D;
+
+typedef ApplicationPullSource< Measurement::ButtonList > ApplicationPullSourceButtonList; //new
+typedef ApplicationPullSource< Measurement::DistanceList > ApplicationPullSourceDistanceList; //new
+
+typedef ApplicationPullSource< Measurement::PositionList2 > ApplicationPullSourcePositionList2;
+typedef ApplicationPullSource< Measurement::PositionList > ApplicationPullSourcePositionList;
+typedef ApplicationPullSource< Measurement::PoseList > ApplicationPullSourcePoseList; //new
+
+typedef ApplicationPullSource< Measurement::ErrorPositionList2 > ApplicationPullSourceErrorPositionList2; //new
 typedef ApplicationPullSource< Measurement::ErrorPositionList > ApplicationPullSourceErrorPositionList;
-typedef ApplicationPullSource< Measurement::ErrorPositionList2 > ApplicationPullSourceErrorPositionList2;
+typedef ApplicationPullSource< Measurement::ErrorPoseList > ApplicationPullSourceErrorPoseList; //new
+
+typedef ApplicationPullSource< Measurement::CameraIntrinsics > ApplicationPullSourceCameraIntrinsics; //new
+
 } } // namespace Ubitrack::Components
 #endif //__UBITRACK_COMPONENTS_APPLICATIONPULLSOURCE_H_INCLUDED__
 
