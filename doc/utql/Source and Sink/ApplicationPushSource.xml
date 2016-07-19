@@ -5,7 +5,127 @@
                       xmlns:xi='http://www.w3.org/2001/XInclude'
                       xmlns:h="http://www.w3.org/1999/xhtml"
                       xsi:schemaLocation='http://ar.in.tum.de/ubitrack/utql ../../../schema/utql_templates.xsd'>
-    
+
+
+    <Pattern name="ApplicationPushSourceButton" displayName="Application Push Source (Button)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Button">
+                <Attribute name="type" value="Button" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceButton"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSourceSkalar" displayName="Application Push Source (Skalar)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Skalar">
+                <Attribute name="type" value="Scalar" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceSkalar"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSourceDistance" displayName="Application Push Source (Distance)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Distance">
+                <Attribute name="type" value="Distance" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceDistance"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
+    <Pattern name="ApplicationPushSourcePosition2D" displayName="Application Push Source (2D Position)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Position">
+                <Description><h:p>The output Position received from the application</h:p></Description>
+                <Attribute name="type" value="2DPosition" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourcePosition2"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSourcePosition" displayName="Application Push Source (3D Position)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Position">
+                <Description><h:p>The output Position received from the application</h:p></Description>
+                <Attribute name="type" value="3DPosition" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourcePosition"/>
+        </DataflowConfiguration>
+    </Pattern>
+
     <Pattern name="ApplicationPushSourcePose" displayName="Application Push Source (Pose)">
     	<Description><h:p>This is an source component which may be used to interface
 		 the dataflow network to a user application.
@@ -29,53 +149,83 @@
             <UbitrackLib class="ApplicationPushSourcePose"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    <Pattern name="ApplicationPushSourcePosition" displayName="Application Push Source (3D Position)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
-		 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
-    	
+
+
+
+    <Pattern name="ApplicationPushSourceErrorPosition2D" displayName="Application Push Source (2D ErrorPosition)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
         <Output>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Position">
-            	<Description><h:p>The output Position received from the application</h:p></Description>
-                <Attribute name="type" value="3DPosition" xsi:type="EnumAttributeReferenceType"/>
+            <Edge name="Output" source="A" destination="B" displayName="ErrorPosition">
+                <Description><h:p>The output ErrorPosition received from the application</h:p></Description>
+                <Attribute name="type" value="2DErrorPosition" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourcePosition"/>
+            <UbitrackLib class="ApplicationPushSourceErrorPosition2"/>
         </DataflowConfiguration>
     </Pattern>
-    <Pattern name="ApplicationPushSourcePosition2D" displayName="Application Push Source (2D Position)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
-		 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
-    	
+
+    <Pattern name="ApplicationPushSourceErrorPosition" displayName="Application Push Source (3D ErrorPosition)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
         <Output>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Position">
-            	<Description><h:p>The output Position received from the application</h:p></Description>
-                <Attribute name="type" value="2DPosition" xsi:type="EnumAttributeReferenceType"/>
+            <Edge name="Output" source="A" destination="B" displayName="ErrorPosition">
+                <Description><h:p>The output ErrorPosition received from the application</h:p></Description>
+                <Attribute name="type" value="3DErrorPosition" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
-                
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourcePosition2"/>
+            <UbitrackLib class="ApplicationPushSourceErrorPosition"/>
         </DataflowConfiguration>
     </Pattern>
+
+    <Pattern name="ApplicationPushSourceErrorPose" displayName="Application Push Source (ErrorPose)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="ErrorPose">
+                <Description><h:p>The output error pose received from the application</h:p></Description>
+                <Attribute name="type" value="6DError" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceErrorPose"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
 
     <Pattern name="ApplicationPushSourceRotation" displayName="Application Push Source (3D Rotation)">
     	<Description><h:p>This is an source component which may be used to interface
@@ -100,7 +250,132 @@
             <UbitrackLib class="ApplicationPushSourceRotation"/>
         </DataflowConfiguration>
     </Pattern>
-    
+
+
+    <Pattern name="ApplicationPushSourceMatrix3x3" displayName="Application Push Source (3x3 Matrix)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Matrix">
+                <Description><h:p>The output pose received from the application</h:p></Description>
+                <Attribute name="type" value="3x3Matrix" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceMatrix3x3"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSourceMatrix3x4" displayName="Application Push Source (3x4 Matrix)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Matrix">
+                <Description><h:p>The output pose received from the application</h:p></Description>
+                <Attribute name="type" value="3x4Matrix" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceMatrix3x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+    <Pattern name="ApplicationPushSourceMatrix4x4" displayName="Application Push Source (4x4 Matrix)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Matrix">
+                <Description><h:p>The output pose received from the application</h:p></Description>
+                <Attribute name="type" value="4x4Matrix" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceMatrix4x4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPushSourceVector4" displayName="Application Push Source (4D Vector)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="4D Vector">
+                <Description><h:p>The output vector4 received from the application</h:p></Description>
+                <Attribute name="type" value="4DVector" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceVector4"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
+
+    <Pattern name="ApplicationPushSourcePositionList2" displayName="Application Push Source (2D Position List)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="Position 2D List">
+                <Description><h:p>The output PositionList received from the application</h:p></Description>
+                <Attribute name="type" value="2DPositionList" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourcePositionList2"/>
+        </DataflowConfiguration>
+    </Pattern>
+
     <Pattern name="ApplicationPushSourcePositionList" displayName="Application Push Source (3D Position List)">
     	<Description><h:p>This is an source component which may be used to interface
 		 the dataflow network to a user application.
@@ -124,152 +399,133 @@
             <UbitrackLib class="ApplicationPushSourcePositionList"/>
         </DataflowConfiguration>
     </Pattern>
-	
-	<Pattern name="ApplicationPushSourcePositionList2" displayName="Application Push Source (2D Position List)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
-		 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
-    	
-        <Output>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Position 2D List">
-            	<Description><h:p>The output PositionList received from the application</h:p></Description>
-                <Attribute name="type" value="2DPositionList" xsi:type="EnumAttributeReferenceType"/>
-                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
-            </Edge>
-        </Output>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourcePositionList2"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-    <Pattern name="ApplicationPushSourceMatrix3x3" displayName="Application Push Source (3x3 Matrix)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
+    <Pattern name="ApplicationPushSourcePoseList" displayName="Application Push Source (3D Pose List)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
 
         <Output>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Matrix">
-            	<Description><h:p>The output pose received from the application</h:p></Description>
-                <Attribute name="type" value="3x3Matrix" xsi:type="EnumAttributeReferenceType"/>
+            <Edge name="Output" source="A" destination="B" displayName="Pose List">
+                <Description><h:p>The output PoseList received from the application</h:p></Description>
+                <Attribute name="type" value="3DPoseList" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
 
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourceMatrix3x3"/>
+            <UbitrackLib class="ApplicationPushSourcePoseList"/>
         </DataflowConfiguration>
     </Pattern>
 
-    <Pattern name="ApplicationPushSourceMatrix3x4" displayName="Application Push Source (3x4 Matrix)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
-		 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
-    	
-        <Output>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Matrix">
-            	<Description><h:p>The output pose received from the application</h:p></Description>
-                <Attribute name="type" value="3x4Matrix" xsi:type="EnumAttributeReferenceType"/>
-                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
-            </Edge>
-        </Output>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourceMatrix3x4"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-    <Pattern name="ApplicationPushSourceMatrix4x4" displayName="Application Push Source (4x4 Matrix)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
-		 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
-    	
-        <Output>
-            <Node name="A" displayName="A"/>
-            <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Matrix">
-            	<Description><h:p>The output pose received from the application</h:p></Description>
-                <Attribute name="type" value="4x4Matrix" xsi:type="EnumAttributeReferenceType"/>
-                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
-            </Edge>
-        </Output>
-                
-        <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourceMatrix4x4"/>
-        </DataflowConfiguration>
-    </Pattern>
-    
-    <Pattern name="ApplicationPushSourceVector4" displayName="Application Push Source (4 Vector)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
+
+    <Pattern name="ApplicationPushSourceErrorPositionList2" displayName="Application Push Source (2D ErrorPosition List)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
 
         <Output>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Matrix">
-            	<Description><h:p>The output pose received from the application</h:p></Description>
-                <Attribute name="type" value="4DVector" xsi:type="EnumAttributeReferenceType"/>
+            <Edge name="Output" source="A" destination="B" displayName="ErrorPosition 2D List">
+                <Description><h:p>The output ErrorPositionList received from the application</h:p></Description>
+                <Attribute name="type" value="2DErrorPositionList" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
 
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourceVector4"/>
+            <UbitrackLib class="ApplicationPushSourceErrorPositionList2"/>
         </DataflowConfiguration>
     </Pattern>
 
-    <Pattern name="ApplicationPushSourceButton" displayName="Application Push Source (Button)">
-    	<Description><h:p>This is an source component which may be used to interface
-		 the dataflow network to a user application.
-		 
-		 This source uses a push output port and provides a callback
-		 function to the application that can be used to send
-		 events into the dataflow network.
-    	</h:p></Description>
+    <Pattern name="ApplicationPushSourceErrorPositionList" displayName="Application Push Source (3D ErrorPosition List)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
 
         <Output>
             <Node name="A" displayName="A"/>
             <Node name="B" displayName="B"/>
-            <Edge name="Output" source="A" destination="B" displayName="Button">
-                <Attribute name="type" value="Button" xsi:type="EnumAttributeReferenceType"/>
+            <Edge name="Output" source="A" destination="B" displayName="ErrorPosition List">
+                <Description><h:p>The output ErrorPositionList received from the application</h:p></Description>
+                <Attribute name="type" value="3DErrorPositionList" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
-        
+
         <DataflowConfiguration>
-            <UbitrackLib class="ApplicationPushSourceButton"/>
+            <UbitrackLib class="ApplicationPushSourceErrorPositionList"/>
         </DataflowConfiguration>
     </Pattern>
-    
-    
-    
+
+    <Pattern name="ApplicationPushSourceErrorPoseList" displayName="Application Push Source (3D ErrorPose List)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="ErrorPose List">
+                <Description><h:p>The output ErrorPoseList received from the application</h:p></Description>
+                <Attribute name="type" value="3DErrorPoseList" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceErrorPoseList"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+    <Pattern name="ApplicationPushSourceCameraIntrinsics" displayName="Application Push Source (CameraIntrinsics)">
+        <Description><h:p>This is an source component which may be used to interface
+            the dataflow network to a user application.
+
+            This source uses a push output port and provides a callback
+            function to the application that can be used to send
+            events into the dataflow network.
+        </h:p></Description>
+
+        <Output>
+            <Node name="A" displayName="A"/>
+            <Node name="B" displayName="B"/>
+            <Edge name="Output" source="A" destination="B" displayName="CameraIntrinsics">
+                <Description><h:p>The output CameraIntrinsics received from the application</h:p></Description>
+                <Attribute name="type" value="Intrinsics" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
+            </Edge>
+        </Output>
+
+        <DataflowConfiguration>
+            <UbitrackLib class="ApplicationPushSourceCameraIntrinsics"/>
+        </DataflowConfiguration>
+    </Pattern>
+
+
+
+
     <!-- Attribute declarations -->
     
     <GlobalNodeAttributeDeclarations>

@@ -37,25 +37,32 @@
 namespace Ubitrack { namespace Components {
 
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
-	cf->registerComponent< ApplicationPullSource< int > > ( "ApplicationPullSourceInt" );
-	cf->registerComponent< ApplicationPullSourceButton > ( "ApplicationPullSourceButton" );
-	cf->registerComponent< ApplicationPullSourcePose > ( "ApplicationPullSourcePose" );
-	cf->registerComponent< ApplicationPullSourceErrorPose > ( "ApplicationPullSourceErrorPose" );
 
-	cf->registerComponent< ApplicationPullSourcePosition > ( "ApplicationPullSourcePosition" );
-	cf->registerComponent< ApplicationPullSourcePosition2D > ( "ApplicationPullSourcePosition2D" );
-	cf->registerComponent< ApplicationPullSourceErrorPosition > ( "ApplicationPullSourceErrorPosition" );
-	cf->registerComponent< ApplicationPullSourceErrorPosition2D > ( "ApplicationPullSourceErrorPosition2D" );
-	cf->registerComponent< ApplicationPullSourceRotation > ( "ApplicationPullSourceRotation" );
-	cf->registerComponent< ApplicationPullSourcePositionList > ( "ApplicationPullSourcePositionList" );
-	cf->registerComponent< ApplicationPullSourcePositionList2 > ( "ApplicationPullSourcePosition2DList" );
-	cf->registerComponent< ApplicationPullSourceErrorPositionList > ( "ApplicationPullSourceErrorPositionList" );
-	cf->registerComponent< ApplicationPullSourceErrorPositionList2 > ( "ApplicationPullSourceErrorPosition2DList" );
-	cf->registerComponent< ApplicationPullSource< Measurement::Matrix3x4 > > ( "ApplicationPullSourceMatrix3x4" );
-	cf->registerComponent< ApplicationPullSource< Measurement::Matrix3x3 > > ( "ApplicationPullSourceMatrix3x3" );
-	cf->registerComponent< ApplicationPullSource< Measurement::Matrix4x4 > > ( "ApplicationPullSourceMatrix4x4" );
-	cf->registerComponent< ApplicationPullSource< Measurement::Distance > > ( "ApplicationPullSourceDistance" );
-	
+	cf->registerComponent< ApplicationPullSourceButton > ("ApplicationPullSourceButton");
+	cf->registerComponent< ApplicationPullSourceSkalar > ("ApplicationPullSourceSkalar");
+	cf->registerComponent< ApplicationPullSourceDistance > ("ApplicationPullSourceDistance"); // new
+	cf->registerComponent< ApplicationPullSourcePosition2D > ("ApplicationPullSourcePosition2D");
+	cf->registerComponent< ApplicationPullSourcePosition > ("ApplicationPullSourcePosition");
+	cf->registerComponent< ApplicationPullSourcePose > ("ApplicationPullSourcePose");
+	cf->registerComponent< ApplicationPullSourceErrorPosition2 > ("ApplicationPullSourceErrorPosition2");
+	cf->registerComponent< ApplicationPullSourceErrorPosition > ("ApplicationPullSourceErrorPosition");
+	cf->registerComponent< ApplicationPullSourceErrorPose > ("ApplicationPullSourceErrorPose");
+	cf->registerComponent< ApplicationPullSourceRotation > ("ApplicationPullSourceRotation");
+	cf->registerComponent< ApplicationPullSourceMatrix3x3 > ("ApplicationPullSourceMatrix3x3");
+	cf->registerComponent< ApplicationPullSourceMatrix3x4 > ("ApplicationPullSourceMatrix3x4");
+	cf->registerComponent< ApplicationPullSourceMatrix4x4 > ("ApplicationPullSourceMatrix4x4");
+	cf->registerComponent< ApplicationPullSourceVector4D > ("ApplicationPullSourceVector4D");
+	cf->registerComponent< ApplicationPullSourceButtonList > ("ApplicationPullSourceButtonList"); //new
+	cf->registerComponent< ApplicationPullSourceDistanceList > ("ApplicationPullSourceDistanceList"); //new
+	cf->registerComponent< ApplicationPullSourcePositionList2 > ("ApplicationPullSourcePositionList2");
+	cf->registerComponent< ApplicationPullSourcePositionList > ("ApplicationPullSourcePositionList");
+	cf->registerComponent< ApplicationPullSourcePoseList > ("ApplicationPullSourcePoseList"); //new
+	cf->registerComponent< ApplicationPullSourceErrorPositionList2 > ("ApplicationPullSourceErrorPositionList2"); //new
+	cf->registerComponent< ApplicationPullSourceErrorPositionList > ("ApplicationPullSourceErrorPositionList");
+	cf->registerComponent< ApplicationPullSourceErrorPoseList > ("ApplicationPullSourceErrorPoseList"); //new	
+
+	cf->registerComponent< ApplicationPullSourceCameraIntrinsics > ("ApplicationPullSourceCameraIntrinsics");
+
 }
 
 } } // namespace Ubitrack::Components

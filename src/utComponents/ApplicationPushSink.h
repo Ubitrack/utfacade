@@ -189,21 +189,40 @@ protected:
 };
 
 
+
 typedef ApplicationPushSink< Measurement::Button > ApplicationPushSinkButton;
-typedef ApplicationPushSink< Measurement::Pose > ApplicationPushSinkPose;
-typedef ApplicationPushSink< Measurement::ErrorPose > ApplicationPushSinkErrorPose;
-typedef ApplicationPushSink< Measurement::Position > ApplicationPushSinkPosition;
+typedef ApplicationPushSink< Measurement::Button > ApplicationPushSinkSkalar;
+typedef ApplicationPushSink< Measurement::Distance > ApplicationPushSinkDistance; // new
+
 typedef ApplicationPushSink< Measurement::Position2D > ApplicationPushSinkPosition2D;
+typedef ApplicationPushSink< Measurement::Position > ApplicationPushSinkPosition;
+typedef ApplicationPushSink< Measurement::Pose > ApplicationPushSinkPose;
+
+typedef ApplicationPushSink< Measurement::ErrorPosition2 > ApplicationPushSinkErrorPosition2;
 typedef ApplicationPushSink< Measurement::ErrorPosition > ApplicationPushSinkErrorPosition;
-typedef ApplicationPushSink< Measurement::Position2D > ApplicationPushSinkErrorPosition2D;
+typedef ApplicationPushSink< Measurement::ErrorPose > ApplicationPushSinkErrorPose;
+
 typedef ApplicationPushSink< Measurement::Rotation > ApplicationPushSinkRotation;
-typedef ApplicationPushSink< Measurement::PositionList > ApplicationPushSinkPositionList;
-typedef ApplicationPushSink< Measurement::PositionList2 > ApplicationPushSinkPositionList2;
-typedef ApplicationPushSink< Measurement::Matrix4x4 > ApplicationPushSinkMatrix4x4;
+
 typedef ApplicationPushSink< Measurement::Matrix3x3 > ApplicationPushSinkMatrix3x3;
 typedef ApplicationPushSink< Measurement::Matrix3x4 > ApplicationPushSinkMatrix3x4;
+typedef ApplicationPushSink< Measurement::Matrix4x4 > ApplicationPushSinkMatrix4x4;
+
+typedef ApplicationPushSink< Measurement::Vector4D > ApplicationPushSinkVector4D;
+
+typedef ApplicationPushSink< Measurement::ButtonList > ApplicationPushSinkButtonList; //new
+typedef ApplicationPushSink< Measurement::DistanceList > ApplicationPushSinkDistanceList; //new
+
+typedef ApplicationPushSink< Measurement::PositionList2 > ApplicationPushSinkPositionList2;
+typedef ApplicationPushSink< Measurement::PositionList > ApplicationPushSinkPositionList;
+typedef ApplicationPushSink< Measurement::PoseList > ApplicationPushSinkPoseList; //new
+
+typedef ApplicationPushSink< Measurement::ErrorPositionList2 > ApplicationPushSinkErrorPositionList2; //new
 typedef ApplicationPushSink< Measurement::ErrorPositionList > ApplicationPushSinkErrorPositionList;
-typedef ApplicationPushSink< Measurement::ErrorPositionList2 > ApplicationPushSinkErrorPositionList2;
+typedef ApplicationPushSink< Measurement::ErrorPoseList > ApplicationPushSinkErrorPoseList; //new
+
+typedef ApplicationPushSink< Measurement::CameraIntrinsics > ApplicationPushSinkCameraIntrinsics; //new
+
 } } // namespace Ubitrack::Components
 #endif //__UBITRACK_COMPONENTS_APPLICATIONPUSHSINK_H_INCLUDED__
 

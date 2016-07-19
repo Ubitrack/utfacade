@@ -55,43 +55,64 @@
     <GlobalEdgeAttributeDeclarations>
         <Attribute name="type" displayName="Transformation type" constant="true" default="6D" xsi:type="EnumAttributeDeclarationType">
             <Description><p xmlns="http://www.w3.org/1999/xhtml">An input edge must always have the same type of transformation as the output edge it shall be matched against</p></Description>
-            <EnumValue name="6D" displayName="6 DOF"/>
-            <EnumValue name="3DPosition" displayName="3 DOF Position"/>
-            <EnumValue name="3DRotation" displayName="3 DOF Rotation"/>
-            <EnumValue name="4DVector" displayName="4-Vector">
-                <Description><p xmlns="http://www.w3.org/1999/xhtml">"4 element vector"</p></Description>
-            </EnumValue>
-            <EnumValue name="Image" displayName="Image">
-                <Description><p xmlns="http://www.w3.org/1999/xhtml">Image Measurement</p></Description>
-            </EnumValue>
-            <EnumValue name="3x3Matrix" displayName="3x3-Matrix">
-                <Description><p xmlns="http://www.w3.org/1999/xhtml">Transformation matrix with 3x3 elements</p></Description>
-            </EnumValue>
-            <EnumValue name="4x4Matrix" displayName="4x4-Matrix">
-                <Description><p xmlns="http://www.w3.org/1999/xhtml">Transformation matrix with 4x4 elements</p></Description>
-            </EnumValue>
-            <EnumValue name="Matrix3x4" displayName="3x4-Matrix">
-                <Description><p xmlns="http://www.w3.org/1999/xhtml">Projection matrix with 3x4 elements</p></Description>
-            </EnumValue>
-            <EnumValue name="PoseList" displayName="6 DOF pose list"/>
-			<EnumValue name="3DPositionList" displayName="3D position list"/>
-            <EnumValue name="2DPositionList" displayName="2D position list"/>			
-			<EnumValue name="3DErrorPositionList" displayName="3D Error position list"/>
-            <EnumValue name="2DErrorPositionList" displayName="2D Error position list"/>
-            <EnumValue name="DistanceList" displayName="Distance list"/>
+
             <EnumValue name="Button" displayName="Signal/Selection"/>
-            <EnumValue name="RotationVelocity" displayName="Rotation velocity"/>
-            <EnumValue name="6DError" displayName="6DOF pose with covariance">
-                <Description><p xmlns="http://www.w3.org/1999/xhtml">6DOF pose with 6x6 covariance matrix</p></Description>
+            <EnumValue name="Scalar" displayName="Scalar value"/>
+            <EnumValue name="Distance" displayName="1D distance value"/>
+
+            <EnumValue name="2DPosition" displayName="2 DOF Position"/>
+            <EnumValue name="3DPosition" displayName="3 DOF Position"/>
+            <EnumValue name="6D" displayName="6 DOF"/>
+
+            <EnumValue name="2DPositionError" displayName="2D position with covariance">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">2DOF position with 2x2 covariance matrix</p></Description>
             </EnumValue>
             <EnumValue name="3DPositionError" displayName="3D position with covariance">
                 <Description><p xmlns="http://www.w3.org/1999/xhtml">3DOF position with 3x3 covariance matrix</p></Description>
             </EnumValue>
-            <EnumValue name="Distance" displayName="1D distance value"/>
-            <EnumValue name="2DPosition" displayName="2 DOF Position"/>
+            <EnumValue name="6DError" displayName="6DOF pose with covariance">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">6DOF pose with 6x6 covariance matrix</p></Description>
+            </EnumValue>
+
+
+            <EnumValue name="3DRotation" displayName="3 DOF Rotation"/>
+
+            <EnumValue name="3x3Matrix" displayName="3x3-Matrix">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">Transformation matrix with 3x3 elements</p></Description>
+            </EnumValue>
+            <EnumValue name="Matrix3x4" displayName="3x4-Matrix">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">Projection matrix with 3x4 elements</p></Description>
+            </EnumValue>
+            <EnumValue name="4x4Matrix" displayName="4x4-Matrix">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">Transformation matrix with 4x4 elements</p></Description>
+            </EnumValue>
+
+            <EnumValue name="4DVector" displayName="4-Vector">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">"4 element vector"</p></Description>
+            </EnumValue>
+
+            <EnumValue name="ButtonList" displayName="Button list"/>
+            <EnumValue name="DistanceList" displayName="Distance list"/>
+
+            <EnumValue name="2DPositionList" displayName="2D position list"/>
+            <EnumValue name="3DPositionList" displayName="3D position list"/>
+            <EnumValue name="PoseList" displayName="6 DOF pose list"/>
+
+            <EnumValue name="2DErrorPositionList" displayName="2D Error position list"/>
+            <EnumValue name="3DErrorPositionList" displayName="3D Error position list"/>
+            <EnumValue name="3DErrorPoseList" displayName="3D Error pose list"/>
+
+
+            <EnumValue name="Image" displayName="Image">
+                <Description><p xmlns="http://www.w3.org/1999/xhtml">Image Measurement</p></Description>
+            </EnumValue>
+
+            <EnumValue name="RotationVelocity" displayName="Rotation velocity"/>
+
             <EnumValue name="Intrinsics" displayName="Camera Intrinsic Parameters">
                 <Description><p xmlns="http://www.w3.org/1999/xhtml">Camera projection matrix, distortion coefficients, image size, and reprojection residual error</p></Description>
             </EnumValue>
+
         </Attribute>
         
         <Attribute name="mode" displayName="Synchronization mode" constant="true" default="push" xsi:type="EnumAttributeDeclarationType">

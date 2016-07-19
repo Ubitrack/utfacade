@@ -143,18 +143,38 @@ protected:
 	PushSupplier< EventType > m_outPort;
 };
 
-typedef ApplicationPushSource< Measurement::Rotation > ApplicationPushSourceRotation;
-//typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
-//typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
-typedef ApplicationPushSource< Measurement::PositionList2 > ApplicationPushSourcePosition2DList;
-typedef ApplicationPushSource< Measurement::PoseList > ApplicationPushSourcePoseList;
-typedef ApplicationPushSource< Measurement::Matrix4x4 > ApplicationPushSourceMatrix4x4;
-typedef ApplicationPushSource< Measurement::Matrix3x4 > ApplicationPushSourceMatrix3x4;
-typedef ApplicationPushSource< Measurement::Matrix3x3 > ApplicationPushSourceMatrix3x3;
-typedef ApplicationPushSource< Measurement::Vector4D > ApplicationPushSourceVector4;
+typedef ApplicationPushSource< Measurement::Button > ApplicationPushSourceButton;
+typedef ApplicationPushSource< Measurement::Button > ApplicationPushSourceSkalar;
+typedef ApplicationPushSource< Measurement::Distance > ApplicationPushSourceDistance; // new
+
+typedef ApplicationPushSource< Measurement::Position2D > ApplicationPushSourcePosition2D;
+typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
+typedef ApplicationPushSource< Measurement::Pose > ApplicationPushSourcePose;
+
+typedef ApplicationPushSource< Measurement::ErrorPosition2 > ApplicationPushSourceErrorPosition2;
+typedef ApplicationPushSource< Measurement::ErrorPosition > ApplicationPushSourceErrorPosition;
 typedef ApplicationPushSource< Measurement::ErrorPose > ApplicationPushSourceErrorPose;
 
+typedef ApplicationPushSource< Measurement::Rotation > ApplicationPushSourceRotation;
 
+typedef ApplicationPushSource< Measurement::Matrix3x3 > ApplicationPushSourceMatrix3x3;
+typedef ApplicationPushSource< Measurement::Matrix3x4 > ApplicationPushSourceMatrix3x4;
+typedef ApplicationPushSource< Measurement::Matrix4x4 > ApplicationPushSourceMatrix4x4;
+
+typedef ApplicationPushSource< Measurement::Vector4D > ApplicationPushSourceVector4D;
+
+typedef ApplicationPushSource< Measurement::ButtonList > ApplicationPushSourceButtonList; //new
+typedef ApplicationPushSource< Measurement::DistanceList > ApplicationPushSourceDistanceList; //new
+
+typedef ApplicationPushSource< Measurement::PositionList2 > ApplicationPushSourcePositionList2;
+typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
+typedef ApplicationPushSource< Measurement::PoseList > ApplicationPushSourcePoseList; //new
+
+typedef ApplicationPushSource< Measurement::ErrorPositionList2 > ApplicationPushSourceErrorPositionList2; //new
+typedef ApplicationPushSource< Measurement::ErrorPositionList > ApplicationPushSourceErrorPositionList;
+typedef ApplicationPushSource< Measurement::ErrorPoseList > ApplicationPushSourceErrorPoseList; //new
+
+typedef ApplicationPushSource< Measurement::CameraIntrinsics > ApplicationPushSourceCameraIntrinsics; //new
 
 /**
  * Specialization of \c ApplicationPushSource for \c Measurement::Pose, which also supports the

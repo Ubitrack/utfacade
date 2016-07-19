@@ -40,19 +40,44 @@ namespace Ubitrack { namespace Components {
 using namespace Ubitrack::Dataflow;
 
 UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
-	cf->registerComponent< ApplicationPushSourceButton > ( "ApplicationPushSourceButton" );
-	cf->registerComponent< ApplicationPushSourceRotation > ( "ApplicationPushSourceRotation" );
-	cf->registerComponent< ApplicationPushSourcePosition > ( "ApplicationPushSourcePosition" );
-	cf->registerComponent< ApplicationPushSourcePositionList > ( "ApplicationPushSourcePositionList" );
-	cf->registerComponent< ApplicationPushSourcePosition2D > ( "ApplicationPushSourcePosition2" );	
-	cf->registerComponent< ApplicationPushSourcePosition2DList > ( "ApplicationPushSourcePositionList2" );
-	cf->registerComponent< ApplicationPushSourcePose > ( "ApplicationPushSourcePose" );
-	cf->registerComponent< ApplicationPushSourceErrorPose > ( "ApplicationPushSourceErrorPose" );
-	cf->registerComponent< ApplicationPushSourcePoseList > ( "ApplicationPushSourcePoseList" );
-	cf->registerComponent< ApplicationPushSourceMatrix4x4 > ( "ApplicationPushSourceMatrix4x4" );
-	cf->registerComponent< ApplicationPushSourceMatrix3x4 > ( "ApplicationPushSourceMatrix3x4" );
-	cf->registerComponent< ApplicationPushSourceMatrix3x3 > ( "ApplicationPushSourceMatrix3x3" );
-	cf->registerComponent< ApplicationPushSourceVector4 > ( "ApplicationPushSourceVector4" );
+
+	cf->registerComponent< ApplicationPushSourceButton > ("ApplicationPushSourceButton");
+	cf->registerComponent< ApplicationPushSourceSkalar > ("ApplicationPushSourceSkalar");
+	cf->registerComponent< ApplicationPushSourceDistance > ("ApplicationPushSourceDistance"); // new
+
+	cf->registerComponent< ApplicationPushSourcePosition2D > ("ApplicationPushSourcePosition2D");
+	cf->registerComponent< ApplicationPushSourcePosition > ("ApplicationPushSourcePosition");
+	cf->registerComponent< ApplicationPushSourcePose > ("ApplicationPushSourcePose");
+
+	cf->registerComponent< ApplicationPushSourceErrorPosition2 > ("ApplicationPushSourceErrorPosition2");
+	cf->registerComponent< ApplicationPushSourceErrorPosition > ("ApplicationPushSourceErrorPosition");
+	cf->registerComponent< ApplicationPushSourceErrorPose > ("ApplicationPushSourceErrorPose");
+
+	cf->registerComponent< ApplicationPushSourceRotation > ("ApplicationPushSourceRotation");
+
+	cf->registerComponent< ApplicationPushSourceMatrix3x3 > ("ApplicationPushSourceMatrix3x3");
+	cf->registerComponent< ApplicationPushSourceMatrix3x4 > ("ApplicationPushSourceMatrix3x4");
+	cf->registerComponent< ApplicationPushSourceMatrix4x4 > ("ApplicationPushSourceMatrix4x4");
+
+	cf->registerComponent< ApplicationPushSourceVector4D > ("ApplicationPushSourceVector4D");
+
+	cf->registerComponent< ApplicationPushSourceButtonList > ("ApplicationPushSourceButtonList"); //new
+	cf->registerComponent< ApplicationPushSourceDistanceList > ("ApplicationPushSourceDistanceList"); //new
+
+	cf->registerComponent< ApplicationPushSourcePositionList2 > ("ApplicationPushSourcePositionList2");
+	cf->registerComponent< ApplicationPushSourcePositionList > ("ApplicationPushSourcePositionList");
+	cf->registerComponent< ApplicationPushSourcePoseList > ("ApplicationPushSourcePoseList"); //new
+
+	cf->registerComponent< ApplicationPushSourceErrorPositionList2 > ("ApplicationPushSourceErrorPositionList2"); //new
+	cf->registerComponent< ApplicationPushSourceErrorPositionList > ("ApplicationPushSourceErrorPositionList");
+	cf->registerComponent< ApplicationPushSourceErrorPoseList > ("ApplicationPushSourceErrorPoseList"); //new
+
+	// backward compatibility
+	cf->registerComponent< ApplicationPushSourceErrorPositionList2 > ( "ApplicationPushSourcePositionList2" );
+	cf->registerComponent< ApplicationPushSourceVector4D > ( "ApplicationPushSourceVector4" );
+
+	cf->registerComponent< ApplicationPushSourceCameraIntrinsics > ("ApplicationPushSourceCameraIntrinsics");
+
 }
 
 } } // namespace Ubitrack::Components
