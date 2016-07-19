@@ -174,7 +174,8 @@ typedef ApplicationPushSource< Measurement::ErrorPositionList2 > ApplicationPush
 typedef ApplicationPushSource< Measurement::ErrorPositionList > ApplicationPushSourceErrorPositionList;
 typedef ApplicationPushSource< Measurement::ErrorPoseList > ApplicationPushSourceErrorPoseList; //new
 
-typedef ApplicationPushSource< Measurement::CameraIntrinsics > ApplicationPushSourceCameraIntrinsics; //new
+// incompatible with simplefacade
+//typedef ApplicationPushSource< Measurement::CameraIntrinsics > ApplicationPushSourceCameraIntrinsics; //new
 
 /**
  * Specialization of \c ApplicationPushSource for \c Measurement::Pose, which also supports the

@@ -76,7 +76,8 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSourceErrorPositionList2 > ( "ApplicationPushSourcePositionList2" );
 	cf->registerComponent< ApplicationPushSourceVector4D > ( "ApplicationPushSourceVector4" );
 
-	cf->registerComponent< ApplicationPushSourceCameraIntrinsics > ("ApplicationPushSourceCameraIntrinsics");
+	// incompatible with simplefacade
+//	cf->registerComponent< ApplicationPushSourceCameraIntrinsics > ("ApplicationPushSourceCameraIntrinsics");
 
 }
 
