@@ -143,13 +143,13 @@ protected:
 	PushSupplier< EventType > m_outPort;
 };
 
-typedef ApplicationPushSource< Measurement::Button > ApplicationPushSourceButton;
+//typedef ApplicationPushSource< Measurement::Button > ApplicationPushSourceButton;
 typedef ApplicationPushSource< Measurement::Button > ApplicationPushSourceSkalar;
 typedef ApplicationPushSource< Measurement::Distance > ApplicationPushSourceDistance; // new
 
-typedef ApplicationPushSource< Measurement::Position2D > ApplicationPushSourcePosition2D;
-typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
-typedef ApplicationPushSource< Measurement::Pose > ApplicationPushSourcePose;
+//typedef ApplicationPushSource< Measurement::Position2D > ApplicationPushSourcePosition2D;
+//typedef ApplicationPushSource< Measurement::Position > ApplicationPushSourcePosition;
+//typedef ApplicationPushSource< Measurement::Pose > ApplicationPushSourcePose;
 
 typedef ApplicationPushSource< Measurement::ErrorPosition2 > ApplicationPushSourceErrorPosition2;
 typedef ApplicationPushSource< Measurement::ErrorPosition > ApplicationPushSourceErrorPosition;
@@ -167,7 +167,7 @@ typedef ApplicationPushSource< Measurement::ButtonList > ApplicationPushSourceBu
 typedef ApplicationPushSource< Measurement::DistanceList > ApplicationPushSourceDistanceList; //new
 
 typedef ApplicationPushSource< Measurement::PositionList2 > ApplicationPushSourcePositionList2;
-typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
+//typedef ApplicationPushSource< Measurement::PositionList > ApplicationPushSourcePositionList;
 typedef ApplicationPushSource< Measurement::PoseList > ApplicationPushSourcePoseList; //new
 
 typedef ApplicationPushSource< Measurement::ErrorPositionList2 > ApplicationPushSourceErrorPositionList2; //new
