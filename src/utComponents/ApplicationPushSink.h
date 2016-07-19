@@ -221,7 +221,8 @@ typedef ApplicationPushSink< Measurement::ErrorPositionList2 > ApplicationPushSi
 typedef ApplicationPushSink< Measurement::ErrorPositionList > ApplicationPushSinkErrorPositionList;
 typedef ApplicationPushSink< Measurement::ErrorPoseList > ApplicationPushSinkErrorPoseList; //new
 
-typedef ApplicationPushSink< Measurement::CameraIntrinsics > ApplicationPushSinkCameraIntrinsics; //new
+// incompatible with simplefacade
+//typedef ApplicationPushSink< Measurement::CameraIntrinsics > ApplicationPushSinkCameraIntrinsics; //new
 
 } } // namespace Ubitrack::Components
 #endif //__UBITRACK_COMPONENTS_APPLICATIONPUSHSINK_H_INCLUDED__

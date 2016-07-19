@@ -61,7 +61,8 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSinkErrorPositionList > ("ApplicationPushSinkErrorPositionList");
 	cf->registerComponent< ApplicationPushSinkErrorPoseList > ("ApplicationPushSinkErrorPoseList"); //new
 
-	cf->registerComponent< ApplicationPushSinkCameraIntrinsics > ("ApplicationPushSinkCameraIntrinsics");
+	// incompatible with simplefacade
+//	cf->registerComponent< ApplicationPushSinkCameraIntrinsics > ("ApplicationPushSinkCameraIntrinsics");
 }
 
 } } // namespace Ubitrack::Components
