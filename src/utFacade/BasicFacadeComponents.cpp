@@ -226,6 +226,11 @@ template class Ubitrack::Facade::BasicPushSink  <Ubitrack::Facade::BasicErrorVec
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >;
 template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >;
 
+template class Ubitrack::Facade::BasicPullSink  <Ubitrack::Facade::BasicErrorPoseMeasurement>;
+template class Ubitrack::Facade::BasicPushSink  <Ubitrack::Facade::BasicErrorPoseMeasurement>;
+template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicErrorPoseMeasurement>;
+template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicErrorPoseMeasurement>;
+
 template class Ubitrack::Facade::BasicPullSink  <Ubitrack::Facade::BasicCameraIntrinsicsMeasurement>;
 template class Ubitrack::Facade::BasicPushSink  <Ubitrack::Facade::BasicCameraIntrinsicsMeasurement>;
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicCameraIntrinsicsMeasurement>;
