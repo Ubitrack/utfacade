@@ -463,7 +463,7 @@ public:
     bool getCovariance(std::vector< std::vector<double> >& v);
 
     //        private:
-    BasicErrorPoseMeasurementPrivate* m_pPrivate;
+    BasicErrorPoseListMeasurementPrivate* m_pPrivate;
 };
 
 

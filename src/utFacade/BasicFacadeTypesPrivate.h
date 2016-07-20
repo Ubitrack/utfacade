@@ -688,6 +688,7 @@ struct BasicMeasurementTypeTrait<BasicCameraIntrinsicsMeasurement> {
   typedef Measurement::CameraIntrinsics ubitrack_measurement_type;
 };
 
+
 /**
 * image measurement buffer
 */
@@ -695,9 +696,8 @@ struct BasicImageMeasurementPrivate {
 
   BasicImageMeasurementPrivate(unsigned long long int const ts,
           int width, int height, int depth, int channels, unsigned char* data,
-          Vision::Image::PixelFormat pixel_format = Vision::Image::RGB,
-          bool copy_data = true)
-  {
+          BasicImageMeasurement::PixelFormat pixel_format = BasicImageMeasurement::RGB,
+          bool copy_data = true) {
 
       unsigned int pixel_size = sizeof(unsigned char);
       switch (depth) {
@@ -711,34 +711,51 @@ struct BasicImageMeasurementPrivate {
           // assume CV8U is the default
           break;
       }
-      unsigned int frame_bytes = width*height*channels*pixel_size;
+      unsigned int frame_bytes = width * height * channels * pixel_size;
 
-      boost::shared_ptr<Vision::Image> pImage;
+      boost::shared_ptr< Vision::Image > pImage;
       if (copy_data) {
           pImage.reset(new Vision::Image(width, height, channels, depth));
 
           // what about images other than CV8U
           // copy data
           unsigned char* srcData = (unsigned char*) data;
-          unsigned char* dstData = (unsigned char*) pImage->Mat().data;
+          unsigned char* dstData = (unsigned char*) pImage->imageData;
           memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 
-      }
-      else {
-          pImage.reset(new Vision::Image(width, height, channels, (void*) (data), depth));
+      } else {
+          pImage.reset(new Vision::Image(width, height, channels, (void*)(data), depth));
       }
 
-      pImage->set_pixelFormat(pixel_format);
+      switch(channels) {
+      case 1:
+          // nothing to do ?
+          break;
+      case 3:
+          if ( pixel_format == BasicImageMeasurement::BGR ) {
+              pImage->channelSeq[0] = 'B';
+              pImage->channelSeq[1] = 'G';
+              pImage->channelSeq[2] = 'R';
+          } else if ( pixel_format == BasicImageMeasurement::RGB ) {
+              pImage->channelSeq[0] = 'R';
+              pImage->channelSeq[1] = 'G';
+              pImage->channelSeq[2] = 'B';
+          } else {
+              // three pixels but not RGB/BGR .. what's it ??
+          }
+          break;
+      default:
+          // what to do here .. do we have some logging ??
+          break;
+      }
       m_measurement = Measurement::ImageMeasurement(pImage);
   }
 
-  BasicImageMeasurementPrivate(const Measurement::ImageMeasurement& m)
-  {
+  BasicImageMeasurementPrivate(const Measurement::ImageMeasurement& m) {
       m_measurement = m;
   }
 
-  void clear()
-  {
+  void clear() {
       m_measurement.reset();
   }
 
@@ -747,9 +764,8 @@ struct BasicImageMeasurementPrivate {
 };
 
 template<>
-struct BasicMeasurementTypeTrait<BasicImageMeasurement> {
+struct BasicMeasurementTypeTrait< BasicImageMeasurement > {
   static const bool supported = true;
-  static const bool is_list = false;
   typedef BasicImageMeasurementPrivate private_measurement_type;
   typedef Measurement::ImageMeasurement ubitrack_measurement_type;
 };

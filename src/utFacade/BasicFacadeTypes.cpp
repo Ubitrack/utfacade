@@ -575,12 +575,13 @@ bool BasicVectorListMeasurement<LEN>::get(std::vector< std::vector<double> >& v)
 
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            
-
-            Math::Vector<double, LEN>* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-            for (unsigned int i = 0; i<TI::SIZE; i++) {
-                v.at(i) = (*m)(i);
+            std::vector< Math::Vector<double, LEN> >* m = m_pPrivate->m_measurement.get();
+            v.reserve(v.size());
+            for (unsigned int i = 0; i < v.size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
+                for (unsigned int j = 0; j<TI::SIZE; j++) {
+                    v.at(i).at(j) = (*m).at(i)(j);
+                }
             }
             return true;
         }
@@ -595,10 +596,13 @@ bool BasicVectorListMeasurement<LEN>::get(std::vector< std::vector<float> >& v)
 
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::Vector<double, LEN>* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-            for (unsigned int i = 0; i<TI::SIZE; i++) {
-                v.at(i) = (float) ((*m)(i));
+            std::vector< Math::Vector<double, LEN> >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
+                for (unsigned int j = 0; j<TI::SIZE; j++) {
+                    v.at(i).at(j) = (float) m->at(i)(j);
+                }
             }
             return true;
         }
@@ -625,19 +629,22 @@ bool BasicPoseListMeasurement::get(std::vector< std::vector<double> >& v)
     typedef TensorIndex<7> TI;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::Pose* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
+            std::vector< Math::Pose >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
 
-            const Math::Vector<double, 3>& t = m->translation();
-            v.at(0) = t(0);
-            v.at(1) = t(1);
-            v.at(2) = t(2);
+                const Math::Vector<double, 3>& t = m->at(i).translation();
+                v.at(i).at(0) = t(0);
+                v.at(i).at(1) = t(1);
+                v.at(i).at(2) = t(2);
 
-            const Math::Quaternion& r = m->rotation();
-            v.at(3) = r.x();
-            v.at(4) = r.y();
-            v.at(5) = r.z();
-            v.at(6) = r.w();
+                const Math::Quaternion& r = m->at(i).rotation();
+                v.at(i).at(3) = r.x();
+                v.at(i).at(4) = r.y();
+                v.at(i).at(5) = r.z();
+                v.at(i).at(6) = r.w();
+            }
             return true;
         }
     }
@@ -649,72 +656,22 @@ bool BasicPoseListMeasurement::get(std::vector< std::vector<float> >& v)
     typedef TensorIndex<7> TI;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::Pose* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
+            std::vector< Math::Pose >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
 
-            const Math::Vector<double, 3>& t = m->translation();
-            v.at(0) = (float) (t(0));
-            v.at(1) = (float) (t(1));
-            v.at(2) = (float) (t(2));
+                const Math::Vector<double, 3>& t = m->at(i).translation();
+                v.at(i).at(0) = (float) t(0);
+                v.at(i).at(1) = (float) t(1);
+                v.at(i).at(2) = (float) t(2);
 
-            const Math::Quaternion& r = m->rotation();
-            v.at(3) = (float) (r.x());
-            v.at(4) = (float) (r.y());
-            v.at(5) = (float) (r.z());
-            v.at(6) = (float) (r.w());
-            return true;
-        }
-    }
-    return false;
-}
-
-// Rotation
-BasicRotationListMeasurement::BasicRotationListMeasurement(unsigned long long int const ts,
-        BasicRotationListMeasurementPrivate* _pPrivate)
-        :BasicMeasurement(ts), m_pPrivate(_pPrivate) { }
-
-BasicRotationListMeasurement::BasicRotationListMeasurement(unsigned long long int const ts, const std::vector< std::vector<double> >& value)
-        :BasicMeasurement(ts), m_pPrivate(new BasicRotationListMeasurementPrivate(ts, value)) { }
-
-BasicRotationListMeasurement::~BasicRotationListMeasurement()
-{
-    if (m_pPrivate) {
-        delete (m_pPrivate);
-    }
-}
-
-bool BasicRotationListMeasurement::get(std::vector< std::vector<double> >& v)
-{
-    typedef TensorIndex<4> TI;
-    if (m_pPrivate) {
-        if (m_pPrivate->m_measurement) {
-            Math::Quaternion* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-
-            v.at(3) = m->x();
-            v.at(4) = m->y();
-            v.at(5) = m->z();
-            v.at(6) = m->w();
-
-            return true;
-        }
-    }
-    return false;
-}
-
-bool BasicRotationListMeasurement::get(std::vector< std::vector<float> >& v)
-{
-    typedef TensorIndex<4> TI;
-    if (m_pPrivate) {
-        if (m_pPrivate->m_measurement) {
-            Math::Quaternion* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-
-            v.at(3) = (float) (m->x());
-            v.at(4) = (float) (m->y());
-            v.at(5) = (float) (m->z());
-            v.at(6) = (float) (m->w());
-
+                const Math::Quaternion& r = m->at(i).rotation();
+                v.at(i).at(3) = (float) r.x();
+                v.at(i).at(4) = (float) r.y();
+                v.at(i).at(5) = (float) r.z();
+                v.at(i).at(6) = (float) r.w();
+            }
             return true;
         }
     }
@@ -747,10 +704,13 @@ bool BasicErrorVectorListMeasurement<LEN>::get(std::vector< std::vector<double> 
 
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::ErrorVector<double, LEN>* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-            for (unsigned int i = 0; i<TI::SIZE; i++) {
-                v.at(i) = m->value(i);
+            std::vector< Math::ErrorVector<double, LEN> >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
+                for (unsigned int j = 0; j<TI::SIZE; j++) {
+                    v.at(i).at(j) = m->at(i).value(j);
+                }
             }
             return true;
         }
@@ -764,11 +724,14 @@ bool BasicErrorVectorListMeasurement<LEN>::getCovariance(std::vector< std::vecto
     typedef TensorIndex<LEN, LEN> TI;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::ErrorVector<double, LEN>* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-            for (unsigned int i = 0; i<TI::LEN1; i++) {
-                for (unsigned int j = 0; j<TI::LEN2; j++) {
-                    v.at(TI::indexOf(i, j)) = m->covariance(i, j);
+            std::vector< Math::ErrorVector<double, LEN> >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
+                for (unsigned int j = 0; j<TI::SIZE; j++) {
+                    for (unsigned int k = 0; k<TI::LEN2; k++) {
+                        v.at(i).at(TI::indexOf(j, k)) = m->at(i).covariance(j, k);
+                    }
                 }
             }
             return true;
@@ -798,19 +761,22 @@ bool BasicErrorPoseListMeasurement::get(std::vector< std::vector<double> >& v)
     typedef TensorIndex<7> TI;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::Pose* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
+            std::vector< Math::ErrorPose >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
 
-            const Math::Vector<double, 3>& t = m->translation();
-            v.at(0) = t(0);
-            v.at(1) = t(1);
-            v.at(2) = t(2);
+                const Math::Vector<double, 3>& t = m->at(i).translation();
+                v.at(i).at(0) = t(0);
+                v.at(i).at(1) = t(1);
+                v.at(i).at(2) = t(2);
 
-            const Math::Quaternion& r = m->rotation();
-            v.at(3) = r.x();
-            v.at(4) = r.y();
-            v.at(5) = r.z();
-            v.at(6) = r.w();
+                const Math::Quaternion& r = m->at(i).rotation();
+                v.at(i).at(3) = r.x();
+                v.at(i).at(4) = r.y();
+                v.at(i).at(5) = r.z();
+                v.at(i).at(6) = r.w();
+            }
             return true;
         }
     }
@@ -822,19 +788,22 @@ bool BasicErrorPoseListMeasurement::get(std::vector< std::vector<float> >& v)
     typedef TensorIndex<7> TI;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::Pose* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
+            std::vector< Math::ErrorPose >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
 
-            const Math::Vector<double, 3>& t = m->translation();
-            v.at(0) = (float) (t(0));
-            v.at(1) = (float) (t(1));
-            v.at(2) = (float) (t(2));
+                const Math::Vector<double, 3>& t = m->at(i).translation();
+                v.at(i).at(0) = (float) t(0);
+                v.at(i).at(1) = (float) t(1);
+                v.at(i).at(2) = (float) t(2);
 
-            const Math::Quaternion& r = m->rotation();
-            v.at(3) = (float) (r.x());
-            v.at(4) = (float) (r.y());
-            v.at(5) = (float) (r.z());
-            v.at(6) = (float) (r.w());
+                const Math::Quaternion& r = m->at(i).rotation();
+                v.at(i).at(3) = (float) r.x();
+                v.at(i).at(4) = (float) r.y();
+                v.at(i).at(5) = (float) r.z();
+                v.at(i).at(6) = (float) r.w();
+            }
             return true;
         }
     }
@@ -846,11 +815,15 @@ bool BasicErrorPoseListMeasurement::getCovariance(std::vector< std::vector<doubl
     typedef TensorIndex<7, 7> TI;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Math::ErrorPose* m = m_pPrivate->m_measurement.get();
-            v.reserve(TI::SIZE);
-            for (unsigned int i = 0; i<TI::LEN1; i++) {
-                for (unsigned int j = 0; j<TI::LEN2; j++) {
-                    v.at(TI::indexOf(i, j)) = m->covariance()(i, j);
+            std::vector< Math::ErrorPose >* m = m_pPrivate->m_measurement.get();
+            v.reserve(m->size());
+            for (unsigned int i = 0; i < m->size(); ++i) {
+                v.at(i).reserve(TI::SIZE);
+                const Math::Matrix< double, 6, 6 >&cv = m->at(i).covariance();
+                for (unsigned int j = 0; j<TI::SIZE; j++) {
+                    for (unsigned int k = 0; k<TI::LEN2; k++) {
+                        v.at(i).at(TI::indexOf(j, k)) = cv(j, k);
+                    }
                 }
             }
             return true;
@@ -946,7 +919,7 @@ BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, Ba
 BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth,
         int channels, unsigned char* data, PixelFormat pixel_format, bool copy_data)
         :BasicMeasurement(ts), m_pPrivate(new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data,
-        (Vision::Image::PixelFormat) pixel_format, copy_data)) { }
+        pixel_format, copy_data)) { }
 
 BasicImageMeasurement::~BasicImageMeasurement()
 {
@@ -959,7 +932,7 @@ int BasicImageMeasurement::getDimX() const
 {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return m_pPrivate->m_measurement->width();
+            return m_pPrivate->m_measurement->width;
         }
     }
     return 0;
@@ -969,7 +942,7 @@ int BasicImageMeasurement::getDimY() const
 {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return m_pPrivate->m_measurement->height();
+            return m_pPrivate->m_measurement->height;
         }
     }
     return 0;
@@ -979,7 +952,7 @@ int BasicImageMeasurement::getDimZ() const
 {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return m_pPrivate->m_measurement->channels();
+            return m_pPrivate->m_measurement->nChannels;
         }
     }
     return 0;
@@ -989,8 +962,20 @@ unsigned int BasicImageMeasurement::getPixelSize() const
 {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-            return m->depth();
+            unsigned int pixel_size = sizeof(unsigned char);
+            switch (m_pPrivate->m_measurement->depth) {
+            case CV_16U:
+                pixel_size = sizeof(unsigned short);
+                break;
+            case CV_32F:
+                pixel_size = sizeof(float);
+                break;
+                // others ??
+            default:
+                // assume CV8U is the default
+                break;
+            }
+            return pixel_size;
         }
     }
     return 0;
@@ -998,14 +983,35 @@ unsigned int BasicImageMeasurement::getPixelSize() const
 
 BasicImageMeasurement::PixelFormat BasicImageMeasurement::getPixelFormat() const
 {
+    PixelFormat pf = UNKNOWN_PIXELFORMAT;
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
             Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-            return (PixelFormat) m->pixelFormat();
+
+            switch (m->nChannels) {
+            case 1:
+                pf = LUMINANCE;
+                break;
+            case 3:
+                if (m->channelSeq[0]=='B' && m->channelSeq[1]=='G' && m->channelSeq[2]=='R') {
+                    pf = BGR;
+                }
+                else if (m->channelSeq[0]=='R' && m->channelSeq[1]=='G' && m->channelSeq[2]=='B') {
+                    pf = RGB;
+                }
+                else {
+                // three pixels but not RGB/BGR .. what's it ??
+                }
+                break;
+            default:
+                // what to do here .. do we have some logging ??
+                break;
+            }
         }
     }
-    return BasicImageMeasurement::UNKNOWN_PIXELFORMAT;
+    return pf;
 }
+
 
 unsigned int BasicImageMeasurement::getByteCount() const
 {
@@ -1033,7 +1039,7 @@ bool BasicImageMeasurement::get(unsigned int size, unsigned char* data)
                 frame_bytes = size;
             }
 
-            unsigned char* srcData = (unsigned char*) m->Mat().data;
+            unsigned char* srcData = (unsigned char*) m->imageData;
             unsigned char* dstData = (unsigned char*) data;
             memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 
