@@ -41,23 +41,12 @@
 #include <utVision/Image.h>
 #include <utVision/OpenCLManager.h>
 #include <utUtil/Exception.h>
+#include <utVision/TextureUpdate.h>
 
 #include <utFacade/BasicFacadeTypesPrivate.h>
 
 #include <log4cpp/Category.hh>
 
-#ifdef HAVE_OPENCL
-#include <opencv2/core/ocl.hpp>
-#ifdef __APPLE__
-#include "OpenCL/opencl.h"
-#include "OpenCL/cl_gl.h"
-#else
-#include "CL/cl.h"
-#include "CL/cl_gl.h"
-#endif
-#endif
-
-#include <GL/glut.h>
 
 // get a logger
 static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Facade.BasicTextureUpdate" ) );
@@ -66,74 +55,10 @@ namespace Ubitrack {
 namespace Facade {
 
 /** private things */
-struct BasicTextureUpdatePrivate {
-    BasicTextureUpdatePrivate()
-    : m_bTextureInitialized(false)
-    , m_texture(0)
-    , m_pow2Width(0)
-    , m_pow2Height(0)
-    {}
-
-    bool m_bTextureInitialized;
-    GLuint m_texture;
-
-#ifdef HAVE_OPENCL
-    //OpenCL
-    cl_mem m_clImage;
-    cv::UMat m_convertedImage;
-#endif
-
-    unsigned m_pow2Width;
-    unsigned m_pow2Height;
+class BasicTextureUpdatePrivate : public Vision::TextureUpdate {
+public:
+    BasicTextureUpdatePrivate() : Vision::TextureUpdate() {}
 };
-
-bool getImageFormat(std::shared_ptr<BasicImageMeasurement>& image, bool use_gpu, int& umatConvertCode, GLenum& imgFormat, int& numOfChannels) {
-    bool ret = true;
-    switch ( image->getPixelFormat() ) {
-    case BasicImageMeasurement::LUMINANCE:
-        imgFormat = GL_LUMINANCE;
-        numOfChannels = 1;
-        break;
-    case BasicImageMeasurement::RGB:
-        numOfChannels = use_gpu ? 4 : 3;
-        imgFormat = use_gpu ? GL_RGBA : GL_RGB;
-        umatConvertCode = cv::COLOR_RGB2RGBA;
-        break;
-#ifndef GL_BGR_EXT
-        case BasicImageMeasurement::BGR:
-			imgFormat = image_isOnGPU ? GL_RGBA : GL_RGB;
-			numOfChannels = use_gpu ? 4 : 3;
-			umatConvertCode = cv::COLOR_BGR2RGBA;
-			break;
-		case BasicImageMeasurement::BGRA:
-			numOfChannels = 4;
-			imgFormat = use_gpu ? GL_RGBA : GL_BGRA;
-			umatConvertCode = cv::COLOR_BGRA2RGBA;
-			break;
-#else
-    case BasicImageMeasurement::BGR:
-        numOfChannels = use_gpu ? 4 : 3;
-        imgFormat = use_gpu ? GL_RGBA : GL_BGR_EXT;
-        umatConvertCode = cv::COLOR_BGR2RGBA;
-        break;
-	case BasicImageMeasurement::BGRA:
-		numOfChannels = 4;
-		imgFormat = use_gpu ? GL_RGBA : GL_BGRA_EXT;
-		umatConvertCode = cv::COLOR_BGRA2RGBA;
-		break;
-#endif
-    case BasicImageMeasurement::RGBA:
-        numOfChannels = 4;
-        imgFormat = GL_RGBA;
-        break;
-    default:
-        // Log Error ?
-        ret = false;
-        break;
-    }
-    return ret;
-}
-
 
 
 
@@ -174,177 +99,54 @@ unsigned int BasicTextureUpdate::getTextureId() {
 
 
 /*
+ * Pow2Width
+ */
+unsigned int BasicTextureUpdate::getPow2Width() {
+    if (m_pPrivate) {
+        return m_pPrivate->m_pow2Width;
+    }
+    return 0;
+}
+
+/*
+ * Pow2Height
+ */
+unsigned int BasicTextureUpdate::getPow2Height() {
+    if (m_pPrivate) {
+        return m_pPrivate->m_pow2Height;
+    }
+    return 0;
+}
+
+
+/*
  * Cleanup Texture - requires valid OpenGL Context
  */
 void BasicTextureUpdate::cleanupTexture() {
     if (m_pPrivate) {
-        if ( m_pPrivate->m_bTextureInitialized ) {
-            glBindTexture( GL_TEXTURE_2D, 0 );
-            glDisable( GL_TEXTURE_2D );
-            glDeleteTextures( 1, &(m_pPrivate->m_texture) );
-        }
+        m_pPrivate->cleanupTexture();
     }
 }
+
 
 /*
  * Initialize Texture - requires valid OpenGL Context
  */
 void BasicTextureUpdate::initializeTexture(std::shared_ptr<BasicImageMeasurement>& image) {
-#ifdef HAVE_OPENCV
-    if (m_pPrivate) {
-       // access OCL Manager and initialize if needed
-        Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
 
-        if (!image->m_pPrivate) {
-            // LOG4CPP_WARN ??
-            return;
-        }
-
-        // if OpenCL is enabled and image is on GPU, then use OCL codepath
-        bool image_isOnGPU = oclManager.isEnabled() & image->m_pPrivate->m_measurement->isOnGPU();
-
-        // find out texture format
-        int umatConvertCode = -1;
-        GLenum imgFormat = GL_LUMINANCE;
-        int numOfChannels = 1;
-        getImageFormat(image, image_isOnGPU, umatConvertCode, imgFormat, numOfChannels);
-
-        if ( !m_pPrivate->m_bTextureInitialized )
-        {
-
-
-            // generate power-of-two sizes
-            m_pPrivate->m_pow2Width = 1;
-            while ( m_pPrivate->m_pow2Width < (unsigned)image->m_pPrivate->m_measurement->width() )
-                m_pPrivate->m_pow2Width <<= 1;
-
-            m_pPrivate->m_pow2Height = 1;
-            while ( m_pPrivate->m_pow2Height < (unsigned)image->m_pPrivate->m_measurement->height() )
-                m_pPrivate->m_pow2Height <<= 1;
-
-            glGenTextures( 1, &(m_pPrivate->m_texture) );
-            glBindTexture( GL_TEXTURE_2D, m_pPrivate->m_texture );
-
-            // define texture parameters
-            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-            glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL );
-
-            // load empty texture image (defines texture size)
-            glTexImage2D( GL_TEXTURE_2D, 0, numOfChannels, m_pPrivate->m_pow2Width, m_pPrivate->m_pow2Height, 0, imgFormat, GL_UNSIGNED_BYTE, 0 );
-            LOG4CPP_DEBUG( logger, "glTexImage2D( width=" << m_pPrivate->m_pow2Width << ", height=" << m_pPrivate->m_pow2Height << " ): " << glGetError() );
-            LOG4CPP_INFO( logger, "initalized texture ( " << imgFormat << " ) OnGPU: " << image_isOnGPU);
-
-
-            if (oclManager.isInitialized()) {
-
-#ifdef HAVE_OPENCL
-                //Get an image Object from the OpenGL texture
-                cl_int err;
-// windows specific or opencl version specific ??
-#ifdef WIN32
-                m_pPrivate->m_clImage = clCreateFromGLTexture2D( oclManager.getContext(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, m_pPrivate->m_texture, &err);
-#else
-                m_pPrivate->m_clImage = clCreateFromGLTexture( oclManager.getContext(), CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, m_pPrivate->m_texture, &err);
-#endif
-                if (err != CL_SUCCESS)
-                {
-                    LOG4CPP_ERROR( logger, "error at  clCreateFromGLTexture2D:" << err );
-                }
-#endif
-            }
-            m_pPrivate->m_bTextureInitialized = true;
-        }
+    if (m_pPrivate && image->m_pPrivate) {
+        m_pPrivate->initializeTexture(image->m_pPrivate->m_measurement);
     }
-#endif // HAVE_OPENCV
 }
+
 
 /*
  * Update Texture - requires valid OpenGL Context
  */
 void BasicTextureUpdate::updateTexture(std::shared_ptr<BasicImageMeasurement>& image) {
-#ifdef HAVE_OPENCV
-    if (m_pPrivate) {
-        // access OCL Manager and initialize if needed
-        Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
-
-        if (!image->m_pPrivate) {
-            // LOG4CPP_WARN ??
-            return;
-        }
-
-        // if OpenCL is enabled and image is on GPU, then use OCL codepath
-        bool image_isOnGPU = oclManager.isInitialized() & image->m_pPrivate->m_measurement->isOnGPU();
-
-        if ( m_pPrivate->m_bTextureInitialized )
-        {
-
-            // find out texture format
-            int umatConvertCode = -1;
-            GLenum imgFormat = GL_LUMINANCE;
-            int numOfChannels = 1;
-            getImageFormat(image, image_isOnGPU, umatConvertCode, imgFormat, numOfChannels);
-
-            if (image_isOnGPU) {
-#ifdef HAVE_OPENCL
-
-                glBindTexture( GL_TEXTURE_2D, m_pPrivate->m_texture );
-
-                if (umatConvertCode != -1) {
-                    cv::cvtColor(image->m_pPrivate->m_measurement->uMat(), m_pPrivate->m_convertedImage, umatConvertCode );
-                } else {
-                    m_pPrivate->m_convertedImage = image->m_pPrivate->m_measurement->uMat();
-                }
-
-                cv::ocl::finish();
-                glFinish();
-
-                cl_command_queue commandQueue = oclManager.getCommandQueue();
-                cl_int err;
-
-                clFinish(commandQueue);
-
-                err = clEnqueueAcquireGLObjects(commandQueue, 1, &(m_pPrivate->m_clImage), 0, NULL, NULL);
-                if(err != CL_SUCCESS)
-                {
-                    LOG4CPP_ERROR( logger, "error at  clEnqueueAcquireGLObjects:" << err );
-                }
-
-                cl_mem clBuffer = (cl_mem) m_pPrivate->m_convertedImage.handle(cv::ACCESS_READ);
-                cl_command_queue cv_ocl_queue = (cl_command_queue)cv::ocl::Queue::getDefault().ptr();
-
-                size_t offset = 0;
-                size_t dst_origin[3] = {0, 0, 0};
-                size_t region[3] = {static_cast<size_t>(m_pPrivate->m_convertedImage.cols), static_cast<size_t>(m_pPrivate->m_convertedImage.rows), 1};
-
-                err = clEnqueueCopyBufferToImage(cv_ocl_queue, clBuffer, m_pPrivate->m_clImage, offset, dst_origin, region, 0, NULL, NULL);
-                if (err != CL_SUCCESS)
-                {
-                    LOG4CPP_ERROR( logger, "error at  clEnqueueCopyBufferToImage:" << err );
-                }
-
-                err = clEnqueueReleaseGLObjects(commandQueue, 1, &m_pPrivate->m_clImage, 0, NULL, NULL);
-                if(err != CL_SUCCESS)
-                {
-                    LOG4CPP_ERROR( logger, "error at  clEnqueueReleaseGLObjects:" << err );
-                }
-                cv::ocl::finish();
-
-
-#else // HAVE_OPENCL
-                LOG4CPP_ERROR( logger, "Image isOnGPU but OpenCL is disabled!!");
-#endif // HAVE_OPENCL
-            } else {
-                // load image from CPU buffer into texture
-                glBindTexture( GL_TEXTURE_2D, m_pPrivate->m_texture );
-                glTexSubImage2D( GL_TEXTURE_2D, 0, 0, 0, image->m_pPrivate->m_measurement->width(), image->m_pPrivate->m_measurement->height(),
-                        imgFormat, GL_UNSIGNED_BYTE, image->m_pPrivate->m_measurement->Mat().data );
-
-            }
-
-        }
+    if (m_pPrivate && image->m_pPrivate) {
+        m_pPrivate->updateTexture(image->m_pPrivate->m_measurement);
     }
-#endif // HAVE_OPENCV
 }
 
 }

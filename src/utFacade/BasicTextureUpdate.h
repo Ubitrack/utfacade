@@ -42,7 +42,7 @@ namespace Ubitrack {
 namespace Facade {
 
 // forward declarations
-struct BasicTextureUpdatePrivate;
+class BasicTextureUpdatePrivate;
 
 /*
  * Texture Update Helper
@@ -61,6 +61,9 @@ public:
      * Is Initialized ?
      */
     bool isInitialized();
+
+    unsigned int getPow2Width();
+    unsigned int getPow2Height();
 
     /*
      * Cleanup Texture - requires valid OpenGL Context
