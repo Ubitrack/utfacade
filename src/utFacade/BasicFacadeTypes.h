@@ -498,7 +498,7 @@ public:
 };
 
 /** wrapper for image measurement **/
-class UTFACADE_EXPORT BasicImageMeasurement: public BasicMeasurement {
+class UTFACADE_EXPORT BasicImageMeasurement : public BasicMeasurement {
 public:
 
     // must be in sync with utVision::Image::PixelFormat
@@ -515,11 +515,10 @@ public:
       DEPTH
     };
 
-    BasicImageMeasurement()
-            :BasicMeasurement(), m_pPrivate(nullptr) { };
+
+    BasicImageMeasurement() : BasicMeasurement(), m_pPrivate(nullptr) {};
     /* set (copy) image from buffer */
-    BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels,
-            unsigned char* data, PixelFormat pixel_format = RGB, bool copy_data = true);
+    BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels, unsigned char* data, PixelFormat pixel_format = RGB, bool copy_data = true);
     BasicImageMeasurement(unsigned long long int const ts, BasicImageMeasurementPrivate* _pPrivate);
     ~BasicImageMeasurement();
 
@@ -535,7 +534,7 @@ public:
     unsigned char* getDataPtr() const;
 
     /* get copy into buffer */
-    bool get(unsigned int size, unsigned char* data);
+    bool get( unsigned int size, unsigned char* data );
 
     BasicImageMeasurementPrivate* m_pPrivate;
 private:
@@ -544,16 +543,18 @@ private:
 /**
 * A Basic data flow observer
 */
-class UTFACADE_EXPORT BasicDataflowObserver {
+class UTFACADE_EXPORT BasicDataflowObserver
+{
 public:
     /** called when a component is added */
-    virtual void notifyAddComponent(const char* sPatternName, const char* sComponentName) throw() = 0;
+    virtual void notifyAddComponent( const char* sPatternName, const char* sComponentName ) throw() = 0;
 
     /** called when a component is removed */
-    virtual void notifyDeleteComponent(const char* sPatternName, const char* sComponentName) throw() = 0;
+    virtual void notifyDeleteComponent( const char* sPatternName, const char* sComponentName ) throw() = 0;
 
     /** virtual destructor */
-    virtual ~BasicDataflowObserver() { }
+    virtual ~BasicDataflowObserver()
+    {}
 };
 }
 } // namespace Ubitrack::Facade

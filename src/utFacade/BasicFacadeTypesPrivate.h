@@ -696,7 +696,7 @@ struct BasicImageMeasurementPrivate {
 
   BasicImageMeasurementPrivate(unsigned long long int const ts,
           int width, int height, int depth, int channels, unsigned char* data,
-          BasicImageMeasurement::PixelFormat pixel_format = BasicImageMeasurement::RGB,
+          Vision::Image::PixelFormat pixel_format = Vision::Image::RGB,
           bool copy_data = true) {
 
       unsigned int pixel_size = sizeof(unsigned char);
@@ -720,34 +720,14 @@ struct BasicImageMeasurementPrivate {
           // what about images other than CV8U
           // copy data
           unsigned char* srcData = (unsigned char*) data;
-          unsigned char* dstData = (unsigned char*) pImage->imageData;
+          unsigned char* dstData = (unsigned char*) pImage->Mat().data;
           memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 
       } else {
           pImage.reset(new Vision::Image(width, height, channels, (void*)(data), depth));
       }
 
-      switch(channels) {
-      case 1:
-          // nothing to do ?
-          break;
-      case 3:
-          if ( pixel_format == BasicImageMeasurement::BGR ) {
-              pImage->channelSeq[0] = 'B';
-              pImage->channelSeq[1] = 'G';
-              pImage->channelSeq[2] = 'R';
-          } else if ( pixel_format == BasicImageMeasurement::RGB ) {
-              pImage->channelSeq[0] = 'R';
-              pImage->channelSeq[1] = 'G';
-              pImage->channelSeq[2] = 'B';
-          } else {
-              // three pixels but not RGB/BGR .. what's it ??
-          }
-          break;
-      default:
-          // what to do here .. do we have some logging ??
-          break;
-      }
+      pImage->set_pixelFormat(pixel_format);
       m_measurement = Measurement::ImageMeasurement(pImage);
   }
 

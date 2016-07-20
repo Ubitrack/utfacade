@@ -914,132 +914,90 @@ bool BasicCameraIntrinsicsMeasurement::getDistortion(std::vector<double>& radial
 
 // Image
 BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, BasicImageMeasurementPrivate* _pPrivate)
-        :BasicMeasurement(ts), m_pPrivate(_pPrivate) { }
+        : BasicMeasurement(ts)
+        , m_pPrivate(_pPrivate) {}
 
-BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth,
-        int channels, unsigned char* data, PixelFormat pixel_format, bool copy_data)
-        :BasicMeasurement(ts), m_pPrivate(new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data,
-        pixel_format, copy_data)) { }
+BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, int width, int height, int depth, int channels, unsigned char* data, PixelFormat pixel_format, bool copy_data)
+        : BasicMeasurement(ts)
+        , m_pPrivate(new BasicImageMeasurementPrivate(ts, width, height, depth, channels, data, (Vision::Image::PixelFormat)pixel_format, copy_data)) {}
 
-BasicImageMeasurement::~BasicImageMeasurement()
-{
+BasicImageMeasurement::~BasicImageMeasurement() {
     if (m_pPrivate) {
-        delete (m_pPrivate);
+        delete(m_pPrivate);
     }
 }
 
-int BasicImageMeasurement::getDimX() const
-{
+int BasicImageMeasurement::getDimX() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return m_pPrivate->m_measurement->width;
+            return m_pPrivate->m_measurement->width();
         }
     }
     return 0;
 }
 
-int BasicImageMeasurement::getDimY() const
-{
+int BasicImageMeasurement::getDimY() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return m_pPrivate->m_measurement->height;
+            return m_pPrivate->m_measurement->height();
         }
     }
     return 0;
 }
 
-int BasicImageMeasurement::getDimZ() const
-{
+int BasicImageMeasurement::getDimZ() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return m_pPrivate->m_measurement->nChannels;
+            return m_pPrivate->m_measurement->channels();
         }
     }
     return 0;
 }
 
-unsigned int BasicImageMeasurement::getPixelSize() const
-{
-    if (m_pPrivate) {
-        if (m_pPrivate->m_measurement) {
-            unsigned int pixel_size = sizeof(unsigned char);
-            switch (m_pPrivate->m_measurement->depth) {
-            case CV_16U:
-                pixel_size = sizeof(unsigned short);
-                break;
-            case CV_32F:
-                pixel_size = sizeof(float);
-                break;
-                // others ??
-            default:
-                // assume CV8U is the default
-                break;
-            }
-            return pixel_size;
-        }
-    }
-    return 0;
-}
-
-BasicImageMeasurement::PixelFormat BasicImageMeasurement::getPixelFormat() const
-{
-    PixelFormat pf = UNKNOWN_PIXELFORMAT;
+unsigned int BasicImageMeasurement::getPixelSize() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
             Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-
-            switch (m->nChannels) {
-            case 1:
-                pf = LUMINANCE;
-                break;
-            case 3:
-                if (m->channelSeq[0]=='B' && m->channelSeq[1]=='G' && m->channelSeq[2]=='R') {
-                    pf = BGR;
-                }
-                else if (m->channelSeq[0]=='R' && m->channelSeq[1]=='G' && m->channelSeq[2]=='B') {
-                    pf = RGB;
-                }
-                else {
-                // three pixels but not RGB/BGR .. what's it ??
-                }
-                break;
-            default:
-                // what to do here .. do we have some logging ??
-                break;
-            }
+            return m->depth();
         }
     }
-    return pf;
+    return 0;
 }
 
-
-unsigned int BasicImageMeasurement::getByteCount() const
-{
-    return size()*getPixelSize();
-}
-
-unsigned char* BasicImageMeasurement::getDataPtr() const
-{
+BasicImageMeasurement::PixelFormat BasicImageMeasurement::getPixelFormat() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
-            return (unsigned char*) m_pPrivate->m_measurement->Mat().data;
+            Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
+            return (PixelFormat)m->pixelFormat();
+        }
+    }
+    return BasicImageMeasurement::UNKNOWN_PIXELFORMAT;
+}
+
+unsigned int BasicImageMeasurement::getByteCount() const {
+    return size() * getPixelSize();
+}
+
+unsigned char* BasicImageMeasurement::getDataPtr() const {
+    if (m_pPrivate) {
+        if (m_pPrivate->m_measurement) {
+            return (unsigned char *) m_pPrivate->m_measurement->Mat().data;
         }
     }
     return NULL;
 }
 
-bool BasicImageMeasurement::get(unsigned int size, unsigned char* data)
-{
+bool BasicImageMeasurement::get(unsigned int size, unsigned char* data) {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
             Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
             unsigned int frame_bytes = getByteCount();
 
-            if (size<frame_bytes) {
+            if (size < frame_bytes) {
                 frame_bytes = size;
             }
 
-            unsigned char* srcData = (unsigned char*) m->imageData;
+            unsigned char* srcData = (unsigned char*) m->Mat().data;
             unsigned char* dstData = (unsigned char*) data;
             memcpy(dstData, srcData, sizeof(unsigned char)*frame_bytes);
 
@@ -1048,6 +1006,7 @@ bool BasicImageMeasurement::get(unsigned int size, unsigned char* data)
     }
     return false;
 }
+
 
 }
 }
