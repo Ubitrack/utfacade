@@ -166,7 +166,7 @@
             <Node name="B" displayName="B"/>
             <Edge name="Output" source="A" destination="B" displayName="ErrorPosition">
                 <Description><h:p>The output ErrorPosition received from the application</h:p></Description>
-                <Attribute name="type" value="2DErrorPosition" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="type" value="2DPositionError" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
@@ -190,7 +190,7 @@
             <Node name="B" displayName="B"/>
             <Edge name="Output" source="A" destination="B" displayName="ErrorPosition">
                 <Description><h:p>The output ErrorPosition received from the application</h:p></Description>
-                <Attribute name="type" value="3DErrorPosition" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="type" value="3DPositionError" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
@@ -414,7 +414,7 @@
             <Node name="B" displayName="B"/>
             <Edge name="Output" source="A" destination="B" displayName="Pose List">
                 <Description><h:p>The output PoseList received from the application</h:p></Description>
-                <Attribute name="type" value="3DPoseList" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="type" value="PoseList" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>
@@ -488,7 +488,7 @@
             <Node name="B" displayName="B"/>
             <Edge name="Output" source="A" destination="B" displayName="ErrorPose List">
                 <Description><h:p>The output ErrorPoseList received from the application</h:p></Description>
-                <Attribute name="type" value="3DErrorPoseList" xsi:type="EnumAttributeReferenceType"/>
+                <Attribute name="type" value="ErrorPoseList" xsi:type="EnumAttributeReferenceType"/>
                 <Attribute name="mode" value="push" xsi:type="EnumAttributeReferenceType"/>
             </Edge>
         </Output>

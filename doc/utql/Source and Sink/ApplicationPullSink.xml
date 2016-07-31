@@ -160,7 +160,7 @@
             <Node name="B" displayName="B"/>
             <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition2D">
                 <Description><h:p>The input error position2d</h:p></Description>
-                <Predicate>type=='2DErrorPosition'&amp;&amp;mode=='pull'</Predicate>
+                <Predicate>type=='2DPositionError'&amp;&amp;mode=='pull'</Predicate>
             </Edge>
         </Input>
 
@@ -182,7 +182,7 @@
             <Node name="B" displayName="B"/>
             <Edge name="Input" source="A" destination="B" displayName="Input ErrorPosition">
                 <Description><h:p>The input error position</h:p></Description>
-                <Predicate>type=='3DErrorPosition'&amp;&amp;mode=='pull'</Predicate>
+                <Predicate>type=='3DPositionError'&amp;&amp;mode=='pull'</Predicate>
             </Edge>
         </Input>
 

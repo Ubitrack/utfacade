@@ -100,7 +100,7 @@
 
             <EnumValue name="2DErrorPositionList" displayName="2D Error position list"/>
             <EnumValue name="3DErrorPositionList" displayName="3D Error position list"/>
-            <EnumValue name="3DErrorPoseList" displayName="3D Error pose list"/>
+            <EnumValue name="6DErrorList" displayName="Error pose list"/>
 
 
             <EnumValue name="Image" displayName="Image">
