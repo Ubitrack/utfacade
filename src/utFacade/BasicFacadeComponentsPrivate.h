@@ -99,11 +99,10 @@ namespace Ubitrack { namespace Facade {
 
             void unregisterCallback() {
                 if (m_component) {
+					m_component->setCallback(NULL);
 #if defined (COMPILER_USE_CXX11) && defined (WIN32)
-                    m_component->setCallback(nullptr);
                     m_slot = nullptr;
 #else
-                    m_component->setCallback(NULL);
                     m_slot = NULL;
 #endif
                 }
@@ -143,11 +142,10 @@ namespace Ubitrack { namespace Facade {
 
             void unregisterCallback() {
                 if (m_component) {
+					m_component->setCallback(NULL);
 #if defined (COMPILER_USE_CXX11) && defined (WIN32)
-                    m_component->setCallback(nullptr);
                     m_slot = nullptr;
 #else
-                    m_component->setCallback(NULL);
                     m_slot = NULL;
 #endif
                 }
