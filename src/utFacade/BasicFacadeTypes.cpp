@@ -1011,36 +1011,23 @@ bool BasicImageMeasurement::get(unsigned int size, unsigned char* data) {
 }
 }
 
-template
-class Ubitrack::Facade::BasicVectorMeasurement<2>;
-template
-class Ubitrack::Facade::BasicVectorMeasurement<3>;
-template
-class Ubitrack::Facade::BasicVectorMeasurement<4>;
-template
-class Ubitrack::Facade::BasicVectorMeasurement<8>;
+template class Ubitrack::Facade::BasicVectorMeasurement<2>;
+template class Ubitrack::Facade::BasicVectorMeasurement<3>;
+template class Ubitrack::Facade::BasicVectorMeasurement<4>;
+template class Ubitrack::Facade::BasicVectorMeasurement<8>;
 
-template
-class Ubitrack::Facade::BasicMatrixMeasurement<3, 3>;
-template
-class Ubitrack::Facade::BasicMatrixMeasurement<3, 4>;
-template
-class Ubitrack::Facade::BasicMatrixMeasurement<4, 4>;
+template class Ubitrack::Facade::BasicMatrixMeasurement<3, 3>;
+template class Ubitrack::Facade::BasicMatrixMeasurement<3, 4>;
+template class Ubitrack::Facade::BasicMatrixMeasurement<4, 4>;
 
-template
-class Ubitrack::Facade::BasicErrorVectorMeasurement<2>;
-template
-class Ubitrack::Facade::BasicErrorVectorMeasurement<3>;
+template class Ubitrack::Facade::BasicErrorVectorMeasurement<2>;
+template class Ubitrack::Facade::BasicErrorVectorMeasurement<3>;
 
 
-template
-class Ubitrack::Facade::BasicVectorListMeasurement<2>;
-template
-class Ubitrack::Facade::BasicVectorListMeasurement<3>;
+template class Ubitrack::Facade::BasicVectorListMeasurement<2>;
+template class Ubitrack::Facade::BasicVectorListMeasurement<3>;
 
-template
-class Ubitrack::Facade::BasicErrorVectorListMeasurement<2>;
-template
-class Ubitrack::Facade::BasicErrorVectorListMeasurement<3>;
+template class Ubitrack::Facade::BasicErrorVectorListMeasurement<2>;
+template class Ubitrack::Facade::BasicErrorVectorListMeasurement<3>;
 
 #endif // ENABLE_BASICFACADE

@@ -486,7 +486,7 @@ template<>
 struct BasicMeasurementTypeTrait<BasicVectorListMeasurement<2> > {
   static const bool supported = true;
   static const bool is_list = true;
-  typedef BasicVectorMeasurementPrivate<2> private_measurement_type;
+  typedef BasicVectorListMeasurementPrivate<2> private_measurement_type;
   typedef Measurement::PositionList2 ubitrack_measurement_type;
 };
 
@@ -494,7 +494,7 @@ template<>
 struct BasicMeasurementTypeTrait<BasicVectorListMeasurement<3> > {
   static const bool supported = true;
   static const bool is_list = true;
-  typedef BasicVectorMeasurementPrivate<3> private_measurement_type;
+  typedef BasicVectorListMeasurementPrivate<3> private_measurement_type;
   typedef Measurement::PositionList ubitrack_measurement_type;
 };
 
