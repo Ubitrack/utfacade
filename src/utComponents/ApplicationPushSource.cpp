@@ -73,7 +73,7 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSourceErrorPoseList > ("ApplicationPushSourceErrorPoseList"); //new
 
 	// backward compatibility
-	cf->registerComponent< ApplicationPushSourceErrorPositionList2 > ( "ApplicationPushSourcePositionList2" );
+	//cf->registerComponent< ApplicationPushSourceErrorPositionList2 > ( "ApplicationPushSourcePositionList2" );
 	cf->registerComponent< ApplicationPushSourceVector4D > ( "ApplicationPushSourceVector4" );
 
 	// incompatible with simplefacade
