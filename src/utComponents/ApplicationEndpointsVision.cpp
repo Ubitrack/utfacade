@@ -32,6 +32,7 @@
  * @author Benjamin Becker <benjamin.becker@eads.net>
  */
 
+#ifdef HAVE_OPENCV
 #include <utDataflow/ComponentFactory.h>
 #include "ApplicationEndpointsVision.h"
 
@@ -44,4 +45,4 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 }
 
 } } // namespace Ubitrack::Components
-
+#endif // HAVE_OPENCV

@@ -35,7 +35,10 @@
 
 #include "utMeasurement/Measurement.h"
 #include "utMath/CameraIntrinsics.h"
+
+#ifdef HAVE_OPENCV
 #include <utVision/Image.h>
+#endif
 
 namespace Ubitrack {
 namespace Facade {
