@@ -236,10 +236,12 @@ template class Ubitrack::Facade::BasicPushSink  <Ubitrack::Facade::BasicCameraIn
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicCameraIntrinsicsMeasurement>;
 template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicCameraIntrinsicsMeasurement>;
 
+#ifdef HAVE_OPENCV
 template class Ubitrack::Facade::BasicPullSink  <Ubitrack::Facade::BasicImageMeasurement>;
 template class Ubitrack::Facade::BasicPushSink  <Ubitrack::Facade::BasicImageMeasurement>;
 template class Ubitrack::Facade::BasicPullSource<Ubitrack::Facade::BasicImageMeasurement>;
 template class Ubitrack::Facade::BasicPushSource<Ubitrack::Facade::BasicImageMeasurement>;
+#endif
 
 // List Measurements
 template class Ubitrack::Facade::BasicPullSink  <Ubitrack::Facade::BasicScalarIntListMeasurement>;

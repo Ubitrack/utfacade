@@ -912,6 +912,7 @@ bool BasicCameraIntrinsicsMeasurement::getDistortion(std::vector<double>& radial
     return false;
 }
 
+#ifdef HAVE_OPENCV
 // Image
 BasicImageMeasurement::BasicImageMeasurement(unsigned long long int const ts, BasicImageMeasurementPrivate* _pPrivate)
         : BasicMeasurement(ts)
@@ -1006,7 +1007,7 @@ bool BasicImageMeasurement::get(unsigned int size, unsigned char* data) {
     }
     return false;
 }
-
+#endif
 
 }
 }

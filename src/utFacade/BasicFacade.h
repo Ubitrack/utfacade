@@ -247,10 +247,13 @@ UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicError
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicErrorVectorMeasurement< 3 > >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
 
+#ifdef HAVE_OPENCV
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
 UTFACADE_DLL_TCM Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+#endif // HAVE_OPENCV
+
 #endif
 
 #endif

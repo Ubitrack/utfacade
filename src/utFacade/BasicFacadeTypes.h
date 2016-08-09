@@ -73,7 +73,9 @@ struct BasicErrorPoseListMeasurementPrivate;
 
 struct BasicRotationListMeasurementPrivate;
 
+#ifdef HAVE_OPENCV
 struct BasicImageMeasurementPrivate;
+#endif 
 
 struct BasicCameraIntrinsicsMeasurementPrivate;
 
@@ -90,8 +92,9 @@ public:
       ERROR_VECTOR,
       ERROR_POSE,
       CAMERA_INTRINSICS,
+#ifdef HAVE_OPENCV
       IMAGE,
-
+#endif
       SCALARI_LIST,
       SCALARD_LIST,
       VECTORD_LIST,
@@ -497,6 +500,7 @@ public:
     BasicCameraIntrinsicsMeasurementPrivate* m_pPrivate;
 };
 
+#ifdef HAVE_OPENCV
 /** wrapper for image measurement **/
 class UTFACADE_EXPORT BasicImageMeasurement : public BasicMeasurement {
 public:
@@ -539,6 +543,7 @@ public:
     BasicImageMeasurementPrivate* m_pPrivate;
 private:
 };
+#endif
 
 /**
 * A Basic data flow observer

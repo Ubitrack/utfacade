@@ -421,10 +421,12 @@ template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicCameraIntrins
 template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicCameraIntrinsicsMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
 template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicCameraIntrinsicsMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
 
+#ifdef HAVE_OPENCV
 template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);
 template Ubitrack::Facade::BasicPushSink  < Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSink  (const char*);
 template Ubitrack::Facade::BasicPullSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPullSource(const char*);
 template Ubitrack::Facade::BasicPushSource< Ubitrack::Facade::BasicImageMeasurement >* Ubitrack::Facade::BasicFacade::getPushSource(const char*);
+#endif
 
 // List Measurements
 template Ubitrack::Facade::BasicPullSink  < Ubitrack::Facade::BasicScalarIntListMeasurement >* Ubitrack::Facade::BasicFacade::getPullSink  (const char*);

@@ -689,6 +689,7 @@ struct BasicMeasurementTypeTrait<BasicCameraIntrinsicsMeasurement> {
 };
 
 
+#ifdef HAVE_OPENCV
 /**
 * image measurement buffer
 */
@@ -749,6 +750,8 @@ struct BasicMeasurementTypeTrait< BasicImageMeasurement > {
   typedef BasicImageMeasurementPrivate private_measurement_type;
   typedef Measurement::ImageMeasurement ubitrack_measurement_type;
 };
+#endif
+
 }
 } // namespace Ubitrack::Facade
 

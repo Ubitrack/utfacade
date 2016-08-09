@@ -31,6 +31,7 @@
 
 #include <utFacade/Config.h>
 #ifdef ENABLE_BASICFACADE
+#ifdef HAVE_OPENCV
 
 #ifdef WIN32
 #include <utUtil/CleanWindows.h>
@@ -148,8 +149,8 @@ void BasicTextureUpdate::updateTexture(std::shared_ptr<BasicImageMeasurement>& i
         m_pPrivate->updateTexture(image->m_pPrivate->m_measurement);
     }
 }
-
 }
 } // namespace Ubitrack::Facade
 
+#endif // HAVE_OPENCV
 #endif // ENABLE_BASICFACADE
