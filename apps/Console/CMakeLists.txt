@@ -1,6 +1,12 @@
 set(the_description "The UbiTrack utConsole app")
-ut_add_app(utConsole DEPS utcore utdataflow utfacade utvision)
-ut_app_include_directories(${UBITRACK_CORE_DEPS_INCLUDE_DIR})
+if(HAVE_OPENCV)
+  ut_add_app(utConsole DEPS utcore utdataflow utfacade utvision)
+  ut_app_include_directories(${UBITRACK_CORE_DEPS_INCLUDE_DIR})
+else(HAVE_OPENCV)
+  ut_add_app(utConsole DEPS utcore utdataflow utfacade)
+  ut_app_include_directories(${UBITRACK_CORE_DEPS_INCLUDE_DIR})
+endif(HAVE_OPENCV)
+
 ut_glob_app_sources(SOURCES "console.cpp")
 ut_create_executable(${PTHREAD_LIBRARIES})
 
