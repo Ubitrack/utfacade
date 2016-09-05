@@ -975,6 +975,26 @@ BasicImageMeasurement::PixelFormat BasicImageMeasurement::getPixelFormat() const
     return BasicImageMeasurement::UNKNOWN_PIXELFORMAT;
 }
 
+unsigned int BasicImageMeasurement::getOrigin() const {
+    if (m_pPrivate) {
+        if (m_pPrivate->m_measurement) {
+            Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
+            return (PixelFormat)m->origin();
+        }
+    }
+    return 0;
+}
+
+unsigned int BasicImageMeasurement::getChannels() const {
+    if (m_pPrivate) {
+        if (m_pPrivate->m_measurement) {
+            Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
+            return (PixelFormat)m->channels();
+        }
+    }
+    return 0;
+}
+
 unsigned int BasicImageMeasurement::getByteCount() const {
     return size() * getPixelSize();
 }

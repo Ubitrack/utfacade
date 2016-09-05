@@ -533,6 +533,8 @@ public:
 
     unsigned int getPixelSize() const;
     PixelFormat getPixelFormat() const;
+    unsigned int getOrigin() const;
+    unsigned int getChannels() const;
     unsigned int getByteCount() const;
 
     unsigned char* getDataPtr() const;
