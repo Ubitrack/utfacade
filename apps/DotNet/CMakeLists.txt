@@ -14,13 +14,13 @@ macro(ut_get_customized_app_creator)
 
 	install(TARGETS ${SWIG_MODULE_ubitrack_dotnet_swig_REAL_NAME}
 	  RUNTIME DESTINATION bin COMPONENT dotnet
-	  LIBRARY DESTINATION ${UBITRACK_LIB_INSTALL_PATH} COMPONENT dotnet
+	  LIBRARY DESTINATION bin COMPONENT dotnet
 	  ARCHIVE DESTINATION ${UBITRACK_LIB_INSTALL_PATH} COMPONENT dev
 	)	
 
 	file(GLOB cs_srcs "${CMAKE_CURRENT_BINARY_DIR}/gensrc/ubitrack/*.cs")
 	csharp_add_library(ubitrack_dotnet ${cs_srcs})
-	install_assembly(ubitrack_dotnet DESTINATION "${UBITRACK_LIB_INSTALL_PATH}")
+	install_assembly(ubitrack_dotnet DESTINATION "bin")
 	
 endmacro(ut_get_customized_app_creator)
 

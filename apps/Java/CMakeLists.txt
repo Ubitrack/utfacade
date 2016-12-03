@@ -24,10 +24,10 @@ macro(ut_get_customized_app_creator)
 	)
 	install(TARGETS ${SWIG_MODULE_ubitrack_java_REAL_NAME}
 	  RUNTIME DESTINATION bin COMPONENT java
-	  LIBRARY DESTINATION ${UBITRACK_LIB_INSTALL_PATH} COMPONENT java
+	  LIBRARY DESTINATION bin COMPONENT java
 	  ARCHIVE DESTINATION ${UBITRACK_LIB_INSTALL_PATH} COMPONENT dev
 	  )	
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubitrack.jar DESTINATION "${UBITRACK_LIB_INSTALL_PATH}" COMPONENT java)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubitrack.jar DESTINATION "bin" COMPONENT java)
 	
 endmacro(ut_get_customized_app_creator)
 
