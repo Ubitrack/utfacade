@@ -28,8 +28,8 @@
 *
 * @author Ulrich Eck <ueck@net-labs.de>
 */
-#ifndef UBITACK_BASICTEXTUREUPDATE_H
-#define UBITACK_BASICTEXTUREUPDATE_H
+#ifndef UBITRACK_BASICTEXTUREUPDATE_H
+#define UBITRACK_BASICTEXTUREUPDATE_H
 
 #include <memory>
 #include <vector>
@@ -87,4 +87,4 @@ private:
 }
 }// namespace Ubitrack::Facade
 
-#endif //UBITACK_BASICTEXTUREUPDATE_H
+#endif //UBITRACK_BASICTEXTUREUPDATE_H
