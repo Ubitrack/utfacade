@@ -536,6 +536,7 @@ public:
     unsigned int getOrigin() const;
     unsigned int getChannels() const;
     unsigned int getByteCount() const;
+    unsigned int getStep() const;
 
     unsigned char* getDataPtr() const;
 

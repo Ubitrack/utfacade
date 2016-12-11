@@ -999,6 +999,15 @@ unsigned int BasicImageMeasurement::getByteCount() const {
     return size() * getPixelSize();
 }
 
+unsigned int BasicImageMeasurement::getStep() const {
+    if (m_pPrivate) {
+        if (m_pPrivate->m_measurement) {
+            return m_pPrivate->m_measurement->Mat().step;
+        }
+    }
+    return 0;
+}
+
 unsigned char* BasicImageMeasurement::getDataPtr() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
