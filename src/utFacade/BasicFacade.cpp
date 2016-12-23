@@ -63,13 +63,15 @@ namespace Ubitrack {
 
         void initGPU() {
 #ifdef HAVE_OPENCV
-            // access OCL Manager and initialize if needed
-            Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
-            if (!oclManager.isInitialized()) {
-                if (oclManager.isEnabled()) {
-                    oclManager.initializeOpenGL();
-                }
-            }
+			// access OCL Manager and initialize if needed
+			Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
+			if ((oclManager.isActive()) && (!oclManager.isInitialized()))
+			{
+				if (oclManager.isEnabled()) {
+					oclManager.initializeOpenGL();
+				}
+				LOG4CPP_INFO(logger, "OCL Manager initialized: " << oclManager.isInitialized());
+			}
 #endif
             return;
         }

@@ -979,7 +979,7 @@ unsigned int BasicImageMeasurement::getOrigin() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
             Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-            return (PixelFormat)m->origin();
+            return m->origin();
         }
     }
     return 0;
@@ -989,7 +989,7 @@ unsigned int BasicImageMeasurement::getChannels() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
             Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-            return (PixelFormat)m->channels();
+            return m->channels();
         }
     }
     return 0;
