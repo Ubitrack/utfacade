@@ -39,6 +39,7 @@
 #include <utComponents/ApplicationPushSink.h>
 #include <utComponents/ApplicationPullSink.h>
 #include <utComponents/ApplicationPushSource.h>
+#include <utComponents/ApplicationPullSource.h>
 #include <utVision/Image.h>
 
 
@@ -47,6 +48,7 @@ namespace Ubitrack { namespace Components {
 typedef ApplicationPushSink< Measurement::ImageMeasurement > ApplicationPushSinkVisionImage;
 typedef ApplicationPullSink< Measurement::ImageMeasurement > ApplicationPullSinkVisionImage;
 typedef ApplicationPushSource< Measurement::ImageMeasurement > ApplicationPushSourceVisionImage;
+typedef ApplicationPullSource< Measurement::ImageMeasurement > ApplicationPullSourceVisionImage;
 
 } } // namespace Ubitrack::Components
 

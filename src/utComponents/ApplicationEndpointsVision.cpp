@@ -42,6 +42,7 @@ UBITRACK_REGISTER_COMPONENT( ComponentFactory* const cf ) {
 	cf->registerComponent< ApplicationPushSinkVisionImage > ( "ApplicationPushSinkVisionImage" );
 	cf->registerComponent< ApplicationPullSinkVisionImage > ( "ApplicationPullSinkVisionImage" );
 	cf->registerComponent< ApplicationPushSourceVisionImage > ( "ApplicationPushSourceVisionImage" );
+	cf->registerComponent< ApplicationPullSourceVisionImage > ( "ApplicationPullSourceVisionImage" );
 }
 
 } } // namespace Ubitrack::Components
