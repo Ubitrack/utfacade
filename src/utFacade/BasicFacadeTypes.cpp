@@ -959,7 +959,7 @@ unsigned int BasicImageMeasurement::getPixelSize() const {
     if (m_pPrivate) {
         if (m_pPrivate->m_measurement) {
             Measurement::ImageMeasurement& m = m_pPrivate->m_measurement;
-            return m->depth();
+            return m->bitsPerPixel();
         }
     }
     return 0;

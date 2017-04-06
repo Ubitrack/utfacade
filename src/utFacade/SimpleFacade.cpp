@@ -51,6 +51,35 @@ static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Faca
 
 namespace {
 
+inline int
+CV2IPL_DEPTH(int depth)
+{
+	switch (depth) {
+	case CV_8U:
+		return IPL_DEPTH_8U;
+		break;
+	case CV_8S:
+		return IPL_DEPTH_8S;
+		break;
+	case CV_16U:
+		return IPL_DEPTH_16U;
+		break;
+	case CV_32F:
+		return IPL_DEPTH_32F;
+		break;
+	case CV_32S:
+		return IPL_DEPTH_32S;
+		break;
+	case CV_64F:
+		return IPL_DEPTH_64F;
+		break;
+	default:
+		break;
+	}
+	return 0;
+}
+
+
 // this function converts Measurement::Pose to SimplePose in a callback
 void convertPoseCallback( Ubitrack::Facade::SimplePoseReceiver* receiver, const Ubitrack::Measurement::Pose& measurement )
 {
@@ -186,7 +215,7 @@ void convertImageCallback( Ubitrack::Facade::SimpleImageReceiver* receiver, cons
 	i.height = measurement->height();
 	i.imageData = (unsigned char *) measurement->Mat().data;
 	i.widthStep = measurement->Mat().step;
-	i.depth = measurement->depth();
+	i.depth = CV2IPL_DEPTH(measurement->depth());
 	i.nChannels = measurement->channels();
 	i.imageSize = measurement->Mat().step * measurement->height();
 
