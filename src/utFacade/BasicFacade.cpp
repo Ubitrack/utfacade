@@ -126,11 +126,11 @@ namespace Ubitrack {
         }
 
 
-        bool BasicFacade::loadDataflow( const char* sDfSrg ) throw()
+        bool BasicFacade::loadDataflow( const char* sDfSrg, bool replace ) throw()
         {
             try
             {
-                m_pPrivate->loadDataflow( sDfSrg );
+                m_pPrivate->loadDataflow( sDfSrg, replace );
             }
             catch ( const Ubitrack::Util::Exception& e )
             {
@@ -143,12 +143,12 @@ namespace Ubitrack {
         }
 
 
-        bool BasicFacade::loadDataflowString( const char* sDataflow ) throw()
+        bool BasicFacade::loadDataflowString( const char* sDataflow, bool replace ) throw()
         {
             try
             {
                 std::istringstream ss( sDataflow );
-                m_pPrivate->loadDataflow( ss );
+                m_pPrivate->loadDataflow( ss, replace );
             }
             catch ( const Ubitrack::Util::Exception& e )
             {

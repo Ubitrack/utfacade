@@ -82,7 +82,7 @@ namespace Ubitrack {
             * @param sDfSrg filename of dataflow description
             * @return true if successful
             */
-            bool loadDataflow( const char* sDfSrg ) throw();
+            bool loadDataflow( const char* sDfSrg, bool bReplace = true  ) throw();
 
             /**
             * Loads and instantiates a dataflow network from a string
@@ -90,7 +90,7 @@ namespace Ubitrack {
             * @param sDataflow string containing the actual XML dataflow
             * @return true if successful
             */
-            bool loadDataflowString( const char* sDataflow ) throw();
+            bool loadDataflowString( const char* sDataflow, bool bReplace = true  ) throw();
 
             /** removes all dataflow component instances */
             void clearDataflow() throw();
