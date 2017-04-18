@@ -51,6 +51,9 @@
 	#include <utUtil/CleanWindows.h>
 #endif
 
+#ifdef HAVE_OPENCV
+#include <utVision/OpenCLManager.h>
+#endif // HAVE_OPENCV
 
 // get a logger
 static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Facade.AdvancedFacade" ) );
@@ -59,6 +62,22 @@ static const char* g_defaultPort = "3000";
 unsigned int Ubitrack::Facade::AdvancedFacade::m_instanceCount = 0;
 
 namespace Ubitrack { namespace Facade {
+
+void initGPU() {
+#ifdef HAVE_OPENCV
+	// access OCL Manager and initialize if needed
+	Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
+	if ((oclManager.isActive()) && (!oclManager.isInitialized()))
+	{
+		if (oclManager.isEnabled()) {
+			oclManager.initializeOpenGL();
+		}
+		LOG4CPP_INFO(logger, "OCL Manager initialized: " << oclManager.isInitialized());
+	}
+#endif
+	return;
+}
+
 
 // XXX duplicated constructor for now until i've found a better solution (Ulrich Eck)
 AdvancedFacade::AdvancedFacade( bool drop_events, const std::string& sComponentPath )

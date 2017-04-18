@@ -62,6 +62,12 @@ namespace boost
 
 namespace Ubitrack { namespace Facade {
 
+/**
+ * initialize GPU (needs valid OpenGL Context activated
+ */
+void UTFACADE_EXPORT initGPU();
+
+
 // forward decls
 class DataflowObserver;
 
