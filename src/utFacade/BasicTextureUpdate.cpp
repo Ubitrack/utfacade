@@ -82,7 +82,7 @@ BasicTextureUpdate::BasicTextureUpdate() throw() : m_pPrivate( 0 )
  */
 bool BasicTextureUpdate::isInitialized() {
     if (m_pPrivate) {
-        return m_pPrivate->m_bTextureInitialized;
+        return m_pPrivate->isInitialized();
     }
     return false;
 }
@@ -93,7 +93,7 @@ bool BasicTextureUpdate::isInitialized() {
  */
 unsigned int BasicTextureUpdate::getTextureId() {
     if (m_pPrivate) {
-        return (unsigned int)m_pPrivate->m_texture;
+        return (unsigned int)m_pPrivate->textureId();
     }
     return 0;
 }
@@ -104,7 +104,7 @@ unsigned int BasicTextureUpdate::getTextureId() {
  */
 unsigned int BasicTextureUpdate::getPow2Width() {
     if (m_pPrivate) {
-        return m_pPrivate->m_pow2Width;
+        return m_pPrivate->pow2width();
     }
     return 0;
 }
@@ -114,7 +114,7 @@ unsigned int BasicTextureUpdate::getPow2Width() {
  */
 unsigned int BasicTextureUpdate::getPow2Height() {
     if (m_pPrivate) {
-        return m_pPrivate->m_pow2Height;
+        return m_pPrivate->pow2height();
     }
     return 0;
 }
