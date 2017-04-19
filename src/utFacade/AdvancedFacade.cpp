@@ -65,6 +65,7 @@ namespace Ubitrack { namespace Facade {
 
 void initGPU() {
 #ifdef HAVE_OPENCV
+	LOG4CPP_INFO(logger, "Facade: initGPU called.");
 	// access OCL Manager and initialize if needed
 	Vision::OpenCLManager& oclManager = Vision::OpenCLManager::singleton();
 	if ((oclManager.isActive()) && (!oclManager.isInitialized()))
