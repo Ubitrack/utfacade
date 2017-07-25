@@ -28,6 +28,8 @@
 *
 * @author Ulrich Eck <ueck@net-labs.de>
 */
+
+#ifdef HAVE_OPENCL
 #ifndef UBITRACK_BASICTEXTUREUPDATE_H
 #define UBITRACK_BASICTEXTUREUPDATE_H
 
@@ -88,3 +90,4 @@ private:
 }// namespace Ubitrack::Facade
 
 #endif //UBITRACK_BASICTEXTUREUPDATE_H
+#endif //HAVE_OPENCL
