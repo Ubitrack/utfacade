@@ -2,6 +2,10 @@ set(UBITRACK_LIBRARY_NAME utfacade)
 
 
 # Source and Header Files
+include_directories(${CMAKE_SOURCE_DIR}/components)
+
+# writes config file into binary_dir, so sourcetree will not be cluttered
+configure_file(utFacade/Config_cmake.hh ${CMAKE_CURRENT_SOURCE_DIR}/utFacade/Config.h)
 
 # All cpp files for UTCORE
 FILE(GLOB UBITRACK_SRCS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -20,6 +24,7 @@ FILE(GLOB UBITRACK_HEADERS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
    "${CMAKE_CURRENT_SOURCE_DIR}/*/*/*/*.h"
    "${CMAKE_CURRENT_SOURCE_DIR}/*/*/*/*/*.h"
 )
+
 
 # UTCORE library definition
 IF(BUILD_SHARED_LIBS)
@@ -72,7 +77,7 @@ set_property(TARGET ${UBITRACK_LIBRARY_NAME} PROPERTY POSITION_INDEPENDENT_CODE 
 set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES
   OUTPUT_NAME "${UBITRACK_LIBRARY_NAME}${UBITRACK_DLLVERSION}"
   DEBUG_POSTFIX "${UBITRACK_DEBUG_POSTFIX}"
-  ARCHIVE_OUTPUT_DIRECTORY lib
+  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_INSTALL_LIBDIR}
   )
 
 if(NOT ANDROID)
@@ -85,9 +90,9 @@ endif(NOT ANDROID)
 # Installation of libraries, headers and documents
 install(TARGETS ${UBITRACK_LIBRARY_NAME}
   EXPORT library_targets
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
 
 foreach(hdr ${UBITRACK_HEADERS})
@@ -102,57 +107,5 @@ endforeach()
 
 install(EXPORT library_targets
   NAMESPACE utfacade::
-  DESTINATION lib/cmake/utfacade
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/utfacade
   )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-UT_OPTION(ENABLE_BASICFACADE "Enable Basic Facade" ON)
-IF(ENABLE_BASICFACADE)
-  add_definitions("-DENABLE_BASICFACADE")
-ENDIF(ENABLE_BASICFACADE)
-
-
-set(the_description "The UbiTrack Facade")
-if(HAVE_OPENCV)
-  ut_add_module(utfacade utcore utdataflow utvision)
-  ut_module_include_directories(utfacade ${UBITRACK_CORE_DEPS_INCLUDE_DIR} ${OPENCV_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-else(HAVE_OPENCV)
-  ut_add_module(utfacade utcore utdataflow)
-  ut_module_include_directories(utfacade ${UBITRACK_CORE_DEPS_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-endif(HAVE_OPENCV)
-
-ut_glob_module_sources(HEADERS "*.h" SOURCES "*.cpp")
-
-# writes config file into binary_dir, so sourcetree will not be cluttered
-configure_file(Config_cmake.hh ${CMAKE_CURRENT_SOURCE_DIR}/Config.h)
-install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Config.h" DESTINATION "${UBITRACK_INCLUDE_INSTALL_PATH}/utFacade" COMPONENT dev)
-
-ut_create_module(${TINYXML_LIBRARIES} ${LOG4CPP_LIBRARIES} ${LAPACK_LIBRARIES} ${Boost_LIBRARIES})

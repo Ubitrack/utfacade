@@ -35,7 +35,7 @@
 #include <boost/bind.hpp>
 #include <log4cpp/Category.hh>
 
-#include "../utComponents/ApplicationPullSink.h"
+#include "utComponents/ApplicationPullSink.h"
 
 #ifdef HAVE_OPENCV
 #include <utVision/Image.h>

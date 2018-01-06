@@ -40,10 +40,10 @@
 
 // not nice having a relative include here ...
 // should deal with CMAKE and include the appropriate directory
-#include "../utComponents/ApplicationPullSink.h"
-#include "../utComponents/ApplicationPushSink.h"
-#include "../utComponents/ApplicationPullSource.h"
-#include "../utComponents/ApplicationPushSource.h"
+#include "utComponents/ApplicationPullSink.h"
+#include "utComponents/ApplicationPushSink.h"
+#include "utComponents/ApplicationPullSource.h"
+#include "utComponents/ApplicationPushSource.h"
 #include "AdvancedFacade.h"
 
 

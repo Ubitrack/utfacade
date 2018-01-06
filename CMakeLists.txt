@@ -8,6 +8,10 @@ conan_basic_setup(KEEP_RPATHS)
 include(GNUInstallDirs)
 include(cmake/UbitrackConfig)
 
+IF(ENABLE_BASICFACADE)
+  set(UBITRACK_COMPILE_DEFINITIONS ${UBITRACK_COMPILE_DEFINITIONS} "ENABLE_BASICFACADE")
+ENDIF(ENABLE_BASICFACADE)
+
 # External Libraries (could this be solved with conan dependencies ??)
 
 # OpenGL

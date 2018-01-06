@@ -39,8 +39,8 @@
 #include <utClientServer/ClientServerConnection.h>
 #include <utDataflow/DataflowNetwork.h>
 
-#include "../utComponents/ApplicationPushSink.h"
-#include "../utComponents/ApplicationPushSource.h"
+#include "utComponents/ApplicationPushSink.h"
+#include "utComponents/ApplicationPushSource.h"
 
 // lots of forward decls to avoid applications having to deal with these internals
 namespace Ubitrack { 

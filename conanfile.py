@@ -29,6 +29,14 @@ class UbitrackCoreConan(ConanFile):
     # all sources are deployed with the package
     exports_sources = "apps/*", "components/*", "doc/*", "src/*", "CMakeLists.txt"
 
+    def build_requirements(self):
+        if self.options.enable_java:
+            self.build_requires("java_installer/9.0.0@bincrafters/stable")
+        if self.options.enable_java or self.options.enable_dotnet:
+            if self.settings.os == "Windows":
+                self.build_requires("swig/3.0.12@ulricheck/stable")
+
+
     def configure(self):
         if self.options.shared:
             self.options['ubitrack_core'].shared = True
@@ -43,8 +51,8 @@ class UbitrackCoreConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions['BUILD_SHARED_LIBS'] = self.options.shared
         cmake.definitions['ENABLE_BASICFACADE'] = self.options.enable_basicfacade
-        cmake.definitions['ENABLE_DOTNET_WRAPPER'] = self.options.with_dotnet
-        cmake.definitions['ENABLE_JAVA_WRAPPER'] = self.options.with_java
+        cmake.definitions['ENABLE_DOTNET_WRAPPER'] = self.options.enable_dotnet
+        cmake.definitions['ENABLE_JAVA_WRAPPER'] = self.options.enable_java
         cmake.configure()
         cmake.build()
 

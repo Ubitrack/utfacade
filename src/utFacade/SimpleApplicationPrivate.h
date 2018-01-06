@@ -2,7 +2,7 @@
 #define __UBITRACK_FACADE_SIMPLEAPPLICATION_PRIVATE_H_INCLUDED__
 
 
-#include "../utComponents/ApplicationPullSink.h"
+#include "utComponents/ApplicationPullSink.h"
 #include "SimpleDatatypes.h"
 
 namespace Ubitrack { namespace Facade {

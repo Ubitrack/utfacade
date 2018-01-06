@@ -1,3 +1,33 @@
+
+# Java
+SET(_JAVA_HOME "${CONAN_JAVA_INSTALLER_ROOT}")
+SET(HAVE_JAVA 0)
+find_package(JNI)
+IF(JNI_FOUND)
+  add_definitions(-DHAVE_JAVA)
+  SET(HAVE_JAVA 1)
+  MESSAGE(STATUS "Found JAVA: ${JNI_INCLUDE_DIRS} - ${JNI_LIBRARIES}")
+ENDIF(JNI_FOUND)
+
+
+#SWIG
+set(SWIG_ROOT_DIR "${CONAN_SWIG_ROOT}")
+SET(HAVE_SWIG 0)
+find_package(SWIG)
+IF(SWIG_FOUND)
+  add_definitions(-DHAVE_SWIG)
+  SET(HAVE_SWIG 1)
+  INCLUDE(${SWIG_USE_FILE})
+ENDIF(SWIG_FOUND)
+
+
+
 add_subdirectory(Console)
-add_subdirectory(DotNet)
-add_subdirectory(Java)
+
+IF(ENABLE_DOTNET_WRAPPER)
+  add_subdirectory(DotNet)
+ENDIF(ENABLE_DOTNET_WRAPPER)
+
+IF(ENABLE_JAVA_WRAPPER)
+  add_subdirectory(Java)
+ENDIF(ENABLE_JAVA_WRAPPER)
