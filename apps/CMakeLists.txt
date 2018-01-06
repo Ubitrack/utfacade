@@ -25,7 +25,7 @@ ENDIF(SWIG_FOUND)
 add_subdirectory(Console)
 
 IF(ENABLE_DOTNET_WRAPPER)
-  # add_subdirectory(DotNet)
+  add_subdirectory(DotNet)
 ENDIF(ENABLE_DOTNET_WRAPPER)
 
 IF(ENABLE_JAVA_WRAPPER)

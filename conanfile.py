@@ -24,7 +24,7 @@ class UbitrackCoreConan(ConanFile):
     default_options = (
         "shared=True",
         "enable_basicfacade=True",
-        "enable_dotnet=True",
+        "enable_dotnet=False",
         "enable_java=True",
         )
 
@@ -40,6 +40,9 @@ class UbitrackCoreConan(ConanFile):
 
 
     def configure(self):
+        if self.settings.os == "Windows":
+            self.options.enable_dotnet = True
+            
         if self.options.shared:
             self.options['ubitrack_core'].shared = True
             self.options['ubitrack_vision'].shared = True
