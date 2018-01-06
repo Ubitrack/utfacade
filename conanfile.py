@@ -29,7 +29,7 @@ class UbitrackCoreConan(ConanFile):
         )
 
     # all sources are deployed with the package
-    exports_sources = "apps/*", "components/*", "doc/*", "src/*", "CMakeLists.txt"
+    exports_sources = "apps/*", "cmake/*", "components/*", "doc/*", "src/*", "CMakeLists.txt"
 
     def build_requirements(self):
         if self.options.enable_java:
