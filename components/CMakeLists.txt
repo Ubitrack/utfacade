@@ -1,5 +1,8 @@
 set(UBITRACK_LIBRARY_NAME utfacade_components)
 
+
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
 # All cpp files for UTCORE
 FILE(GLOB UBITRACK_SRCS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
