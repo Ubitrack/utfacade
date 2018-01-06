@@ -39,7 +39,7 @@ set(UBITRACK_EXTRA_LIBS ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} ${OpenCL_LIBR
 add_subdirectory(src)
 
 # components
-# add_subdirectory(components)
+add_subdirectory(components)
 
 # wrappers and helpers
 # add_subdirectory(apps)
