@@ -1,12 +1,14 @@
-import os
 from conans import ConanFile, CMake
-from conans.tools import download
-from conans.tools import unzip
 
 
 class UbitrackCoreConan(ConanFile):
     name = "ubitrack_facade"
     version = "1.3.0"
+
+    description = "Ubitrack Facade Library and Components"
+    url = "https://github.com/Ubitrack/utfacade.git"
+    license = "GPL"
+
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     options = {"shared": [True, False],
