@@ -42,7 +42,7 @@ add_subdirectory(src)
 add_subdirectory(components)
 
 # wrappers and helpers
-# add_subdirectory(apps)
+add_subdirectory(apps)
 
 # collect all utql patterns from module for installation
 file(GLOB _utql_patterns "doc/utql/*.xml" "doc/utql/*/*.xml"  "doc/utql/*/*/*.xml")

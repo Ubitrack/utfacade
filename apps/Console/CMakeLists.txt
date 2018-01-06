@@ -1,11 +1,56 @@
-set(the_description "The UbiTrack utConsole app")
-if(HAVE_OPENCV)
-  ut_add_app(utConsole DEPS utcore utdataflow utfacade utvision)
-  ut_app_include_directories(${UBITRACK_CORE_DEPS_INCLUDE_DIR})
-else(HAVE_OPENCV)
-  ut_add_app(utConsole DEPS utcore utdataflow utfacade)
-  ut_app_include_directories(${UBITRACK_CORE_DEPS_INCLUDE_DIR})
-endif(HAVE_OPENCV)
+set(UBITRACK_APPLICATION_NAME utConsole)
 
-ut_glob_app_sources(SOURCES "console.cpp")
-ut_create_executable(${PTHREAD_LIBRARIES})
+# All cpp files for UTCORE
+file(GLOB UBITRACK_SRCS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*/*.cpp"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*/*/*.cpp"
+)
+
+# All header files for UTCORE
+file(GLOB UBITRACK_HEADERS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.h"  
+   "${CMAKE_CURRENT_SOURCE_DIR}/*/*.h" 
+   "${CMAKE_CURRENT_SOURCE_DIR}/*/*/*.h" 
+)
+
+# UTCORE library definition
+add_executable(${UBITRACK_APPLICATION_NAME} ${UBITRACK_SRCS} ${UBITRACK_HEADERS})
+
+target_link_libraries(${UBITRACK_APPLICATION_NAME} utfacade ${CONAN_LIBS})
+
+# Apply Target Properties
+if(MSVC)
+  if(CMAKE_CROSSCOMPILING)
+    set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:secchk")
+  endif()
+  set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:libc /DEBUG")
+endif()
+
+foreach(_flag ${UBITRACK_COMPILE_FLAGS})
+  set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES COMPILE_FLAGS "${_flag}")
+endforeach()
+foreach(_flag ${UBITRACK_LINK_FLAGS})
+  set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES LINK_FLAGS "${_flag}")
+endforeach()
+foreach(_flag ${UBITRACK_LINK_FLAGS_DEBUG})
+  set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES LINK_FLAGS_DEBUG "${_flag}")
+endforeach()
+foreach(_symb ${UBITRACK_DEFINES})
+  set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES DEFINE_SYMBOL ${_symb})
+endforeach()
+
+# set compiler Definitions
+set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES COMPILE_DEFINITIONS "${UBITRACK_COMPILE_DEFINITIONS}")
+
+set_target_properties(${UBITRACK_APPLICATION_NAME} PROPERTIES
+  DEBUG_POSTFIX "${UBITRACK_DEBUG_POSTFIX}"
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_INSTALL_BINDIR}
+  )
+
+# Installation of libraries, headers and documents
+install(TARGETS ${UBITRACK_APPLICATION_NAME}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  )
