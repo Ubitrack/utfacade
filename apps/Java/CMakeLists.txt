@@ -11,6 +11,10 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${CMAKE_SOURCE_DIR}/components)
 include_directories(${JNI_INCLUDE_DIRS})
 
+if(MSVC)
+  set(UBITRACK_COMPILE_DEFINITIONS ${UBITRACK_COMPILE_DEFINITIONS} "BOOST_ALL_DYN_LINK")
+endif(MSVC)
+
 # ubitrack_java library definition
 SET(CMAKE_SWIG_FLAGS "-v")
 
