@@ -55,21 +55,23 @@ class UbitrackCoreConan(ConanFile):
         cmake.definitions['ENABLE_JAVA_WRAPPER'] = self.options.enable_java
         cmake.configure()
         cmake.build()
+        cmake.install()
 
     def package(self):
-        self.copy("*.h", dst="include", src="src")
-        self.copy("*.lib", dst="lib", excludes="*/lib/ubitrack/*.lib", keep_path=False)
-        self.copy("*.dll", dst="bin", excludes="*/lib/ubitrack/*.dll", keep_path=False)
-        self.copy("*.dylib*", dst="lib", excludes="*/lib/ubitrack/*.dylib", keep_path=False)
-        self.copy("*.so", dst="lib", excludes="*/lib/ubitrack/*.so", keep_path=False)
-        self.copy("*.a", dst="lib", keep_path=False)
-        self.copy("*", dst="bin", src="bin", keep_path=False)
+        # self.copy("*.h", dst="include", src="src")
+        # self.copy("*.lib", dst="lib", excludes="*/lib/ubitrack/*.lib", keep_path=False)
+        # self.copy("*.dll", dst="bin", excludes="*/lib/ubitrack/*.dll", keep_path=False)
+        # self.copy("*.dylib*", dst="lib", excludes="*/lib/ubitrack/*.dylib", keep_path=False)
+        # self.copy("*.so", dst="lib", excludes="*/lib/ubitrack/*.so", keep_path=False)
+        # self.copy("*.a", dst="lib", keep_path=False)
+        # self.copy("*", dst="bin", src="bin", keep_path=False)
 
-        # components
-        self.copy("ubitrack/*.lib", dst="lib/ubitrack", keep_path=False)
-        self.copy("ubitrack/*.dll", dst="bin/ubitrack", keep_path=False)
-        self.copy("ubitrack/*.dylib*", dst="lib/ubitrack", keep_path=False)
-        self.copy("ubitrack/*.so", dst="lib/ubitrack", keep_path=False)
+        # # components
+        # self.copy("ubitrack/*.lib", dst="lib/ubitrack", keep_path=False)
+        # self.copy("ubitrack/*.dll", dst="bin/ubitrack", keep_path=False)
+        # self.copy("ubitrack/*.dylib*", dst="lib/ubitrack", keep_path=False)
+        # self.copy("ubitrack/*.so", dst="lib/ubitrack", keep_path=False)
+        pass
 
     def package_info(self):
         suffix = ""
