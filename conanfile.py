@@ -17,9 +17,9 @@ class UbitrackCoreConan(ConanFile):
                "enable_dotnet": [True, False],
                "enable_java": [True, False]}
     requires = (
-        "ubitrack_core/%s@ulricheck/stable" % version,
-        "ubitrack_vision/%s@ulricheck/stable" % version,
-        "ubitrack_dataflow/%s@ulricheck/stable" % version,
+        "ubitrack_core/%s@ubitrack/stable" % version,
+        "ubitrack_vision/%s@ubitrack/stable" % version,
+        "ubitrack_dataflow/%s@ubitrack/stable" % version,
        )
 
     default_options = (
@@ -37,7 +37,7 @@ class UbitrackCoreConan(ConanFile):
             self.build_requires("java_installer/9.0.0@bincrafters/stable")
         if self.options.enable_java or self.options.enable_dotnet:
             if self.settings.os == "Windows":
-                self.build_requires("swig/3.0.12@ulricheck/stable")
+                self.build_requires("swig/3.0.12@camposs/stable")
 
 
     def configure(self):
