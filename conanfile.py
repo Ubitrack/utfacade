@@ -38,7 +38,7 @@ class UbitrackCoreConan(ConanFile):
         if self.options.enable_java or self.options.enable_dotnet:
             if self.settings.os == "Windows":
                 self.build_requires("swig/3.0.12@camposs/stable")
-
+            # if linux, then apt-get install swig
 
     def configure(self):
         if self.settings.os == "Windows":
