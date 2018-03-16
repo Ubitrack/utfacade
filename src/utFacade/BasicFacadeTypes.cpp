@@ -31,6 +31,8 @@
 #include <utFacade/Config.h>
 #ifdef ENABLE_BASICFACADE
 
+#include <utAlgorithm/Projection.h>
+
 #include "BasicFacadeTypesPrivate.h"
 #include <algorithm>
 
@@ -905,6 +907,26 @@ bool BasicCameraIntrinsicsMeasurement::getDistortion(std::vector<double>& radial
             tangential.reserve(TI2::SIZE);
             for (unsigned int i = 0; i<TI2::SIZE; i++) {
                 tangential.at(i) = m->tangential_params(i);
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+bool BasicCameraIntrinsicsMeasurement::getOpenGLProjectionMatrix(double l, double r, double b, double t, double n, double f, std::vector<double>& v)
+{
+    typedef TensorIndex<4, 4> TI;
+    if (m_pPrivate) {
+        if (m_pPrivate->m_measurement) {
+            Math::CameraIntrinsics<double>* m = m_pPrivate->m_measurement.get();
+            Math::Matrix< double, 4, 4> proj_mat = Algorithm::projectionMatrixToOpenGL(l, r, b, t, n, f, (*m).matrix);
+
+            v.reserve(TI::SIZE);
+            for (unsigned int i = 0; i<TI::LEN1; i++) {
+                for (unsigned int j = 0; j<TI::LEN2; j++) {
+                    v.at(TI::indexOf(i, j)) = proj_mat(i, j);
+                }
             }
             return true;
         }

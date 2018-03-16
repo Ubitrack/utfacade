@@ -496,6 +496,10 @@ public:
     bool getResolution(std::vector<double>& v);
     bool getDistortion(std::vector<double>& radial, std::vector<double>& tangential);
 
+    /* get OpenGL projection matrix 4x4 */
+    bool getOpenGLProjectionMatrix(double l, double r, double b, double t, double n, double f, std::vector<double>& v);
+
+
 //        private:
     BasicCameraIntrinsicsMeasurementPrivate* m_pPrivate;
 };
