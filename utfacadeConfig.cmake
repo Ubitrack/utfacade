@@ -1,0 +1,5 @@
+include(CMakeFindDependencyMacro)
+find_dependency(ubitrack_core)
+find_dependency(ubitrack_vision)
+find_dependency(ubitrack_dataflow)
+include("${CMAKE_CURRENT_LIST_DIR}/utfacadeeTargets.cmake")

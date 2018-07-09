@@ -30,7 +30,7 @@ class UbitrackCoreConan(ConanFile):
         )
 
     # all sources are deployed with the package
-    exports_sources = "apps/*", "cmake/*", "components/*", "doc/*", "src/*", "CMakeLists.txt"
+    exports_sources = "apps/*", "cmake/*", "components/*", "doc/*", "src/*", "CMakeLists.txt", "utfacadeConfig.cmake"
 
     def build_requirements(self):
         if self.options.enable_java:
@@ -55,6 +55,7 @@ class UbitrackCoreConan(ConanFile):
        
     def build(self):
         cmake = CMake(self)
+        cmake.verbose = True
         cmake.definitions['BUILD_SHARED_LIBS'] = self.options.shared
         cmake.definitions['ENABLE_BASICFACADE'] = self.options.enable_basicfacade
         cmake.definitions['ENABLE_DOTNET_WRAPPER'] = self.options.enable_dotnet

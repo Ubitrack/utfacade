@@ -1,9 +1,6 @@
 set(UBITRACK_LIBRARY_NAME utfacade)
 
 
-# Source and Header Files
-include_directories(${CMAKE_SOURCE_DIR}/components)
-
 # writes config file into binary_dir, so sourcetree will not be cluttered
 configure_file(utFacade/Config_cmake.hh ${CMAKE_CURRENT_SOURCE_DIR}/utFacade/Config.h)
 
@@ -27,18 +24,27 @@ FILE(GLOB UBITRACK_HEADERS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
 
 
 # UTCORE library definition
-IF(BUILD_SHARED_LIBS)
-  ADD_LIBRARY(${UBITRACK_LIBRARY_NAME} SHARED ${UBITRACK_SRCS} ${UBITRACK_HEADERS})
-ELSE(BUILD_SHARED_LIBS)
-  ADD_LIBRARY(${UBITRACK_LIBRARY_NAME} STATIC ${UBITRACK_SRCS} ${UBITRACK_HEADERS})
-ENDIF(BUILD_SHARED_LIBS)
+ADD_LIBRARY(${UBITRACK_LIBRARY_NAME} ${UBITRACK_SRCS} ${UBITRACK_HEADERS})
 
-target_link_libraries(${UBITRACK_LIBRARY_NAME} ${CONAN_LIBS} ${UBITRACK_EXTRA_LIBS})
+target_link_libraries(${UBITRACK_LIBRARY_NAME} 
+  CONAN_PKG::ubitrack_core
+  CONAN_PKG::ubitrack_vision
+  CONAN_PKG::ubitrack_dataflow
+  OpenGL::GL
+  OpenGL::GLU
+  OpenCL::OpenCL
+  )
+
 
 target_include_directories(${UBITRACK_LIBRARY_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/components>
   $<INSTALL_INTERFACE:include>
   PRIVATE src)
+
+if(HAVE_GLAD)
+    set(UBITRACK_COMPILE_DEFINITIONS ${UBITRACK_COMPILE_DEFINITIONS} "HAVE_GLAD")
+endif(HAVE_GLAD)
 
 if(WIN32)
   IF(BUILD_SHARED_LIBS)
@@ -55,57 +61,6 @@ if(MSVC)
   set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:libc /DEBUG")
 endif()
 
-foreach(_flag ${UBITRACK_COMPILE_FLAGS})
-  set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES COMPILE_FLAGS "${_flag}")
-endforeach()
-foreach(_flag ${UBITRACK_LINK_FLAGS})
-  set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES LINK_FLAGS "${_flag}")
-endforeach()
-foreach(_flag ${UBITRACK_LINK_FLAGS_DEBUG})
-  set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES LINK_FLAGS_DEBUG "${_flag}")
-endforeach()
-foreach(_symb ${UBITRACK_DEFINES})
-  set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES DEFINE_SYMBOL ${_symb})
-endforeach()
-
-# set compiler Definitions
-set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES COMPILE_DEFINITIONS "${UBITRACK_COMPILE_DEFINITIONS}")
-
-# set fPIC
-set_property(TARGET ${UBITRACK_LIBRARY_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
-
-set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES
-  OUTPUT_NAME "${UBITRACK_LIBRARY_NAME}${UBITRACK_DLLVERSION}"
-  DEBUG_POSTFIX "${UBITRACK_DEBUG_POSTFIX}"
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_INSTALL_LIBDIR}
-  )
-
-if(NOT ANDROID)
-  set_target_properties(${UBITRACK_LIBRARY_NAME} PROPERTIES
-    VERSION ${UBITRACK_LIBVERSION}
-    SOVERSION ${UBITRACK_SOVERSION}
-    )
-endif(NOT ANDROID)
-
-# Installation of libraries, headers and documents
-install(TARGETS ${UBITRACK_LIBRARY_NAME}
-  EXPORT library_targets
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
-
-foreach(hdr ${UBITRACK_HEADERS})
-  string(REGEX REPLACE "${CMAKE_BINARY_DIR}/" "" hdr2 "${hdr}")
-  GET_FILENAME_COMPONENT(fpath ${hdr2} PATH)
-  IF(fpath)
-    install(FILES ${hdr} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${fpath}" COMPONENT dev)
-  ELSE(fpath)
-    install(FILES ${hdr} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}" COMPONENT dev)
-  ENDIF(fpath)
-endforeach()
-
-install(EXPORT library_targets
-  NAMESPACE utfacade::
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/utfacade
-  )
+ubitrack_set_target_properties(${UBITRACK_LIBRARY_NAME})
+ubitrack_install_headers(${UBITRACK_HEADERS})
+ubitrack_install_library(${UBITRACK_LIBRARY_NAME})
