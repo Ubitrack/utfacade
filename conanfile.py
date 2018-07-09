@@ -55,7 +55,6 @@ class UbitrackCoreConan(ConanFile):
        
     def build(self):
         cmake = CMake(self)
-        cmake.verbose = True
         cmake.definitions['BUILD_SHARED_LIBS'] = self.options.shared
         cmake.definitions['ENABLE_BASICFACADE'] = self.options.enable_basicfacade
         cmake.definitions['ENABLE_DOTNET_WRAPPER'] = self.options.enable_dotnet
