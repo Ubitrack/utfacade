@@ -33,9 +33,7 @@
 #ifdef ENABLE_BASICFACADE
 #ifdef HAVE_OPENCV
 
-#ifdef WIN32
-#include <utUtil/CleanWindows.h>
-#endif
+#include <utVision/OpenGLPlatform.h>
 
 #include "utFacade/BasicTextureUpdate.h"
 
