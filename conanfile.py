@@ -16,7 +16,6 @@ class UbitrackCoreConan(ConanFile):
                "enable_basicfacade": [True, False],
                "enable_dotnet": [True, False],
                "enable_java": [True, False],
-                "opengl_extension_wrapper": "ANY",
                 }
 
     requires = (
@@ -30,7 +29,6 @@ class UbitrackCoreConan(ConanFile):
         "enable_basicfacade=True",
         "enable_dotnet=False",
         "enable_java=True",
-        "opengl_extension_wrapper=glad",
         )
 
     # all sources are deployed with the package
@@ -43,7 +41,6 @@ class UbitrackCoreConan(ConanFile):
             if self.settings.os == "Windows":
                 self.build_requires("swig/3.0.12@camposs/stable")
             # if linux, then apt-get install swig
-        self.options.opengl_extension_wrapper = self.options['ubitrack_vision'].opengl_extension_wrapper
 
 
     def configure(self):
@@ -92,3 +89,7 @@ class UbitrackCoreConan(ConanFile):
             if self.settings.build_type == "Debug":
                 suffix += "d"
         self.cpp_info.libs.append("utfacade%s" % (suffix))
+
+
+    def package_id(self):
+        self.requires["ubitrack_vision"].full_package_mode()
