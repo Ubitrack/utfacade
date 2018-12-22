@@ -28,7 +28,7 @@ class UbitrackCoreConan(ConanFile):
         "shared=True",
         "enable_basicfacade=True",
         "enable_dotnet=False",
-        "enable_java=True",
+        "enable_java=False",
         )
 
     # all sources are deployed with the package
