@@ -343,6 +343,7 @@ public:
 
     /* get int v */
     bool get(std::vector< int >& v);
+    virtual unsigned int elementCount();
 
 //        private:
     BasicScalarIntListMeasurementPrivate* m_pPrivate;
@@ -364,6 +365,7 @@ public:
     /* get int v */
     bool get(std::vector<double>& v);
     bool get(std::vector<float>& v);
+    virtual unsigned int elementCount();
 
 //        private:
     BasicScalarDoubleListMeasurementPrivate* m_pPrivate;
@@ -387,6 +389,7 @@ public:
     /* get vec2 v */
     bool get(std::vector< std::vector<double> >& v);
     bool get(std::vector< std::vector<float> >& v);
+    virtual unsigned int elementCount();
 
 //        private:
     BasicVectorListMeasurementPrivate<LEN>* m_pPrivate;
@@ -410,6 +413,7 @@ public:
     /* get pose as vector [x, y, z, rx, ry, rz, rw] */
     bool get(std::vector< std::vector<double> >& v);
     bool get(std::vector< std::vector<float> >& v);
+    virtual unsigned int elementCount();
 
 //        private:
     BasicPoseListMeasurementPrivate* m_pPrivate;
@@ -437,6 +441,7 @@ public:
 
     /* get NxN covariance-matrix as vector N*N row-major */
     bool getCovariance(std::vector< std::vector<double> >& v);
+    virtual unsigned int elementCount();
 
 //        private:
     BasicErrorVectorListMeasurementPrivate<LEN>* m_pPrivate;
@@ -464,6 +469,7 @@ public:
 
     /* get 7x7 covariance-matrix as vector N*N row-major */
     bool getCovariance(std::vector< std::vector<double> >& v);
+    virtual unsigned int elementCount();
 
     //        private:
     BasicErrorPoseListMeasurementPrivate* m_pPrivate;

@@ -507,6 +507,13 @@ bool BasicScalarIntListMeasurement::get(std::vector<int>& v)
     return false;
 }
 
+unsigned int BasicScalarIntListMeasurement::elementCount(){
+    if (m_pPrivate) {
+        return m_pPrivate->elementCount();
+    }
+    return 0;
+}
+
 // ScalarDouble
 BasicScalarDoubleListMeasurement::BasicScalarDoubleListMeasurement(unsigned long long int const ts,
         BasicScalarDoubleListMeasurementPrivate* _pPrivate)
@@ -550,6 +557,13 @@ bool BasicScalarDoubleListMeasurement::get(std::vector<float>& v)
         }
     }
     return false;
+}
+
+unsigned int BasicScalarDoubleListMeasurement::elementCount(){
+    if (m_pPrivate) {
+        return m_pPrivate->elementCount();
+    }
+    return 0;
 }
 
 // Vec
@@ -610,6 +624,14 @@ bool BasicVectorListMeasurement<LEN>::get(std::vector< std::vector<float> >& v)
         }
     }
     return false;
+}
+
+template<int LEN>
+unsigned int BasicVectorListMeasurement<LEN>::elementCount(){
+    if (m_pPrivate) {
+        return m_pPrivate->elementCount();
+    }
+    return 0;
 }
 
 // Pose
@@ -680,6 +702,13 @@ bool BasicPoseListMeasurement::get(std::vector< std::vector<float> >& v)
     return false;
 }
 
+unsigned int BasicPoseListMeasurement::elementCount(){
+    if (m_pPrivate) {
+        return m_pPrivate->elementCount();
+    }
+    return 0;
+}
+
 // ErrorVec
 template<int LEN>
 BasicErrorVectorListMeasurement<LEN>::BasicErrorVectorListMeasurement(unsigned long long int const ts,
@@ -740,6 +769,14 @@ bool BasicErrorVectorListMeasurement<LEN>::getCovariance(std::vector< std::vecto
         }
     }
     return false;
+}
+
+template<int LEN>
+unsigned int BasicErrorVectorListMeasurement<LEN>::elementCount(){
+    if (m_pPrivate) {
+        return m_pPrivate->elementCount();
+    }
+    return 0;
 }
 
 // ErrorPose
@@ -832,6 +869,13 @@ bool BasicErrorPoseListMeasurement::getCovariance(std::vector< std::vector<doubl
         }
     }
     return false;
+}
+
+unsigned int BasicErrorPoseListMeasurement::elementCount(){
+    if (m_pPrivate) {
+        return m_pPrivate->elementCount();
+    }
+    return 0;
 }
 
 
