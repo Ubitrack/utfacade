@@ -29,6 +29,7 @@
 * @author Ulrich Eck <ueck@net-labs.de>
 */
 
+#ifdef HAVE_OPENCL
 #include <utFacade/Config.h>
 #ifdef ENABLE_BASICFACADE
 #ifdef HAVE_OPENCV
@@ -152,3 +153,5 @@ void BasicTextureUpdate::updateTexture(std::shared_ptr<BasicImageMeasurement>& i
 
 #endif // HAVE_OPENCV
 #endif // ENABLE_BASICFACADE
+
+#endif //HAVE_OPENCL
