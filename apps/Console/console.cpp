@@ -65,6 +65,8 @@ int main( int ac, char** av )
 		std::string sComponentsPath;
 		bool bNoExit;
 
+		bool dropEvents=true;
+
 		try
 		{
 			// describe program options
@@ -79,6 +81,8 @@ int main( int ac, char** av )
 				( "extra-dataflow", po::value< std::string >( &sExtraUtqlFile ), "Additional UTQL response file to be loaded directly without using the server" )
 				( "noexit", "do not exit on return" )
 				( "path", "path to ubitrack bin directory" )
+				("path", "path to ubitrack bin directory")
+				("allEvents", "should all events be computed, no drops")
 				#ifdef _WIN32
 				( "priority", po::value< int >( 0 ),"set priority of console thread, -1: lower, 0: normal, 1: higher, 2: real time (needs admin)" )
 				#endif
@@ -118,6 +122,8 @@ int main( int ac, char** av )
 			#endif
 
 			bNoExit = poOptions.count( "noexit" ) != 0;
+
+			dropEvents = poOptions.count("allEvents") == 0;
 			
 			// print help message if nothing specified
 			if ( poOptions.count( "help" ) || sUtqlFile.empty() )
@@ -137,8 +143,11 @@ int main( int ac, char** av )
 		}		
 		
 		// configure ubitrack
+		
+
+		std::cout << "Droping events:" << dropEvents << std::endl << std::flush;
 		std::cout << "Loading components..." << std::endl << std::flush;
-		Facade::AdvancedFacade utFacade( sComponentsPath );
+		Facade::AdvancedFacade utFacade(dropEvents, sComponentsPath  );
 
 		if ( sServerAddress.empty() )
 		{
