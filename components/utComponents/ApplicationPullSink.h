@@ -44,6 +44,7 @@
 #include <utDataflow/Component.h>
 #include <utDataflow/ComponentFactory.h>
 #include <utMeasurement/Measurement.h>
+#include <utComponents/ApplicationMetadata.h>
 
 namespace Ubitrack { namespace Components {
 
@@ -82,6 +83,7 @@ using namespace Dataflow;
 template < class EventType >
 class ApplicationPullSink
 	: public Component
+	, public ApplicationMetadata
 {
 public:
 	/**
@@ -90,11 +92,12 @@ public:
 	 * @param sName Unique name of the component.
 	 * @param subgraph UTQL subgraph
 	 */
-	ApplicationPullSink( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> )
-      : Ubitrack::Dataflow::Component( nm )
-      , m_InPort( "Input", *this )
-    {
-    }
+	ApplicationPullSink( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> subgraph )
+    	: Ubitrack::Dataflow::Component( nm )
+		, ApplicationMetadata( subgraph )
+      	, m_InPort( "Input", *this )
+	    {
+	    }
 
 	/**
 	 * Get function as interface to user.

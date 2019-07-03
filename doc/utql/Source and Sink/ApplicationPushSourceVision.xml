@@ -27,6 +27,15 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPushSourceVisionImage"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 	
@@ -45,6 +54,54 @@
     
     <GlobalDataflowAttributeDeclarations>
         <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/3/1)"/>
+
+        <Attribute name="metadataDebug" displayName="Is this sink for Debugging" default="FALSE" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define if this sink is intended for debugging.
+                </h:p>
+            </Description>
+
+            <EnumValue name="TRUE" displayName="True"/>
+            <EnumValue name="FALSE" displayName="False"/>
+        </Attribute>
+
+        <Attribute name="metadataSynchronization" displayName="Synchronization for this sink" default="FREE" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define how the data provided by this sink is intended to be synchronized.
+                </h:p>
+            </Description>
+
+            <EnumValue name="FREE" displayName="Free"/>
+            <EnumValue name="MASTER" displayName="Master"/>
+            <EnumValue name="SLAVE" displayName="Slave"/>
+        </Attribute>
+
+        <Attribute name="metadataUsage" displayName="Usage intent for this sink" default="STREAM" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define how the data provided by this sink is intended to be used.
+                </h:p>
+            </Description>
+
+            <EnumValue name="STREAM" displayName="Stream"/>
+            <EnumValue name="CALIBRATION" displayName="Calibration"/>
+            <EnumValue name="NOTIFICATION" displayName="Notification"/>
+        </Attribute>
+
+        <Attribute name="metadataSensorCategory" displayName="Sensor category for this sink" default="UNDEFINED" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define the sensor category for the data provided by this sink.
+                </h:p>
+            </Description>
+
+            <EnumValue name="UNDEFINED" displayName="Undefined"/>
+            <EnumValue name="TRACKER" displayName="Tracker"/>
+            <EnumValue name="CAMERA" displayName="Camera"/>
+        </Attribute>
+
     </GlobalDataflowAttributeDeclarations>
  
     

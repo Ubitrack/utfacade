@@ -42,6 +42,8 @@
 #include <utDataflow/PushSupplier.h>
 #include <utDataflow/Component.h>
 #include <utMeasurement/Measurement.h>
+#include <utComponents/ApplicationMetadata.h>
+
 #include <utFacade/SimpleDatatypes.h>
 #include <utUtil/SimpleStringIArchive.h>
 
@@ -79,6 +81,7 @@ using namespace Dataflow;
 template< class EventType >
 class ApplicationPushSource 
 	: public Component
+	, public ApplicationMetadata
 	, public Facade::SimpleStringReceiver
 {
 public:
@@ -91,8 +94,9 @@ public:
 	 * @param nm Unique name of the component.
 	 * @param cfg ComponentConfiguration containing all configuration.
 	 */
-	ApplicationPushSource( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph >  )
+	ApplicationPushSource( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph )
 		: Ubitrack::Dataflow::Component( nm )
+		, ApplicationMetadata( subgraph )
 		, m_outPort( "Output", *this )
 	{
 	}

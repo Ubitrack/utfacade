@@ -47,6 +47,8 @@
 #include <utDataflow/Component.h>
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
+#include <utComponents/ApplicationMetadata.h>
+
 #include <utFacade/SimpleDatatypes.h>
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
 #include <log4cpp/Category.hh>
@@ -108,6 +110,7 @@ public:
 template <class EventType>
 class ApplicationPushSink
 	: public Component
+	, public ApplicationMetadata
 	, public ApplicationPushSinkBase
 {
 public:
@@ -117,8 +120,9 @@ public:
 	 * @param sName Unique name of the component.
 	 * @param subgraph UTQL subgraph
 	 */
-	ApplicationPushSink( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph >  )
+	ApplicationPushSink( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph )
 		: Ubitrack::Dataflow::Component( nm )
+		, ApplicationMetadata( subgraph )
 		, m_InPort( "Input", *this, boost::bind( &ApplicationPushSink::pushHandler, this, _1 ) )
 		, m_callback( 0 )
 #ifndef APPLICATIONPUSHSINK_NOLOGGING

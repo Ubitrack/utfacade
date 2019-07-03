@@ -80,9 +80,9 @@ namespace Ubitrack { namespace Components {
             std::string getMetadataAttribute ( const std::string& key ) const  {
                 auto it = m_metadata.find( key );
                 if ( it == m_metadata.end() )
-                    return m_metadata[key];
-                UBITRACK_THROW("Invalid Metadata Attribute Key");
-            }
+                    UBITRACK_THROW("Invalid Metadata Attribute Key");
+                return it->second;
+        }
 
 
             /**
@@ -101,8 +101,12 @@ namespace Ubitrack { namespace Components {
             }
 
 
+            /** return a read-only version of the metadata attribute map for iterating */
+            const std::map<std::string, std::string>& metadata_map() const
+            { return m_metadata; }
+
             /**
-             * Lista all registered metadata attribute keys.
+             * Lists all registered metadata attribute keys.
              *
              * @param
              * @returns vector of strings containing the registered keys

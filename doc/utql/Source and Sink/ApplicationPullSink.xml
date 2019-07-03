@@ -25,6 +25,14 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkButton"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
         </DataflowConfiguration>
     </Pattern>
 
@@ -47,6 +55,14 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkSkalar"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
         </DataflowConfiguration>
     </Pattern>
 
@@ -69,6 +85,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkDistance"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -97,6 +122,15 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPosition2D"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -119,6 +153,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPosition"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -141,6 +184,15 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPose"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -166,6 +218,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkErrorPosition2D"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -188,6 +249,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkErrorPosition"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -210,6 +280,15 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkErrorPose"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -235,6 +314,15 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkRotation"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -258,6 +346,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkMatrix3x3"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -280,6 +377,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkMatrix3x4"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -302,6 +408,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkMatrix4x4"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -325,6 +440,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkVector4D"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -348,6 +472,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkButtonList"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -370,6 +503,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkDistanceList"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -393,6 +535,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPositionList2"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -415,6 +566,15 @@
                 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPositionList"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -437,6 +597,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkPoseList"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -460,6 +629,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkErrorPositionList2"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -482,6 +660,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkErrorPositionList"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -504,6 +691,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkErrorPoseList"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -527,6 +723,15 @@
 
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPullSinkCameraIntrinsics"/>
+
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
+            <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
+
         </DataflowConfiguration>
     </Pattern>
 
@@ -545,6 +750,54 @@
     
     <GlobalDataflowAttributeDeclarations>
         <xi:include href="../../GlobalAttrSpec.xml" xpointer="element(/1/3/1)"/>
+
+        <Attribute name="metadataDebug" displayName="Is this sink for Debugging" default="FALSE" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define if this sink is intended for debugging.
+                </h:p>
+            </Description>
+
+            <EnumValue name="TRUE" displayName="True"/>
+            <EnumValue name="FALSE" displayName="False"/>
+        </Attribute>
+
+        <Attribute name="metadataSynchronization" displayName="Synchronization for this sink" default="FREE" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define how the data provided by this sink is intended to be synchronized.
+                </h:p>
+            </Description>
+
+            <EnumValue name="FREE" displayName="Free"/>
+            <EnumValue name="MASTER" displayName="Master"/>
+            <EnumValue name="SLAVE" displayName="Slave"/>
+        </Attribute>
+
+        <Attribute name="metadataUsage" displayName="Usage intent for this sink" default="STREAM" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define how the data provided by this sink is intended to be used.
+                </h:p>
+            </Description>
+
+            <EnumValue name="STREAM" displayName="Stream"/>
+            <EnumValue name="CALIBRATION" displayName="Calibration"/>
+            <EnumValue name="NOTIFICATION" displayName="Notification"/>
+        </Attribute>
+
+        <Attribute name="metadataSensorCategory" displayName="Sensor category for this sink" default="UNDEFINED" xsi:type="EnumAttributeDeclarationType">
+            <Description>
+                <h:p>
+                    Define the sensor category for the data provided by this sink.
+                </h:p>
+            </Description>
+
+            <EnumValue name="UNDEFINED" displayName="Undefined"/>
+            <EnumValue name="TRACKER" displayName="Tracker"/>
+            <EnumValue name="CAMERA" displayName="Camera"/>
+        </Attribute>
+
     </GlobalDataflowAttributeDeclarations>
  
     
