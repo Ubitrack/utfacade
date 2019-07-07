@@ -28,10 +28,10 @@
         <DataflowConfiguration>
             <UbitrackLib class="ApplicationPushSourceVisionImage"/>
 
-            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorGroup" default="default" displayName="Sensor Group" xsi:type="StringAttributeDeclarationType"/>
             <Attribute name="metadataSensorCategory" value="UNDEFINED" xsi:type="EnumAttributeReferenceType"/>
-            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeReferenceType"/>
-            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeReferenceType"/>
+            <Attribute name="metadataSensorName" default="default" displayName="Sensor Name" xsi:type="StringAttributeDeclarationType"/>
+            <Attribute name="metadataSensorInfo" default="" displayName="Sensor Info" xsi:type="StringAttributeDeclarationType"/>
             <Attribute name="metadataDebug" value="FALSE" xsi:type="EnumAttributeReferenceType"/>
             <Attribute name="metadataSynchronization" value="FREE" xsi:type="EnumAttributeReferenceType"/>
             <Attribute name="metadataUsage" value="STREAM" xsi:type="EnumAttributeReferenceType"/>
