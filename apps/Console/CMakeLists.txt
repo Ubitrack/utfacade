@@ -21,7 +21,7 @@ endif(MSVC)
 # UTCORE library definition
 add_executable(${UBITRACK_APPLICATION_NAME} ${UBITRACK_SRCS} ${UBITRACK_HEADERS})
 
-target_link_libraries(${UBITRACK_APPLICATION_NAME} 
+target_link_libraries(${UBITRACK_APPLICATION_NAME}
   utfacade
   )
 

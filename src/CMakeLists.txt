@@ -38,7 +38,7 @@ target_link_libraries(${UBITRACK_LIBRARY_NAME}
 
 target_include_directories(${UBITRACK_LIBRARY_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/components>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../components>
   $<INSTALL_INTERFACE:include>
   PRIVATE src)
 

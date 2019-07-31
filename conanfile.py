@@ -11,28 +11,33 @@ class UbitrackCoreConan(ConanFile):
 
     short_paths = True
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake"
+    generators = "cmake", "ubitrack_virtualenv_generator"
     options = {"shared": [True, False],
+               "workspaceBuild" : [True, False],
                "enable_basicfacade": [True, False],
                "enable_dotnet": [True, False],
                "enable_java": [True, False],
                 }
 
-    requires = (
-        "ubitrack_core/%s@ubitrack/stable" % version,
-        "ubitrack_vision/%s@ubitrack/stable" % version,
-        "ubitrack_dataflow/%s@ubitrack/stable" % version,
-       )
-
-    default_options = (
-        "shared=True",
-        "enable_basicfacade=True",
-        "enable_dotnet=False",
-        "enable_java=False",
-        )
+    default_options = {
+        "shared" :True,
+        "enable_basicfacade":True,
+        "enable_dotnet":False,
+        "enable_java":False,
+        "workspaceBuild" : False,
+        }
 
     # all sources are deployed with the package
     exports_sources = "apps/*", "cmake/*", "components/*", "doc/*", "src/*", "CMakeLists.txt", "utfacadeConfig.cmake"
+
+    def requirements(self):
+        userChannel = "ubitrack/stable"
+        if self.options.workspaceBuild:
+            userChannel = "local/dev"
+        self.requires("ubitrack_core/%s@%s" % (self.version, userChannel))
+        self.requires("ubitrack_vision/%s@%s" % (self.version, userChannel))
+        self.requires("ubitrack_dataflow/%s@%s" % (self.version, userChannel) )
+        self.requires("ubitrack_virtualenv_generator/1.3.0@ubitrack/stable")
 
     def build_requirements(self):
         if self.options.enable_java:
