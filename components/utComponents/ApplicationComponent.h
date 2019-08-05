@@ -1,42 +1,15 @@
-/*
- * Ubitrack - Library for Ubiquitous Tracking
- * Copyright 2006, Technische Universitaet Muenchen, and individual
- * contributors as indicated by the @authors tag. See the
- * copyright.txt in the distribution for a full listing of individual
- * contributors.
- *
- * This is free software; you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation; either version 2.1 of
- * the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this software; if not, write to the Free
- * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
- * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
- */
+//
+// Created by Ulrich Eck on 2019-08-05.
+//
 
+#ifndef UBITRACK_FACADE_APPLICATIONCOMPONENT_H
+#define UBITRACK_FACADE_APPLICATIONCOMPONENT_H
 
-/**
- * @ingroup dataflow_components
- * @file
- * helper class to support metadata for sink/source components
- *
- * @author ulrich eck <ulrich.eck@tum.de>
- */
-
-#ifndef UBITRACK_FACADE_APPLICATIONMETADATAHELPER_H
-#define UBITRACK_FACADE_APPLICATIONMETADATAHELPER_H
 
 #include <string>
 #include <iostream>
-#include <map>
-#include <vector>
+
+#include <boost/bind.hpp>
 
 #include <utDataflow/Component.h>
 #include <utDataflow/ComponentFactory.h>
@@ -47,25 +20,45 @@ namespace Ubitrack { namespace Components {
 
 /**
  * @ingroup dataflow_components
- * This helper class is used to parse and provide access to sink/source metadata
+ * This is an base class for components which may be used to interface
+ * the dataflow network to an user application.
  *
+ * This component exposes basic / common information on the components for generic access / inspection of components.
+ *
+ * @par Input Ports
+ * None.
+ *
+ * @par Output Ports
+ * None.
+ *
+ * @par Configuration
+ * TBD
+ *
+ * @par Operation
+ * This base class provides access to attributes of the derived Push/Pull Sink/Source Components.
+ *
+ * @par Instances
+ * None
  */
-        class ApplicationMetadata
+        class ApplicationComponent
+                : public Component
         {
         public:
             /**
-             * ApplicationMetaData constructor.
+             * UTQL component constructor.
              *
+             * @param sName Unique name of the component.
              * @param subgraph UTQL subgraph
              */
-            ApplicationMetadata( boost::shared_ptr< Graph::UTQLSubgraph> pConfig)
+            ApplicationComponent( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> subgraph )
+                    : Component( nm )
             {
                 // For now just copies all dataflow attributes from the component
                 // it's up to the UTQL Pattern to define a standard/schema
                 // once we know a good schema - we can enforce it.
-                auto& attribute_map = pConfig->m_DataflowAttributes.map();
-                for (auto it = attribute_map.begin(); it != attribute_map.end(); it++ ) {
-                    m_metadata[it->first] = it->second.getText();
+                auto& attribute_map = subgraph->m_DataflowAttributes.map();
+                for (const auto & it : attribute_map) {
+                    m_metadata[it.first] = it.second.getText();
                 }
             }
 
@@ -82,8 +75,7 @@ namespace Ubitrack { namespace Components {
                 if ( it == m_metadata.end() )
                     UBITRACK_THROW("Invalid Metadata Attribute Key");
                 return it->second;
-        }
-
+            }
 
             /**
              * Tests if the metadata attribute for a key is present
@@ -113,8 +105,8 @@ namespace Ubitrack { namespace Components {
              */
             std::vector<std::string> listMetadataAttributes( ) const {
                 std::vector<std::string> result;
-                for (auto it = m_metadata.begin(); it != m_metadata.end(); it++ ) {
-                    result.emplace_back(it->first);
+                for (const auto & it : m_metadata) {
+                    result.emplace_back(it.first);
                 }
                 return std::move(result);
             }
@@ -126,7 +118,6 @@ namespace Ubitrack { namespace Components {
             std::map<std::string, std::string> m_metadata;
         };
 
-
     } } // namespace Ubitrack::Components
 
-#endif //UBITRACK_FACADE_APPLICATIONMETADATAHELPER_H
+#endif //UBITRACK_FACADE_APPLICATIONCOMPONENT_H

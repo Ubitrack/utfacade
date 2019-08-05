@@ -2,6 +2,8 @@
 // Created by netlabs on 8/1/19.
 //
 
+
+#ifdef NOT_USED_CODE___
 #include "AsyncJoin.h"
 
 #include <iostream>
@@ -102,3 +104,4 @@ namespace Ubitrack { namespace Components {
         }
 
     } } // namespace Ubitrack::Drivers
+# endif // NOT_USED_CODE___

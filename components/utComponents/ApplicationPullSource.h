@@ -44,10 +44,9 @@
 #include <boost/bind.hpp>
 
 #include <utDataflow/PullSupplier.h>
-#include <utDataflow/Component.h>
+#include <utComponents/ApplicationComponent.h>
 #include <utMeasurement/Measurement.h>
 #include <utUtil/SimpleStringOArchive.h>
-#include <utComponents/ApplicationMetadata.h>
 
 // no counterpart in SimpleFacade yet
 //#include <utFacade/SimpleDatatypes.h>
@@ -111,8 +110,7 @@ public:
  */
 template <class EventType>
 class ApplicationPullSource
-	: public Component
-	, public ApplicationMetadata
+	: public ApplicationComponent
 	, public ApplicationPullSourceBase
 {
 public:
@@ -123,8 +121,7 @@ public:
 	 * @param subgraph UTQL subgraph
 	 */
 	ApplicationPullSource( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph  )
-		: Ubitrack::Dataflow::Component( nm )
-		, ApplicationMetadata( subgraph )
+		: ApplicationComponent( nm, subgraph )
 		, m_OutPort( "Output", *this, boost::bind( &ApplicationPullSource::request, this, _1 ) )
 		, m_callback( 0 )
 #ifndef APPLICATIONPULLSOURCE_NOLOGGING
