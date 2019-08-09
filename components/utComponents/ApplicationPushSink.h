@@ -108,7 +108,7 @@ public:
  */
 template <class EventType>
 class ApplicationPushSink
-	: public ApplicationComponent
+	: public ApplicationComponent<EventType>
 	, public ApplicationPushSinkBase
 {
 public:
@@ -119,7 +119,7 @@ public:
 	 * @param subgraph UTQL subgraph
 	 */
 	ApplicationPushSink( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph )
-		: ApplicationComponent( nm, subgraph )
+		: ApplicationComponent<EventType>( nm, subgraph )
 		, m_InPort( "Input", *this, boost::bind( &ApplicationPushSink::pushHandler, this, _1 ) )
 		, m_callback( 0 )
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
@@ -128,7 +128,20 @@ public:
 	{
 	}
 
-	/**
+    /**
+     * Get type of the application Component
+     * This returns the type of the component for introspection.
+     *
+     *
+     * @param
+     * @return the type of the application component
+     * @throws
+     */
+    ApplicationComponentType getComponentType ( ) const override  {
+        return ApplicationComponentType::ApplicationComponentTypePushSink;
+    }
+
+    /**
 	 * Set the callback.
 	 * Set the callback in the user application which will be called for
 	 * incoming events.
@@ -140,7 +153,7 @@ public:
 	}
 
 	/** sets a string receiver */
-	void setStringCallback( Facade::SimpleStringReceiver* pReceiver )
+	void setStringCallback( Facade::SimpleStringReceiver* pReceiver ) override
 	{
 		m_callback = boost::bind( &ApplicationPushSink< EventType >::sendString, _1, pReceiver );
 	}

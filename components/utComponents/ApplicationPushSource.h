@@ -79,7 +79,7 @@ using namespace Dataflow;
  */
 template< class EventType >
 class ApplicationPushSource 
-	: public ApplicationComponent
+	: public ApplicationComponent<EventType>
 	, public Facade::SimpleStringReceiver
 {
 public:
@@ -93,10 +93,23 @@ public:
 	 * @param cfg ComponentConfiguration containing all configuration.
 	 */
 	ApplicationPushSource( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph )
-		: ApplicationComponent( nm, subgraph )
+		: ApplicationComponent<EventType>( nm, subgraph )
 		, m_outPort( "Output", *this )
 	{
 	}
+
+    /**
+     * Get type of the application Component
+     * This returns the type of the component for introspection.
+     *
+     *
+     * @param
+     * @return the type of the application component
+     * @throws
+     */
+    ApplicationComponentType getComponentType ( ) const override  {
+        return ApplicationComponentType::ApplicationComponentTypePushSource;
+    }
 
 	/**
 	 * Sends an event.
@@ -118,7 +131,7 @@ public:
 	 * Method to call to send stringified data.
 	 * For simple java/python wrapping.
 	 */
-	void receiveString( const char* s ) throw()
+	void receiveString( const char* s ) noexcept override
 	{
 		try
 		{

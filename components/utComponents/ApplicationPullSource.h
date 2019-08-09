@@ -110,7 +110,7 @@ public:
  */
 template <class EventType>
 class ApplicationPullSource
-	: public ApplicationComponent
+	: public ApplicationComponent<EventType>
 	, public ApplicationPullSourceBase
 {
 public:
@@ -121,7 +121,7 @@ public:
 	 * @param subgraph UTQL subgraph
 	 */
 	ApplicationPullSource( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph > subgraph  )
-		: ApplicationComponent( nm, subgraph )
+		: ApplicationComponent<EventType>( nm, subgraph )
 		, m_OutPort( "Output", *this, boost::bind( &ApplicationPullSource::request, this, _1 ) )
 		, m_callback( 0 )
 #ifndef APPLICATIONPULLSOURCE_NOLOGGING
@@ -129,6 +129,19 @@ public:
 #endif
 	{
 	}
+
+    /**
+     * Get type of the application Component
+     * This returns the type of the component for introspection.
+     *
+     *
+     * @param
+     * @return the type of the application component
+     * @throws
+     */
+    ApplicationComponentType getComponentType ( ) const override  {
+        return ApplicationComponentType::ApplicationComponentTypePullSource;
+    }
 
 	/**
 	 * Set the callback.

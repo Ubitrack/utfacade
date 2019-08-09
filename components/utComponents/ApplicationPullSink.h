@@ -81,7 +81,7 @@ using namespace Dataflow;
  */
 template < class EventType >
 class ApplicationPullSink
-	: public ApplicationComponent
+	: public ApplicationComponent<EventType>
 {
 public:
 	/**
@@ -91,10 +91,23 @@ public:
 	 * @param subgraph UTQL subgraph
 	 */
 	ApplicationPullSink( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> subgraph )
-    	: ApplicationComponent( nm, subgraph )
+    	: ApplicationComponent<EventType>( nm, subgraph )
       	, m_InPort( "Input", *this )
 	    {
 	    }
+
+    /**
+     * Get type of the application Component
+     * This returns the type of the component for introspection.
+     *
+     *
+     * @param
+     * @return the type of the application component
+     * @throws
+     */
+    ApplicationComponentType getComponentType ( ) const override  {
+        return ApplicationComponentType::ApplicationComponentTypePullSink;
+    }
 
 	/**
 	 * Get function as interface to user.

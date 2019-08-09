@@ -11,12 +11,23 @@
 
 #include <boost/bind.hpp>
 
+#include <utMeasurement/MeasurementTraits.h>
+
 #include <utDataflow/Component.h>
 #include <utDataflow/ComponentFactory.h>
 
 namespace Ubitrack { namespace Components {
 
         using namespace Dataflow;
+
+
+        enum class ApplicationComponentType {
+            ApplicationComponentTypeUndefined = 0,
+            ApplicationComponentTypePushSource,
+            ApplicationComponentTypePushSink,
+            ApplicationComponentTypePullSource,
+            ApplicationComponentTypePullSink
+        };
 
 /**
  * @ingroup dataflow_components
@@ -40,9 +51,8 @@ namespace Ubitrack { namespace Components {
  * @par Instances
  * None
  */
-        class ApplicationComponent
-                : public Component
-        {
+
+        class ApplicationComponentBase : public Component {
         public:
             /**
              * UTQL component constructor.
@@ -50,7 +60,7 @@ namespace Ubitrack { namespace Components {
              * @param sName Unique name of the component.
              * @param subgraph UTQL subgraph
              */
-            ApplicationComponent( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> subgraph )
+            ApplicationComponentBase( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> subgraph )
                     : Component( nm )
             {
                 // For now just copies all dataflow attributes from the component
@@ -60,6 +70,58 @@ namespace Ubitrack { namespace Components {
                 for (const auto & it : attribute_map) {
                     m_metadata[it.first] = it.second.getText();
                 }
+            }
+
+            /**
+             * Get type of the application Component
+             * This method returns the type of the component for introspection.
+             *
+             *
+             * @param
+             * @return the type of the application component
+             * @throws
+             */
+            virtual ApplicationComponentType getComponentType ( ) const  {
+                return ApplicationComponentType::ApplicationComponentTypeUndefined;
+            }
+
+            /**
+            * Get type of the measurement
+            * This method returns the type of the measurement for introspection.
+            *
+            *
+            * @param
+            * @return the type of the measurement
+            * @throws
+            */
+            virtual Measurement::Traits::MeasurementType getMeasurementType ( ) const  {
+                return Measurement::Traits::MeasurementType::MeasurementTypeUndefined;
+            }
+
+            /**
+            * Is the measurement fixed size
+            * This method returns true if the measurement is fixed size (e.g. not a vector of measurements.
+            *
+            *
+            * @param
+            * @return bool
+            * @throws
+            */
+            virtual bool isMeasurementFixedSize ( ) const  {
+                return true;
+            }
+
+            /**
+            * Get datatype
+            * This method returns the datatype of the measurement for introspection.
+            *
+            *
+            * @param
+            * @return the datatype of the measurement
+            * @throws
+            */
+            virtual Measurement::Traits::DataType getDataType ( ) const  {
+                return Measurement::Traits::DataType ::DataTypeUndefined;
             }
 
             /**
@@ -117,6 +179,64 @@ namespace Ubitrack { namespace Components {
              */
             std::map<std::string, std::string> m_metadata;
         };
+
+
+
+
+        template < class EventType >
+        class ApplicationComponent
+                : public ApplicationComponentBase
+        {
+        public:
+            /**
+             * UTQL component constructor.
+             *
+             * @param sName Unique name of the component.
+             * @param subgraph UTQL subgraph
+             */
+            ApplicationComponent( const std::string& nm, boost::shared_ptr< Graph::UTQLSubgraph> subgraph )
+                    : ApplicationComponentBase( nm, subgraph ) { }
+
+            /**
+            * Get type of the measurement
+            * This method returns the type of the measurement for introspection.
+            *
+            *
+            * @param
+            * @return the type of the measurement
+            * @throws
+            */
+            Measurement::Traits::MeasurementType getMeasurementType ( ) const override {
+                return Measurement::Traits::MeasurementTypeTraits<EventType>().getMeasurementType();
+            }
+
+            /**
+            * Is the measurement fixed size
+            * This method returns true if the measurement is fixed size (e.g. not a vector of measurements.
+            *
+            *
+            * @param
+            * @return bool
+            * @throws
+            */
+            bool isMeasurementFixedSize ( ) const override {
+                return Measurement::Traits::MeasurementTypeTraits<EventType>().isFixedType();
+            }
+
+            /**
+            * Get datatype
+            * This method returns the datatype of the measurement for introspection.
+            *
+            *
+            * @param
+            * @return the datatype of the measurement
+            * @throws
+            */
+            Measurement::Traits::DataType getDataType ( ) const override {
+                return Measurement::Traits::MeasurementTypeTraits<EventType>().getDataType() ;
+            }
+        };
+
 
     } } // namespace Ubitrack::Components
 
