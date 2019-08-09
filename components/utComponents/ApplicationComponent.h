@@ -95,7 +95,7 @@ namespace Ubitrack { namespace Components {
             * @throws
             */
             virtual Measurement::Traits::MeasurementType getMeasurementType ( ) const  {
-                return Measurement::Traits::MeasurementType::MeasurementTypeUndefined;
+                return Measurement::Traits::MeasurementType::Undefined;
             }
 
             /**
@@ -111,18 +111,6 @@ namespace Ubitrack { namespace Components {
                 return true;
             }
 
-            /**
-            * Get datatype
-            * This method returns the datatype of the measurement for introspection.
-            *
-            *
-            * @param
-            * @return the datatype of the measurement
-            * @throws
-            */
-            virtual Measurement::Traits::DataType getDataType ( ) const  {
-                return Measurement::Traits::DataType ::DataTypeUndefined;
-            }
 
             /**
              * Get the metadata attribute for a key
@@ -207,7 +195,7 @@ namespace Ubitrack { namespace Components {
             * @throws
             */
             Measurement::Traits::MeasurementType getMeasurementType ( ) const override {
-                return Measurement::Traits::MeasurementTypeTraits<EventType>().getMeasurementType();
+                return Measurement::Traits::MeasurementTypeToEnumTraits<EventType>().getMeasurementType();
             }
 
             /**
@@ -220,20 +208,7 @@ namespace Ubitrack { namespace Components {
             * @throws
             */
             bool isMeasurementFixedSize ( ) const override {
-                return Measurement::Traits::MeasurementTypeTraits<EventType>().isFixedType();
-            }
-
-            /**
-            * Get datatype
-            * This method returns the datatype of the measurement for introspection.
-            *
-            *
-            * @param
-            * @return the datatype of the measurement
-            * @throws
-            */
-            Measurement::Traits::DataType getDataType ( ) const override {
-                return Measurement::Traits::MeasurementTypeTraits<EventType>().getDataType() ;
+                return Measurement::Traits::MeasurementTypeToEnumTraits<EventType>().isFixedType();
             }
         };
 

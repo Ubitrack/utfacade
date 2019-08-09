@@ -19,6 +19,7 @@
 #include <utComponents/ApplicationComponent.h>
 #include <utComponents/ApplicationPushSink.h>
 #include <utComponents/ApplicationPullSink.h>
+#include <utComponents/ApplicationEndpointsVision.h>
 #include <utFacade/DataflowObserver.h>
 #include <utFacade/AdvancedFacade.h>
 

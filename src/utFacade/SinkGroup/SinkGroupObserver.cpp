@@ -31,225 +31,202 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
         return;
     }
 
-    auto dt = bc->getDataType();
-
     // this is ugly design !!!
     if (bc->isMeasurementFixedSize()) {
         // Fixed-Size Measurements
         switch(bc->getMeasurementType()) {
-            // Scalar Types
-            case Measurement::Traits::MeasurementType::MeasurementTypeScalar:
-                switch(dt) {
-                    // Button
-                    case Measurement::Traits::DataType ::DataTypeInteger:
-                    {
-                        auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Button>>(bc);
-                        if ( c ) {
-                            m_compoundSink.addSinkComponent(sComponentName, c);
-                        } else {
-                            // log error: invalid cast - check implementation as this should never happen
-                        }
-                    }
-                        break;
-                        // Distance
-                    case Measurement::Traits::DataType::DataTypeDouble:
-                    {
-                        auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Distance>>(bc);
-                        if ( c ) {
-                            m_compoundSink.addSinkComponent(sComponentName, c);
-                        } else {
-                            // log error: invalid cast - check implementation as this should never happen
-                        }
-                    }
-                        break;
-                    default:
-                        // log error: unknown combination of measurement type and data type
-                        break;
+            // Button
+            case Measurement::Traits::MeasurementType::ScalarInt:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Button>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
                 }
+            }
                 break;
 
-                // Position2D
-            case Measurement::Traits::MeasurementType::MeasurementTypeVector2:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Position2D>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                    }
+            // Distance
+            case Measurement::Traits::MeasurementType::ScalarDouble:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Distance>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
-                    // log error: unknown combination of measurement type and data type
+                    // log error: invalid cast - check implementation as this should never happen
                 }
+            }
                 break;
-                // Position
-            case Measurement::Traits::MeasurementType::MeasurementTypeVector3:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Position>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                    }
+
+            // Position2D
+            case Measurement::Traits::MeasurementType::Vector2:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Position2D>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
-                    // log error: unknown combination of measurement type and data type
+                    // log error: invalid cast - check implementation as this should never happen
                 }
+            }
                 break;
-                // Vector4D
-            case Measurement::Traits::MeasurementType::MeasurementTypeVector4:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Position
+            case Measurement::Traits::MeasurementType::Vector3:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Position>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                }
+            }
+                break;
+
+            // Vector4D
+            case Measurement::Traits::MeasurementType::Vector4:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Vector4D>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // Vector8D
-            case Measurement::Traits::MeasurementType::MeasurementTypeVector8:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Vector8D
+            case Measurement::Traits::MeasurementType::Vector8:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Vector8D>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // Rotation
-            case Measurement::Traits::MeasurementType::MeasurementTypeQuaternion:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Rotation
+            case Measurement::Traits::MeasurementType::Quaternion:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Rotation>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // Matrix3x3
-            case Measurement::Traits::MeasurementType::MeasurementTypeMatrix3x3:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Matrix3x3
+            case Measurement::Traits::MeasurementType::Matrix3x3:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Matrix3x3>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // Matrix3x4
-            case Measurement::Traits::MeasurementType::MeasurementTypeMatrix3x4:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Matrix3x4
+            case Measurement::Traits::MeasurementType::Matrix3x4:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Matrix3x4>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // Matrix4x4
-            case Measurement::Traits::MeasurementType::MeasurementTypeMatrix4x4:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Matrix4x4
+            case Measurement::Traits::MeasurementType::Matrix4x4:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Matrix4x4>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // Pose
-            case Measurement::Traits::MeasurementType::MeasurementTypePose:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // Pose
+            case Measurement::Traits::MeasurementType::Pose:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Pose>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // ErrorPose
-            case Measurement::Traits::MeasurementType::MeasurementTypeErrorPose:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // ErrorPose
+            case Measurement::Traits::MeasurementType::ErrorPose:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPose>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // ErrorPosition2
-            case Measurement::Traits::MeasurementType::MeasurementTypeErrorVector2:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // ErrorPosition2
+            case Measurement::Traits::MeasurementType::ErrorVector2:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPosition2>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // ErrorPosition
-            case Measurement::Traits::MeasurementType::MeasurementTypeErrorVector3:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // ErrorPosition
+            case Measurement::Traits::MeasurementType::ErrorVector3:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPosition>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // RotationVelocity
-            case Measurement::Traits::MeasurementType::MeasurementTypeRotationVelocity:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // RotationVelocity
+            case Measurement::Traits::MeasurementType::RotationVelocity:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::RotationVelocity>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // CameraIntrinsics
-            case Measurement::Traits::MeasurementType::MeasurementTypeCameraIntrinsics:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // CameraIntrinsics
+            case Measurement::Traits::MeasurementType::CameraIntrinsics:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::CameraIntrinsics>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
+
             default:
                 // log error: unknown type
                 break;
@@ -258,124 +235,111 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
         // Vector of Measurements
         switch(bc->getMeasurementType()) {
             // ButtonList
-            // DistanceList
-            // IDList
-            case Measurement::Traits::MeasurementType::MeasurementTypeScalar:
-                switch(dt) {
-                    case Measurement::Traits::DataType ::DataTypeInteger:
-                    {
-                        auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ButtonList>>(bc);
-                        if ( c ) {
-                            m_compoundSink.addSinkComponent(sComponentName, c);
-                        } else {
-                            // log error: invalid cast - check implementation as this should never happen
-                        }
-                    }
-                        break;
-                    case Measurement::Traits::DataType::DataTypeUnsignedLong:
-                    {
-                        auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::IDList>>(bc);
-                        if ( c ) {
-                            m_compoundSink.addSinkComponent(sComponentName, c);
-                        } else {
-                            // log error: invalid cast - check implementation as this should never happen
-                        }
-                    }
-                        break;
-                    case Measurement::Traits::DataType::DataTypeDouble:
-                    {
-                        auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::DistanceList>>(bc);
-                        if ( c ) {
-                            m_compoundSink.addSinkComponent(sComponentName, c);
-                        } else {
-                            // log error: invalid cast - check implementation as this should never happen
-                        }
-                    }
-                        break;
-                    default:
-                        // log error: unknown combination of measurement type and data type
-                        break;
+            case Measurement::Traits::MeasurementType::ScalarInt:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ButtonList>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
                 }
+            }
+
+            // DistanceList
+            case Measurement::Traits::MeasurementType::ScalarDouble:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::IDList>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                }
+            }
+
+            // IDList
+            case Measurement::Traits::MeasurementType::ScalarUnsignedLong:
+            {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::DistanceList>>(bc);
+                if ( c ) {
+                    m_compoundSink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                }
+            }
                 break;
 
-                // PositionList2
-            case Measurement::Traits::MeasurementType::MeasurementTypeVector2:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+            // PositionList2
+            case Measurement::Traits::MeasurementType::Vector2:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::PositionList2>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // PositionList
-            case Measurement::Traits::MeasurementType::MeasurementTypeVector3:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // PositionList
+            case Measurement::Traits::MeasurementType::Vector3:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::PositionList>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // PoseList
-            case Measurement::Traits::MeasurementType::MeasurementTypePose:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // PoseList
+            case Measurement::Traits::MeasurementType::Pose:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::PoseList>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // ErrorPoseList
-            case Measurement::Traits::MeasurementType::MeasurementTypeErrorPose:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // ErrorPoseList
+            case Measurement::Traits::MeasurementType::ErrorPose:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPoseList>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // ErrorPositionList2
-            case Measurement::Traits::MeasurementType::MeasurementTypeErrorVector2:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // ErrorPositionList2
+            case Measurement::Traits::MeasurementType::ErrorVector2:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPositionList2>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
-                // ErrorPositionList
-            case Measurement::Traits::MeasurementType::MeasurementTypeErrorVector3:
-                if (dt == Measurement::Traits::DataType::DataTypeDouble) {
+
+            // ErrorPositionList
+            case Measurement::Traits::MeasurementType::ErrorVector3:
+                {
                     auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPositionList>>(bc);
                     if ( c ) {
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
                     }
-                } else {
-                    // log error: unknown combination of measurement type and data type
                 }
                 break;
+
             default:
                 // log error: unknown type
                 break;
