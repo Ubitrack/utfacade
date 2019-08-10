@@ -37,6 +37,11 @@ namespace Ubitrack {
         NoUpdate
     };
 
+    struct UTFACADE_EXPORT ComponentTypeInfo {
+        Ubitrack::Measurement::Traits::MeasurementType measurementType;
+        bool isFixedType;
+    };
+
     struct UTFACADE_EXPORT FrameReceivedInfo {
 
         FrameReceivedInfo() {
@@ -85,6 +90,15 @@ namespace Ubitrack {
 
 
         // accessors for data
+        ComponentTypeInfo getMeasurementType(const std::string& sComponentName) {
+            auto it = m_components.find(sComponentName);
+            if ( it == m_components.end()) {
+                // log error: invalid component name
+                return ComponentTypeInfo{Ubitrack::Measurement::Traits::MeasurementType::Undefined, true};
+            }
+            return ComponentTypeInfo{it->second->getMeasurementType(), it->second->isMeasurementFixedSize()};
+        }
+
         template<typename MT>
         bool getMeasurement(const std::string& sComponentName, MT& measurement) {
             auto it = m_components.find(sComponentName);
