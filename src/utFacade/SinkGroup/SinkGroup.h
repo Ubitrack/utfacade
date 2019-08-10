@@ -90,6 +90,15 @@ namespace Ubitrack {
 
 
         // accessors for data
+
+        std::vector<std::string> getSinkNames() {
+            std::vector<std::string> result;
+            for ( const auto &it : m_components ) {
+                result.push_back(it.first);
+            }
+            return std::move(result);
+        }
+
         ComponentTypeInfo getMeasurementType(const std::string& sComponentName) {
             auto it = m_components.find(sComponentName);
             if ( it == m_components.end()) {
