@@ -3,6 +3,10 @@
 //
 
 #include "SinkGroupObserver.h"
+#include <log4cpp/Category.hh>
+
+
+static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Facade.SinkGroupObserver" ) );
 
 
 using namespace Ubitrack::Facade;
@@ -17,10 +21,12 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
     auto bc = m_facade.componentByName<Ubitrack::Components::ApplicationComponentBase>(sComponentName);
     if (!bc->hasMetadataAttribute(m_domainAttribute)) {
         // component is missing the required domainAttribute
+        LOG4CPP_DEBUG(logger, "Component " << sComponentName << " is missing required domain attribute: " << m_domainAttribute);
         return;
     }
     if (bc->getMetadataAttribute(m_domainAttribute) != m_domainValue) {
         // component does not belong to this domain
+        LOG4CPP_DEBUG(logger, "Component " << sComponentName << " domain attribute does not match provided value: " << m_domainValue);
         return;
     }
 
@@ -28,6 +34,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
 
     if ((ct == Components::ApplicationComponentType::ApplicationComponentTypePushSource) || (ct == Components::ApplicationComponentType::ApplicationComponentTypePullSource)) {
         // we do not consider source in a compound sink
+        LOG4CPP_DEBUG(logger, "Component " << sComponentName << " is not a sink." );
         return;
     }
 
@@ -43,6 +50,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
                 break;
@@ -55,6 +63,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
                 break;
@@ -67,6 +76,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
                 break;
@@ -79,6 +89,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
                 break;
@@ -91,6 +102,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -103,6 +115,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -115,6 +128,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -127,6 +141,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -139,6 +154,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -151,6 +167,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -163,6 +180,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -175,6 +193,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -187,6 +206,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -199,6 +219,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -211,6 +232,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -223,6 +245,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -242,6 +265,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
 
@@ -253,6 +277,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
 
@@ -264,6 +289,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                     m_compoundSink.addSinkComponent(sComponentName, c);
                 } else {
                     // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                 }
             }
                 break;
@@ -276,6 +302,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -288,6 +315,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -300,6 +328,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -312,6 +341,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -324,6 +354,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
@@ -336,6 +367,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
                         m_compoundSink.addSinkComponent(sComponentName, c);
                     } else {
                         // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
                     }
                 }
                 break;
