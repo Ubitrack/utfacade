@@ -19,6 +19,10 @@ SinkGroupObserver::SinkGroupObserver(Ubitrack::Facade::AdvancedFacade& facade, S
 
 void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, const std::string& sComponentName, const Graph::UTQLSubgraph& pattern ) {
     auto bc = m_facade.componentByName<Ubitrack::Components::ApplicationComponentBase>(sComponentName);
+    if (!bc) {
+        // not an application component
+        return;
+    }
     if (!bc->hasMetadataAttribute(m_domainAttribute)) {
         // component is missing the required domainAttribute
         LOG4CPP_DEBUG(logger, "Component " << sComponentName << " is missing required domain attribute: " << m_domainAttribute);
