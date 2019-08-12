@@ -119,7 +119,7 @@ namespace Ubitrack {
             auto bc = it->second;
             if (bc->getComponentType() == Components::ApplicationComponentType::ApplicationComponentTypePullSink) {
                 auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationPullSink<MT>>(bc);
-                if (c == 0) {
+                if (!c) {
                     // log error: invalid pullsink type
                     return false;
                 }
@@ -129,16 +129,15 @@ namespace Ubitrack {
 
             } else if (bc->getComponentType() == Components::ApplicationComponentType::ApplicationComponentTypePushSink) {
                 auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationPushSink<MT>>(bc);
-                if (c != 0) {
+                if (c) {
                     // need to check the pushsink wrapper
                     auto it2 = m_pushsink_wrappers.find(sComponentName);
                     if ( it2 == m_pushsink_wrappers.end()) {
                         // log error: invalid pushsink wrapper name
                         return false;
                     }
-                    auto pswb = it2->second;
-                    auto psw = boost::dynamic_pointer_cast<PushSinkWrapper<MT>>(pswb);
-                    if (psw == 0) {
+                    std::shared_ptr<PushSinkWrapper<MT>> psw = it2->second;
+                    if (!psw) {
                         // log error: invalid pushsink wrapper type
                         return false;
                     }
