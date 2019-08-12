@@ -20,6 +20,7 @@ void SinkGroup::checkFrameReceived() {
         auto& fri = it.second;
         if (!fri.valid) {
             frameComplete = false;
+        } else {
             ts = fri.timestamp;
         }
     }
