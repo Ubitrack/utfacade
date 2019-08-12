@@ -136,7 +136,7 @@ namespace Ubitrack {
                         // log error: invalid pushsink wrapper name
                         return false;
                     }
-                    std::shared_ptr<PushSinkWrapper<MT>> psw = it2->second;
+                    boost::shared_ptr<PushSinkWrapper<MT>> psw = it2->second;
                     if (!psw) {
                         // log error: invalid pushsink wrapper type
                         return false;
