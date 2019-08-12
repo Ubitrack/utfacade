@@ -48,8 +48,6 @@ void SinkGroup::removeSinkComponent(const std::string& sComponentName) {
         auto psw = m_pushsink_wrappers[sComponentName];
         m_pushsink_wrappers.erase(sComponentName);
         psw->setCallback(NULL);
-        // explicit deletion since we're allocating manually
-        delete psw;
     }
     m_frameReceivedInfo.erase(sComponentName);
     m_components.erase(sComponentName);

@@ -166,11 +166,29 @@ namespace Ubitrack {
 
         std::map<std::string, FrameReceivedInfo> m_frameReceivedInfo;
         // is a pointer since we need to cast it to a concrete type...
-        std::map<std::string, PushSinkWrapperBase*> m_pushsink_wrappers;
+        std::map<std::string, boost::shared_ptr<PushSinkWrapperBase>> m_pushsink_wrappers;
         std::map<std::string, boost::shared_ptr<Ubitrack::Components::ApplicationComponentBase>> m_components;
     };
 
+        template < class EventType >
+        void SinkGroup::addSinkComponent(const std::string& sComponentName, boost::shared_ptr<Components::ApplicationComponent<EventType>>& pComponent) {
+            if (hasSinkComponent(sComponentName)) {
+                UBITRACK_THROW("Component already registered");
+            }
 
-}} // Ubitrack::Facade
+            m_components.emplace(sComponentName, pComponent);
+
+            if (pComponent->getComponentType() == Components::ApplicationComponentType::ApplicationComponentTypePushSink) {
+                auto c = boost::dynamic_pointer_cast<Components::ApplicationPushSink<EventType>>(pComponent);
+                auto psw = boost::shared_ptr<PushSinkWrapper<EventType>>(new PushSinkWrapper<EventType>(sComponentName, c));
+                m_pushsink_wrappers.emplace(sComponentName, psw);
+                psw->setCallback(boost::bind(&SinkGroup::onMeasurementReceived, this, _1, _2));
+                m_frameReceivedInfo.emplace(sComponentName, std::move(FrameReceivedInfo()));
+            }
+        }
+
+
+
+    }} // Ubitrack::Facade
 
 #endif //UBITRACK_FACADE_SINKGROUP_H
