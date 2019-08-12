@@ -32,7 +32,8 @@ namespace Ubitrack {
 
             explicit PushSinkWrapperBase(std::string  sComponentName) : m_componentName(std::move(sComponentName)), m_callback(NULL) {}
 
-            void setCallback ( SlotType slot )
+            // made virtual to create a polymorphic type .. need a better solution !
+            virtual void setCallback ( SlotType slot )
             {
                 m_callback = std::move(slot);
             }

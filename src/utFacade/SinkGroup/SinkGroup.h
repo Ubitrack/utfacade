@@ -136,7 +136,7 @@ namespace Ubitrack {
                         // log error: invalid pushsink wrapper name
                         return false;
                     }
-                    boost::shared_ptr<PushSinkWrapper<MT>> psw = it2->second;
+                    auto psw = boost::dynamic_pointer_cast<PushSinkWrapper<MT>>(it2->second);
                     if (!psw) {
                         // log error: invalid pushsink wrapper type
                         return false;
