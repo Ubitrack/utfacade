@@ -17,7 +17,7 @@ SinkGroupObserver::SinkGroupObserver(Ubitrack::Facade::AdvancedFacade& facade, S
 {
 }
 
-void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, const std::string& sComponentName, const Graph::UTQLSubgraph& pattern ) {
+void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, const std::string& sComponentName, const Ubitrack::Graph::UTQLSubgraph& pattern ) {
     auto bc = m_facade.componentByName<Ubitrack::Components::ApplicationComponentBase>(sComponentName);
     if (!bc) {
         // not an application component
