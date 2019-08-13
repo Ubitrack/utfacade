@@ -12,6 +12,11 @@ conan_basic_setup(TARGETS)
 include(GNUInstallDirs)
 include(cmake/UbitrackConfig)
 
+OPTION(ENABLE_BASICFACADE "Build the BasicFacade" OFF)
+OPTION(ENABLE_SIMPLEFACADE "Build the SimpleFacade (also disables java/dotnet wrappers if disabled)" OFF)
+OPTION(ENABLE_DOTNET_WRAPPER "Build the DOTNET Wrapper" OFF)
+OPTION(ENABLE_JAVA_WRAPPER "Build the JAVA Wrapper" OFF)
+
 
 # External Libraries (could this be solved with conan dependencies ??)
 

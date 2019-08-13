@@ -43,10 +43,14 @@
 
 #include <boost/bind.hpp>
 
+#include <utFacade/Config.h>
 #include <utDataflow/PullSupplier.h>
 #include <utComponents/ApplicationComponent.h>
 #include <utMeasurement/Measurement.h>
+
+#ifdef ENABLE_SIMPLEFACADE
 #include <utUtil/SimpleStringOArchive.h>
+#endif
 
 // no counterpart in SimpleFacade yet
 //#include <utFacade/SimpleDatatypes.h>
@@ -66,6 +70,7 @@ namespace Ubitrack { namespace Components {
 
 using namespace Dataflow;
 
+#ifdef ENABLE_SIMPLEFACADE
 /**
  * Common base class for application push sinks.
  * Allows setting string receivers.
@@ -81,7 +86,7 @@ public:
 	virtual ~ApplicationPullSourceBase()
 	{}
 };
-
+#endif // ENABLE_SIMPLEFACADE
 
 /**
  * @ingroup dataflow_components
@@ -111,7 +116,9 @@ public:
 template <class EventType>
 class ApplicationPullSource
 	: public ApplicationComponent<EventType>
+#ifdef ENABLE_SIMPLEFACADE
 	, public ApplicationPullSourceBase
+#endif
 {
 public:
 	/**

@@ -15,6 +15,7 @@ class UbitrackCoreConan(ConanFile):
     options = {"shared": [True, False],
                "workspaceBuild" : [True, False],
                "enable_basicfacade": [True, False],
+               "enable_simplefacade": [True, False],
                "enable_dotnet": [True, False],
                "enable_java": [True, False],
                 }
@@ -22,6 +23,7 @@ class UbitrackCoreConan(ConanFile):
     default_options = {
         "shared" :True,
         "enable_basicfacade":True,
+        "enable_simplefacade":False,
         "enable_dotnet":False,
         "enable_java":False,
         "workspaceBuild" : False,
@@ -57,6 +59,12 @@ class UbitrackCoreConan(ConanFile):
             self.options['ubitrack_vision'].shared = True
             self.options['ubitrack_dataflow'].shared = True
 
+        # can't build java/dotnet wrappers without simplefacade
+        if not self.options.enable_simplefacade:
+            self.options.enable_java = False
+            self.options.enable_dotnet = False
+
+
     # def imports(self):
     #     self.copy(pattern="*.dll", dst="bin", src="bin") # From bin to bin
     #     self.copy(pattern="*.dylib*", dst="lib", src="lib") 
@@ -65,6 +73,7 @@ class UbitrackCoreConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions['BUILD_SHARED_LIBS'] = self.options.shared
         cmake.definitions['ENABLE_BASICFACADE'] = self.options.enable_basicfacade
+        cmake.definitions['ENABLE_SIMPLEFACADE'] = self.options.enable_simplefacade
         cmake.definitions['ENABLE_DOTNET_WRAPPER'] = self.options.enable_dotnet
         cmake.definitions['ENABLE_JAVA_WRAPPER'] = self.options.enable_java
         cmake.configure()

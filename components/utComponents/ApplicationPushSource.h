@@ -43,8 +43,10 @@
 #include <utComponents/ApplicationComponent.h>
 #include <utMeasurement/Measurement.h>
 
+#ifdef ENABLE_SIMPLEFACADE
 #include <utFacade/SimpleDatatypes.h>
 #include <utUtil/SimpleStringIArchive.h>
+#endif 
 
 #include <log4cpp/Category.hh>
 
@@ -80,7 +82,9 @@ using namespace Dataflow;
 template< class EventType >
 class ApplicationPushSource 
 	: public ApplicationComponent<EventType>
+#ifdef ENABLE_SIMPLEFACADE
 	, public Facade::SimpleStringReceiver
+#endif
 {
 public:
 	// type of callback
@@ -127,6 +131,7 @@ public:
 	CallbackType getCallback ()
 	{ return boost::bind( &PushSupplier< EventType >::send, &m_outPort, _1 ); }
 
+#ifdef ENABLE_SIMPLEFACADE
 	/**
 	 * Method to call to send stringified data.
 	 * For simple java/python wrapping.
@@ -151,7 +156,8 @@ public:
 		catch( ... )
 		{}
 	}
-	
+#endif
+
 protected:
 	/** Input port of the function. */
 	PushSupplier< EventType > m_outPort;
@@ -197,7 +203,9 @@ typedef ApplicationPushSource< Measurement::ErrorPoseList > ApplicationPushSourc
  */
 class ApplicationPushSourcePose
 	: public ApplicationPushSource< Measurement::Pose >
+#ifdef ENABLE_SIMPLEFACADE
     , public Facade::SimplePoseReceiver
+#endif
 {
 public:
 	/**
@@ -210,6 +218,7 @@ public:
 		: ApplicationPushSource< Measurement::Pose >( nm, subgraph )
 	{}
 
+#ifdef ENABLE_SIMPLEFACADE
 	/** implements the \c Facade::SimplePoseReceiver interface */
 	void receivePose( const Facade::SimplePose& pose ) throw()
 	{
@@ -221,6 +230,8 @@ public:
 				)
 			) );
 	}
+#endif
+
 };
 
 
@@ -230,7 +241,9 @@ public:
  */
 class ApplicationPushSourcePosition2D
 	: public ApplicationPushSource< Measurement::Position2D >
+#ifdef ENABLE_SIMPLEFACADE
     , public Facade::SimplePosition2DReceiver
+#endif
 {
 public:
 	/**
@@ -244,6 +257,7 @@ public:
 		, m_logger( log4cpp::Category::getInstance( "Ubitrack.Components.ApplicationPushSourcePosition2D" ) )
 	{}
 
+#ifdef ENABLE_SIMPLEFACADE
 	/** implements the \c Facade::SimplePosition2DReceiver interface */
 	void receivePosition2D( const Facade::SimplePosition2D& position2d ) throw()
 	{
@@ -253,6 +267,7 @@ public:
 			) );
 		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePosition2D receivePosition2D: x=" << position2d.x << " y=" << position2d.y );
 	}
+#endif
 
 	/** reference to logger */
 	log4cpp::Category& m_logger;
@@ -260,7 +275,9 @@ public:
 
 class ApplicationPushSourcePosition
 	: public ApplicationPushSource< Measurement::Position >
+#ifdef ENABLE_SIMPLEFACADE
     , public Facade::SimplePosition3DReceiver
+#endif
 {
 public:
 	/**
@@ -274,6 +291,8 @@ public:
 		, m_logger( log4cpp::Category::getInstance( "Ubitrack.Components.ApplicationPushSourcePosition3D" ) )
 	{}
 
+
+#ifdef ENABLE_SIMPLEFACADE
 	/** implements the \c Facade::SimplePosition2DReceiver interface */
 	void receivePosition3D( const Facade::SimplePosition3D& position3d ) throw()
 	{
@@ -283,6 +302,7 @@ public:
 			) );
 		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePosition3D receivePosition3D: x=" << position3d.x << " y=" << position3d.y<< " z=" << position3d.z  );
 	}
+#endif
 
 	/** reference to logger */
 	log4cpp::Category& m_logger;
@@ -295,7 +315,9 @@ public:
  */
 class ApplicationPushSourceButton
 	: public ApplicationPushSource< Measurement::Button >
+#ifdef ENABLE_SIMPLEFACADE
     , public Facade::SimpleButtonReceiver
+#endif
 {
 public:
 	/**
@@ -308,6 +330,7 @@ public:
 		: ApplicationPushSource< Measurement::Button >( nm, subgraph )
 	{}
 
+#ifdef ENABLE_SIMPLEFACADE
 	/** implements the \c Facade::SimpleButtonReceiver interface */
 	void receiveButton( const Facade::SimpleButton& button ) throw()
 	{
@@ -315,12 +338,15 @@ public:
 		m_outPort.send( Measurement::Button( button.timestamp,
 											 Math::Scalar<int>( button.event ) ) );
 	}
+#endif
 
 };
 
 class ApplicationPushSourcePositionList
 	: public ApplicationPushSource< Measurement::PositionList >
+#ifdef ENABLE_SIMPLEFACADE
     , public Facade::SimplePositionList3DReceiver
+#endif
 {
 public:
 	/**
@@ -334,6 +360,7 @@ public:
 		, m_logger( log4cpp::Category::getInstance( "Ubitrack.Components.ApplicationPushSourcePositionList" ) )
 	{}
 
+#ifdef ENABLE_SIMPLEFACADE
 	/** implements the \c Facade::SimplePosition2DReceiver interface */
 	void receivePositionList3D( const Facade::SimplePositionList3D& positionlist3d ) throw()
 	{
@@ -349,7 +376,8 @@ public:
 			) );
 		LOG4CPP_INFO( m_logger, "ApplicationPushSourcePositionList receivePosition3DList: " );
 	}
-
+#endif
+	
 	/** reference to logger */
 	log4cpp::Category& m_logger;
 };

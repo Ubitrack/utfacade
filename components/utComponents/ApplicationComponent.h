@@ -11,6 +11,7 @@
 
 #include <boost/bind.hpp>
 
+#include <utFacade/Config.h>
 #include <utMeasurement/MeasurementTraits.h>
 
 #include <utDataflow/Component.h>

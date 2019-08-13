@@ -29,6 +29,9 @@
  * @author Daniel Pustka <daniel.pustka@in.tum.de>
  */
 
+#include <utFacade/Config.h>
+#ifdef ENABLE_SIMPLEFACADE
+
 #include <stdlib.h>
 #include <string.h>
 #include <sstream>
@@ -1081,3 +1084,6 @@ void SimpleFacade::killEverything(){
 }
 
 } } // namespace Ubitrack::Facade
+
+
+#endif // ENABLE_SIMPLEFACADE

@@ -46,9 +46,12 @@
 #include <utDataflow/PushConsumer.h>
 #include <utComponents/ApplicationComponent.h>
 #include <utMeasurement/Measurement.h>
-#include <utUtil/SimpleStringOArchive.h>
 
+#ifdef ENABLE_SIMPLEFACADE
+#include <utUtil/SimpleStringOArchive.h>
 #include <utFacade/SimpleDatatypes.h>
+#endif
+
 #ifndef APPLICATIONPUSHSINK_NOLOGGING
 #include <log4cpp/Category.hh>
 #endif
@@ -65,6 +68,7 @@ namespace Ubitrack { namespace Components {
 
 using namespace Dataflow;
 
+#ifdef ENABLE_SIMPLEFACADE
 /**
  * Common base class for application push sinks.
  * Allows setting string receivers.
@@ -79,7 +83,7 @@ public:
 	virtual ~ApplicationPushSinkBase()
 	{}
 };
-
+#endif
 
 /**
  * @ingroup dataflow_components
@@ -109,7 +113,9 @@ public:
 template <class EventType>
 class ApplicationPushSink
 	: public ApplicationComponent<EventType>
+#ifdef ENABLE_SIMPLEFACADE
 	, public ApplicationPushSinkBase
+#endif
 {
 public:
 	/**
@@ -152,11 +158,13 @@ public:
 		m_callback = slot;
 	}
 
+#ifdef ENABLE_SIMPLEFACADE
 	/** sets a string receiver */
 	void setStringCallback( Facade::SimpleStringReceiver* pReceiver ) override
 	{
 		m_callback = boost::bind( &ApplicationPushSink< EventType >::sendString, _1, pReceiver );
 	}
+#endif
 
 protected:
 	/**
@@ -181,6 +189,7 @@ protected:
 #endif
 	}
 
+#ifdef ENABLE_SIMPLEFACADE
 	/** converts events to string */
 	static void sendString( const EventType& m, Facade::SimpleStringReceiver* pReceiver )
 	{
@@ -189,6 +198,7 @@ protected:
 		std::string s( ar.str() );
 		pReceiver->receiveString( s.c_str() );
 	}
+#endif
 	
 	/** Input port of the function. */
 	PushConsumer< EventType > m_InPort;

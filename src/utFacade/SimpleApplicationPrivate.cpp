@@ -1,3 +1,7 @@
+#include <utFacade/Config.h>
+
+#ifdef ENABLE_SIMPLEFACADE
+
 #include "SimpleApplicationPrivate.h"
 #include <log4cpp/Category.hh>
 #include <string.h>
@@ -246,3 +250,5 @@ bool SimpleApplicationPullSinkErrorPosePrivate::getPose( SimpleErrorPose & p, un
 }
 
 }}
+
+#endif // ENABLE_SIMPLEFACADE
