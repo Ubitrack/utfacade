@@ -36,6 +36,7 @@
 #include <list>
 #include <boost/thread.hpp>
 #include <boost/scoped_ptr.hpp>
+#include <boost/asio/io_service.hpp>
 #include <utClientServer/ClientServerConnection.h>
 #include <utDataflow/DataflowNetwork.h>
 
@@ -49,13 +50,6 @@ namespace Ubitrack {
 	}
 	namespace ClientServer {
 		class TcpConnection;
-	}
-}
-
-namespace boost 
-{
-	namespace asio {
-		class io_service;
 	}
 }
 
