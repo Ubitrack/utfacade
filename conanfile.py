@@ -76,6 +76,7 @@ class UbitrackCoreConan(ConanFile):
         cmake.definitions['ENABLE_SIMPLEFACADE'] = self.options.enable_simplefacade
         cmake.definitions['ENABLE_DOTNET_WRAPPER'] = self.options.enable_dotnet
         cmake.definitions['ENABLE_JAVA_WRAPPER'] = self.options.enable_java
+        cmake.definitions['WITH_OPENCL'] = self.options['ubitrack_vision'].with_opencl
         cmake.configure()
         cmake.build()
         cmake.install()

@@ -16,6 +16,7 @@ OPTION(ENABLE_BASICFACADE "Build the BasicFacade" OFF)
 OPTION(ENABLE_SIMPLEFACADE "Build the SimpleFacade (also disables java/dotnet wrappers if disabled)" OFF)
 OPTION(ENABLE_DOTNET_WRAPPER "Build the DOTNET Wrapper" OFF)
 OPTION(ENABLE_JAVA_WRAPPER "Build the JAVA Wrapper" OFF)
+option(WITH_OPENCL "Enable OpenCL support" ON)
 
 
 # External Libraries (could this be solved with conan dependencies ??)
@@ -28,15 +29,16 @@ IF(OpenGL_FOUND)
   MESSAGE(STATUS "Found OpenGL: ${OpenGL_INCLUDE_DIR} - ${OpenGL_LIBRARIES}")
 ENDIF(OpenGL_FOUND)
 
-# OpenCL
-SET(HAVE_OPENCL 0)
-find_package(OpenCL)
-IF(OpenCL_FOUND)
-  include_directories(${OpenCL_INCLUDE_DIR})
-  SET(HAVE_OPENCL 1)
-  MESSAGE(STATUS "Found OpenCL: ${OpenCL_INCLUDE_DIR} - ${OpenCL_LIBRARY}")
-ENDIF(OpenCL_FOUND)
-
+if(WITH_OPENCL)
+	# OpenCL
+	SET(HAVE_OPENCL 0)
+	find_package(OpenCL)
+	IF(OpenCL_FOUND)
+	  include_directories(${OpenCL_INCLUDE_DIR})
+	  SET(HAVE_OPENCL 1)
+	  MESSAGE(STATUS "Found OpenCL: ${OpenCL_INCLUDE_DIR} - ${OpenCL_LIBRARY}")
+	ENDIF(OpenCL_FOUND)
+endif()
 
 IF(ENABLE_BASICFACADE)
   set(UBITRACK_COMPILE_DEFINITIONS ${UBITRACK_COMPILE_DEFINITIONS} "ENABLE_BASICFACADE")
