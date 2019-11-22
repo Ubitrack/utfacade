@@ -30,6 +30,9 @@ namespace Ubitrack {
     namespace Facade {
 
 
+
+        bool UTFACADE_EXPORT addApplicationSinkComponentToGroup(SinkGroup& cmpsink, const std::string& sComponentName, boost::shared_ptr<Ubitrack::Components::ApplicationComponentBase> bc);
+
         class UTFACADE_EXPORT SinkGroupObserver  : public DataflowObserver {
         public:
 

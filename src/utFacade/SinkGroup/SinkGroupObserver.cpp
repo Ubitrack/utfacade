@@ -11,6 +11,385 @@ static log4cpp::Category& logger( log4cpp::Category::getInstance( "Ubitrack.Faca
 
 using namespace Ubitrack::Facade;
 
+bool Ubitrack::Facade::addApplicationSinkComponentToGroup(SinkGroup& cmpsink, const std::string& sComponentName, boost::shared_ptr<Ubitrack::Components::ApplicationComponentBase> bc) {
+
+    auto ct = bc->getComponentType();
+
+    if ((ct == Ubitrack::Components::ApplicationComponentType::ApplicationComponentTypePushSource) || (ct == Ubitrack::Components::ApplicationComponentType::ApplicationComponentTypePullSource)) {
+        // we do not consider source in a compound sink
+        LOG4CPP_DEBUG(logger, "Component " << sComponentName << " is not a sink." );
+        return false;
+    }
+
+    // this is ugly design !!!
+    if (bc->isMeasurementFixedSize()) {
+        // Fixed-Size Measurements
+        switch(bc->getMeasurementType()) {
+            // Button
+            case Ubitrack::Measurement::Traits::MeasurementType::ScalarInt:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Button>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+                break;
+
+            // Distance
+            case Ubitrack::Measurement::Traits::MeasurementType::ScalarDouble:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Distance>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+                break;
+
+            // Position2D
+            case Ubitrack::Measurement::Traits::MeasurementType::Vector2:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Position2D>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+                break;
+
+            // Position
+            case Ubitrack::Measurement::Traits::MeasurementType::Vector3:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Position>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+                break;
+
+            // Vector4D
+            case Ubitrack::Measurement::Traits::MeasurementType::Vector4:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Vector4D>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // Vector8D
+            case Ubitrack::Measurement::Traits::MeasurementType::Vector8:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Vector8D>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // Rotation
+            case Ubitrack::Measurement::Traits::MeasurementType::Quaternion:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Rotation>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // Matrix3x3
+            case Ubitrack::Measurement::Traits::MeasurementType::Matrix3x3:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Matrix3x3>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // Matrix3x4
+            case Ubitrack::Measurement::Traits::MeasurementType::Matrix3x4:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Matrix3x4>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // Matrix4x4
+            case Ubitrack::Measurement::Traits::MeasurementType::Matrix4x4:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Matrix4x4>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // Pose
+            case Ubitrack::Measurement::Traits::MeasurementType::Pose:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::Pose>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // ErrorPose
+            case Ubitrack::Measurement::Traits::MeasurementType::ErrorPose:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ErrorPose>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // ErrorPosition2
+            case Ubitrack::Measurement::Traits::MeasurementType::ErrorVector2:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ErrorPosition2>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // ErrorPosition
+            case Ubitrack::Measurement::Traits::MeasurementType::ErrorVector3:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ErrorPosition>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // RotationVelocity
+            case Ubitrack::Measurement::Traits::MeasurementType::RotationVelocity:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::RotationVelocity>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // CameraIntrinsics
+            case Ubitrack::Measurement::Traits::MeasurementType::CameraIntrinsics:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::CameraIntrinsics>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            default:
+                // log error: unknown type
+                return false;
+        }
+    } else {
+        // Vector of Measurements
+        switch(bc->getMeasurementType()) {
+            // ButtonList
+            case Ubitrack::Measurement::Traits::MeasurementType::ScalarInt:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ButtonList>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+
+            // DistanceList
+            case Ubitrack::Measurement::Traits::MeasurementType::ScalarDouble:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::IDList>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+
+            // IDList
+            case Ubitrack::Measurement::Traits::MeasurementType::ScalarUnsignedLong:
+            {
+                auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::DistanceList>>(bc);
+                if ( c ) {
+                    cmpsink.addSinkComponent(sComponentName, c);
+                } else {
+                    // log error: invalid cast - check implementation as this should never happen
+                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                    return false;
+                }
+            }
+                break;
+
+            // PositionList2
+            case Ubitrack::Measurement::Traits::MeasurementType::Vector2:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::PositionList2>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // PositionList
+            case Ubitrack::Measurement::Traits::MeasurementType::Vector3:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::PositionList>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // PoseList
+            case Ubitrack::Measurement::Traits::MeasurementType::Pose:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::PoseList>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // ErrorPoseList
+            case Ubitrack::Measurement::Traits::MeasurementType::ErrorPose:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ErrorPoseList>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // ErrorPositionList2
+            case Ubitrack::Measurement::Traits::MeasurementType::ErrorVector2:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ErrorPositionList2>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            // ErrorPositionList
+            case Ubitrack::Measurement::Traits::MeasurementType::ErrorVector3:
+                {
+                    auto c = boost::dynamic_pointer_cast<Ubitrack::Components::ApplicationComponent<Ubitrack::Measurement::ErrorPositionList>>(bc);
+                    if ( c ) {
+                        cmpsink.addSinkComponent(sComponentName, c);
+                    } else {
+                        // log error: invalid cast - check implementation as this should never happen
+                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
+                        return false;
+                    }
+                }
+                break;
+
+            default:
+                // log error: unknown type
+                return false;
+        }
+    }
+    return true;
+}
+
+
+
 SinkGroupObserver::SinkGroupObserver(Ubitrack::Facade::AdvancedFacade& facade, SinkGroup& cmpsink, std::string  sDomainAttribute, std::string  sDomainValue)
         : m_domainAttribute(std::move(sDomainAttribute)), m_domainValue(std::move(sDomainValue))
         , m_compoundSink(cmpsink), m_facade(facade)
@@ -34,353 +413,7 @@ void SinkGroupObserver::notifyAddComponent(const std::string& sPatternName, cons
         return;
     }
 
-    auto ct = bc->getComponentType();
-
-    if ((ct == Components::ApplicationComponentType::ApplicationComponentTypePushSource) || (ct == Components::ApplicationComponentType::ApplicationComponentTypePullSource)) {
-        // we do not consider source in a compound sink
-        LOG4CPP_DEBUG(logger, "Component " << sComponentName << " is not a sink." );
-        return;
-    }
-
-    // this is ugly design !!!
-    if (bc->isMeasurementFixedSize()) {
-        // Fixed-Size Measurements
-        switch(bc->getMeasurementType()) {
-            // Button
-            case Measurement::Traits::MeasurementType::ScalarInt:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Button>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-                break;
-
-            // Distance
-            case Measurement::Traits::MeasurementType::ScalarDouble:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Distance>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-                break;
-
-            // Position2D
-            case Measurement::Traits::MeasurementType::Vector2:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Position2D>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-                break;
-
-            // Position
-            case Measurement::Traits::MeasurementType::Vector3:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Position>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-                break;
-
-            // Vector4D
-            case Measurement::Traits::MeasurementType::Vector4:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Vector4D>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // Vector8D
-            case Measurement::Traits::MeasurementType::Vector8:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Vector8D>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // Rotation
-            case Measurement::Traits::MeasurementType::Quaternion:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Rotation>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // Matrix3x3
-            case Measurement::Traits::MeasurementType::Matrix3x3:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Matrix3x3>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // Matrix3x4
-            case Measurement::Traits::MeasurementType::Matrix3x4:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Matrix3x4>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // Matrix4x4
-            case Measurement::Traits::MeasurementType::Matrix4x4:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Matrix4x4>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // Pose
-            case Measurement::Traits::MeasurementType::Pose:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::Pose>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // ErrorPose
-            case Measurement::Traits::MeasurementType::ErrorPose:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPose>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // ErrorPosition2
-            case Measurement::Traits::MeasurementType::ErrorVector2:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPosition2>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // ErrorPosition
-            case Measurement::Traits::MeasurementType::ErrorVector3:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPosition>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // RotationVelocity
-            case Measurement::Traits::MeasurementType::RotationVelocity:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::RotationVelocity>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // CameraIntrinsics
-            case Measurement::Traits::MeasurementType::CameraIntrinsics:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::CameraIntrinsics>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            default:
-                // log error: unknown type
-                break;
-        }
-    } else {
-        // Vector of Measurements
-        switch(bc->getMeasurementType()) {
-            // ButtonList
-            case Measurement::Traits::MeasurementType::ScalarInt:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ButtonList>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-
-            // DistanceList
-            case Measurement::Traits::MeasurementType::ScalarDouble:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::IDList>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-
-            // IDList
-            case Measurement::Traits::MeasurementType::ScalarUnsignedLong:
-            {
-                auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::DistanceList>>(bc);
-                if ( c ) {
-                    m_compoundSink.addSinkComponent(sComponentName, c);
-                } else {
-                    // log error: invalid cast - check implementation as this should never happen
-                    LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                }
-            }
-                break;
-
-            // PositionList2
-            case Measurement::Traits::MeasurementType::Vector2:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::PositionList2>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // PositionList
-            case Measurement::Traits::MeasurementType::Vector3:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::PositionList>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // PoseList
-            case Measurement::Traits::MeasurementType::Pose:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::PoseList>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // ErrorPoseList
-            case Measurement::Traits::MeasurementType::ErrorPose:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPoseList>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // ErrorPositionList2
-            case Measurement::Traits::MeasurementType::ErrorVector2:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPositionList2>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            // ErrorPositionList
-            case Measurement::Traits::MeasurementType::ErrorVector3:
-                {
-                    auto c = boost::dynamic_pointer_cast<Components::ApplicationComponent<Measurement::ErrorPositionList>>(bc);
-                    if ( c ) {
-                        m_compoundSink.addSinkComponent(sComponentName, c);
-                    } else {
-                        // log error: invalid cast - check implementation as this should never happen
-                        LOG4CPP_ERROR(logger, "Component " << sComponentName << " invalid cast - should never happen" );
-                    }
-                }
-                break;
-
-            default:
-                // log error: unknown type
-                break;
-        }
-    }
+    addApplicationSinkComponentToGroup(m_compoundSink, sComponentName, bc);
 
 }
 
