@@ -114,7 +114,7 @@ namespace Ubitrack {
                 // log error: invalid component name
                 return "";
             }
-            return it->second->getMeasurement(key);
+            return it->second->getMetadataAttribute(key);
         }
 
         bool hasMetadataAttribute( const std::string& sComponentName, const std::string& key ) {
