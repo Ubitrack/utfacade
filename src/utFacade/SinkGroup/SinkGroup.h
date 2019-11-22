@@ -108,6 +108,24 @@ namespace Ubitrack {
             return ComponentTypeInfo{it->second->getMeasurementType(), it->second->isMeasurementFixedSize()};
         }
 
+        std::string getMetadataAttribute( const std::string& sComponentName, const std::string& key ) const  {
+            auto it = m_components.find(sComponentName);
+            if ( it == m_components.end()) {
+                // log error: invalid component name
+                return "";
+            }
+            return it->second->getMeasurement(key);
+        }
+
+        bool hasMetadataAttribute( const std::string& sComponentName, const std::string& key ) {
+            auto it = m_components.find(sComponentName);
+            if ( it == m_components.end()) {
+                // log error: invalid component name
+                return false;
+            }
+            return it->second->hasMetadataAttribute(key);
+        }
+
         template<typename MT>
         bool getMeasurement(const std::string& sComponentName, MT& measurement) {
             auto it = m_components.find(sComponentName);
