@@ -127,7 +127,7 @@ namespace Ubitrack {
         }
 
         template<typename MT>
-        bool getMeasurement(const std::string& sComponentName, MT& measurement) {
+        bool getMeasurement(const std::string& sComponentName, MT& measurement, Ubitrack::Measurement::Timestamp ts=0) {
             auto it = m_components.find(sComponentName);
             if ( it == m_components.end()) {
                 // log error: invalid component name
@@ -142,7 +142,8 @@ namespace Ubitrack {
                     return false;
                 }
                 // pull measurement directly from sink
-                measurement = c->get(m_lastTimestamp);
+                Ubitrack::Measurement::Timestamp ts_ = ts==0 ? m_lastTimestamp : ts;
+                measurement = c->get(ts_);
                 return true;
 
             } else if (bc->getComponentType() == Components::ApplicationComponentType::ApplicationComponentTypePushSink) {
@@ -170,6 +171,10 @@ namespace Ubitrack {
 
         // maybe make protected and friend class PushSink Wrapper
         void onMeasurementReceived(const std::string& sComponentName, Ubitrack::Measurement::Timestamp ts);
+
+        Ubitrack::Measurement::Timestamp getLastTimestamp() {
+            return m_lastTimestamp;
+        }
 
     protected:
         virtual void checkFrameReceived();
